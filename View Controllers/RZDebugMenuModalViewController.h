@@ -1,5 +1,5 @@
 //
-//  RZDebugMenuTableViewController.h
+//  RZDebugMenuModalViewController.h
 //  RZDebugMenuDemo
 //
 //  Created by Clayton Rieck on 6/2/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RZDebugMenuTableViewController : UITableViewController
+@interface RZDebugMenuModalViewController : UIViewController
 
 @end

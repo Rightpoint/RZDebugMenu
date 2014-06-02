@@ -7,7 +7,7 @@
 //
 
 #import "RZDebugMenuRootViewController.h"
-#import "RZDebugMenuTableViewController.h"
+#import "RZDebugMenuModalViewController.h"
 
 @interface RZDebugMenuRootViewController ()
 
@@ -50,7 +50,7 @@
 
 - (void)displayDebugMenu {
     
-    RZDebugMenuTableViewController *debugTableView = [[RZDebugMenuTableViewController alloc] init];
+    RZDebugMenuModalViewController *debugTableView = [[RZDebugMenuModalViewController alloc] init];
     [self presentViewController:debugTableView animated:YES completion:nil];
 }
 
