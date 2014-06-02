@@ -7,15 +7,19 @@
 //
 
 #import "RZAppDelegate.h"
+#import "RZDebugMenuRootViewController.h"
 
 @implementation RZAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
+ 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

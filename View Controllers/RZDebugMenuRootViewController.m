@@ -19,6 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -27,7 +28,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
+    
+    UIView *rootSubView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    rootSubView.backgroundColor = [UIColor blueColor];
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:rootSubView action:@selector(displayDebugMenu)];
+    doubleTap.numberOfTapsRequired = 2;
+    doubleTap.numberOfTouchesRequired = 1;
+    [rootSubView addGestureRecognizer:doubleTap];
+    
+    [self.view addSubview:rootSubView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,6 +48,7 @@
 
 - (void)displayDebugMenu {
     // TODO: display modal view of the menu
+    NSLog(@"Double tap recognized");
 }
 
 /*

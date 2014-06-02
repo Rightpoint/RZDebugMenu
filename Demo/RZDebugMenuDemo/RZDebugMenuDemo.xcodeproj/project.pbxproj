@@ -21,6 +21,7 @@
 		0C22DAE8193CCDA30042938F /* RZDebugMenuDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DAE7193CCDA30042938F /* RZDebugMenuDemoTests.m */; };
 		0C22DAF4193CCFF50042938F /* RZDebugMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DAF3193CCFF50042938F /* RZDebugMenu.m */; };
 		0C22DAF8193D04330042938F /* RZDebugMenuRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DAF7193D04330042938F /* RZDebugMenuRootViewController.m */; };
+		0C22DB02193D0A850042938F /* RZDebugMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DB01193D0A850042938F /* RZDebugMenuTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		0C22DAF3193CCFF50042938F /* RZDebugMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenu.m; sourceTree = "<group>"; };
 		0C22DAF6193D04330042938F /* RZDebugMenuRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuRootViewController.h; sourceTree = "<group>"; };
 		0C22DAF7193D04330042938F /* RZDebugMenuRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuRootViewController.m; sourceTree = "<group>"; };
+		0C22DB00193D0A850042938F /* RZDebugMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuTableViewController.h; sourceTree = "<group>"; };
+		0C22DB01193D0A850042938F /* RZDebugMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,7 @@
 			children = (
 				0C22DAF1193CCFDD0042938F /* Classes */,
 				0C22DAF5193D02060042938F /* View Controllers */,
+				0C22DAF9193D085C0042938F /* Views */,
 				0C22DAC8193CCDA30042938F /* RZDebugMenuDemo */,
 				0C22DAE1193CCDA30042938F /* RZDebugMenuDemoTests */,
 				0C22DAC1193CCDA30042938F /* Frameworks */,
@@ -167,9 +171,19 @@
 			children = (
 				0C22DAF6193D04330042938F /* RZDebugMenuRootViewController.h */,
 				0C22DAF7193D04330042938F /* RZDebugMenuRootViewController.m */,
+				0C22DB00193D0A850042938F /* RZDebugMenuTableViewController.h */,
+				0C22DB01193D0A850042938F /* RZDebugMenuTableViewController.m */,
 			);
 			name = "View Controllers";
 			path = "../../View Controllers";
+			sourceTree = "<group>";
+		};
+		0C22DAF9193D085C0042938F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			path = ../../Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C22DB02193D0A850042938F /* RZDebugMenuTableViewController.m in Sources */,
 				0C22DAD3193CCDA30042938F /* RZAppDelegate.m in Sources */,
 				0C22DAF8193D04330042938F /* RZDebugMenuRootViewController.m in Sources */,
 				0C22DAF4193CCFF50042938F /* RZDebugMenu.m in Sources */,
