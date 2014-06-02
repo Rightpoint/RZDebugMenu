@@ -7,6 +7,7 @@
 //
 
 #import "RZDebugMenuRootViewController.h"
+#import "RZDebugMenuTableViewController.h"
 
 @interface RZDebugMenuRootViewController ()
 
@@ -32,7 +33,7 @@
     UIView *rootSubView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     rootSubView.backgroundColor = [UIColor blueColor];
     
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:rootSubView action:@selector(displayDebugMenu)];
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
     doubleTap.numberOfTapsRequired = 2;
     doubleTap.numberOfTouchesRequired = 1;
     [rootSubView addGestureRecognizer:doubleTap];
@@ -43,12 +44,14 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Display menu methods
+
 - (void)displayDebugMenu {
-    // TODO: display modal view of the menu
-    NSLog(@"Double tap recognized");
+    
+    RZDebugMenuTableViewController *debugTableView = [[RZDebugMenuTableViewController alloc] init];
+    [self presentViewController:debugTableView animated:YES completion:nil];
 }
 
 /*
