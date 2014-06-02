@@ -10,7 +10,10 @@
 
 @interface RZDebugMenuModalViewController ()
 
+@synthesize options = _options;
+
 @end
+
 
 @implementation RZDebugMenuModalViewController
 
@@ -32,12 +35,13 @@
     CGRect screen = [[UIScreen mainScreen] bounds];
     CGFloat width = screen.size.width;
     CGFloat height = screen.size.width;
+    _options = [[UITableView alloc] initWithFrame:CGRectMake(0, 100, width, height) style:UITableViewStylePlain];
     
-    UITableView *options = [[UITableView alloc] initWithFrame:CGRectMake(0, 100, width, height) style:UITableViewStylePlain];
-    
-    [[self view] addSubview:options];
+    [[self view] addSubview:_options];
     
 }
+
+#pragma mark - table view methods
 
 - (void)didReceiveMemoryWarning
 {
