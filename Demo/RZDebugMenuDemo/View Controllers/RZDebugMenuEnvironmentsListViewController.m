@@ -18,7 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = @"Environments";
     }
     return self;
 }
@@ -27,15 +27,14 @@
 {
     [super viewDidLoad];
     
-    CGRect screen = [[UIScreen mainScreen] bounds];
-    CGFloat width = screen.size.width;
-    CGFloat height = screen.size.height;
+    CGFloat width = self.view.bounds.size.width;
+    CGFloat height = self.view.bounds.size.height;
     
-    UITableView *environments = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
+    UITableView *environmentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
                                                              style:UITableViewStylePlain];
-
-    [self.view addSubview:environments];
-    self.title = @"Environments";
+    environmentsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    [self.view addSubview:environmentsTableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,7 +65,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
 {
     // TODO: Present view with list of environments they have
-    
 }
 
 @end

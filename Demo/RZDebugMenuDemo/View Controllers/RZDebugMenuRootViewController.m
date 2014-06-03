@@ -20,7 +20,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
     }
     return self;
 }
@@ -46,8 +45,8 @@
 {
     
     RZDebugMenuModalViewController *debugTableViewController = [[RZDebugMenuModalViewController alloc] init];
-    UINavigationController *navigationWrapperController = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
-    [self presentViewController:navigationWrapperController animated:YES completion:nil];
+    UINavigationController *navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
+    [self presentViewController:navigationControllerWrapper animated:YES completion:nil];
 }
 
 @end
