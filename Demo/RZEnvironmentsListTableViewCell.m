@@ -14,7 +14,6 @@
 {
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         self.textLabel.text = @"Environments";
         self.detailTextLabel.text = @"Placeholder";
