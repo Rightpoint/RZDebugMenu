@@ -36,6 +36,7 @@
                                                              style:UITableViewStylePlain];
 
     [self.view addSubview:environments];
+    self.title = @"Environments";
 }
 
 - (void)didReceiveMemoryWarning

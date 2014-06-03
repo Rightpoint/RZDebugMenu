@@ -22,8 +22,8 @@
 		0C22DAF4193CCFF50042938F /* RZDebugMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DAF3193CCFF50042938F /* RZDebugMenu.m */; };
 		0C22DAF8193D04330042938F /* RZDebugMenuRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DAF7193D04330042938F /* RZDebugMenuRootViewController.m */; };
 		0C22DB05193D19350042938F /* RZDebugMenuModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DB04193D19350042938F /* RZDebugMenuModalViewController.m */; };
-		0C972AFE193DF31200EA84FF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C972AFD193DF31200EA84FF /* Settings.bundle */; };
 		0C972B01193E063900EA84FF /* RZDebugMenuEnvironmentsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C972B00193E063900EA84FF /* RZDebugMenuEnvironmentsListViewController.m */; };
+		0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C972B02193E0CBB00EA84FF /* Settings.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,9 +59,9 @@
 		0C22DAF7193D04330042938F /* RZDebugMenuRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuRootViewController.m; sourceTree = "<group>"; };
 		0C22DB03193D19350042938F /* RZDebugMenuModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuModalViewController.h; sourceTree = "<group>"; };
 		0C22DB04193D19350042938F /* RZDebugMenuModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuModalViewController.m; sourceTree = "<group>"; };
-		0C972AFD193DF31200EA84FF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0C972AFF193E063900EA84FF /* RZDebugMenuEnvironmentsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuEnvironmentsListViewController.h; sourceTree = "<group>"; };
 		0C972B00193E063900EA84FF /* RZDebugMenuEnvironmentsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuEnvironmentsListViewController.m; sourceTree = "<group>"; };
+		0C972B02193E0CBB00EA84FF /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 		0C22DAB6193CCDA30042938F = {
 			isa = PBXGroup;
 			children = (
-				0C972AFD193DF31200EA84FF /* Settings.bundle */,
+				0C972B02193E0CBB00EA84FF /* Settings.plist */,
 				0C22DAF1193CCFDD0042938F /* Classes */,
 				0C22DAF5193D02060042938F /* View Controllers */,
 				0C22DAF9193D085C0042938F /* Views */,
@@ -271,8 +271,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C22DACD193CCDA30042938F /* InfoPlist.strings in Resources */,
-				0C972AFE193DF31200EA84FF /* Settings.bundle in Resources */,
 				0C22DAD5193CCDA30042938F /* Images.xcassets in Resources */,
+				0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

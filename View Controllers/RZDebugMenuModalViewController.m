@@ -97,6 +97,10 @@
     }
     else if (indexPath.row == 1) {
         
+        NSString *settingsPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+        NSDictionary *settingsDictionary = [[NSDictionary alloc] initWithContentsOfFile:settingsPath];
+        
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UISwitch *applySettingsSwitch = [[UISwitch alloc] init];
         cell.accessoryView = [[UIView alloc] initWithFrame:applySettingsSwitch.frame];
@@ -114,9 +118,12 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath {
-    RZDebugMenuEnvironmentsListViewController *environmentsView = [[RZDebugMenuEnvironmentsListViewController alloc] init];
-    [self.navigationController pushViewController:environmentsView animated:YES];
-    [_options deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        
+        RZDebugMenuEnvironmentsListViewController *environmentsView = [[RZDebugMenuEnvironmentsListViewController alloc] init];
+        [self.navigationController pushViewController:environmentsView animated:YES];
+        [_options deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 /*
 #pragma mark - Navigation
