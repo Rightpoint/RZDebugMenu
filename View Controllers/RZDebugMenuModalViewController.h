@@ -10,6 +10,4 @@
 
 @interface RZDebugMenuModalViewController : UIViewController
 
-@property (nonatomic, retain) UITableView *options;
-
 @end

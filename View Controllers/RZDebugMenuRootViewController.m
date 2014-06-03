@@ -51,7 +51,8 @@
 - (void)displayDebugMenu {
     
     RZDebugMenuModalViewController *debugTableView = [[RZDebugMenuModalViewController alloc] init];
-    [self presentViewController:debugTableView animated:YES completion:nil];
+    UINavigationController *navigationWrapperController = [[UINavigationController alloc] initWithRootViewController:debugTableView];
+    [self presentViewController:navigationWrapperController animated:YES completion:nil];
 }
 
 /*
