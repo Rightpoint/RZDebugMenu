@@ -67,26 +67,31 @@
 
 #pragma mark - nav bar buttons methods
 
-- (void)closeView {
+- (void)closeView
+{
     // TODO: save plist in completion
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)addEnvironment {
+- (void)addEnvironment
+{
     // TODO: call methods to edit plist in settings bundle
 }
 
 #pragma mark - table view delegate methods
 
-- (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section
+{
     return 3;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     if (indexPath.row == 0) {
@@ -117,7 +122,8 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
+{
     if (indexPath.row == 0) {
         
         RZDebugMenuEnvironmentsListViewController *environmentsView = [[RZDebugMenuEnvironmentsListViewController alloc] init];

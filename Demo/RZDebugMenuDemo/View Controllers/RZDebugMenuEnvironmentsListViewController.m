@@ -45,22 +45,26 @@
 
 #pragma mark - table view delegate methods
 
-- (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section
+{
     // TODO: replace return value with number of environments the user has
     return 3;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
+{
     // TODO: Present view with list of environments they have
     
 }

@@ -42,7 +42,8 @@
 
 #pragma mark - Display menu methods
 
-- (void)displayDebugMenu {
+- (void)displayDebugMenu
+{
     
     RZDebugMenuModalViewController *debugTableViewController = [[RZDebugMenuModalViewController alloc] init];
     UINavigationController *navigationWrapperController = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
@@ -51,15 +52,18 @@
 
 #pragma mark - table view delegate methods
 
-- (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section
+{
     return 3;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     if (indexPath.row == 0) {
@@ -85,9 +89,9 @@
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
+{
     // TODO: Present view with list of environments they have
-    
 }
 
 @end
