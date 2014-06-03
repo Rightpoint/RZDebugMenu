@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuModalViewController.h"
 #import "RZDebugMenuRootViewController.h"
+#import "RZDebugMenuEnvironmentsListViewController.h"
 #import "RZDebugMenu.h"
 
 @interface RZDebugMenuModalViewController ()
@@ -16,6 +17,8 @@
 
 
 @implementation RZDebugMenuModalViewController
+
+@synthesize options = _options;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +40,7 @@
     CGFloat width = screen.size.width;
     CGFloat height = screen.size.height;
     
-    UITableView *options = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
+    _options = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
                                                         style:UITableViewStylePlain];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
@@ -51,10 +54,9 @@
                                                                   action:@selector(addEnvironment)];
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = addButton;
-    [[self view] addSubview:options];
-    options.delegate = self;
-    options.dataSource = self;
-    
+    [self.view addSubview:_options];
+    _options.delegate = self;
+    _options.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,6 +91,7 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     if (indexPath.row == 0) {
         
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = @"Environment";
         cell.detailTextLabel.text = @"Placeholder";
     }
@@ -111,7 +114,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath {
-    // TODO: Present view with list of environments they have
+    RZDebugMenuEnvironmentsListViewController *environmentsView = [[RZDebugMenuEnvironmentsListViewController alloc] init];
+    [self.navigationController pushViewController:environmentsView animated:YES];
+    [_options deselectRowAtIndexPath:indexPath animated:YES];
 }
 /*
 #pragma mark - Navigation
