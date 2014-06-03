@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZEnvironmentsListTableViewCell.h"
+#import "RZDisclosureTableViewCell.h"
 
-@implementation RZEnvironmentsListTableViewCell
+@implementation RZDisclosureTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

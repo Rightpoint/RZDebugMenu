@@ -9,8 +9,8 @@
 #import "RZDebugMenuModalViewController.h"
 #import "RZDebugMenuRootViewController.h"
 #import "RZDebugMenuEnvironmentsListViewController.h"
-#import "RZEnvironmentsListTableViewCell.h"
-#import "RZToggleResetTableViewCell.h"
+#import "RZDisclosureTableViewCell.h"
+#import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 #import "RZDebugMenu.h"
 
@@ -39,7 +39,7 @@
     
     // TODO: Put this in its' own class. Singleton pattern?
     NSString *settingsPlistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    [_settingsDictionary initWithContentsOfFile:settingsPlistPath];
+    self.settingsDictionary = [[NSDictionary alloc] initWithContentsOfFile:settingsPlistPath];
     
     CGFloat width = self.view.bounds.size.width;
     CGFloat height = self.view.bounds.size.height;
@@ -56,23 +56,18 @@
                                                                   target:self
                                                                   action:@selector(addEnvironment)];
     
-    _optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = addButton;
     [self.view addSubview:_optionsTableView];
     
-    [_optionsTableView registerClass:[RZEnvironmentsListTableViewCell class] forCellReuseIdentifier:@"environments"];
-    [_optionsTableView registerClass:[RZToggleResetTableViewCell class] forCellReuseIdentifier:@"toggle"];
-    [_optionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:@"version"];
+    [self.optionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:@"environments"];
+    [self.optionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:@"toggle"];
+    [self.optionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:@"version"];
     
-    _optionsTableView.delegate = self;
-    _optionsTableView.dataSource = self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
+    self.optionsTableView.delegate = self;
+    self.optionsTableView.dataSource = self;
 }
 
 #pragma mark - nav bar buttons methods
@@ -105,13 +100,13 @@
     UITableViewCell *cell;
     
     if ( indexPath.row == 0 ) {
-        cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"environments"];
+        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:@"environments"];
     }
     else if ( indexPath.row == 1 ) {
-        cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"toggle"];
+        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:@"toggle"];
     }
     else {
-        cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"version"];
+        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:@"version"];
     }
     
     return cell;
@@ -123,7 +118,7 @@
         
         RZDebugMenuEnvironmentsListViewController *environmentsView = [[RZDebugMenuEnvironmentsListViewController alloc] init];
         [self.navigationController pushViewController:environmentsView animated:YES];
-        [_optionsTableView deselectRowAtIndexPath:indexPath animated:YES];
+        [self.optionsTableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
 

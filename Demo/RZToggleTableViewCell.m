@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZToggleResetTableViewCell.h"
+#import "RZToggleTableViewCell.h"
 
-@implementation RZToggleResetTableViewCell
+@implementation RZToggleTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

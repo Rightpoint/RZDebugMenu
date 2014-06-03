@@ -37,11 +37,6 @@
     [self.view addSubview:environmentsTableView];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - table view delegate methods
 
 - (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView

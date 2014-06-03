@@ -34,11 +34,6 @@
     [self.view addGestureRecognizer:doubleTap];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - Display menu methods
 
 - (void)displayDebugMenu

@@ -1,5 +1,5 @@
 //
-//  RZEnvironmentsListTableViewCell.h
+//  RZToggleResetTableViewCell.h
 //  RZDebugMenuDemo
 //
 //  Created by Clayton Rieck on 6/3/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RZEnvironmentsListTableViewCell : UITableViewCell
+@interface RZToggleTableViewCell : UITableViewCell
 
 @end
