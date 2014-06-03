@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
-    doubleTap.numberOfTapsRequired = 2;
+    doubleTap.numberOfTapsRequired = 3;
     doubleTap.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:doubleTap];
 }

@@ -17,6 +17,7 @@
 @interface RZDebugMenuModalViewController ()
 
 @property(nonatomic, strong) UITableView *optionsTableView;
+@property(nonatomic, strong) NSDictionary *settingsDictionary;
 
 @end
 
@@ -37,6 +38,10 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    NSString *settingsPlistPath = [[NSBundle mainBundle] pathForResource:@"Settings"
+                                                          ofType:@"plist"];
+    [_settingsDictionary initWithContentsOfFile:settingsPlistPath];
     
     CGFloat width = self.view.bounds.size.width;
     CGFloat height = self.view.bounds.size.height;
@@ -103,12 +108,15 @@
     UITableViewCell *cell;
     
     if (indexPath.row == 0) {
+        
         cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"environments"];
     }
     else if (indexPath.row == 1) {
+        
         cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"toggle"];
     }
     else {
+        
         cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"version"];
     }
     
