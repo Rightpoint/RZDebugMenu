@@ -10,12 +10,12 @@
 
 @interface RZDebugMenuModalViewController ()
 
-@synthesize options = _options;
-
 @end
 
 
 @implementation RZDebugMenuModalViewController
+
+@synthesize options = _options;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,8 +34,8 @@
     
     CGRect screen = [[UIScreen mainScreen] bounds];
     CGFloat width = screen.size.width;
-    CGFloat height = screen.size.width;
-    _options = [[UITableView alloc] initWithFrame:CGRectMake(0, 100, width, height) style:UITableViewStylePlain];
+    CGFloat height = screen.size.height;
+    _options = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
     
     [[self view] addSubview:_options];
     
