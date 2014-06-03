@@ -44,12 +44,18 @@
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(closeView)];
-    self.navigationItem.rightBarButtonItem = doneButton;
     
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(addEnvironment)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.leftBarButtonItem = addButton;
     [[self view] addSubview:options];
+    options.delegate = self;
+    options.dataSource = self;
+    
 }
-
-#pragma mark - table view methods
 
 - (void)didReceiveMemoryWarning
 {
@@ -57,11 +63,48 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - nav bar buttons methods
+
 - (void)closeView {
     // TODO: save plist in completion
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)addEnvironment {
+    // TODO: call methods to edit plist in settings bundle
+}
+
+#pragma mark - table view methods
+
+- (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section {
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    if (indexPath.row == 0) {
+        
+        cell.textLabel.text = @"Environments";
+    }
+    else if (indexPath.row == 1) {
+        
+        UISwitch *applySettingsSwitch = [[UISwitch alloc] init];
+        cell.accessoryView = [[UIView alloc] initWithFrame:applySettingsSwitch.frame];
+        [cell.accessoryView addSubview:applySettingsSwitch];
+        cell.textLabel.text = @"Apply Changes on Reset";
+    }
+    else {
+        
+        cell.textLabel.text = @"Version 0.0.1";
+    }
+    
+    return cell;
+}
 /*
 #pragma mark - Navigation
 

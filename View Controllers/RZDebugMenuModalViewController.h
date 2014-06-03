@@ -11,5 +11,6 @@
 @interface RZDebugMenuModalViewController : UIViewController
 
 - (void)closeView;
+- (void)addEnvironment;
 
 @end
