@@ -7,6 +7,7 @@
 //
 
 #import "RZDebugMenuModalViewController.h"
+#import "RZDebugMenuRootViewController.h"
 #import "RZDebugMenu.h"
 
 @interface RZDebugMenuModalViewController ()
@@ -29,16 +30,23 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Env Settings";
     self.view.backgroundColor = [UIColor whiteColor];
     
     CGRect screen = [[UIScreen mainScreen] bounds];
     CGFloat width = screen.size.width;
     CGFloat height = screen.size.height;
     
-    UITableView *options = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
-
-    [[self view] addSubview:options];
+    UITableView *options = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
+                                                        style:UITableViewStylePlain];
     
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(closeView)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
+    [[self view] addSubview:options];
 }
 
 #pragma mark - table view methods
@@ -47,6 +55,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)closeView {
+    // TODO: save plist in completion
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

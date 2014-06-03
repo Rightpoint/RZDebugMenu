@@ -10,4 +10,6 @@
 
 @interface RZDebugMenuModalViewController : UIViewController
 
+- (void)closeView;
+
 @end
