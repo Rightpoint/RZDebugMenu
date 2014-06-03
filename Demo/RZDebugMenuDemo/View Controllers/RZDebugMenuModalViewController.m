@@ -37,10 +37,8 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    NSString *settingsPlistPath = [[NSBundle mainBundle] pathForResource:@"Settings"
-                                                          ofType:@"plist"];
+    // TODO: Put this in its' own class. Singleton pattern?
+    NSString *settingsPlistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     [_settingsDictionary initWithContentsOfFile:settingsPlistPath];
     
     CGFloat width = self.view.bounds.size.width;
@@ -75,7 +73,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - nav bar buttons methods
@@ -107,16 +104,13 @@
 {
     UITableViewCell *cell;
     
-    if (indexPath.row == 0) {
-        
+    if ( indexPath.row == 0 ) {
         cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"environments"];
     }
-    else if (indexPath.row == 1) {
-        
+    else if ( indexPath.row == 1 ) {
         cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"toggle"];
     }
     else {
-        
         cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"version"];
     }
     
@@ -125,7 +119,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
+    if ( indexPath.row == 0 ) {
         
         RZDebugMenuEnvironmentsListViewController *environmentsView = [[RZDebugMenuEnvironmentsListViewController alloc] init];
         [self.navigationController pushViewController:environmentsView animated:YES];
