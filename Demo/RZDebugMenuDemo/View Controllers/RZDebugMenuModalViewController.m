@@ -12,7 +12,6 @@
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
-#import "RZDebugMenu.h"
 
 static const NSString *kRZDisclosureReuseIdentifier = @"environments";
 static const NSString *kRZToggleReuseIdentifier = @"toggle";
