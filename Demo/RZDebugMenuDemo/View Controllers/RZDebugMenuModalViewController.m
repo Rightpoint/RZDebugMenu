@@ -13,12 +13,12 @@
 
 @interface RZDebugMenuModalViewController ()
 
+@property(nonatomic, strong) UITableView *optionsTableView;
+
 @end
 
 
 @implementation RZDebugMenuModalViewController
-
-@synthesize options = _options;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,7 +40,7 @@
     CGFloat width = screen.size.width;
     CGFloat height = screen.size.height;
     
-    _options = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
+    _optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
                                                         style:UITableViewStylePlain];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
@@ -54,9 +54,9 @@
                                                                   action:@selector(addEnvironment)];
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = addButton;
-    [self.view addSubview:_options];
-    _options.delegate = self;
-    _options.dataSource = self;
+    [self.view addSubview:_optionsTableView];
+    _optionsTableView.delegate = self;
+    _optionsTableView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,18 +122,8 @@
         
         RZDebugMenuEnvironmentsListViewController *environmentsView = [[RZDebugMenuEnvironmentsListViewController alloc] init];
         [self.navigationController pushViewController:environmentsView animated:YES];
-        [_options deselectRowAtIndexPath:indexPath animated:YES];
+        [_optionsTableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

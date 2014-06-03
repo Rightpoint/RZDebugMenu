@@ -10,6 +10,4 @@
 
 @interface RZDebugMenuRootViewController : UIViewController
 
-- (void)displayDebugMenu;
-
 @end

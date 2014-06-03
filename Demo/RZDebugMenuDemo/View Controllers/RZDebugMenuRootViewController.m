@@ -28,7 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     UIView *rootSubView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     rootSubView.backgroundColor = [UIColor blueColor];
@@ -50,8 +49,8 @@
 
 - (void)displayDebugMenu {
     
-    RZDebugMenuModalViewController *debugTableView = [[RZDebugMenuModalViewController alloc] init];
-    UINavigationController *navigationWrapperController = [[UINavigationController alloc] initWithRootViewController:debugTableView];
+    RZDebugMenuModalViewController *debugTableViewController = [[RZDebugMenuModalViewController alloc] init];
+    UINavigationController *navigationWrapperController = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
     [self presentViewController:navigationWrapperController animated:YES completion:nil];
 }
 
@@ -95,16 +94,5 @@
     // TODO: Present view with list of environments they have
     
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
