@@ -24,7 +24,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = @"Env Settings";
     }
     return self;
 }
@@ -33,15 +33,12 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Env Settings";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    CGRect screen = [[UIScreen mainScreen] bounds];
-    CGFloat width = screen.size.width;
-    CGFloat height = screen.size.height;
+    CGFloat width = self.view.bounds.size.width;
+    CGFloat height = self.view.bounds.size.height;
     
-    _optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
-                                                        style:UITableViewStylePlain];
+    _optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                    style:UIBarButtonItemStylePlain
@@ -52,6 +49,9 @@
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(addEnvironment)];
+    
+    _optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = addButton;
     [self.view addSubview:_optionsTableView];

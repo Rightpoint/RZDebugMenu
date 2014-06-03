@@ -29,15 +29,10 @@
 {
     [super viewDidLoad];
     
-    UIView *rootSubView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-    rootSubView.backgroundColor = [UIColor blueColor];
-    
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
     doubleTap.numberOfTapsRequired = 2;
     doubleTap.numberOfTouchesRequired = 1;
-    [rootSubView addGestureRecognizer:doubleTap];
-    
-    [self.view addSubview:rootSubView];
+    [self.view addGestureRecognizer:doubleTap];
 }
 
 - (void)didReceiveMemoryWarning
