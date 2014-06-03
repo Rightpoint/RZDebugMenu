@@ -9,6 +9,9 @@
 #import "RZDebugMenuModalViewController.h"
 #import "RZDebugMenuRootViewController.h"
 #import "RZDebugMenuEnvironmentsListViewController.h"
+#import "RZEnvironmentsListTableViewCell.h"
+#import "RZToggleResetTableViewCell.h"
+#import "RZVersionInfoTableViewCell.h"
 #import "RZDebugMenu.h"
 
 @interface RZDebugMenuModalViewController ()
@@ -38,7 +41,7 @@
     CGFloat width = self.view.bounds.size.width;
     CGFloat height = self.view.bounds.size.height;
     
-    _optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
+    _optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStyleGrouped];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                    style:UIBarButtonItemStylePlain
@@ -55,6 +58,11 @@
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = addButton;
     [self.view addSubview:_optionsTableView];
+    
+    [_optionsTableView registerClass:[RZEnvironmentsListTableViewCell class] forCellReuseIdentifier:@"environments"];
+    [_optionsTableView registerClass:[RZToggleResetTableViewCell class] forCellReuseIdentifier:@"toggle"];
+    [_optionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:@"version"];
+    
     _optionsTableView.delegate = self;
     _optionsTableView.dataSource = self;
 }
@@ -92,31 +100,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell;
     
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     if (indexPath.row == 0) {
-        
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = @"Environment";
-        cell.detailTextLabel.text = @"Placeholder";
+        cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"environments"];
     }
     else if (indexPath.row == 1) {
-        
-        NSString *settingsPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-        NSDictionary *settingsDictionary = [[NSDictionary alloc] initWithContentsOfFile:settingsPath];
-        
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UISwitch *applySettingsSwitch = [[UISwitch alloc] init];
-        cell.accessoryView = [[UIView alloc] initWithFrame:applySettingsSwitch.frame];
-        [cell.accessoryView addSubview:applySettingsSwitch];
-        cell.textLabel.text = @"Apply Changes on Reset";
+        cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"toggle"];
     }
     else {
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = @"Version";
-        cell.detailTextLabel.text = @"0.0.1";
+        cell = [_optionsTableView dequeueReusableCellWithIdentifier:@"version"];
     }
     
     return cell;
