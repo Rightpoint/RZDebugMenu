@@ -3,7 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>Environments</key>
-	<dict/>
+	<dict>
+		<key>SQL</key>
+		<string>SQL_URL</string>
+		<key>MongoDB</key>
+		<string>mongoURL...</string>
+	</dict>
 	<key>Reset</key>
 	<true/>
 </dict>
