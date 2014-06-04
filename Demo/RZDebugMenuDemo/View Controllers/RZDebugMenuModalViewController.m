@@ -41,7 +41,8 @@ static const NSString *kRZVersionInfoReuseIdentifier = @"version";
 {
     [super viewDidLoad];
     
-    [RZSettingsManager settingsManager];
+    RZSettingsManager *debugSettingsManager = [RZSettingsManager settingsManager];
+    BOOL toggleSwitchValue = [debugSettingsManager getToggleValue];
     
     CGFloat width = self.view.bounds.size.width;
     CGFloat height = self.view.bounds.size.height;

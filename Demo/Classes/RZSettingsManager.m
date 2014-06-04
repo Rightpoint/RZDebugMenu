@@ -33,6 +33,12 @@ static const NSString *kRZTogglePlistKey = @"Reset";
     return self;
 }
 
++ (BOOL)getToggleValue
+{
+    NSNumber *switchValue = [[RZSettingsManager settingsManager] settingsPlistDictionary][kRZTogglePlistKey];
+    return switchValue.boolValue;
+}
+
 + (void)toggleReset
 {
     NSNumber *resetIsOn = [[RZSettingsManager settingsManager] settingsPlistDictionary][kRZTogglePlistKey];
@@ -43,8 +49,19 @@ static const NSString *kRZTogglePlistKey = @"Reset";
     else {
         [[RZSettingsManager settingsManager] settingsPlistDictionary][kRZTogglePlistKey] = @YES;
     }
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    [[RZSettingsManager settingsManager] settingsPlistDictionary];
+
+    NSString *plistPath = nil;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ( (plistPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Settings.plist"]) ) {
+        
+        if ( [fileManager isWritableFileAtPath:plistPath] ) {
+            
+            [fileManager setAttributes:[[RZSettingsManager settingsManager] settingsPlistDictionary]
+                          ofItemAtPath:[[NSBundle mainBundle] bundlePath]
+                                 error:nil];
+        }
+    }
 }
 
 + (void)switchEnvironments
