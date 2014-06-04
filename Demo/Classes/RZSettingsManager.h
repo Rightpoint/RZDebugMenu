@@ -12,8 +12,6 @@
 
 @property (nonatomic, strong) NSMutableDictionary *settingsPlistDictionary;
 
-+ (id)settingsManager;
-+ (BOOL)getToggleValue;
 + (void)toggleReset;
 + (void)switchEnvironments;
 

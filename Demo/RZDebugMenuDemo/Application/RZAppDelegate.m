@@ -13,6 +13,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    #if DEBUG == YES
+        
+    #endif
+    
+    
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
  
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -16,10 +16,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        BOOL switchValue = [RZSettingsManager getToggleValue];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         UISwitch *applySettingsSwitch = [[UISwitch alloc] init];
-        applySettingsSwitch.on = switchValue;
         self.accessoryView = [[UIView alloc] initWithFrame:applySettingsSwitch.frame];
         [self.accessoryView addSubview:applySettingsSwitch];
         self.textLabel.text = @"Apply Changes on Reset";
