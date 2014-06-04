@@ -20,4 +20,23 @@
     return settingsManager;
 }
 
+- (id)init
+{
+    if ( self == [super init] ) {
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+        _settingsPlistDictionary = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+    }
+    return self;
+}
+
++ (void)toggleReset
+{
+    
+}
+
++ (void)switchEnvironments
+{
+    
+}
+
 @end

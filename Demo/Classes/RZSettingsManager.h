@@ -13,5 +13,7 @@
 @property (nonatomic, strong) NSDictionary *settingsPlistDictionary;
 
 + (id)settingsManager;
++ (void)toggleReset;
++ (void)switchEnvironments;
 
 @end
