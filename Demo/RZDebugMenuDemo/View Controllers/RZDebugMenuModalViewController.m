@@ -12,6 +12,7 @@
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
+#import "RZSettingsManager.h"
 
 static const NSString *kRZDisclosureReuseIdentifier = @"environments";
 static const NSString *kRZToggleReuseIdentifier = @"toggle";
@@ -40,9 +41,7 @@ static const NSString *kRZVersionInfoReuseIdentifier = @"version";
 {
     [super viewDidLoad];
     
-    // TODO: Put this in its' own class. Singleton pattern?
-    NSString *settingsPlistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    self.settingsDictionary = [[NSDictionary alloc] initWithContentsOfFile:settingsPlistPath];
+    [RZSettingsManager settingsManager];
     
     CGFloat width = self.view.bounds.size.width;
     CGFloat height = self.view.bounds.size.height;

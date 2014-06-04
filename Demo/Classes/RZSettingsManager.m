@@ -43,6 +43,8 @@ static const NSString *kRZTogglePlistKey = @"Reset";
     else {
         [[RZSettingsManager settingsManager] settingsPlistDictionary][kRZTogglePlistKey] = @YES;
     }
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+    [[RZSettingsManager settingsManager] settingsPlistDictionary];
 }
 
 + (void)switchEnvironments
