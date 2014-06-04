@@ -2,29 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Preferences</key>
+	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
-			<key>Autocapitilization Style</key>
-			<string>None</string>
-			<key>Default Value</key>
-			<string>None</string>
-			<key>Identifier</key>
-			<string>environment_preference</string>
-			<key>Title</key>
-			<string>Environment</string>
 			<key>Type</key>
-			<string>Text Field</string>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Apply on Reset</string>
+			<key>Key</key>
+			<string>reset_toggle</string>
+			<key>DefaultValue</key>
+			<true/>
 		</dict>
 		<dict>
-			<key>Default Value</key>
-			<true/>
-			<key>Identifier</key>
-			<string>enabled_preference</string>
-			<key>Title</key>
-			<string>Enabled</string>
 			<key>Type</key>
-			<string>Toggle Switch</string>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string></string>
+			<key>Key</key>
+			<string></string>
+			<key>DefaultValue</key>
+			<string>0</string>
+			<key>Titles</key>
+			<array>
+				<string>Staging</string>
+				<string>Production</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>0</string>
+				<string>1</string>
+			</array>
 		</dict>
 	</array>
 </dict>

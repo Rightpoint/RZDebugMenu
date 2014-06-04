@@ -14,7 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     #if DEBUG == YES
-        
+        // TODO: Load the plist here
     #endif
     
     

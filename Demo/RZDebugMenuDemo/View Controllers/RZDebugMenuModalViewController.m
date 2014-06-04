@@ -52,9 +52,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                   action:@selector(closeView)];
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add"
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(addEnvironment)];
+                                                                  style:UIBarButtonItemStylePlain
+                                                                 target:self
+                                                                 action:@selector(addEnvironment)];
     
     self.optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
