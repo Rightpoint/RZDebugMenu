@@ -8,6 +8,10 @@
 
 #import "RZSettingsManager.h"
 
+static const NSString *kRZEnvironmentsPlistKey = @"Environments";
+static const NSString *kRZTogglePlistKey = @"Reset";
+
+
 @implementation RZSettingsManager
 
 + (id)settingsManager
@@ -24,14 +28,21 @@
 {
     if ( self == [super init] ) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-        _settingsPlistDictionary = [[NSDictionary alloc] initWithContentsOfFile:filePath];
+        _settingsPlistDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
     }
     return self;
 }
 
 + (void)toggleReset
 {
+    NSNumber *resetIsOn = [[RZSettingsManager settingsManager] settingsPlistDictionary][kRZTogglePlistKey];
     
+    if ( resetIsOn.boolValue ) {
+        [[RZSettingsManager settingsManager] settingsPlistDictionary][kRZTogglePlistKey] = @NO;
+    }
+    else {
+        [[RZSettingsManager settingsManager] settingsPlistDictionary][kRZTogglePlistKey] = @YES;
+    }
 }
 
 + (void)switchEnvironments

@@ -10,7 +10,7 @@
 
 @interface RZSettingsManager : NSObject
 
-@property (nonatomic, strong) NSDictionary *settingsPlistDictionary;
+@property (nonatomic, strong) NSMutableDictionary *settingsPlistDictionary;
 
 + (id)settingsManager;
 + (void)toggleReset;
