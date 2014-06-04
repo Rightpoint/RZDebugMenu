@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RZDebugMenuModalViewController : UIViewController
+@interface RZDebugMenuModalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

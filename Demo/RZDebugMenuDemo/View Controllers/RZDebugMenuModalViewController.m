@@ -14,9 +14,9 @@
 #import "RZVersionInfoTableViewCell.h"
 #import "RZSettingsManager.h"
 
-static const NSString *kRZDisclosureReuseIdentifier = @"environments";
-static const NSString *kRZToggleReuseIdentifier = @"toggle";
-static const NSString *kRZVersionInfoReuseIdentifier = @"version";
+static NSString * const kRZDisclosureReuseIdentifier = @"environments";
+static NSString * const kRZToggleReuseIdentifier = @"toggle";
+static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuModalViewController ()
 
@@ -90,7 +90,7 @@ static const NSString *kRZVersionInfoReuseIdentifier = @"version";
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 3;
 }
