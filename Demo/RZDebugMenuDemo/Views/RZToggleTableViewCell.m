@@ -7,7 +7,6 @@
 //
 
 #import "RZToggleTableViewCell.h"
-#import "RZSettingsManager.h"
 
 @implementation RZToggleTableViewCell
 
