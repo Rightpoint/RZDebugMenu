@@ -10,6 +10,8 @@
 
 @interface RZSettingsInterfaceTableViewCell : UITableViewCell
 
++ (id)setupEnvironmentsCellWithTitle:(NSString *)title andEnvironments:(NSArray *)environmentOptions;
 + (id)setupToggleCellWithTitle:(NSString *)title andValue:(BOOL)value;
++ (id)setupVersionCellWithVersionNumber:(NSString *)versionNumber;
 
 @end
