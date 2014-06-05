@@ -15,19 +15,19 @@ static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
 
 @implementation RZSettingsInterfaceTableViewCell
 
-- (id)setupEnvironmentsCellWithTitle:(NSString *)title andEnvironments:(NSArray *)environmentOptions withReuseIdentifier:(NSString *)reuseIdentifier
+- (id)initEnvironmentsCellWithTitle:(NSString *)title andEnvironments:(NSArray *)environmentOptions withReuseIdentifier:(NSString *)reuseIdentifier
 {
     id environmentsCell;
     return environmentsCell;
 }
 
-- (id)setupToggleCellWithTitle:(NSString *)title andValue:(BOOL)value
+- (id)initToggleCellWithTitle:(NSString *)title andValue:(BOOL)value
 {
     id toggleCell = [[RZToggleTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 cellTitle:title andSwitchValue:value];
     return toggleCell;
 }
 
-- (id)setupVersionCellWithVersionNumber:(NSString *)versionNumber withReuseIdentifier:(NSString *)reuseIdentifier
+- (id)initVersionCellWithVersionNumber:(NSString *)versionNumber withReuseIdentifier:(NSString *)reuseIdentifier
 {
     id versionCell;
     return versionCell;

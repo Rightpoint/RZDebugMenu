@@ -63,12 +63,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     self.navigationItem.leftBarButtonItem = addButton;
     [self.view addSubview:_optionsTableView];
     
-    UITableViewCell *toggleSwitchTableViewCell = [[RZSettingsInterfaceTableViewCell alloc] setupToggleCellWithTitle:@"RESET" andValue:YES];
+    UITableViewCell *toggleSwitchTableViewCell = [[RZSettingsInterfaceTableViewCell alloc] initToggleCellWithTitle:@"RESET" andValue:YES];
     
     UITableViewCell *versionInformationTableViewCell;
     
     [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
-    [self.optionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
+    [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
     [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
     
     self.optionsTableView.delegate = self;
@@ -104,16 +104,16 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 {
     UITableViewCell *cell;
     
-    cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier];
+    cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
     
     if ( indexPath.row == 0 ) {
-        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier];
+        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
     }
     else if ( indexPath.row == 1 ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
     }
     else {
-        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier];
+        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
     }
     
     return cell;
