@@ -12,7 +12,6 @@
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
-
 #import "RZSettingsInterfaceTableViewCell.h"
 
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
@@ -22,10 +21,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 @interface RZDebugMenuModalViewController ()
 
 @property(nonatomic, strong) UITableView *optionsTableView;
-@property(nonatomic, strong) NSDictionary *settingsDictionary;
 
 @end
-
 
 @implementation RZDebugMenuModalViewController
 
@@ -63,9 +60,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     self.navigationItem.leftBarButtonItem = addButton;
     [self.view addSubview:self.optionsTableView];
     
-    [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
-    [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
-    [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
+    [self.optionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
+    [self.optionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
+    [self.optionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
     
     self.optionsTableView.delegate = self;
     self.optionsTableView.dataSource = self;

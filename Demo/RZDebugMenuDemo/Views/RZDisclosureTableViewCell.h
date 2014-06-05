@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "RZSettingsInterfaceTableViewCell.h"
 
-@interface RZDisclosureTableViewCell : RZSettingsInterfaceTableViewCell
+@interface RZDisclosureTableViewCell : UITableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style andTitle:(NSString *)title;
+@property(atomic, strong) NSString *cellTitle;
+@property(atomic, strong) NSString *currentEnvironment;
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+//- (id)initWithStyle:(UITableViewCellStyle)style andTitle:(NSString *)title;
 
 @end

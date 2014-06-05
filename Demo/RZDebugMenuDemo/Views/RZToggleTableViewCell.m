@@ -10,16 +10,17 @@
 
 @implementation RZToggleTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style cellTitle:(NSString *)title andSwitchValue:(BOOL)value
+//- (id)initWithStyle:(UITableViewCellStyle)style cellTitle:(NSString *)title andSwitchValue:(BOOL)value
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super init];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.applySettingsSwitch = [[UISwitch alloc] init];
-        self.applySettingsSwitch.on = value;
+//        self.applySettingsSwitch.on = YES;
         self.accessoryView = [[UIView alloc] initWithFrame:self.applySettingsSwitch.frame];
         [self.accessoryView addSubview:self.applySettingsSwitch];
-        self.textLabel.text = title;
+        self.textLabel.text = self.cellTitle;
     }
     return self;
 }
