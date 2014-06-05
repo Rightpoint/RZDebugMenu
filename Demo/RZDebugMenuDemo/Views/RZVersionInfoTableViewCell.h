@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RZSettingsInterfaceTableViewCell.h"
 
-@interface RZVersionInfoTableViewCell : UITableViewCell
+@interface RZVersionInfoTableViewCell : RZSettingsInterfaceTableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style andVersionNumber:(NSString *)version;
 
 @end

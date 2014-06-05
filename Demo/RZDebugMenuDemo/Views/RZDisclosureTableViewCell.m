@@ -10,12 +10,12 @@
 
 @implementation RZDisclosureTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style andTitle:(NSString *)title
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super init];
     if (self) {
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        self.textLabel.text = @"Environments";
+        self.textLabel.text = title;
         self.detailTextLabel.text = @"Placeholder";
     }
     return self;

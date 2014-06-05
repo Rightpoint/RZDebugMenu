@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RZSettingsInterfaceTableViewCell.h"
 
-@interface RZToggleTableViewCell : UITableViewCell
+@interface RZToggleTableViewCell : RZSettingsInterfaceTableViewCell
 
 @property(nonatomic, strong) UISwitch *applySettingsSwitch;
 

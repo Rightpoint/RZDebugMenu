@@ -10,8 +10,11 @@
 
 @interface RZSettingsInterfaceTableViewCell : UITableViewCell
 
-- (id)initEnvironmentsCellWithTitle:(NSString *)title andEnvironments:(NSArray *)environmentOptions withReuseIdentifier:(NSString *)reuseIdentifier;
+@property(nonatomic, strong) NSString *cellTitle;
+
+
+- (id)initEnvironmentsCellWithTitle:(NSString *)title;
 - (id)initToggleCellWithTitle:(NSString *)title andValue:(BOOL)value;
-- (id)initVersionCellWithVersionNumber:(NSString *)versionNumber withReuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initVersionCellWithVersionNumber:(NSString *)versionNumber;
 
 @end

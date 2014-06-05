@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RZSettingsInterfaceTableViewCell.h"
 
-@interface RZDisclosureTableViewCell : UITableViewCell
+@interface RZDisclosureTableViewCell : RZSettingsInterfaceTableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style andTitle:(NSString *)title;
 
 @end

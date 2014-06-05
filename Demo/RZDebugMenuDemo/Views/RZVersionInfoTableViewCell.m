@@ -10,13 +10,13 @@
 
 @implementation RZVersionInfoTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style andVersionNumber:(NSString *)version
 {
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
+    self = [super init];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.textLabel.text = @"Version";
-        self.detailTextLabel.text = @"0.0.1";
+        self.detailTextLabel.text = version;
     }
     return self;
 }

@@ -61,11 +61,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = addButton;
-    [self.view addSubview:_optionsTableView];
-    
-    UITableViewCell *toggleSwitchTableViewCell = [[RZSettingsInterfaceTableViewCell alloc] initToggleCellWithTitle:@"RESET" andValue:YES];
-    
-    UITableViewCell *versionInformationTableViewCell;
+    [self.view addSubview:self.optionsTableView];
     
     [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
     [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
@@ -90,7 +86,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 #pragma mark - table view delegate methods
 
-- (NSInteger)numberOfSectionsInTableView: (UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
@@ -103,8 +99,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    
-    cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
     
     if ( indexPath.row == 0 ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
@@ -119,7 +113,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( indexPath.row == 0 ) {
         

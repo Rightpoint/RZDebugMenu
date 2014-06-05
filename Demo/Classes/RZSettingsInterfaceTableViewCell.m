@@ -9,28 +9,26 @@
 #import "RZSettingsInterfaceTableViewCell.h"
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
-
-static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
-static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
+#import "RZVersionInfoTableViewCell.h"
 
 @implementation RZSettingsInterfaceTableViewCell
 
-- (id)initEnvironmentsCellWithTitle:(NSString *)title andEnvironments:(NSArray *)environmentOptions withReuseIdentifier:(NSString *)reuseIdentifier
+- (id)initEnvironmentsCellWithTitle:(NSString *)title
 {
-    id environmentsCell;
-    return environmentsCell;
+    self = [[RZDisclosureTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 andTitle:@"Environments"];
+    return self;
 }
 
 - (id)initToggleCellWithTitle:(NSString *)title andValue:(BOOL)value
 {
-    id toggleCell = [[RZToggleTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 cellTitle:title andSwitchValue:value];
-    return toggleCell;
+    self = [[RZToggleTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 cellTitle:title andSwitchValue:value];
+    return self;
 }
 
-- (id)initVersionCellWithVersionNumber:(NSString *)versionNumber withReuseIdentifier:(NSString *)reuseIdentifier
+- (id)initVersionCellWithVersionNumber:(NSString *)versionNumber
 {
-    id versionCell;
-    return versionCell;
+    self = [[RZVersionInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 andVersionNumber:@"0.0.1"];
+    return self;
 }
 
 @end
