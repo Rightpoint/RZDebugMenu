@@ -10,4 +10,8 @@
 
 @interface RZToggleTableViewCell : UITableViewCell
 
+@property(nonatomic, strong) UISwitch *applySettingsSwitch;
+
+- (id)initWithStyle:(UITableViewCellStyle)style cellTitle:(NSString *)title andSwitchValue:(BOOL)value;
+
 @end

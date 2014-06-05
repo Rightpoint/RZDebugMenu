@@ -10,8 +10,8 @@
 
 @interface RZSettingsInterfaceTableViewCell : UITableViewCell
 
-+ (id)setupEnvironmentsCellWithTitle:(NSString *)title andEnvironments:(NSArray *)environmentOptions;
-+ (id)setupToggleCellWithTitle:(NSString *)title andValue:(BOOL)value;
-+ (id)setupVersionCellWithVersionNumber:(NSString *)versionNumber;
+- (id)setupEnvironmentsCellWithTitle:(NSString *)title andEnvironments:(NSArray *)environmentOptions withReuseIdentifier:(NSString *)reuseIdentifier;
+- (id)setupToggleCellWithTitle:(NSString *)title andValue:(BOOL)value;
+- (id)setupVersionCellWithVersionNumber:(NSString *)versionNumber withReuseIdentifier:(NSString *)reuseIdentifier;
 
 @end
