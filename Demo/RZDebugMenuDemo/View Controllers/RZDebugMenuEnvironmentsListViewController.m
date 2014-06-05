@@ -30,8 +30,7 @@
     CGFloat width = self.view.bounds.size.width;
     CGFloat height = self.view.bounds.size.height;
     
-    UITableView *environmentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height)
-                                                             style:UITableViewStylePlain];
+    UITableView *environmentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
     environmentsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:environmentsTableView];

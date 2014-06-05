@@ -28,10 +28,13 @@
 {
     [super viewDidLoad];
     
+#if DEBUG
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
     doubleTap.numberOfTapsRequired = 3;
     doubleTap.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:doubleTap];
+#endif
+    
 }
 
 #pragma mark - Display menu methods

@@ -13,6 +13,8 @@
 #import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 
+#import "RZSettingsInterfaceTableViewCell.h"
+
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
@@ -61,9 +63,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     self.navigationItem.leftBarButtonItem = addButton;
     [self.view addSubview:_optionsTableView];
     
-    [self.optionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
-    [self.optionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
-    [self.optionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
+    [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
+    [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
+    [self.optionsTableView registerClass:[RZSettingsInterfaceTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
     
     self.optionsTableView.delegate = self;
     self.optionsTableView.dataSource = self;
@@ -99,13 +101,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     UITableViewCell *cell;
     
     if ( indexPath.row == 0 ) {
-        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:@"environments"];
+        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier];
     }
     else if ( indexPath.row == 1 ) {
-        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:@"toggle"];
+        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier];
     }
     else {
-        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:@"version"];
+        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier];
     }
     
     return cell;

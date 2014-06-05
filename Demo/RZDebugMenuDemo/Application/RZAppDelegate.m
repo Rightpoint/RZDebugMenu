@@ -13,13 +13,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    #if DEBUG == YES
-        // TODO: Load the plist here
+    #if DEBUG
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+    NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     #endif
     
-    
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
- 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootViewController;
