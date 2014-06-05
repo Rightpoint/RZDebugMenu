@@ -10,4 +10,6 @@
 
 @interface RZDebugMenuModalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property(nonatomic, strong) NSDictionary *settingsPlist;
+
 @end

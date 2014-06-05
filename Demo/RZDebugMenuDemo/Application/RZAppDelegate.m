@@ -8,6 +8,7 @@
 
 #import "RZAppDelegate.h"
 #import "RZDebugMenuRootViewController.h"
+#import "RZDebugMenuModalViewController.h"
 
 @implementation RZAppDelegate
 
@@ -19,6 +20,7 @@
     #endif
     
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
+    rootViewController.settingsPlist = plistData;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootViewController;

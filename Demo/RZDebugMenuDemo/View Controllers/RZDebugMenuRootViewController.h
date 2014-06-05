@@ -10,4 +10,6 @@
 
 @interface RZDebugMenuRootViewController : UIViewController
 
+@property(nonatomic, strong) NSDictionary *settingsPlist;
+
 @end
