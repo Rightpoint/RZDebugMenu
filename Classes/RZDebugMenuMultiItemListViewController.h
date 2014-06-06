@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "RZDebugMenuSettingsInterface.h"
 
-@interface RZDebugMenuEnvironmentsListViewController : UIViewController
+@interface RZDebugMenuMultiItemListViewController : UIViewController
 
 @property(nonatomic, strong) NSArray *cellTitles;
+
+- (id)initWithCellTitles:(NSArray *)titles;
 
 @end

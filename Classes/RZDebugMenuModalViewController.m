@@ -8,7 +8,7 @@
 
 #import "RZDebugMenuModalViewController.h"
 #import "RZDebugMenuRootViewController.h"
-#import "RZDebugMenuEnvironmentsListViewController.h"
+#import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
@@ -98,8 +98,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
+    id currentMetaDataObject = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
     
-    if ( [[self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row] isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
+    if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
         RZDebugMenuMultiValueItem *disclosureCellMetaData = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = disclosureCellMetaData.disclosureTableViewCellTitle;
@@ -109,7 +110,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell.detailTextLabel.text = currentSelection;
         
     }
-    else if ( [[self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row] isKindOfClass:[RZDebugMenuToggleItem class]] ) {
+    else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
         RZDebugMenuToggleItem *toggleCellMetaData = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = toggleCellMetaData.toggleCellTitle;
@@ -128,7 +129,10 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     if ( [cell isKindOfClass:[RZDisclosureTableViewCell class]] ) {
         
-        RZDebugMenuEnvironmentsListViewController *environmentsView = [[RZDebugMenuEnvironmentsListViewController alloc] init];
+        RZDebugMenuMultiValueItem *disclosureCellOptions = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
+        NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionTitles;
+        
+        RZDebugMenuMultiItemListViewController *environmentsView = [[RZDebugMenuMultiItemListViewController alloc] initWithCellTitles:disclosureCellSelectableItems];
         [self.navigationController pushViewController:environmentsView animated:YES];
         [self.optionsTableView deselectRowAtIndexPath:indexPath animated:YES];
     }

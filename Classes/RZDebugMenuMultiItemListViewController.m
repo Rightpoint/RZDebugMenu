@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuEnvironmentsListViewController.h"
+#import "RZDebugMenuMultiItemListViewController.h"
 
-@interface RZDebugMenuEnvironmentsListViewController ()
+@interface RZDebugMenuMultiItemListViewController ()
 
 @end
 
-@implementation RZDebugMenuEnvironmentsListViewController
+@implementation RZDebugMenuMultiItemListViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -20,6 +20,12 @@
     if (self) {
         self.title = @"Environments";
     }
+    return self;
+}
+
+- (id)initWithCellTitles:(NSArray *)titles
+{
+    _cellTitles = [[NSArray alloc] initWithArray:titles];
     return self;
 }
 
