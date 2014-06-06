@@ -16,6 +16,7 @@
 		0C0CFB2419424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1919424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.m */; };
 		0C0CFB2519424BBD00605FF3 /* RZToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1B19424BBD00605FF3 /* RZToggleTableViewCell.m */; };
 		0C0CFB2619424BBD00605FF3 /* RZVersionInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1D19424BBD00605FF3 /* RZVersionInfoTableViewCell.m */; };
+		0C0CFB4519425DE600605FF3 /* RZDebugMenuVersionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB4419425DE600605FF3 /* RZDebugMenuVersionItem.m */; };
 		0C22DAC3193CCDA30042938F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC2193CCDA30042938F /* Foundation.framework */; };
 		0C22DAC5193CCDA30042938F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC4193CCDA30042938F /* CoreGraphics.framework */; };
 		0C22DAC7193CCDA30042938F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC6193CCDA30042938F /* UIKit.framework */; };
@@ -61,6 +62,8 @@
 		0C0CFB1B19424BBD00605FF3 /* RZToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZToggleTableViewCell.m; sourceTree = "<group>"; };
 		0C0CFB1C19424BBD00605FF3 /* RZVersionInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZVersionInfoTableViewCell.h; sourceTree = "<group>"; };
 		0C0CFB1D19424BBD00605FF3 /* RZVersionInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZVersionInfoTableViewCell.m; sourceTree = "<group>"; };
+		0C0CFB4319425DE600605FF3 /* RZDebugMenuVersionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuVersionItem.h; sourceTree = "<group>"; };
+		0C0CFB4419425DE600605FF3 /* RZDebugMenuVersionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuVersionItem.m; sourceTree = "<group>"; };
 		0C22DABF193CCDA30042938F /* RZDebugMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RZDebugMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C22DAC2193CCDA30042938F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C22DAC4193CCDA30042938F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -116,6 +119,8 @@
 				0C0CFB1019424BBD00605FF3 /* RZDebugMenuMultiValueItem.h */,
 				0C0CFB1119424BBD00605FF3 /* RZDebugMenuMultiValueItem.m */,
 				0C0CFB1219424BBD00605FF3 /* RZDebugMenuSettingsInterface.h */,
+				0C0CFB4319425DE600605FF3 /* RZDebugMenuVersionItem.h */,
+				0C0CFB4419425DE600605FF3 /* RZDebugMenuVersionItem.m */,
 				0C0CFB1319424BBD00605FF3 /* RZDebugMenuSettingsInterface.m */,
 				0C0CFB1419424BBD00605FF3 /* RZDebugMenuToggleItem.h */,
 				0C0CFB1519424BBD00605FF3 /* RZDebugMenuToggleItem.m */,
@@ -341,6 +346,7 @@
 				0C22DAD3193CCDA30042938F /* RZAppDelegate.m in Sources */,
 				0C0CFB2019424BBD00605FF3 /* RZDebugMenuMultiValueItem.m in Sources */,
 				0C0CFB1F19424BBD00605FF3 /* RZDebugMenuModalViewController.m in Sources */,
+				0C0CFB4519425DE600605FF3 /* RZDebugMenuVersionItem.m in Sources */,
 				0C0CFB2219424BBD00605FF3 /* RZDebugMenuToggleItem.m in Sources */,
 				0C0CFB1E19424BBD00605FF3 /* RZDebugMenuMultiItemListViewController.m in Sources */,
 				0C0CFB2619424BBD00605FF3 /* RZVersionInfoTableViewCell.m in Sources */,

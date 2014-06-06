@@ -9,6 +9,7 @@
 #import "RZDebugMenuSettingsInterface.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
+#import "RZDebugMenuVersionItem.h"
 
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
@@ -55,8 +56,9 @@ static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString
                 [_settingsCellItems addObject:toggleTableViewCellMetaData];
             }
         }
-        NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
-        [_settingsCellItems addObject:version];
+        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
+        RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithVersionNumber:version];
+        [_settingsCellItems addObject:versionItem];
     }
     return self;
 }

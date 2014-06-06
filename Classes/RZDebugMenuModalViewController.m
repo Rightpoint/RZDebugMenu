@@ -15,6 +15,7 @@
 #import "RZSettingsInterfaceTableViewCell.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
+#import "RZDebugMenuVersionItem.h"
 
 static NSString * const kRZNavigationBarTitle = @"Env Settings";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
@@ -126,10 +127,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = ((RZDebugMenuToggleItem *)currentMetaDataObject).toggleCellTitle;
     }
-    else {
+    else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
-        cell.detailTextLabel.text = [self.debugSettingsInterface.settingsCellItems lastObject];
+        RZDebugMenuVersionItem *versionItem = [self.debugSettingsInterface.settingsCellItems lastObject];
+        cell.detailTextLabel.text = versionItem.versionNumber;
     }
     
     return cell;
