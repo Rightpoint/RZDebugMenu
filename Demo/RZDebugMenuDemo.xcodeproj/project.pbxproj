@@ -18,7 +18,7 @@
 				<string>0C22DAE1193CCDA30042938F</string>
 				<string>0C22DAC1193CCDA30042938F</string>
 				<string>0C22DAC0193CCDA30042938F</string>
-				<string>0C972B10193E1C0C00EA84FF</string>
+				<string>0C58B3C319423F2A0021D455</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -94,18 +94,18 @@
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
-				<string>0C6AAC391940A8C700851A0F</string>
+				<string>0C58B3DD19423F2A0021D455</string>
+				<string>0C58B3DC19423F2A0021D455</string>
+				<string>0C58B3DB19423F2A0021D455</string>
 				<string>0C22DAD3193CCDA30042938F</string>
-				<string>0C972B0C193E1A9900EA84FF</string>
-				<string>0C972B0B193E1A9900EA84FF</string>
-				<string>0C972B1C193E367B00EA84FF</string>
-				<string>0C58B3BF194224DB0021D455</string>
-				<string>0CE5281F1941EE9800D2EE81</string>
+				<string>0C58B3D819423F2A0021D455</string>
+				<string>0C58B3D719423F2A0021D455</string>
+				<string>0C58B3DA19423F2A0021D455</string>
+				<string>0C58B3D619423F2A0021D455</string>
+				<string>0C58B3DE19423F2A0021D455</string>
 				<string>0C972B0D193E1A9900EA84FF</string>
-				<string>0C972B19193E356D00EA84FF</string>
 				<string>0C22DACF193CCDA30042938F</string>
-				<string>0C972B1F193E36D700EA84FF</string>
-				<string>0C58B3C2194229A80021D455</string>
+				<string>0C58B3D919423F2A0021D455</string>
 			</array>
 			<key>isa</key>
 			<string>PBXSourcesBuildPhase</string>
@@ -939,7 +939,39 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0C58B3BD194224DB0021D455</key>
+		<key>0C58B3C319423F2A0021D455</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C58B3C419423F2A0021D455</string>
+				<string>0C58B3C519423F2A0021D455</string>
+				<string>0C58B3C619423F2A0021D455</string>
+				<string>0C58B3C719423F2A0021D455</string>
+				<string>0C58B3C819423F2A0021D455</string>
+				<string>0C58B3C919423F2A0021D455</string>
+				<string>0C58B3CA19423F2A0021D455</string>
+				<string>0C58B3CB19423F2A0021D455</string>
+				<string>0C58B3CC19423F2A0021D455</string>
+				<string>0C58B3CD19423F2A0021D455</string>
+				<string>0C58B3CE19423F2A0021D455</string>
+				<string>0C58B3CF19423F2A0021D455</string>
+				<string>0C58B3D019423F2A0021D455</string>
+				<string>0C58B3D119423F2A0021D455</string>
+				<string>0C58B3D219423F2A0021D455</string>
+				<string>0C58B3D319423F2A0021D455</string>
+				<string>0C58B3D419423F2A0021D455</string>
+				<string>0C58B3D519423F2A0021D455</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Classes</string>
+			<key>path</key>
+			<string>Classes</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3C419423F2A0021D455</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -948,11 +980,11 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>RZDebugMenuMultiValueItem.h</string>
+			<string>../../Classes/RZDebugMenuEnvironmentsListViewController.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0C58B3BE194224DB0021D455</key>
+		<key>0C58B3C519423F2A0021D455</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -961,80 +993,278 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>RZDebugMenuMultiValueItem.m</string>
+			<string>../../Classes/RZDebugMenuEnvironmentsListViewController.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0C58B3BF194224DB0021D455</key>
+		<key>0C58B3C619423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>../../Classes/RZDebugMenuModalViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3C719423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>../../Classes/RZDebugMenuModalViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3C819423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>../../Classes/RZDebugMenuMultiValueItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3C919423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>../../Classes/RZDebugMenuMultiValueItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3CA19423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>../../Classes/RZDebugMenuSettingsInterface.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3CB19423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>../../Classes/RZDebugMenuSettingsInterface.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3CC19423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>../../Classes/RZDebugMenuToggleItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3CD19423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>../../Classes/RZDebugMenuToggleItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3CE19423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>../../Classes/RZDisclosureTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3CF19423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>../../Classes/RZDisclosureTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3D019423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>../../Classes/RZSettingsInterfaceTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3D119423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>../../Classes/RZSettingsInterfaceTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3D219423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>../../Classes/RZToggleTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3D319423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>../../Classes/RZToggleTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3D419423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>../../Classes/RZVersionInfoTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3D519423F2A0021D455</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>../../Classes/RZVersionInfoTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C58B3D619423F2A0021D455</key>
 		<dict>
 			<key>fileRef</key>
-			<string>0C58B3BE194224DB0021D455</string>
+			<string>0C58B3C519423F2A0021D455</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>0C58B3C0194229A80021D455</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>RZDebugMenuToggleItem.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C58B3C1194229A80021D455</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>RZDebugMenuToggleItem.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C58B3C2194229A80021D455</key>
+		<key>0C58B3D719423F2A0021D455</key>
 		<dict>
 			<key>fileRef</key>
-			<string>0C58B3C1194229A80021D455</string>
+			<string>0C58B3C719423F2A0021D455</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>0C6AAC371940A8C700851A0F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>RZSettingsInterfaceTableViewCell.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C6AAC381940A8C700851A0F</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>RZSettingsInterfaceTableViewCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C6AAC391940A8C700851A0F</key>
+		<key>0C58B3D819423F2A0021D455</key>
 		<dict>
 			<key>fileRef</key>
-			<string>0C6AAC381940A8C700851A0F</string>
+			<string>0C58B3C919423F2A0021D455</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C58B3D919423F2A0021D455</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C58B3CB19423F2A0021D455</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C58B3DA19423F2A0021D455</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C58B3CD19423F2A0021D455</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C58B3DB19423F2A0021D455</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C58B3CF19423F2A0021D455</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C58B3DC19423F2A0021D455</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C58B3D119423F2A0021D455</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C58B3DD19423F2A0021D455</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C58B3D319423F2A0021D455</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C58B3DE19423F2A0021D455</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C58B3D519423F2A0021D455</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -1072,58 +1302,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0C972B05193E1A9900EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>RZDebugMenuEnvironmentsListViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B06193E1A9900EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>RZDebugMenuEnvironmentsListViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B07193E1A9900EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>RZDebugMenuModalViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B08193E1A9900EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>RZDebugMenuModalViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>0C972B09193E1A9900EA84FF</key>
 		<dict>
 			<key>fileEncoding</key>
@@ -1149,20 +1327,6 @@
 			<string>RZDebugMenuRootViewController.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B0B193E1A9900EA84FF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0C972B06193E1A9900EA84FF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0C972B0C193E1A9900EA84FF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0C972B08193E1A9900EA84FF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>0C972B0D193E1A9900EA84FF</key>
 		<dict>
@@ -1198,168 +1362,6 @@
 			<string>Application</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B10193E1C0C00EA84FF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>0C972B05193E1A9900EA84FF</string>
-				<string>0C972B06193E1A9900EA84FF</string>
-				<string>0C972B07193E1A9900EA84FF</string>
-				<string>0C972B08193E1A9900EA84FF</string>
-				<string>0C972B17193E356D00EA84FF</string>
-				<string>0C972B18193E356D00EA84FF</string>
-				<string>0C972B1A193E367B00EA84FF</string>
-				<string>0C972B1B193E367B00EA84FF</string>
-				<string>0C972B1D193E36D700EA84FF</string>
-				<string>0C972B1E193E36D700EA84FF</string>
-				<string>0C6AAC371940A8C700851A0F</string>
-				<string>0C6AAC381940A8C700851A0F</string>
-				<string>0CE5281D1941EE9800D2EE81</string>
-				<string>0CE5281E1941EE9800D2EE81</string>
-				<string>0C58B3BD194224DB0021D455</string>
-				<string>0C58B3BE194224DB0021D455</string>
-				<string>0C58B3C0194229A80021D455</string>
-				<string>0C58B3C1194229A80021D455</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>Classes</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B17193E356D00EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>RZDisclosureTableViewCell.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B18193E356D00EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>RZDisclosureTableViewCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B19193E356D00EA84FF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0C972B18193E356D00EA84FF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0C972B1A193E367B00EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>RZToggleTableViewCell.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B1B193E367B00EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>RZToggleTableViewCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B1C193E367B00EA84FF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0C972B1B193E367B00EA84FF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0C972B1D193E36D700EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>RZVersionInfoTableViewCell.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B1E193E36D700EA84FF</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>RZVersionInfoTableViewCell.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0C972B1F193E36D700EA84FF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0C972B1E193E36D700EA84FF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0CE5281D1941EE9800D2EE81</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>RZDebugMenuSettingsInterface.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0CE5281E1941EE9800D2EE81</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>RZDebugMenuSettingsInterface.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0CE5281F1941EE9800D2EE81</key>
-		<dict>
-			<key>fileRef</key>
-			<string>0CE5281E1941EE9800D2EE81</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
