@@ -7,6 +7,8 @@
 //
 
 #import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuMultiValueItem.h"
+#import "RZDebugMenuToggleItem.h"
 
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZKeyTitle = @"Title";
@@ -21,15 +23,30 @@ static NSString * const kRZKeyEnvironmentsValues = @"Values";
     self = [super init];
     if ( self ) {
         NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
-        NSDictionary *disclosureCellData = [preferenceSpecifiers objectAtIndex:0];
-        NSDictionary *toggleCellData = [preferenceSpecifiers objectAtIndex:1];
         
-        _disclosureTableViewCellTitle = [disclosureCellData objectForKey:kRZKeyTitle];
-        _disclosureTableViewCellDefaultValue = [disclosureCellData objectForKey:kRZKeyDefaultValue];
-        _environmentNames = [disclosureCellData objectForKey:kRZKeyEnvironmentsTitles];
-        _environmentValues = [disclosureCellData objectForKey:kRZKeyEnvironmentsValues];
-        _toggleTableViewCellTitle = [toggleCellData objectForKey:kRZKeyTitle];
-        _toggleTableViewCellDefaultValue = [toggleCellData objectForKey:kRZKeyDefaultValue];
+        for (id settingsItem in preferenceSpecifiers) {
+            
+            NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
+            id cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            
+            if ( [[settingsItem objectForKey:@"Type"] isEqualToString:@"PSMultiValueSpecifier"] ) {
+                NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
+                NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
+                RZDebugMenuMultiValueItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
+                                                                                                                 defaultValue:cellDefaultValue
+                                                                                                                   andOptions:optionTitles
+                                                                                                                   withValues:optionValues];
+                [_settingsCellItems addObject:disclosureTableViewCellMetaData];
+            }
+            else if ( [[settingsItem objectForKey:@"Type"] isEqualToString:@"PSToggleSwitchSpecifier"] ) {
+                
+                RZDebugMenuToggleItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
+                [_settingsCellItems addObject:toggleTableViewCellMetaData];
+            }
+        }
+        
+        NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
+        [_settingsCellItems addObject:version];
     }
     return self;
 }

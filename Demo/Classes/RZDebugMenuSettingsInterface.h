@@ -10,17 +10,7 @@
 
 @interface RZDebugMenuSettingsInterface : NSObject
 
-#pragma mark - cell titles
-@property(nonatomic, strong) NSString *disclosureTableViewCellTitle;
-@property(nonatomic, strong) NSString *toggleTableViewCellTitle;
-
-#pragma mark - cell default values
-@property(nonatomic, strong) NSString *disclosureTableViewCellDefaultValue;
-@property(nonatomic, strong) NSString *toggleTableViewCellDefaultValue;
-
-#pragma mark - environments
-@property(nonatomic, strong) NSArray *environmentNames;
-@property(nonatomic, strong) NSArray *environmentValues;
+@property(nonatomic, strong) NSMutableArray *settingsCellItems;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
 
