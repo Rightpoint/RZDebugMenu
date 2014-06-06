@@ -16,6 +16,12 @@ static NSString * const kRZKeyDefaultValue = @"DefaultValue";
 static NSString * const kRZKeyEnvironmentsTitles = @"Titles";
 static NSString * const kRZKeyEnvironmentsValues = @"Values";
 
+@interface RZDebugMenuSettingsInterface ()
+
+@property(nonatomic, readwrite, strong) NSMutableArray *settingsCellItems;
+
+@end
+
 @implementation RZDebugMenuSettingsInterface
 
 - (id)initWithDictionary:(NSDictionary *)plistData

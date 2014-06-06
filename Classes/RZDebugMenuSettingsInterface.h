@@ -10,7 +10,7 @@
 
 @interface RZDebugMenuSettingsInterface : NSObject
 
-@property(nonatomic, strong) NSMutableArray *settingsCellItems;
+@property(nonatomic, readonly, strong) NSMutableArray *settingsCellItems;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
 
