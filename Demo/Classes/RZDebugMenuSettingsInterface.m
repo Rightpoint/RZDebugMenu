@@ -18,7 +18,8 @@ static NSString * const kRZKeyEnvironmentsValues = @"Values";
 
 @implementation RZDebugMenuSettingsInterface
 
-- (id)initWithDictionary:(NSDictionary *)plistData {
+- (id)initWithDictionary:(NSDictionary *)plistData
+{
     
     self = [super init];
     if ( self ) {
