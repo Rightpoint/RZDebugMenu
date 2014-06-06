@@ -8,6 +8,13 @@
 
 #import "RZDebugMenuToggleItem.h"
 
+@interface RZDebugMenuToggleItem ()
+
+@property(nonatomic, readwrite, strong) NSString *toggleCellTitle;
+@property(readwrite, assign) BOOL toggleCellDefaultValue;
+
+@end
+
 @implementation RZDebugMenuToggleItem
 
 - (id)initWithTitle:(NSString *)title andValue:(BOOL)value

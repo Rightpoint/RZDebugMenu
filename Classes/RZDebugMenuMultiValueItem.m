@@ -8,6 +8,15 @@
 
 #import "RZDebugMenuMultiValueItem.h"
 
+@interface RZDebugMenuMultiValueItem ()
+
+@property(nonatomic, readwrite, strong) NSString *disclosureTableViewCellTitle;
+@property(nonatomic, readwrite, strong) NSNumber *disclosureTableViewCellDefaultValue;
+@property(nonatomic, readwrite, strong) NSArray *selectionTitles;
+@property(nonatomic, readwrite, strong) NSArray *selectionValues;
+
+@end
+
 @implementation RZDebugMenuMultiValueItem
 
 - (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andOptions:(NSArray *)options withValues:(NSArray *)optionValues

@@ -11,10 +11,10 @@
 
 @interface RZDebugMenuMultiValueItem : RZDebugMenuSettingsInterface
 
-@property(nonatomic, strong) NSString *disclosureTableViewCellTitle;
-@property(nonatomic, strong) NSNumber *disclosureTableViewCellDefaultValue;
-@property(nonatomic, strong) NSArray *selectionTitles;
-@property(nonatomic, strong) NSArray *selectionValues;
+@property(nonatomic, readonly, strong) NSString *disclosureTableViewCellTitle;
+@property(nonatomic, readonly, strong) NSNumber *disclosureTableViewCellDefaultValue;
+@property(nonatomic, readonly, strong) NSArray *selectionTitles;
+@property(nonatomic, readonly, strong) NSArray *selectionValues;
 
 - (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andOptions:(NSArray *)options withValues:(NSArray *)optionValues;
 
