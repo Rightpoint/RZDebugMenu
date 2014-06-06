@@ -44,6 +44,8 @@
     RZDebugMenuModalViewController *debugTableViewController = [[RZDebugMenuModalViewController alloc] init];
     UINavigationController *navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
     debugTableViewController.debugSettingsInterface = self.debugSettingsInterface;
+    NSLog(@"%lu", (unsigned long)self.debugSettingsInterface.settingsCellItems.count);
+    
     [self presentViewController:navigationControllerWrapper animated:YES completion:nil];
 }
 

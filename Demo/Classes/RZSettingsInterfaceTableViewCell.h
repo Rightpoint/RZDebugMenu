@@ -10,6 +10,4 @@
 
 @interface RZSettingsInterfaceTableViewCell : UITableViewCell
 
-- (void)setCellTitleAs:(NSString *)title;
-
 @end

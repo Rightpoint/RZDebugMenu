@@ -10,9 +10,4 @@
 
 @implementation RZSettingsInterfaceTableViewCell
 
-- (void)setCellTitleAs:(NSString *)title
-{
-    self.textLabel.text = title;
-}
-
 @end
