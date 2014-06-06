@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "RZSettingsInterfaceTableViewCell.h"
 
-@interface RZToggleTableViewCell : UITableViewCell
+@interface RZToggleTableViewCell : RZSettingsInterfaceTableViewCell
 
 @property(nonatomic, strong) UISwitch *applySettingsSwitch;
-@property(nonatomic, strong) NSString *cellTitle;
 
 //- (id)initWithStyle:(UITableViewCellStyle)style cellTitle:(NSString *)title andSwitchValue:(BOOL)value;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;

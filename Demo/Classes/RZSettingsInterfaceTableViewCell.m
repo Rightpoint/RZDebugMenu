@@ -13,22 +13,10 @@
 
 @implementation RZSettingsInterfaceTableViewCell
 
-//- (id)initEnvironmentsCellWithTitle:(NSString *)title
-//{
-//    self = [[RZDisclosureTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 andTitle:@"Environments"];
-//    return self;
-//}
-//
-//- (id)initToggleCellWithTitle:(NSString *)title andValue:(BOOL)value
-//{
-//    self = [[RZToggleTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 cellTitle:title andSwitchValue:value];
-//    return self;
-//}
-//
-//- (id)initVersionCellWithVersionNumber:(NSString *)versionNumber
-//{
-//    self = [[RZVersionInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 andVersionNumber:@"0.0.1"];
-//    return self;
-//}
+- (void)setCellTitleAs:(NSString *)title
+{
+    self.cellTitle = title;
+    NSLog(@"Title %@:", self.cellTitle);
+}
 
 @end

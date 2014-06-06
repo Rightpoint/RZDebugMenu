@@ -12,9 +12,6 @@
 
 @property(nonatomic, strong) NSString *cellTitle;
 
-
-- (id)initEnvironmentsCellWithTitle:(NSString *)title;
-- (id)initToggleCellWithTitle:(NSString *)title andValue:(BOOL)value;
-- (id)initVersionCellWithVersionNumber:(NSString *)versionNumber;
+- (void)setCellTitleAs:(NSString *)title;
 
 @end

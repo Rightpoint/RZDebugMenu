@@ -95,13 +95,15 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
+    RZSettingsInterfaceTableViewCell *cell;
     
     if ( indexPath.row == 0 ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
+        [cell setCellTitleAs:@"Hello"];
     }
     else if ( indexPath.row == 1 ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
+        [cell setCellTitleAs:@"ToggleCell"];
     }
     else {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];

@@ -13,6 +13,7 @@
 //- (id)initWithStyle:(UITableViewCellStyle)style andTitle:(NSString *)title
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
+    NSLog(@"Init %@", self.cellTitle);
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -20,6 +21,13 @@
         self.detailTextLabel.text = self.currentEnvironment;
     }
     return self;
+}
+
+- (void)prepareForReuse
+{
+    NSLog(@"Reuse %@", self.cellTitle);
+    self.textLabel.text = self.cellTitle;
+    [super prepareForReuse];
 }
 
 @end
