@@ -43,7 +43,7 @@
 {
     RZDebugMenuModalViewController *debugTableViewController = [[RZDebugMenuModalViewController alloc] init];
     UINavigationController *navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
-    debugTableViewController.settingsInterface = self.settingsInterface;
+    debugTableViewController.debugSettingsInterface = self.debugSettingsInterface;
     [self presentViewController:navigationControllerWrapper animated:YES completion:nil];
 }
 
