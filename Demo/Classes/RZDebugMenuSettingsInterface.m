@@ -21,13 +21,16 @@ static NSString * const kRZKeyEnvironmentsValues = @"Values";
     NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
     NSDictionary *disclosureCellData = [preferenceSpecifiers objectAtIndex:0];
     NSDictionary *toggleCellData = [preferenceSpecifiers objectAtIndex:1];
+    NSDictionary *versionCellData = [preferenceSpecifiers objectAtIndex:2];
     
     _disclosureTableViewCellTitle = [disclosureCellData objectForKey:kRZKeyTitle];
     _disclosureTableViewCellDefaultValue = [disclosureCellData objectForKey:kRZKeyDefaultValue];
-    _toggleTableViewCellTitle = [toggleCellData objectForKey:kRZKeyTitle];
-    _toggleTableViewCellDefaultValue = [toggleCellData objectForKey:kRZKeyDefaultValue];
     _environmentNames = [disclosureCellData objectForKey:kRZKeyEnvironmentsTitles];
     _environmentValues = [disclosureCellData objectForKey:kRZKeyEnvironmentsValues];
+    _toggleTableViewCellTitle = [toggleCellData objectForKey:kRZKeyTitle];
+    _toggleTableViewCellDefaultValue = [toggleCellData objectForKey:kRZKeyDefaultValue];
+    _versionTableViewCellTitle = [versionCellData objectForKey:kRZKeyTitle];
+    _versionTableViewCellDefaultValue = [versionCellData objectForKey:kRZKeyDefaultValue];
     
     return self;
 }

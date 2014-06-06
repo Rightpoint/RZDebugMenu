@@ -34,6 +34,16 @@
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Version</string>
+			<key>Key</key>
+			<string>version_number</string>
+			<key>DefaultValue</key>
+			<string>0.0.1</string>
+		</dict>
 	</array>
 </dict>
 </plist>

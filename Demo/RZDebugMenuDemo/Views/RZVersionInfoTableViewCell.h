@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "RZSettingsInterfaceTableViewCell.h"
 
-@interface RZVersionInfoTableViewCell : UITableViewCell
+@interface RZVersionInfoTableViewCell : RZSettingsInterfaceTableViewCell
 
 @property(nonatomic, strong) NSString *versionNumber;
 
-//- (id)initWithStyle:(UITableViewCellStyle)style andVersionNumber:(NSString *)version;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end
