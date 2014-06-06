@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RZDebugMenuSettingsInterface.h"
 
-@interface RZDebugMenuMultiValueItem : RZDebugMenuSettingsInterface
+@interface RZDebugMenuMultiValueItem : NSObject
 
 @property(nonatomic, readonly, strong) NSString *disclosureTableViewCellTitle;
 @property(nonatomic, readonly, strong) NSNumber *disclosureTableViewCellDefaultValue;
