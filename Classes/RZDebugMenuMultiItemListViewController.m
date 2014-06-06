@@ -12,20 +12,26 @@
 
 @end
 
+static NSString * const kRZNavigationBarTitle = @"Environments";
+
 @implementation RZDebugMenuMultiItemListViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"Environments";
+        
     }
     return self;
 }
 
 - (id)initWithCellTitles:(NSArray *)titles
 {
-    _cellTitles = [[NSArray alloc] initWithArray:titles];
+    self = [super init];
+    if ( self ) {
+        _cellTitles = [[NSArray alloc] initWithArray:titles];
+        self.title = kRZNavigationBarTitle;
+    }
     return self;
 }
 

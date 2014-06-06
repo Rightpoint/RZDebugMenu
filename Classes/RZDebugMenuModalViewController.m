@@ -16,6 +16,7 @@
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 
+static NSString * const kRZNavigationBarTitle = @"Env Settings";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
@@ -32,7 +33,17 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"Env Settings";
+        
+    }
+    return self;
+}
+
+- (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface
+{
+    self = [super init];
+    if ( self ) {
+        self.title = kRZNavigationBarTitle;
+        _debugSettingsInterface = interface;
     }
     return self;
 }

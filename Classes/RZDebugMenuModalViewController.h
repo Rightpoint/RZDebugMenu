@@ -13,4 +13,6 @@
 
 @property(nonatomic, strong) RZDebugMenuSettingsInterface *debugSettingsInterface;
 
+- (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface;
+
 @end
