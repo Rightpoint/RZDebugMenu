@@ -97,7 +97,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RZSettingsInterfaceTableViewCell *cell;
+    UITableViewCell *cell;
     
     if ( [[self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row] isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
