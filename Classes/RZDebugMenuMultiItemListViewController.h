@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RZDebugMenuSettingsInterface.h"
 
-@interface RZDebugMenuMultiItemListViewController : UIViewController
+@interface RZDebugMenuMultiItemListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, strong) NSArray *cellTitles;
 

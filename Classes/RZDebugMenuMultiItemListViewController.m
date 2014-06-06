@@ -10,6 +10,8 @@
 
 @interface RZDebugMenuMultiItemListViewController ()
 
+@property(nonatomic, strong) UITableView *selectionsTableView;
+
 @end
 
 static NSString * const kRZNavigationBarTitle = @"Environments";
@@ -42,10 +44,13 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
     CGFloat width = self.view.bounds.size.width;
     CGFloat height = self.view.bounds.size.height;
     
-    UITableView *environmentsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
-    environmentsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.selectionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
+    self.selectionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    [self.view addSubview:environmentsTableView];
+    [self.view addSubview:self.selectionsTableView];
+    
+    self.selectionsTableView.delegate = self;
+    self.selectionsTableView.dataSource = self;
 }
 
 #pragma mark - table view delegate methods
@@ -55,9 +60,8 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger *)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // TODO: replace return value with number of environments the user has
     return self.cellTitles.count;
 }
 
@@ -67,11 +71,6 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     cell.textLabel.text = [self.cellTitles objectAtIndex:indexPath.row];
     return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath
-{
-    // TODO: Present view with list of environments they have
 }
 
 @end
