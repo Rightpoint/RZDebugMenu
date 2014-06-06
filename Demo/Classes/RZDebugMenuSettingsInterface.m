@@ -30,7 +30,7 @@ static NSString * const kRZKeyEnvironmentsValues = @"Values";
             NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
             
             if ( [[settingsItem objectForKey:@"Type"] isEqualToString:@"PSMultiValueSpecifier"] ) {
-                NSString *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+                NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
                 NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
                 NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
                 RZDebugMenuMultiValueItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle

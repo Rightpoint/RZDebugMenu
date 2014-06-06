@@ -10,7 +10,7 @@
 
 @implementation RZDebugMenuMultiValueItem
 
-- (id)initWithTitle:(NSString *)title defaultValue:(NSString *)value andOptions:(NSArray *)options withValues:(NSArray *)optionValues
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andOptions:(NSArray *)options withValues:(NSArray *)optionValues
 {
     self = [super init];
     if ( self ) {
