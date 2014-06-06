@@ -112,6 +112,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     id currentMetaDataObject = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
+        
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = ((RZDebugMenuMultiValueItem *)currentMetaDataObject).disclosureTableViewCellTitle;
         
@@ -121,10 +122,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
+        
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = ((RZDebugMenuToggleItem *)currentMetaDataObject).toggleCellTitle;
     }
     else {
+        
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
         cell.detailTextLabel.text = [self.debugSettingsInterface.settingsCellItems lastObject];
     }
@@ -134,9 +137,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id cell = [self.optionsTableView cellForRowAtIndexPath:indexPath];
+    id currentMetaDataObject = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
     
-    if ( [cell isKindOfClass:[RZDisclosureTableViewCell class]] ) {
+    if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
         RZDebugMenuMultiValueItem *disclosureCellOptions = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionTitles;
