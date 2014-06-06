@@ -45,7 +45,6 @@ static NSString * const kRZKeyEnvironmentsValues = @"Values";
                 [_settingsCellItems addObject:toggleTableViewCellMetaData];
             }
         }
-        
         NSString * version = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"];
         [_settingsCellItems addObject:version];
     }
