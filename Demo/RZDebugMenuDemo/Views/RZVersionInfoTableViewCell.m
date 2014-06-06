@@ -8,14 +8,18 @@
 
 #import "RZVersionInfoTableViewCell.h"
 
+static NSString * const kRZVersionTitle = @"Verison";
+static NSString * const kRZVersionNumber = @"0.0.1";
+
 @implementation RZVersionInfoTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.detailTextLabel.text = self.versionNumber;
+        self.textLabel.text = kRZVersionTitle;
+        self.detailTextLabel.text = kRZVersionNumber;
     }
     return self;
 }

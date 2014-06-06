@@ -13,12 +13,10 @@
 #pragma mark - cell titles
 @property(nonatomic, strong) NSString *disclosureTableViewCellTitle;
 @property(nonatomic, strong) NSString *toggleTableViewCellTitle;
-@property(nonatomic, strong) NSString *versionTableViewCellTitle;
 
 #pragma mark - cell default values
 @property(nonatomic, strong) NSString *disclosureTableViewCellDefaultValue;
 @property(nonatomic, strong) NSString *toggleTableViewCellDefaultValue;
-@property(nonatomic, strong) NSString *versionTableViewCellDefaultValue;
 
 #pragma mark - environments
 @property(nonatomic, strong) NSArray *environmentNames;

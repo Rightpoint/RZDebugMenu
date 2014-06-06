@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RZSettingsInterfaceTableViewCell.h"
 
-@interface RZVersionInfoTableViewCell : RZSettingsInterfaceTableViewCell
+@interface RZVersionInfoTableViewCell : UITableViewCell
 
 @property(nonatomic, strong) NSString *versionNumber;
 

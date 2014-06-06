@@ -108,7 +108,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     }
     else {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
-        [cell setCellTitleAs:self.debugSettingsInterface.versionTableViewCellTitle];
     }
     
     return cell;
