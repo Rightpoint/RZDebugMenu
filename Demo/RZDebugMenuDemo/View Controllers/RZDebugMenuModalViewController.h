@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RZDebugMenuSettingsInterface.h"
 
 @interface RZDebugMenuModalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property(nonatomic, strong) NSDictionary *settingsPlist;
+@property(nonatomic, strong) RZDebugMenuSettingsInterface *settingsInterface;
 
 @end

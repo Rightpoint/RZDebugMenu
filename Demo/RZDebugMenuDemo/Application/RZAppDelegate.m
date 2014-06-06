@@ -9,6 +9,7 @@
 #import "RZAppDelegate.h"
 #import "RZDebugMenuRootViewController.h"
 #import "RZDebugMenuModalViewController.h"
+#import "RZDebugMenuSettingsInterface.h"
 
 @implementation RZAppDelegate
 
@@ -17,10 +18,11 @@
     #if DEBUG
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    RZDebugMenuSettingsInterface *settingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
     #endif
     
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
-    rootViewController.settingsPlist = plistData;
+    rootViewController.settingsInterface = settingsInterface;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootViewController;

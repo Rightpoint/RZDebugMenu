@@ -22,4 +22,6 @@
 @property(nonatomic, strong) NSArray *environmentNames;
 @property(nonatomic, strong) NSArray *environmentValues;
 
+- (id)initWithDictionary:(NSDictionary *)plistData;
+
 @end

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RZDebugMenuSettingsInterface.h"
 
 @interface RZDebugMenuRootViewController : UIViewController
 
-@property(nonatomic, strong) NSDictionary *settingsPlist;
+@property(nonatomic, strong) RZDebugMenuSettingsInterface *settingsInterface;
 
 @end
