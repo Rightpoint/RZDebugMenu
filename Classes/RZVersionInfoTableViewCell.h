@@ -13,6 +13,4 @@
 
 @property(nonatomic, strong) NSString *versionNumber;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-
 @end

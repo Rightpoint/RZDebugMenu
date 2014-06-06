@@ -11,6 +11,4 @@
 
 @interface RZDisclosureTableViewCell : RZSettingsInterfaceTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-
 @end

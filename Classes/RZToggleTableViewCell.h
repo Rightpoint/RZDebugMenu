@@ -13,6 +13,4 @@
 
 @property(nonatomic, strong) UISwitch *applySettingsSwitch;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-
 @end
