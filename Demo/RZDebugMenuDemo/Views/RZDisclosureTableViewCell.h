@@ -15,6 +15,5 @@
 @property(atomic, strong) NSString *currentEnvironment;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-//- (id)initWithStyle:(UITableViewCellStyle)style andTitle:(NSString *)title;
-- (void)prepareForReuseWithTitle:(NSString *)title;
+
 @end

@@ -27,6 +27,7 @@
 		0C972B19193E356D00EA84FF /* RZDisclosureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C972B18193E356D00EA84FF /* RZDisclosureTableViewCell.m */; };
 		0C972B1C193E367B00EA84FF /* RZToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C972B1B193E367B00EA84FF /* RZToggleTableViewCell.m */; };
 		0C972B1F193E36D700EA84FF /* RZVersionInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C972B1E193E36D700EA84FF /* RZVersionInfoTableViewCell.m */; };
+		0CE5281F1941EE9800D2EE81 /* RZDebugMenuSettingsInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CE5281E1941EE9800D2EE81 /* RZDebugMenuSettingsInterface.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		0C972B1B193E367B00EA84FF /* RZToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZToggleTableViewCell.m; sourceTree = "<group>"; };
 		0C972B1D193E36D700EA84FF /* RZVersionInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZVersionInfoTableViewCell.h; sourceTree = "<group>"; };
 		0C972B1E193E36D700EA84FF /* RZVersionInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZVersionInfoTableViewCell.m; sourceTree = "<group>"; };
+		0CE5281D1941EE9800D2EE81 /* RZDebugMenuSettingsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingsInterface.h; sourceTree = "<group>"; };
+		0CE5281E1941EE9800D2EE81 /* RZDebugMenuSettingsInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettingsInterface.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +219,8 @@
 		0C972B10193E1C0C00EA84FF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0CE5281D1941EE9800D2EE81 /* RZDebugMenuSettingsInterface.h */,
+				0CE5281E1941EE9800D2EE81 /* RZDebugMenuSettingsInterface.m */,
 				0C6AAC371940A8C700851A0F /* RZSettingsInterfaceTableViewCell.h */,
 				0C6AAC381940A8C700851A0F /* RZSettingsInterfaceTableViewCell.m */,
 			);
@@ -324,6 +329,7 @@
 				0C972B0C193E1A9900EA84FF /* RZDebugMenuModalViewController.m in Sources */,
 				0C972B0B193E1A9900EA84FF /* RZDebugMenuEnvironmentsListViewController.m in Sources */,
 				0C972B1C193E367B00EA84FF /* RZToggleTableViewCell.m in Sources */,
+				0CE5281F1941EE9800D2EE81 /* RZDebugMenuSettingsInterface.m in Sources */,
 				0C972B0D193E1A9900EA84FF /* RZDebugMenuRootViewController.m in Sources */,
 				0C972B19193E356D00EA84FF /* RZDisclosureTableViewCell.m in Sources */,
 				0C22DACF193CCDA30042938F /* main.m in Sources */,

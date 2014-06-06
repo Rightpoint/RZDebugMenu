@@ -22,10 +22,4 @@
     return self;
 }
 
-- (void)prepareForReuseWithTitle:(NSString *)title
-{
-    [super prepareForReuse];
-    self.cellTitle = title;
-}
-
 @end

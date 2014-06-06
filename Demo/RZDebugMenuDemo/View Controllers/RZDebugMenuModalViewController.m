@@ -99,8 +99,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     if ( indexPath.row == 0 ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
-        [cell prepareForReuseWithTitle:@"Hey"];
-        
     }
     else if ( indexPath.row == 1 ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
