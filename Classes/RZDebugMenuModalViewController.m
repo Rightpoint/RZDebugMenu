@@ -108,7 +108,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
+    UITableViewCell *cell = nil;
     id currentMetaDataObject = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
