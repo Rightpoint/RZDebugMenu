@@ -929,14 +929,7 @@
 		<key>0C22DAF9193D085C0042938F</key>
 		<dict>
 			<key>children</key>
-			<array>
-				<string>0C972B17193E356D00EA84FF</string>
-				<string>0C972B18193E356D00EA84FF</string>
-				<string>0C972B1A193E367B00EA84FF</string>
-				<string>0C972B1B193E367B00EA84FF</string>
-				<string>0C972B1D193E36D700EA84FF</string>
-				<string>0C972B1E193E36D700EA84FF</string>
-			</array>
+			<array/>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>path</key>
@@ -1001,10 +994,6 @@
 		<dict>
 			<key>children</key>
 			<array>
-				<string>0C972B05193E1A9900EA84FF</string>
-				<string>0C972B06193E1A9900EA84FF</string>
-				<string>0C972B07193E1A9900EA84FF</string>
-				<string>0C972B08193E1A9900EA84FF</string>
 				<string>0C972B09193E1A9900EA84FF</string>
 				<string>0C972B0A193E1A9900EA84FF</string>
 			</array>
@@ -1023,6 +1012,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RZDebugMenuEnvironmentsListViewController.h</string>
 			<key>path</key>
 			<string>RZDebugMenuEnvironmentsListViewController.h</string>
 			<key>sourceTree</key>
@@ -1036,6 +1027,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RZDebugMenuEnvironmentsListViewController.m</string>
 			<key>path</key>
 			<string>RZDebugMenuEnvironmentsListViewController.m</string>
 			<key>sourceTree</key>
@@ -1049,6 +1042,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RZDebugMenuModalViewController.h</string>
 			<key>path</key>
 			<string>RZDebugMenuModalViewController.h</string>
 			<key>sourceTree</key>
@@ -1062,6 +1057,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RZDebugMenuModalViewController.m</string>
 			<key>path</key>
 			<string>RZDebugMenuModalViewController.m</string>
 			<key>sourceTree</key>
@@ -1146,6 +1143,16 @@
 		<dict>
 			<key>children</key>
 			<array>
+				<string>0C972B05193E1A9900EA84FF</string>
+				<string>0C972B06193E1A9900EA84FF</string>
+				<string>0C972B07193E1A9900EA84FF</string>
+				<string>0C972B08193E1A9900EA84FF</string>
+				<string>0C972B17193E356D00EA84FF</string>
+				<string>0C972B18193E356D00EA84FF</string>
+				<string>0C972B1A193E367B00EA84FF</string>
+				<string>0C972B1B193E367B00EA84FF</string>
+				<string>0C972B1D193E36D700EA84FF</string>
+				<string>0C972B1E193E36D700EA84FF</string>
 				<string>0CE5281D1941EE9800D2EE81</string>
 				<string>0CE5281E1941EE9800D2EE81</string>
 				<string>0C6AAC371940A8C700851A0F</string>
@@ -1166,6 +1173,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RZDisclosureTableViewCell.h</string>
 			<key>path</key>
 			<string>RZDisclosureTableViewCell.h</string>
 			<key>sourceTree</key>
@@ -1179,6 +1188,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RZDisclosureTableViewCell.m</string>
 			<key>path</key>
 			<string>RZDisclosureTableViewCell.m</string>
 			<key>sourceTree</key>
@@ -1199,6 +1210,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RZToggleTableViewCell.h</string>
 			<key>path</key>
 			<string>RZToggleTableViewCell.h</string>
 			<key>sourceTree</key>
@@ -1212,6 +1225,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RZToggleTableViewCell.m</string>
 			<key>path</key>
 			<string>RZToggleTableViewCell.m</string>
 			<key>sourceTree</key>
@@ -1232,6 +1247,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>RZVersionInfoTableViewCell.h</string>
 			<key>path</key>
 			<string>RZVersionInfoTableViewCell.h</string>
 			<key>sourceTree</key>
@@ -1245,6 +1262,8 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>RZVersionInfoTableViewCell.m</string>
 			<key>path</key>
 			<string>RZVersionInfoTableViewCell.m</string>
 			<key>sourceTree</key>
