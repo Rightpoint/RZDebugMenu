@@ -99,11 +99,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     if ( indexPath.row == 0 ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
-        [cell setCellTitleAs:@"Hello"];
+        [cell setCellTitleAs:self.debugSettingsInterface.disclosureTableViewCellTitle];
     }
     else if ( indexPath.row == 1 ) {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
-        [cell setCellTitleAs:@"ToggleCell"];
+        [cell setCellTitleAs:self.debugSettingsInterface.toggleTableViewCellTitle];
     }
     else {
         cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];

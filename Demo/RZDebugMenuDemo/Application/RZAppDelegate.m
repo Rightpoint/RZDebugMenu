@@ -16,13 +16,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     #if DEBUG
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    RZDebugMenuSettingsInterface *settingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+        NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
     #endif
     
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
-    rootViewController.settingsInterface = settingsInterface;
+    rootViewController.debugSettingsInterface = debugSettingsInterface;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootViewController;

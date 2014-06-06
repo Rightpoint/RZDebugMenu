@@ -10,8 +10,6 @@
 
 @interface RZSettingsInterfaceTableViewCell : UITableViewCell
 
-@property(nonatomic, strong) NSString *cellTitle;
-
 - (void)setCellTitleAs:(NSString *)title;
 
 @end

@@ -11,6 +11,6 @@
 
 @interface RZDebugMenuModalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property(nonatomic, strong) RZDebugMenuSettingsInterface *settingsInterface;
+@property(nonatomic, strong) RZDebugMenuSettingsInterface *debugSettingsInterface;
 
 @end

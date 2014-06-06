@@ -11,6 +11,6 @@
 
 @interface RZDebugMenuRootViewController : UIViewController
 
-@property(nonatomic, strong) RZDebugMenuSettingsInterface *settingsInterface;
+@property(nonatomic, strong) RZDebugMenuSettingsInterface *debugSettingsInterface;
 
 @end

@@ -7,16 +7,12 @@
 //
 
 #import "RZSettingsInterfaceTableViewCell.h"
-#import "RZDisclosureTableViewCell.h"
-#import "RZToggleTableViewCell.h"
-#import "RZVersionInfoTableViewCell.h"
 
 @implementation RZSettingsInterfaceTableViewCell
 
 - (void)setCellTitleAs:(NSString *)title
 {
-    self.cellTitle = title;
-    NSLog(@"Title %@:", self.cellTitle);
+    self.textLabel.text = title;
 }
 
 @end
