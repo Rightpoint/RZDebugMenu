@@ -31,23 +31,25 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuSettingsInterface ()
 
-@property(nonatomic, readwrite, strong) UITableView *settingsOptionsTableView;
 @property(nonatomic, readwrite, strong) NSMutableArray *settingsCellItemsMetaData;
 
 @end
 
 @implementation RZDebugMenuSettingsInterface
 
+- (void)setSettingsOptionsTableView:(UITableView *)settingsOptionsTableView
+{
+    _settingsOptionsTableView = settingsOptionsTableView;
+    [_settingsOptionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
+    [_settingsOptionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
+    [_settingsOptionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
+}
+
 - (id)initWithDictionary:(NSDictionary *)plistData
 {
     
     self = [super init];
     if ( self ) {
-        
-        _settingsOptionsTableView = [[UITableView alloc] init];
-        [_settingsOptionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
-        [_settingsOptionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
-        [_settingsOptionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
         
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         

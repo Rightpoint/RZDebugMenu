@@ -51,7 +51,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     self.optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
     [self.view addSubview:self.optionsTableView];
-    
+
+    self.debugSettingsInterface.settingsOptionsTableView = self.optionsTableView;
+
     self.optionsTableView.delegate = self;
     self.optionsTableView.dataSource = self.debugSettingsInterface;
 
