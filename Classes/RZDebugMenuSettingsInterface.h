@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RZDebugMenuSettingsInterface : NSObject
+@interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
 
-@property(nonatomic, readonly, strong) NSMutableArray *settingsCellItems;
+@property(nonatomic, readonly, strong) NSMutableArray *settingsCellItemsMetaData;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
 

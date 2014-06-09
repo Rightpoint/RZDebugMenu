@@ -18,6 +18,8 @@
 #import "RZDebugMenuVersionItem.h"
 
 static NSString * const kRZNavigationBarTitle = @"Env Settings";
+static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
+static NSString * const kRZNavigationBarAddButtonTitle = @"Add";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
@@ -29,15 +31,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 @end
 
 @implementation RZDebugMenuModalViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        
-    }
-    return self;
-}
 
 - (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface
 {
@@ -58,12 +51,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     self.optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStyleGrouped];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:kRZNavigationBarDoneButtonTitle
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(closeView)];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add"
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:kRZNavigationBarAddButtonTitle
                                                                   style:UIBarButtonItemStylePlain
                                                                  target:self
                                                                  action:@selector(addEnvironment)];
@@ -72,14 +65,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = addButton;
+
     [self.view addSubview:self.optionsTableView];
     
-    [self.optionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
-    [self.optionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
-    [self.optionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
-    
     self.optionsTableView.delegate = self;
-    self.optionsTableView.dataSource = self;
+    self.optionsTableView.dataSource = self.debugSettingsInterface;
 }
 
 #pragma mark - nav bar buttons methods
@@ -97,53 +87,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 #pragma mark - table view delegate methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.debugSettingsInterface.settingsCellItems.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = nil;
-    id currentMetaDataObject = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
-    
-    if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
-        
-        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = ((RZDebugMenuMultiValueItem *)currentMetaDataObject).disclosureTableViewCellTitle;
-        
-        NSInteger defaultValue = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).disclosureTableViewCellDefaultValue integerValue];
-        NSString *currentSelection = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).selectionTitles objectAtIndex:(unsigned long)defaultValue];
-        cell.detailTextLabel.text = currentSelection;
-        
-    }
-    else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
-        
-        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = ((RZDebugMenuToggleItem *)currentMetaDataObject).toggleCellTitle;
-    }
-    else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
-        
-        cell = [self.optionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
-        RZDebugMenuVersionItem *versionItem = [self.debugSettingsInterface.settingsCellItems lastObject];
-        cell.detailTextLabel.text = versionItem.versionNumber;
-    }
-    
-    return cell;
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id currentMetaDataObject = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
+    id currentMetaDataObject = [self.debugSettingsInterface.settingsCellItemsMetaData objectAtIndex:indexPath.row];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
-        RZDebugMenuMultiValueItem *disclosureCellOptions = [self.debugSettingsInterface.settingsCellItems objectAtIndex:indexPath.row];
+        RZDebugMenuMultiValueItem *disclosureCellOptions = [self.debugSettingsInterface.settingsCellItemsMetaData objectAtIndex:indexPath.row];
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionTitles;
         
         RZDebugMenuMultiItemListViewController *environmentsView = [[RZDebugMenuMultiItemListViewController alloc] initWithCellTitles:disclosureCellSelectableItems];

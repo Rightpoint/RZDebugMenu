@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RZDebugMenuSettingsInterface.h"
 
-@interface RZDebugMenuModalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface RZDebugMenuModalViewController : UIViewController <UITableViewDelegate>
 
 @property(nonatomic, strong) RZDebugMenuSettingsInterface *debugSettingsInterface;
 

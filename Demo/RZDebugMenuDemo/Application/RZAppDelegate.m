@@ -23,6 +23,7 @@
     
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
     rootViewController.debugSettingsInterface = debugSettingsInterface;
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootViewController;
