@@ -7,17 +7,14 @@
 //
 
 #import "RZDebugMenuModalViewController.h"
-#import "RZDebugMenuRootViewController.h"
-#import "RZDebugMenuMultiItemListViewController.h"
-#import "RZDisclosureTableViewCell.h"
-#import "RZToggleTableViewCell.h"
-#import "RZVersionInfoTableViewCell.h"
+
 #import "RZSettingsInterfaceTableViewCell.h"
+
+#import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
-#import "RZDebugMenuVersionItem.h"
 
-static NSString * const kRZNavigationBarTitle = @"Env Settings";
+static NSString * const kRZNavigationBarTitle = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
 static NSString * const kRZNavigationBarAddButtonTitle = @"Add";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
@@ -51,6 +48,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     self.optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStyleGrouped];
     
+    self.optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+    [self.view addSubview:self.optionsTableView];
+    
+    self.optionsTableView.delegate = self;
+    self.optionsTableView.dataSource = self.debugSettingsInterface;
+
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:kRZNavigationBarDoneButtonTitle
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
@@ -61,15 +65,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                  target:self
                                                                  action:@selector(addEnvironment)];
     
-    self.optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
     self.navigationItem.rightBarButtonItem = doneButton;
     self.navigationItem.leftBarButtonItem = addButton;
-
-    [self.view addSubview:self.optionsTableView];
-    
-    self.optionsTableView.delegate = self;
-    self.optionsTableView.dataSource = self.debugSettingsInterface;
 }
 
 #pragma mark - nav bar buttons methods

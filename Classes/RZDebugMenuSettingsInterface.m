@@ -7,7 +7,7 @@
 //
 
 #import "RZDebugMenuSettingsInterface.h"
-#import "RZDebugMenuModalViewController.h"
+
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
@@ -19,22 +19,20 @@
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
 static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
+static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
 static NSString * const kRZKeyTitle = @"Title";
 static NSString * const kRZKeyType = @"Type";
 static NSString * const kRZKeyDefaultValue = @"DefaultValue";
 static NSString * const kRZKeyEnvironmentsTitles = @"Titles";
 static NSString * const kRZKeyEnvironmentsValues = @"Values";
-static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
-
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuSettingsInterface ()
 
+@property(nonatomic, readwrite, strong) UITableView *settingsOptionsTableView;
 @property(nonatomic, readwrite, strong) NSMutableArray *settingsCellItemsMetaData;
-@property(nonatomic, strong) UITableView *settingsOptionsTableView;
-
 
 @end
 
