@@ -10,9 +10,9 @@
 
 @interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
 
-@property(nonatomic, readonly, strong) NSMutableArray *settingsCellItemsMetaData;
 @property(nonatomic, weak) UITableView *settingsOptionsTableView;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

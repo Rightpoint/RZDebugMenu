@@ -23,6 +23,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuModalViewController ()
 
+@property(nonatomic, strong) RZDebugMenuSettingsInterface *debugSettingsInterface;
 @property(nonatomic, strong) UITableView *optionsTableView;
 
 @end
@@ -88,11 +89,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id currentMetaDataObject = [self.debugSettingsInterface.settingsCellItemsMetaData objectAtIndex:indexPath.row];
+    id currentMetaDataObject = [self.debugSettingsInterface objectAtIndexPath:indexPath];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
-        RZDebugMenuMultiValueItem *disclosureCellOptions = [self.debugSettingsInterface.settingsCellItemsMetaData objectAtIndex:indexPath.row];
+        RZDebugMenuMultiValueItem *disclosureCellOptions = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionTitles;
         
         RZDebugMenuMultiItemListViewController *environmentsView = [[RZDebugMenuMultiItemListViewController alloc] initWithCellTitles:disclosureCellSelectableItems];

@@ -86,6 +86,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return self;
 }
 
+- (id)objectAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
+}
+
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
