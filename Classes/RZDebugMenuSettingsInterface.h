@@ -14,6 +14,6 @@
 @property(nonatomic, weak) UITableView *settingsOptionsTableView;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
-- (RZDebugMenuSettingsItem *)objectAtIndexPath:(NSIndexPath *)indexPath;
+- (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

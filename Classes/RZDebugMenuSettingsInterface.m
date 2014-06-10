@@ -135,7 +135,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 #pragma mark - other methods
 
-- (RZDebugMenuSettingsItem *)objectAtIndexPath:(NSIndexPath *)indexPath
+- (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
