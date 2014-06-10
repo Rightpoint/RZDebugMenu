@@ -51,8 +51,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         for (id settingsItem in preferenceSpecifiers) {
             NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
+            NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
             
-            if ( [[settingsItem objectForKey:kRZKeyType] isEqualToString:kRZMultiValueSpecifier] ) {
+            if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
                 NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
                 NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
                 NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
@@ -63,7 +64,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                                                                  withValues:optionValues];
                 [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
             }
-            else if ( [[settingsItem objectForKey:kRZKeyType] isEqualToString:kRZToggleSwitchSpecifier] ) {
+            else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
                 
                 bool cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
                 RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
