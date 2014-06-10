@@ -12,8 +12,6 @@
 @interface RZDebugMenuMultiValueItem : RZDebugMenuSettingsItem
 
 @property(nonatomic, readonly, strong) NSNumber *disclosureTableViewCellDefaultValue;
-//@property(nonatomic, readonly, strong) NSArray *selectionTitles;
-//@property(nonatomic, readonly, strong) NSArray *selectionValues;
 @property(nonatomic, readonly, strong) NSArray *selectionTableViewCellMetaData;
 
 - (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andSelectionItems:(NSArray *)selectionItems;
