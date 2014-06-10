@@ -89,7 +89,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return self;
 }
 
-- (id)objectAtIndexPath:(NSIndexPath *)indexPath
+- (RZDebugMenuSettingsItem *)objectAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
@@ -110,12 +110,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 {
     UITableViewCell *cell = nil;
     
-    id currentMetaDataObject = [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
+    RZDebugMenuSettingsItem *currentMetaDataObject = [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = ((RZDebugMenuMultiValueItem *)currentMetaDataObject).tableViewCellTitle;
+        cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         
         NSInteger defaultValue = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).disclosureTableViewCellDefaultValue integerValue];
         NSString *currentSelection = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).selectionTitles objectAtIndex:(unsigned long)defaultValue];
@@ -125,7 +125,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = ((RZDebugMenuToggleItem *)currentMetaDataObject).tableViewCellTitle;
+        cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         

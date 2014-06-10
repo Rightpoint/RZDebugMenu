@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RZDebugMenuSettingsItem.h"
 
 @interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
 
 @property(nonatomic, weak) UITableView *settingsOptionsTableView;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
-- (id)objectAtIndexPath:(NSIndexPath *)indexPath;
+- (RZDebugMenuSettingsItem *)objectAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
