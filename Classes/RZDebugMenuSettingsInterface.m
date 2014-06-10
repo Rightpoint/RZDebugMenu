@@ -74,8 +74,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
         RZDebugMenuSettingsItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
         [_settingsCellItemsMetaData addObject:versionItem];
-    
-        _settingsOptionsTableView.dataSource = self;
     }
     
     return self;
