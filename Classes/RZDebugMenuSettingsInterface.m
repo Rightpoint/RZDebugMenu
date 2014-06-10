@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuSettingsInterface.h"
 
+#import "RZDebugMenuSettingsItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
@@ -63,7 +64,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
                 NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
                 NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
-                RZDebugMenuMultiValueItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
+                RZDebugMenuSettingsItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
                                                                                                                  defaultValue:cellDefaultValue
                                                                                                                    andOptions:optionTitles
                                                                                                                    withValues:optionValues];
@@ -112,7 +113,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = ((RZDebugMenuMultiValueItem *)currentMetaDataObject).disclosureTableViewCellTitle;
+        cell.textLabel.text = ((RZDebugMenuMultiValueItem *)currentMetaDataObject).tableViewCellTitle;
         
         NSInteger defaultValue = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).disclosureTableViewCellDefaultValue integerValue];
         NSString *currentSelection = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).selectionTitles objectAtIndex:(unsigned long)defaultValue];

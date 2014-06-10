@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RZDebugMenuSettingsInterface.h"
+//#import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuSettingsItem.h"
 
-@interface RZDebugMenuMultiValueItem : NSObject
+@interface RZDebugMenuMultiValueItem : RZDebugMenuSettingsItem
 
-@property(nonatomic, readonly, strong) NSString *disclosureTableViewCellTitle;
+//@property(nonatomic, readonly, strong) NSString *disclosureTableViewCellTitle;
 @property(nonatomic, readonly, strong) NSNumber *disclosureTableViewCellDefaultValue;
 @property(nonatomic, readonly, strong) NSArray *selectionTitles;
 @property(nonatomic, readonly, strong) NSArray *selectionValues;

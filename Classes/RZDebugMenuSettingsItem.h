@@ -10,4 +10,10 @@
 
 @interface RZDebugMenuSettingsItem : NSObject
 
+@property(nonatomic, strong) NSString *tableViewCellTitle;
+
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andOptions:(NSArray *)options withValues:(NSArray *)optionValues;
+- (id)initWithTitle:(NSString *)title andValue:(BOOL)value;
+- (id)initWithVersionNumber:(NSString *)version;
+
 @end
