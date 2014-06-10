@@ -23,7 +23,7 @@
 {
     self = [super init];
     if ( self ) {
-        
+        _tableViewCellTitle = title;
     }
     return self;
 }

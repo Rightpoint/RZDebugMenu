@@ -10,7 +10,7 @@
 
 @interface RZDebugMenuToggleItem ()
 
-@property(nonatomic, readwrite, strong) NSString *toggleCellTitle;
+//@property(nonatomic, readwrite, strong) NSString *toggleCellTitle;
 @property(readwrite, assign) BOOL toggleCellDefaultValue;
 
 @end
@@ -19,9 +19,9 @@
 
 - (id)initWithTitle:(NSString *)title andValue:(BOOL)value
 {
-    self = [super init];
+    self = [super initWithTitle:title andValue:value];
     if ( self ) {
-        _toggleCellTitle = title;
+//        _toggleCellTitle = title;
         _toggleCellDefaultValue = value;
 
     }

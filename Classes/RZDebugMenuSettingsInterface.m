@@ -73,7 +73,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             else if ( [[settingsItem objectForKey:kRZKeyType] isEqualToString:kRZToggleSwitchSpecifier] ) {
                 
                 bool cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
-                RZDebugMenuToggleItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
+                RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
             }
         }
@@ -123,7 +123,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = ((RZDebugMenuToggleItem *)currentMetaDataObject).toggleCellTitle;
+        cell.textLabel.text = ((RZDebugMenuToggleItem *)currentMetaDataObject).tableViewCellTitle;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         

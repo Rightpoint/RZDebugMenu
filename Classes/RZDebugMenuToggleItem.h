@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RZDebugMenuSettingsInterface.h"
+//#import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuSettingsItem.h"
 
-@interface RZDebugMenuToggleItem : NSObject
+@interface RZDebugMenuToggleItem : RZDebugMenuSettingsItem
 
-@property(nonatomic, readonly, strong) NSString *toggleCellTitle;
+//@property(nonatomic, readonly, strong) NSString *toggleCellTitle;
 @property(readonly, assign) BOOL toggleCellDefaultValue;
 
 - (id)initWithTitle:(NSString *)title andValue:(BOOL)value;
