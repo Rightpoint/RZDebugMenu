@@ -13,6 +13,7 @@ static NSString * const kRZCellReuseIdentifier = @"Cell";
 @interface RZDebugMenuMultiItemListViewController ()
 
 @property(nonatomic, strong) UITableView *selectionsTableView;
+@property(nonatomic, strong) NSArray *cellTitles;
 
 @end
 
