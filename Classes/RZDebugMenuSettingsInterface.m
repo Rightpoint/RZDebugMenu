@@ -128,9 +128,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
-        RZDebugMenuVersionItem *versionItem = [self.settingsCellItemsMetaData lastObject];
-        cell.textLabel.text = versionItem.tableViewCellTitle;
-        cell.detailTextLabel.text = versionItem.versionNumber;
+        cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        cell.detailTextLabel.text = ((RZDebugMenuVersionItem *)currentMetaDataObject).versionNumber;
     }
     
     return cell;
