@@ -136,6 +136,10 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    int numberOfItems = self.settingsCellItemsMetaData.count;
+    if ( indexPath.section > 0 || indexPath.row >= numberOfItems ) {
+        return nil;
+    }
     return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
 
