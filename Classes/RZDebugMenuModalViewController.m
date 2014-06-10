@@ -76,7 +76,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (void)closeView
 {
-    // TODO: save plist in completion
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
