@@ -32,7 +32,7 @@
 			<key>Key</key>
 			<string>reset_toggle</string>
 			<key>DefaultValue</key>
-			<true/>
+			<false/>
 		</dict>
 	</array>
 </dict>

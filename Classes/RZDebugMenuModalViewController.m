@@ -15,7 +15,6 @@
 
 static NSString * const kRZNavigationBarTitle = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
-static NSString * const kRZNavigationBarAddButtonTitle = @"Add";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
@@ -62,13 +61,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                   target:self
                                                                   action:@selector(closeView)];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:kRZNavigationBarAddButtonTitle
-                                                                  style:UIBarButtonItemStylePlain
-                                                                 target:self
-                                                                 action:@selector(addEnvironment)];
-    
     self.navigationItem.rightBarButtonItem = doneButton;
-    self.navigationItem.leftBarButtonItem = addButton;
 }
 
 #pragma mark - nav bar buttons methods
@@ -76,11 +69,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (void)closeView
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)addEnvironment
-{
-    // TODO: call methods to edit plist in settings bundle
 }
 
 #pragma mark - table view delegate methods

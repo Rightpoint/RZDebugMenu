@@ -50,13 +50,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
         
         for (id settingsItem in preferenceSpecifiers) {
-            
             NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
             
             if ( [[settingsItem objectForKey:kRZKeyType] isEqualToString:kRZMultiValueSpecifier] ) {
                 NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
                 NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
                 NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
+                
                 RZDebugMenuSettingsItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
                                                                                                                defaultValue:cellDefaultValue
                                                                                                                  andOptions:optionTitles
@@ -106,7 +106,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = nil;
-    
     RZDebugMenuSettingsItem *currentMetaDataObject = [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
@@ -123,7 +122,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
-        
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
