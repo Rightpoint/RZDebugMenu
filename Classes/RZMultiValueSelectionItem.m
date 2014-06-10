@@ -10,18 +10,19 @@
 
 @interface RZMultiValueSelectionItem ()
 
-@property(nonatomic, readonly, strong) NSString *selectionTitle;
-@property(nonatomic, readonly, strong) NSString *selectionValue;
+@property(nonatomic, readwrite, strong) NSString *selectionTitle;
+@property(nonatomic, readwrite, strong) NSNumber *selectionValue;
 
 @end
 
 @implementation RZMultiValueSelectionItem
 
-- (id)initWithTitle:(NSString *)title andValue:(NSString *)value
+- (id)initWithTitle:(NSString *)title andValue:(NSNumber *)value
 {
     self = [super init];
     if ( self ) {
-        // TODO: setup object here
+        _selectionTitle = title;
+        _selectionValue = value;
     }
     return self;
 }

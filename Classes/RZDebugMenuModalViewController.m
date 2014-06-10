@@ -80,7 +80,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
         RZDebugMenuMultiValueItem *disclosureCellOptions = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
-        NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionTitles;
+        NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionTableViewCellMetaData;
         
         RZDebugMenuMultiItemListViewController *environmentsView = [[RZDebugMenuMultiItemListViewController alloc] initWithCellTitles:disclosureCellSelectableItems];
         [self.navigationController pushViewController:environmentsView animated:YES];

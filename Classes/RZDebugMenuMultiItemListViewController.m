@@ -13,7 +13,7 @@ static NSString * const kRZCellReuseIdentifier = @"Cell";
 @interface RZDebugMenuMultiItemListViewController ()
 
 @property(nonatomic, strong) UITableView *selectionsTableView;
-@property(nonatomic, strong) NSArray *cellTitles;
+@property(nonatomic, strong) NSArray *tableViewCellMetaData;
 
 @end
 
@@ -21,11 +21,11 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithCellTitles:(NSArray *)titles
+- (id)initWithCellTitles:(NSArray *)tableViewCellMetaData
 {
     self = [super init];
     if ( self ) {
-        _cellTitles = [[NSArray alloc] initWithArray:titles];
+        _tableViewCellMetaData = [[NSArray alloc] initWithArray:tableViewCellMetaData];
         self.title = kRZNavigationBarTitle;
     }
     return self;
@@ -57,14 +57,15 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.cellTitles.count;
+    return self.tableViewCellMetaData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
     if ( cell ) {
-        cell.textLabel.text = [self.cellTitles objectAtIndex:indexPath.row];
+        // TODO: Have model handle generation of cells
+        cell.textLabel.text = [self.tableViewCellMetaData objectAtIndex:indexPath.row];
     }
     return cell;
 }
