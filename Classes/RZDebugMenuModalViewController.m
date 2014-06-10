@@ -8,8 +8,6 @@
 
 #import "RZDebugMenuModalViewController.h"
 
-#import "RZSettingsInterfaceTableViewCell.h"
-
 #import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"

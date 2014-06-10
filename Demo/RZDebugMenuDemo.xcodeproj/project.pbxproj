@@ -14,7 +14,6 @@
 		0C0CFB2119424BBD00605FF3 /* RZDebugMenuSettingsInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1319424BBD00605FF3 /* RZDebugMenuSettingsInterface.m */; };
 		0C0CFB2219424BBD00605FF3 /* RZDebugMenuToggleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1519424BBD00605FF3 /* RZDebugMenuToggleItem.m */; };
 		0C0CFB2319424BBD00605FF3 /* RZDisclosureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1719424BBD00605FF3 /* RZDisclosureTableViewCell.m */; };
-		0C0CFB2419424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1919424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.m */; };
 		0C0CFB2519424BBD00605FF3 /* RZToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1B19424BBD00605FF3 /* RZToggleTableViewCell.m */; };
 		0C0CFB2619424BBD00605FF3 /* RZVersionInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB1D19424BBD00605FF3 /* RZVersionInfoTableViewCell.m */; };
 		0C0CFB4519425DE600605FF3 /* RZDebugMenuVersionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CFB4419425DE600605FF3 /* RZDebugMenuVersionItem.m */; };
@@ -59,8 +58,6 @@
 		0C0CFB1519424BBD00605FF3 /* RZDebugMenuToggleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuToggleItem.m; sourceTree = "<group>"; };
 		0C0CFB1619424BBD00605FF3 /* RZDisclosureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDisclosureTableViewCell.h; sourceTree = "<group>"; };
 		0C0CFB1719424BBD00605FF3 /* RZDisclosureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDisclosureTableViewCell.m; sourceTree = "<group>"; };
-		0C0CFB1819424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZSettingsInterfaceTableViewCell.h; sourceTree = "<group>"; };
-		0C0CFB1919424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZSettingsInterfaceTableViewCell.m; sourceTree = "<group>"; };
 		0C0CFB1A19424BBD00605FF3 /* RZToggleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZToggleTableViewCell.h; sourceTree = "<group>"; };
 		0C0CFB1B19424BBD00605FF3 /* RZToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZToggleTableViewCell.m; sourceTree = "<group>"; };
 		0C0CFB1C19424BBD00605FF3 /* RZVersionInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZVersionInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -129,8 +126,6 @@
 				0C0CFB1519424BBD00605FF3 /* RZDebugMenuToggleItem.m */,
 				0C0CFB4319425DE600605FF3 /* RZDebugMenuVersionItem.h */,
 				0C0CFB4419425DE600605FF3 /* RZDebugMenuVersionItem.m */,
-				0C0CFB1819424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.h */,
-				0C0CFB1919424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.m */,
 				0C0CFB1619424BBD00605FF3 /* RZDisclosureTableViewCell.h */,
 				0C0CFB1719424BBD00605FF3 /* RZDisclosureTableViewCell.m */,
 				0C0CFB1A19424BBD00605FF3 /* RZToggleTableViewCell.h */,
@@ -346,7 +341,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C0CFB2519424BBD00605FF3 /* RZToggleTableViewCell.m in Sources */,
-				0C0CFB2419424BBD00605FF3 /* RZSettingsInterfaceTableViewCell.m in Sources */,
 				0C0CFB2319424BBD00605FF3 /* RZDisclosureTableViewCell.m in Sources */,
 				0C22DAD3193CCDA30042938F /* RZAppDelegate.m in Sources */,
 				0C0CFB2019424BBD00605FF3 /* RZDebugMenuMultiValueItem.m in Sources */,

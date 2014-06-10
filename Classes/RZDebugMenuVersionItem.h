@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RZDebugMenuSettingsItem.h"
 
-@interface RZDebugMenuVersionItem : NSObject
+@interface RZDebugMenuVersionItem : RZDebugMenuSettingsItem
 
 @property(nonatomic, readonly, strong) NSString *versionNumber;
 
-- (id)initWithVersionNumber:(NSString *)version;
+- (id)initWithTitle:(NSString *)title andVersionNumber:(NSString *)version;
 
 @end

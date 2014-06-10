@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RZSettingsInterfaceTableViewCell.h"
 
-@interface RZDisclosureTableViewCell : RZSettingsInterfaceTableViewCell
+@interface RZDisclosureTableViewCell : UITableViewCell
 
 @end

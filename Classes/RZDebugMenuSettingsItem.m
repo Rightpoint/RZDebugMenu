@@ -28,11 +28,12 @@
     return self;
 }
 
-- (id)initWithVersionNumber:(NSString *)version
+
+- (id)initWithTitle:(NSString *)title andVersionNumber:(NSString *)version
 {    
     self = [super init];
     if ( self ) {
-        
+        _tableViewCellTitle = title;
     }
     return self;
 }

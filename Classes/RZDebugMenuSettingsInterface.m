@@ -26,6 +26,7 @@ static NSString * const kRZKeyType = @"Type";
 static NSString * const kRZKeyDefaultValue = @"DefaultValue";
 static NSString * const kRZKeyEnvironmentsTitles = @"Titles";
 static NSString * const kRZKeyEnvironmentsValues = @"Values";
+static NSString * const kRZVersionCellTitle = @"Version";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
@@ -77,8 +78,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
             }
         }
+        
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
-        RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithVersionNumber:version];
+        RZDebugMenuSettingsItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
         [_settingsCellItemsMetaData addObject:versionItem];
     
         _settingsOptionsTableView.dataSource = self;
@@ -129,6 +131,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
         RZDebugMenuVersionItem *versionItem = [self.settingsCellItemsMetaData lastObject];
+        cell.textLabel.text = versionItem.tableViewCellTitle;
         cell.detailTextLabel.text = versionItem.versionNumber;
     }
     

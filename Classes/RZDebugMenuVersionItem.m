@@ -11,13 +11,14 @@
 @interface RZDebugMenuVersionItem ()
 
 @property(nonatomic, readwrite, strong) NSString *versionNumber;
+
 @end
 
 @implementation RZDebugMenuVersionItem
 
-- (id)initWithVersionNumber:(NSString *)version
+- (id)initWithTitle:(NSString *)title andVersionNumber:(NSString *)version
 {
-    self = [super init];
+    self = [super initWithTitle:title andVersionNumber:version];
     if ( self ) {
         _versionNumber = version;
     }

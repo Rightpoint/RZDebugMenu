@@ -10,7 +10,6 @@
 
 @interface RZDebugMenuMultiValueItem ()
 
-//@property(nonatomic, readwrite, strong) NSString *disclosureTableViewCellTitle;
 @property(nonatomic, readwrite, strong) NSNumber *disclosureTableViewCellDefaultValue;
 @property(nonatomic, readwrite, strong) NSArray *selectionTitles;
 @property(nonatomic, readwrite, strong) NSArray *selectionValues;
@@ -23,8 +22,6 @@
 {
     self = [super initWithTitle:title defaultValue:value andOptions:options withValues:optionValues];
     if ( self ) {
-//        _disclosureTableViewCellTitle = title;
-        
         _disclosureTableViewCellDefaultValue = value;
         _selectionTitles = options;
         _selectionValues = optionValues;

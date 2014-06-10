@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RZSettingsInterfaceTableViewCell.h"
 
 @interface RZVersionInfoTableViewCell : UITableViewCell
 
