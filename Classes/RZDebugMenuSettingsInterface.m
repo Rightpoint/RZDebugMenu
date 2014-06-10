@@ -39,14 +39,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @implementation RZDebugMenuSettingsInterface
 
-- (void)setSettingsOptionsTableView:(UITableView *)settingsOptionsTableView
-{
-    _settingsOptionsTableView = settingsOptionsTableView;
-    [_settingsOptionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
-    [_settingsOptionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
-    [_settingsOptionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
-}
-
 - (id)initWithDictionary:(NSDictionary *)plistData
 {
     
@@ -89,9 +81,14 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return self;
 }
 
-- (RZDebugMenuSettingsItem *)objectAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Overridden setters/getters
+
+- (void)setSettingsOptionsTableView:(UITableView *)settingsOptionsTableView
 {
-    return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
+    _settingsOptionsTableView = settingsOptionsTableView;
+    [_settingsOptionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
+    [_settingsOptionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
+    [_settingsOptionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -137,6 +134,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     }
     
     return cell;
+}
+
+#pragma mark - other methods
+
+- (RZDebugMenuSettingsItem *)objectAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
 
 @end

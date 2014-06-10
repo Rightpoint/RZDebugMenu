@@ -20,8 +20,9 @@
 
 - (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andOptions:(NSArray *)options withValues:(NSArray *)optionValues
 {
-    self = [super initWithTitle:title defaultValue:value andOptions:options withValues:optionValues];
+    self = [super init];
     if ( self ) {
+        self.tableViewCellTitle = title;
         _disclosureTableViewCellDefaultValue = value;
         _selectionTitles = options;
         _selectionValues = optionValues;

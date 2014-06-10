@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuModalViewController.h"
 
+#import "RZDebugMenuSettingsItem.h"
 #import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
@@ -86,7 +87,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id currentMetaDataObject = [self.debugSettingsInterface objectAtIndexPath:indexPath];
+    RZDebugMenuSettingsItem *currentMetaDataObject = [self.debugSettingsInterface objectAtIndexPath:indexPath];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         

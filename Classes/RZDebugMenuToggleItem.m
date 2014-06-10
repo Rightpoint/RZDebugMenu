@@ -18,8 +18,9 @@
 
 - (id)initWithTitle:(NSString *)title andValue:(BOOL)value
 {
-    self = [super initWithTitle:title andValue:value];
+    self = [super init];
     if ( self ) {
+        self.tableViewCellTitle = title;
         _toggleCellDefaultValue = value;
 
     }
