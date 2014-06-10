@@ -8,6 +8,8 @@
 
 #import "RZDebugMenuMultiItemListViewController.h"
 
+static NSString * const kRZCellReuseIdentifier = @"Cell";
+
 @interface RZDebugMenuMultiItemListViewController ()
 
 @property(nonatomic, strong) UITableView *selectionsTableView;
@@ -45,6 +47,7 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
     CGFloat height = CGRectGetHeight(self.view.bounds);
     
     self.selectionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
+    [self.selectionsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kRZCellReuseIdentifier];
     self.selectionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:self.selectionsTableView];
@@ -67,9 +70,10 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
-    cell.textLabel.text = [self.cellTitles objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
+    if ( cell ) {
+        cell.textLabel.text = [self.cellTitles objectAtIndex:indexPath.row];
+    }
     return cell;
 }
 

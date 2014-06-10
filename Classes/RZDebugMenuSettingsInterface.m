@@ -58,9 +58,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
                 NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
                 RZDebugMenuSettingsItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
-                                                                                                                 defaultValue:cellDefaultValue
-                                                                                                                   andOptions:optionTitles
-                                                                                                                   withValues:optionValues];
+                                                                                                               defaultValue:cellDefaultValue
+                                                                                                                 andOptions:optionTitles
+                                                                                                                 withValues:optionValues];
                 [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
             }
             else if ( [[settingsItem objectForKey:kRZKeyType] isEqualToString:kRZToggleSwitchSpecifier] ) {
