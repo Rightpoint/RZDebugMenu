@@ -7,6 +7,7 @@
 //
 
 #import "RZDebugMenuMultiItemListViewController.h"
+#import "RZMultiValueSelectionItem.h"
 
 static NSString * const kRZCellReuseIdentifier = @"Cell";
 
@@ -21,7 +22,7 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithCellTitles:(NSArray *)tableViewCellMetaData
+- (id)initWithCellMetaData:(NSArray *)tableViewCellMetaData
 {
     self = [super init];
     if ( self ) {
@@ -64,8 +65,8 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
 {
     UITableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
     if ( cell ) {
-        // TODO: Have model handle generation of cells
-        cell.textLabel.text = [self.tableViewCellMetaData objectAtIndex:indexPath.row];
+        RZMultiValueSelectionItem *currentSelectionItem = [self.tableViewCellMetaData objectAtIndex:indexPath.row];
+        cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
     return cell;
 }

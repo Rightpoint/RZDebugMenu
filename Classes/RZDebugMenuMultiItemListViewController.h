@@ -10,6 +10,6 @@
 
 @interface RZDebugMenuMultiItemListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (id)initWithCellTitles:(NSArray *)tableViewCellMetaData;
+- (id)initWithCellMetaData:(NSArray *)tableViewCellMetaData;
 
 @end
