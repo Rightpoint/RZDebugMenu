@@ -14,7 +14,7 @@ static NSString * const kRZCellReuseIdentifier = @"Cell";
 @interface RZDebugMenuMultiItemListViewController ()
 
 @property(nonatomic, strong) UITableView *selectionsTableView;
-@property(nonatomic, strong) NSArray *tableViewCellMetaData;
+@property(nonatomic, strong) NSArray *cellItems;
 
 @end
 
@@ -26,7 +26,7 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
 {
     self = [super init];
     if ( self ) {
-        _tableViewCellMetaData = [[NSArray alloc] initWithArray:tableViewCellMetaData];
+        _cellItems = [[NSArray alloc] initWithArray:tableViewCellMetaData];
         self.title = kRZNavigationBarTitle;
     }
     return self;
@@ -58,14 +58,14 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.tableViewCellMetaData.count;
+    return self.cellItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
     if ( cell ) {
-        RZMultiValueSelectionItem *currentSelectionItem = [self.tableViewCellMetaData objectAtIndex:indexPath.row];
+        RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
     return cell;

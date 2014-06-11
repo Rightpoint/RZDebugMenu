@@ -11,7 +11,7 @@
 @interface RZDebugMenuMultiValueItem ()
 
 @property(nonatomic, readwrite, strong) NSNumber *disclosureTableViewCellDefaultValue;
-@property(nonatomic, readwrite, strong) NSArray *selectionTableViewCellMetaData;
+@property(nonatomic, readwrite, strong) NSArray *selectionItems;
 
 @end
 
@@ -23,7 +23,7 @@
     if ( self ) {
         self.tableViewCellTitle = title;
         _disclosureTableViewCellDefaultValue = value;
-        _selectionTableViewCellMetaData = selectionItems;
+        _selectionItems = selectionItems;
     }
     return self;
 }

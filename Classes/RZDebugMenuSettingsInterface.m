@@ -124,7 +124,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         
         NSInteger defaultValue = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).disclosureTableViewCellDefaultValue integerValue];
-        RZMultiValueSelectionItem *currentSelection = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).selectionTableViewCellMetaData objectAtIndex:(unsigned long)defaultValue];
+        RZMultiValueSelectionItem *currentSelection = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).selectionItems objectAtIndex:(unsigned long)defaultValue];
         cell.detailTextLabel.text = currentSelection.selectionTitle;
         
     }
