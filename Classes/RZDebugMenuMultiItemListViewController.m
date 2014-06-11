@@ -22,11 +22,11 @@ static NSString * const kRZNavigationBarTitle = @"Environments";
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithCellMetaData:(NSArray *)tableViewCellMetaData
+- (id)initWithSelectionItems:(NSArray *)selectionItems
 {
     self = [super init];
     if ( self ) {
-        _cellItems = [[NSArray alloc] initWithArray:tableViewCellMetaData];
+        _cellItems = [[NSArray alloc] initWithArray:selectionItems];
         self.title = kRZNavigationBarTitle;
     }
     return self;

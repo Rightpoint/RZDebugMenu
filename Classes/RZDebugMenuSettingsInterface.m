@@ -60,7 +60,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
                 NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
                 
-                NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"The disclosure selection arrays must be of non-zero and equal value. Check to see in the Plist under your MultiValue item that your Titles and Values items are equal in length and are not 0");
+                NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"The disclosure selection arrays must be of non-zero length and equal length. Check to see in the Plist under your MultiValue item that your Titles and Values items are equal in length and are not 0");
                 
                 NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
                 
