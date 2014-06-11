@@ -10,6 +10,7 @@
 #import "RZMultiValueSelectionItem.h"
 
 static NSString * const kRZCellReuseIdentifier = @"Cell";
+static NSString * const kRZNavigationBarTitle = @"Options";
 
 @interface RZDebugMenuMultiItemListViewController ()
 
@@ -17,8 +18,6 @@ static NSString * const kRZCellReuseIdentifier = @"Cell";
 @property(nonatomic, strong) NSArray *cellItems;
 
 @end
-
-static NSString * const kRZNavigationBarTitle = @"Environments";
 
 @implementation RZDebugMenuMultiItemListViewController
 
