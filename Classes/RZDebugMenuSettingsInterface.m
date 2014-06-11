@@ -17,6 +17,8 @@
 #import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 
+#import "RZMultiValueSelectionItem.h"
+
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
 static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
@@ -58,15 +60,26 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
                 NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
                 
+                NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"The disclosure selection arrays must be of non-zero length and equal length. Check to see in the Plist under your MultiValue item that your Titles and Values items are equal in length and are not 0");
+                
+                NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
+                
+                for (int i = 0; i < optionTitles.count; i++) {
+                    NSString *title = [optionTitles objectAtIndex:i];
+                    NSNumber *value = [optionValues objectAtIndex:i];
+                    
+                    RZMultiValueSelectionItem *selectionItemMetaData = [[RZMultiValueSelectionItem alloc] initWithTitle:title andValue:value];
+                    [selectionItems addObject:selectionItemMetaData];
+                }
+                
                 RZDebugMenuSettingsItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
                                                                                                                defaultValue:cellDefaultValue
-                                                                                                                 andOptions:optionTitles
-                                                                                                                 withValues:optionValues];
+                                                                                                          andSelectionItems:selectionItems];
                 [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
             }
             else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
                 
-                bool cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+                BOOL cellDefaultValue = [[settingsItem objectForKey:kRZKeyDefaultValue] boolValue];
                 RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
             }
@@ -112,15 +125,23 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         
-        NSInteger defaultValue = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).disclosureTableViewCellDefaultValue integerValue];
-        NSString *currentSelection = [((RZDebugMenuMultiValueItem *)currentMetaDataObject).selectionTitles objectAtIndex:(unsigned long)defaultValue];
-        cell.detailTextLabel.text = currentSelection;
+        RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
+        
+        NSInteger defaultValue = [currentMultiValueItem.disclosureTableViewCellDefaultValue integerValue];
+        RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:(unsigned long)defaultValue];
+        cell.detailTextLabel.text = currentSelection.selectionTitle;
         
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        
+        RZDebugMenuToggleItem *currentToggleItem = (RZDebugMenuToggleItem *)currentMetaDataObject;
+        RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *) cell;
+        
+        toggleCell.applySettingsSwitch.on = currentToggleItem.toggleCellDefaultValue;
+        cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
@@ -136,7 +157,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    int numberOfItems = self.settingsCellItemsMetaData.count;
+    NSUInteger numberOfItems = self.settingsCellItemsMetaData.count;
     if ( indexPath.section > 0 || indexPath.row >= numberOfItems ) {
         return nil;
     }

@@ -16,7 +16,6 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.applySettingsSwitch = [[UISwitch alloc] init];
-        self.applySettingsSwitch.on = YES;
         self.accessoryView = [[UIView alloc] initWithFrame:self.applySettingsSwitch.frame];
         [self.accessoryView addSubview:self.applySettingsSwitch];
     }

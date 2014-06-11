@@ -11,21 +11,19 @@
 @interface RZDebugMenuMultiValueItem ()
 
 @property(nonatomic, readwrite, strong) NSNumber *disclosureTableViewCellDefaultValue;
-@property(nonatomic, readwrite, strong) NSArray *selectionTitles;
-@property(nonatomic, readwrite, strong) NSArray *selectionValues;
+@property(nonatomic, readwrite, strong) NSArray *selectionItems;
 
 @end
 
 @implementation RZDebugMenuMultiValueItem
 
-- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andOptions:(NSArray *)options withValues:(NSArray *)optionValues
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andSelectionItems:(NSArray *)selectionItems
 {
     self = [super init];
     if ( self ) {
         self.tableViewCellTitle = title;
         _disclosureTableViewCellDefaultValue = value;
-        _selectionTitles = options;
-        _selectionValues = optionValues;
+        _selectionItems = selectionItems;
     }
     return self;
 }

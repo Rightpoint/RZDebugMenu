@@ -80,10 +80,10 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
         RZDebugMenuMultiValueItem *disclosureCellOptions = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
-        NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionTitles;
+        NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
         
-        RZDebugMenuMultiItemListViewController *environmentsView = [[RZDebugMenuMultiItemListViewController alloc] initWithCellTitles:disclosureCellSelectableItems];
-        [self.navigationController pushViewController:environmentsView animated:YES];
+        RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems];
+        [self.navigationController pushViewController:environmentsViewController animated:YES];
         [self.optionsTableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 }

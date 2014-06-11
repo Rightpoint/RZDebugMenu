@@ -10,6 +10,6 @@
 
 @interface RZDebugMenuMultiItemListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (id)initWithCellTitles:(NSArray *)titles;
+- (id)initWithSelectionItems:(NSArray *)selectionItems;
 
 @end
