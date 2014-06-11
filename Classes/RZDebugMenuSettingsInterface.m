@@ -60,6 +60,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
                 NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
                 
+                NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"There are either no selections branching from your disclosure cell or there is a mismatch between the number of selection titles and the number of values or vice versa. Make sure the length of the arrays are non-zero and of equal length");
+                
                 NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
                 
                 for (int i = 0; i < optionTitles.count; i++) {
