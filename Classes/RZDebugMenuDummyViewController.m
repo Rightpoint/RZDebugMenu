@@ -35,7 +35,7 @@
 {
     RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
-    [self presentViewController:modalNavigationController animated:YES completion:nil];
+    [self.navigationController pushViewController:modalNavigationController animated:YES];
 }
 
 @end

@@ -20,6 +20,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @property(nonatomic, strong) RZDebugMenuSharedManager *sharedManager;
 
+- (void)createSharedManagerWithWindow:(RZDebugMenuWindow *)window tapGesture:(UITapGestureRecognizer *)gesture andRootViewController:(RZDebugMenuDummyViewController *)root;
+
 @end
 
 @implementation RZDebugMenu
@@ -31,12 +33,21 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                  userInfo:nil];
 }
 
+- (void)createSharedManagerWithWindow:(RZDebugMenuWindow *)window tapGesture:(UITapGestureRecognizer *)gesture andRootViewController:(RZDebugMenuDummyViewController *)root
+{
+    _sharedManager = [RZDebugMenuSharedManager sharedTopLevel];
+    _sharedManager.topWindow = window;
+    _sharedManager.tripleTap = gesture;
+    _sharedManager.clearViewController = root;
+}
+
 + (void)enable
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
     RZDebugMenuDummyViewController *dummyViewController = [[RZDebugMenuDummyViewController alloc] initWithInterface:debugSettingsInterface];
+//    UINavigationController *dummyNavigationController = [[UINavigationController alloc] initWithRootViewController:dummyViewController];
     dummyViewController.view.backgroundColor = [UIColor clearColor];
     
     UIApplication *application = [UIApplication sharedApplication];
@@ -53,9 +64,10 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     RZDebugMenuWindow *window = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
     window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     window.rootViewController = dummyViewController;
-    window.windowLevel = UIWindowLevelAlert;
-    [applicationWindow addSubview:window];
-    [window makeKeyAndVisible];
+//    window.windowLevel = UIWindowLevelStatusBar;
+    window.hidden = NO;
+
+    [[self alloc] createSharedManagerWithWindow:window tapGesture:tripleTap andRootViewController:dummyViewController];
 }
 
 @end
