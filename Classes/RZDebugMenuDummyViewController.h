@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "RZDebugMenuSettingsInterface.h"
+
 @interface RZDebugMenuDummyViewController : UIViewController
 
+- (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface;
 - (void)showViewController;
 
 @end

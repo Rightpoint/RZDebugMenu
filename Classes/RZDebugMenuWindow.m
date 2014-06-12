@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenuDummyViewController.h"
+#import "RZDebugMenuModalViewController.h"
 
 @implementation RZDebugMenuWindow
 
@@ -24,10 +25,10 @@
 {
     UIView *hitView = [super hitTest:point withEvent:event];
     if ( [hitView isKindOfClass:[RZDebugMenuDummyViewController class]] ) {
-        NSLog(@"not hitting");
+        NSLog(@"dummy");
         return nil;
     }
-    NSLog(@"hitting main view");
+    NSLog(@"main");
     return hitView;
 }
 

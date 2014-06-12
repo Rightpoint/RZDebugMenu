@@ -31,26 +31,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                  userInfo:nil];
 }
 
-//- (id)initWithWindow:(RZDebugMenuWindow *)window andGesture:(UITapGestureRecognizer *)gesture andRootViewController:(RZDebugMenuDummyViewController *)root
-//{
-//    self = [super init];
-//    if (self) {
-//        _sharedManager = [RZDebugMenuSharedManager sharedTopLevel];
-//        _sharedManager.topWindow = window;
-//        _sharedManager.tripleTap = gesture;
-//        _sharedManager.clearViewController = root;
-//    }
-//    return self;
-//}
-
 + (void)enable
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
-    RZDebugMenuModalViewController *modalViewController = [[RZDebugMenuModalViewController alloc] initWithInterface:debugSettingsInterface];
-    RZDebugMenuDummyViewController *dummyViewController = [[RZDebugMenuDummyViewController alloc] init];
-    UINavigationController *dummyNavigationController = [[UINavigationController alloc] initWithRootViewController:dummyViewController];
+    RZDebugMenuDummyViewController *dummyViewController = [[RZDebugMenuDummyViewController alloc] initWithInterface:debugSettingsInterface];
     dummyViewController.view.backgroundColor = [UIColor clearColor];
     
     UIApplication *application = [UIApplication sharedApplication];
@@ -66,11 +52,10 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     
     RZDebugMenuWindow *window = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
     window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    window.rootViewController = dummyNavigationController;
-    window.backgroundColor = [UIColor redColor];
+    window.rootViewController = dummyViewController;
     window.windowLevel = UIWindowLevelAlert;
     [applicationWindow addSubview:window];
-    
+    [window makeKeyAndVisible];
 }
 
 @end

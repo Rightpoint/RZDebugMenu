@@ -7,7 +7,6 @@
 //
 
 #import "RZDebugMenuDummyViewController.h"
-#import "RZDebugMenuSettingsInterface.h"
 #import "RZDebugMenuModalViewController.h"
 
 @interface RZDebugMenuDummyViewController ()
@@ -30,16 +29,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor redColor];
 }
 
 - (void)showViewController
 {
-    UIApplication *application = [UIApplication sharedApplication];
-    NSArray *applicationWindows = application.windows;
-    
     RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
-    [self presentViewController:settingsMenu animated:YES completion:nil];
+    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
+    [self presentViewController:modalNavigationController animated:YES completion:nil];
 }
 
 @end
