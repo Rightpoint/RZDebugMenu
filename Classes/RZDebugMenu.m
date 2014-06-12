@@ -24,28 +24,28 @@
                                  userInfo:nil];
 }
 
-+ (UIWindow *)enable
++ (void)enable
 {
-    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    UIApplication *application = [UIApplication sharedApplication];
+    UIWindow *applicationWindow = application.delegate.window;
+    
     RZDebugMenuModalViewController *modalViewController = [[RZDebugMenuModalViewController alloc] init];
     
     // Set up gesture and attach to application window
     UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] init];
     tripleTap.numberOfTapsRequired = 3;
     tripleTap.numberOfTouchesRequired = 1;
-    [mainWindow addGestureRecognizer:tripleTap];
+    [applicationWindow addGestureRecognizer:tripleTap];
     
     UIScreen *mainScreen = [UIScreen mainScreen];
     
-    CGFloat width = CGRectGetWidth(mainScreen.bounds);
-    CGFloat height = CGRectGetHeight(mainScreen.bounds);
-    
-    UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    UIWindow *window = [[UIWindow alloc] initWithFrame:mainScreen.bounds];
     window.rootViewController = modalViewController;
-    window.backgroundColor = [UIColor whiteColor];
-    [window makeKeyAndVisible];
+    window.backgroundColor = [UIColor redColor];
+    window.windowLevel = UIWindowLevelAlert;
+    window.hidden = NO;
     
-    return window;
+    [applicationWindow addSubview:window];
 }
 
 

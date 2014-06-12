@@ -22,7 +22,7 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
-    
+
     [RZDebugMenu enable];
 #endif
     

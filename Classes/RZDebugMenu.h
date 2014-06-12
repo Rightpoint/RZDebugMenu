@@ -10,6 +10,6 @@
 
 @interface RZDebugMenu : NSObject
 
-+ (UIWindow *)enable;
++ (void)enable;
 
 @end
