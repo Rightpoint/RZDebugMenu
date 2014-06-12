@@ -23,6 +23,7 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
     
 #if (DEBUG)
     //    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
@@ -31,8 +32,6 @@
     
     [RZDebugMenu enable];
 #endif
-    
-    [self.window makeKeyAndVisible];
     
     return YES;
 }

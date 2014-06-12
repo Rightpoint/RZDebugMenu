@@ -24,7 +24,8 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView *hitView = [super hitTest:point withEvent:event];
-    if ( [[hitView nextResponder] isMemberOfClass:[RZDebugMenuDummyViewController class]] ) {
+//    if ( [[hitView nextResponder] isMemberOfClass:[RZDebugMenuDummyViewController class]] ) {
+    if ( [hitView isKindOfClass:[RZDebugMenuDummyViewController class]] ) {
         NSLog(@"dummy");
         return nil;
     }

@@ -42,7 +42,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
     RZDebugMenuDummyViewController *dummyViewController = [[RZDebugMenuDummyViewController alloc] initWithInterface:debugSettingsInterface];
     //    UINavigationController *dummyNavigationController = [[UINavigationController alloc] initWithRootViewController:dummyViewController];
-    dummyViewController.view.backgroundColor = [UIColor redColor];
+    dummyViewController.view.backgroundColor = [UIColor clearColor];
     
     
     UIApplication *application = [UIApplication sharedApplication];
