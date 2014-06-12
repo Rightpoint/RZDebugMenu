@@ -11,7 +11,7 @@
 
 @interface RZDebugMenuDummyViewController ()
 
-@property(nonatomic, strong) RZDebugMenuSettingsInterface *interface;
+@property(nonatomic, readwrite, strong) RZDebugMenuSettingsInterface *interface;
 
 @end
 

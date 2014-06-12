@@ -12,6 +12,8 @@
 
 @interface RZDebugMenuDummyViewController : UIViewController
 
+@property(nonatomic, readonly, strong) RZDebugMenuSettingsInterface *interface;
+
 - (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface;
 //- (void)showViewController;
 

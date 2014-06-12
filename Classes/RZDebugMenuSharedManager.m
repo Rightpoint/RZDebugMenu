@@ -25,7 +25,7 @@
 
 - (void)showViewController
 {
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] init];
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.clearViewController.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
     [modalNavigationController presentViewController:modalNavigationController animated:YES completion:^{
         NSLog(@"SHOWING");
