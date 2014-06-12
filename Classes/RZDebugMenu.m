@@ -52,7 +52,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     
     tripleTap.numberOfTapsRequired = 3;
     tripleTap.numberOfTouchesRequired = 1;
-    [applicationWindow addGestureRecognizer:tripleTap];
+//    [applicationWindow addGestureRecognizer:tripleTap];
     
     UIScreen *mainScreen = [UIScreen mainScreen];
     
@@ -61,6 +61,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     window.rootViewController = dummyViewController;
     window.windowLevel = UIWindowLevelStatusBar;
     window.hidden = NO;
+    
+    [window addGestureRecognizer:tripleTap];
     
     _sharedManager.topWindow = window;
     _sharedManager.tripleTap = tripleTap;
