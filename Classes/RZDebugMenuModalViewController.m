@@ -64,6 +64,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     self.navigationItem.rightBarButtonItem = doneButton;
 }
 
+- (void)showViewController
+{
+    [self presentViewController:self animated:YES completion:nil];
+}
+
 #pragma mark - nav bar buttons methods
 
 - (void)closeView
