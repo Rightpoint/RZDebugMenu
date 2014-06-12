@@ -13,6 +13,6 @@
 @interface RZDebugMenuDummyViewController : UIViewController
 
 - (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface;
-- (void)showViewController;
+//- (void)showViewController;
 
 @end

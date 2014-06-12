@@ -20,7 +20,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @property(nonatomic, strong) RZDebugMenuSharedManager *sharedManager;
 
-- (void)createSharedManagerWithWindow:(RZDebugMenuWindow *)window tapGesture:(UITapGestureRecognizer *)gesture andRootViewController:(RZDebugMenuDummyViewController *)root;
+- (void)initSharedManager;
 
 @end
 
@@ -33,27 +33,22 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                  userInfo:nil];
 }
 
-- (void)createSharedManagerWithWindow:(RZDebugMenuWindow *)window tapGesture:(UITapGestureRecognizer *)gesture andRootViewController:(RZDebugMenuDummyViewController *)root
+- (void)initSharedManager
 {
     _sharedManager = [RZDebugMenuSharedManager sharedTopLevel];
-    _sharedManager.topWindow = window;
-    _sharedManager.tripleTap = gesture;
-    _sharedManager.clearViewController = root;
-}
-
-+ (void)enable
-{
+    
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
     RZDebugMenuDummyViewController *dummyViewController = [[RZDebugMenuDummyViewController alloc] initWithInterface:debugSettingsInterface];
-//    UINavigationController *dummyNavigationController = [[UINavigationController alloc] initWithRootViewController:dummyViewController];
-    dummyViewController.view.backgroundColor = [UIColor clearColor];
+    //    UINavigationController *dummyNavigationController = [[UINavigationController alloc] initWithRootViewController:dummyViewController];
+    dummyViewController.view.backgroundColor = [UIColor redColor];
+    
     
     UIApplication *application = [UIApplication sharedApplication];
     UIWindow *applicationWindow = application.keyWindow;
     
-    UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] initWithTarget:dummyViewController action:@selector(showViewController)];
+    UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] initWithTarget:_sharedManager action:@selector(showViewController)];
     
     tripleTap.numberOfTapsRequired = 3;
     tripleTap.numberOfTouchesRequired = 1;
@@ -66,8 +61,15 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     window.rootViewController = dummyViewController;
 //    window.windowLevel = UIWindowLevelStatusBar;
     window.hidden = NO;
+    
+    _sharedManager.topWindow = window;
+    _sharedManager.tripleTap = tripleTap;
+    _sharedManager.clearViewController = dummyViewController;
+}
 
-    [[self alloc] createSharedManagerWithWindow:window tapGesture:tripleTap andRootViewController:dummyViewController];
++ (void)enable
+{
+    [[self alloc] initSharedManager];
 }
 
 @end

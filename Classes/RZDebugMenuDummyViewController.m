@@ -31,11 +31,4 @@
     [super viewDidLoad];
 }
 
-- (void)showViewController
-{
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
-    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
-    [self.navigationController pushViewController:modalNavigationController animated:YES];
-}
-
 @end

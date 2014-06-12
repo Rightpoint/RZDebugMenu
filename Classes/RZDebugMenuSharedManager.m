@@ -7,6 +7,7 @@
 //
 
 #import "RZDebugMenuSharedManager.h"
+#import "RZDebugMenuModalViewController.h"
 
 @implementation RZDebugMenuSharedManager
 
@@ -20,6 +21,15 @@
         }
     });
     return sharedManager;
+}
+
+- (void)showViewController
+{
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] init];
+    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
+    [modalNavigationController presentViewController:modalNavigationController animated:YES completion:^{
+        NSLog(@"SHOWING");
+    }];
 }
 
 @end

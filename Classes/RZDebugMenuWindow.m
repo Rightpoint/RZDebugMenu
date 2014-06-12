@@ -26,10 +26,10 @@
     UIView *hitView = [super hitTest:point withEvent:event];
     if ( [[hitView nextResponder] isMemberOfClass:[RZDebugMenuDummyViewController class]] ) {
         NSLog(@"dummy");
-        return hitView;
+        return nil;
     }
     NSLog(@"main");
-    return nil;
+    return hitView;
 }
 
 @end
