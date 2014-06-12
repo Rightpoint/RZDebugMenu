@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RZDebugMenuWindow.h"
 #import "RZDebugMenuDummyViewController.h"
 
 @interface RZDebugMenuSharedManager : NSObject
 
-@property(nonatomic, strong) UIWindow *topWindow;
+@property(nonatomic, strong) RZDebugMenuWindow *topWindow;
 @property(nonatomic, strong) UITapGestureRecognizer *tripleTap;
-@property(nonatomic, strong) UIViewController *clearViewController;
+@property(nonatomic, strong) RZDebugMenuDummyViewController *clearViewController;
+
++ (RZDebugMenuSharedManager *)sharedTopLevel;
 
 @end

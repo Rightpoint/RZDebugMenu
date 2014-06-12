@@ -7,6 +7,8 @@
 //
 
 #import "RZDebugMenu.h"
+#import "RZDebugMenuSharedManager.h"
+#import "RZDebugMenuWindow.h"
 #import "RZDebugMenuDummyViewController.h"
 #import "RZDebugMenuModalViewController.h"
 #import "RZDebugMenuSettingsInterface.h"
@@ -15,6 +17,8 @@ static NSString * const kRZSettingsFileTitle = @"Settings";
 static NSString * const kRZSettingsFileExtension = @"plist";
 
 @interface RZDebugMenu ()
+
+@property(nonatomic, strong) RZDebugMenuSharedManager *sharedManager;
 
 @end
 
@@ -27,6 +31,18 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                  userInfo:nil];
 }
 
+//- (id)initWithWindow:(RZDebugMenuWindow *)window andGesture:(UITapGestureRecognizer *)gesture andRootViewController:(RZDebugMenuDummyViewController *)root
+//{
+//    self = [super init];
+//    if (self) {
+//        _sharedManager = [RZDebugMenuSharedManager sharedTopLevel];
+//        _sharedManager.topWindow = window;
+//        _sharedManager.tripleTap = gesture;
+//        _sharedManager.clearViewController = root;
+//    }
+//    return self;
+//}
+
 + (void)enable
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
@@ -34,11 +50,13 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
     RZDebugMenuModalViewController *modalViewController = [[RZDebugMenuModalViewController alloc] initWithInterface:debugSettingsInterface];
     RZDebugMenuDummyViewController *dummyViewController = [[RZDebugMenuDummyViewController alloc] init];
+    UINavigationController *dummyNavigationController = [[UINavigationController alloc] initWithRootViewController:dummyViewController];
+    dummyViewController.view.backgroundColor = [UIColor clearColor];
     
     UIApplication *application = [UIApplication sharedApplication];
-    UIWindow *applicationWindow = application.delegate.window;
+    UIWindow *applicationWindow = application.keyWindow;
     
-    UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] initWithTarget:dummyViewController action:@selector(showDebugMenu)];
+    UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] initWithTarget:dummyViewController action:@selector(showViewController)];
     
     tripleTap.numberOfTapsRequired = 3;
     tripleTap.numberOfTouchesRequired = 1;
@@ -46,13 +64,13 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     
     UIScreen *mainScreen = [UIScreen mainScreen];
     
-    UIWindow *window = [[UIWindow alloc] initWithFrame:mainScreen.bounds];
+    RZDebugMenuWindow *window = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
     window.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    window.rootViewController = modalViewController;
+    window.rootViewController = dummyNavigationController;
     window.backgroundColor = [UIColor redColor];
     window.windowLevel = UIWindowLevelAlert;
-    
     [applicationWindow addSubview:window];
+    
 }
 
 @end

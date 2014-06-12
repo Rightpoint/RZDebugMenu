@@ -10,6 +10,4 @@
 
 @interface RZDebugMenuWindow : UIWindow
 
-@property(nonatomic, strong) UIWindow *secondWindow;
-
 @end

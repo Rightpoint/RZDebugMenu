@@ -18,16 +18,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blueColor];
 }
 
 #pragma mark - Display menu methods
 
-- (void)displayDebugMenu
-{
-    RZDebugMenuModalViewController *debugTableViewController = [[RZDebugMenuModalViewController alloc] initWithInterface:self.debugSettingsInterface];
-    UINavigationController *navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
-
-    [self presentViewController:navigationControllerWrapper animated:YES completion:nil];
-}
+//- (void)displayDebugMenu
+//{
+//    RZDebugMenuModalViewController *debugTableViewController = [[RZDebugMenuModalViewController alloc] initWithInterface:self.debugSettingsInterface];
+//    UINavigationController *navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
+//
+//    [self presentViewController:navigationControllerWrapper animated:YES completion:nil];
+//}
 
 @end

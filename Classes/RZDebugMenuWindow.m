@@ -24,8 +24,10 @@
 {
     UIView *hitView = [super hitTest:point withEvent:event];
     if ( [hitView isKindOfClass:[RZDebugMenuDummyViewController class]] ) {
+        NSLog(@"not hitting");
         return nil;
     }
+    NSLog(@"hitting main view");
     return hitView;
 }
 

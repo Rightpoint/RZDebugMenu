@@ -7,26 +7,39 @@
 //
 
 #import "RZDebugMenuDummyViewController.h"
+#import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuModalViewController.h"
 
 @interface RZDebugMenuDummyViewController ()
+
+@property(nonatomic, strong) RZDebugMenuSettingsInterface *interface;
 
 @end
 
 @implementation RZDebugMenuDummyViewController
 
+- (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface
+{
+    self = [super init];
+    if ( self ) {
+        _interface = interface;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor redColor];
 }
 
 - (void)showViewController
 {
     UIApplication *application = [UIApplication sharedApplication];
     NSArray *applicationWindows = application.windows;
-    UIWindow *debugMenuWindow = [applicationWindows lastObject];
-    debugMenuWindow.windowLevel = UIWindowLevelAlert;
-    //    [self presentViewController:debugMenuWindow.rootViewController animated:YES completion:nil];
+    
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
+    [self presentViewController:settingsMenu animated:YES completion:nil];
 }
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation RZDebugMenuSharedManager
 
-+ (RZDebugMenuSharedManager *)sharedWindow
++ (RZDebugMenuSharedManager *)sharedTopLevel
 {
     static RZDebugMenuSharedManager *sharedManager = nil;
     static dispatch_once_t onceToken;
