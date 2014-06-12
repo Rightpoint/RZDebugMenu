@@ -19,15 +19,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
 #if (DEBUG)
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
+//    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+//    NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+//    RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
 
     [RZDebugMenu enable];
 #endif
     
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
-    rootViewController.debugSettingsInterface = debugSettingsInterface;
+//    rootViewController.debugSettingsInterface = debugSettingsInterface;
     
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootViewController;
