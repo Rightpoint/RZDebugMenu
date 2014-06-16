@@ -11,7 +11,6 @@
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenuSettingsInterface.h"
 
-#import "RZDebugMenuDummyViewController.h"
 #import "RZDebugMenuModalViewController.h"
 
 static NSString * const kRZSettingsFileTitle = @"Settings";
@@ -22,7 +21,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 @property(strong, nonatomic) RZDebugMenuSettingsInterface *interface;
 @property(strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property(strong, nonatomic) UITapGestureRecognizer *tripleTapGesture;
-@property(strong, nonatomic) RZDebugMenuDummyViewController *clearRootViewController;
+@property(strong, nonatomic) UIViewController *clearRootViewController;
 @property(assign, nonatomic) BOOL enabled;
 
 @end
@@ -60,7 +59,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         
         NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
         _interface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
-        _clearRootViewController = [[RZDebugMenuDummyViewController alloc] init];
+        _clearRootViewController = [[UIViewController alloc] init];
         _clearRootViewController.view.backgroundColor = [UIColor clearColor];
         
         UIScreen *mainScreen = [UIScreen mainScreen];
