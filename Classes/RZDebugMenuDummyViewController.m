@@ -10,20 +10,9 @@
 
 @interface RZDebugMenuDummyViewController ()
 
-@property(strong, nonatomic, readwrite) RZDebugMenuSettingsInterface *interface;
-
 @end
 
 @implementation RZDebugMenuDummyViewController
-
-- (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface
-{
-    self = [super init];
-    if ( self ) {
-        _interface = interface;
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {

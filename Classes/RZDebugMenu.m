@@ -19,6 +19,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @interface RZDebugMenu ()
 
+@property(strong, nonatomic) RZDebugMenuSettingsInterface *interface;
 @property(strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property(strong, nonatomic) UITapGestureRecognizer *tripleTapGesture;
 @property(strong, nonatomic) RZDebugMenuDummyViewController *clearRootViewController;
@@ -57,8 +58,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         }
         
         NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
-        _clearRootViewController = [[RZDebugMenuDummyViewController alloc] initWithInterface:debugSettingsInterface];
+        _interface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
+        _clearRootViewController = [[RZDebugMenuDummyViewController alloc] init];
         _clearRootViewController.view.backgroundColor = [UIColor clearColor];
         
         UIApplication *application = [UIApplication sharedApplication];
@@ -84,7 +85,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (void)showDebugMenu
 {
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.clearRootViewController.interface];
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
     [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
