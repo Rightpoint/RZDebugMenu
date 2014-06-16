@@ -95,4 +95,11 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     [applicationWindow addGestureRecognizer:self.tripleTapGesture];
 }
 
+#pragma mark - gesture recognizer delegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
 @end

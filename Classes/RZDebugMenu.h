@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RZDebugMenu : NSObject
+@interface RZDebugMenu : NSObject <UIGestureRecognizerDelegate>
 
 + (void)enable;
 
