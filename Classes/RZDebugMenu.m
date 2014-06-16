@@ -16,7 +16,6 @@
 
 static NSString * const kRZSettingsFileTitle = @"Settings";
 static NSString * const kRZSettingsFileExtension = @"plist";
-static NSString * const kRZFinishedLaunchingNotificationName = @"finishedLaunchingNotification";
 
 @interface RZDebugMenu ()
 
@@ -24,6 +23,7 @@ static NSString * const kRZFinishedLaunchingNotificationName = @"finishedLaunchi
 @property(strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property(strong, nonatomic) UITapGestureRecognizer *tripleTapGesture;
 @property(strong, nonatomic) RZDebugMenuDummyViewController *clearRootViewController;
+@property(assign, nonatomic) BOOL enabled;
 
 @end
 
@@ -49,8 +49,9 @@ static NSString * const kRZFinishedLaunchingNotificationName = @"finishedLaunchi
 {
     self = [super init];
     if ( self ) {
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attachGesture:) name:UIApplicationDidFinishLaunchingNotification object:nil];
         
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
         if ( !plistPath ) {
             @throw [NSException exceptionWithName:@"Settings.plist doesn't exist"
                                            reason:@"Make sure you have a 'Settings.plist' file in the Resources directory of your application"
@@ -68,15 +69,14 @@ static NSString * const kRZFinishedLaunchingNotificationName = @"finishedLaunchi
         _topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _topWindow.rootViewController = _clearRootViewController;
         _topWindow.hidden = NO;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attachGesture:) name:UIApplicationDidFinishLaunchingNotification object:nil];
     }
     return self;
 }
 
 + (void)enable
 {
-    [self privateSharedInstance];
+    RZDebugMenu *sharedInstance = [self privateSharedInstance];
+    sharedInstance.enabled = YES;
 }
 
 - (void)showDebugMenu
