@@ -28,6 +28,7 @@
     [RZDebugMenu enable];
 #endif
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"finishedLaunchingNotification" object:nil];
     return YES;
 }
 

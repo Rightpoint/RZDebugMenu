@@ -16,6 +16,7 @@
 
 static NSString * const kRZSettingsFileTitle = @"Settings";
 static NSString * const kRZSettingsFileExtension = @"plist";
+static NSString * const kRZFinishedLaunchingNotificationName = @"finishedLaunchingNotification";
 
 @interface RZDebugMenu ()
 
@@ -61,12 +62,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         _clearRootViewController = [[RZDebugMenuDummyViewController alloc] init];
         _clearRootViewController.view.backgroundColor = [UIColor clearColor];
         
-        UIApplication *application = [UIApplication sharedApplication];
-        UIWindow *applicationWindow = application.keyWindow;
-        _tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
-        _tripleTapGesture.numberOfTapsRequired = 3;
-        _tripleTapGesture.numberOfTouchesRequired = 1;
-        [applicationWindow addGestureRecognizer:_tripleTapGesture];
+//        UIApplication *application = [UIApplication sharedApplication];
+//        UIWindow *applicationWindow = application.keyWindow;
+//        _tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
+//        _tripleTapGesture.numberOfTapsRequired = 3;
+//        _tripleTapGesture.numberOfTouchesRequired = 1;
+//        [applicationWindow addGestureRecognizer:_tripleTapGesture];
         
         UIScreen *mainScreen = [UIScreen mainScreen];
         _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
@@ -74,6 +75,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         _topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _topWindow.rootViewController = _clearRootViewController;
         _topWindow.hidden = NO;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attachGesture:) name:kRZFinishedLaunchingNotificationName object:nil];
     }
     return self;
 }
@@ -88,6 +91,16 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
     [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
+}
+
+- (void)attachGesture:(NSNotification *)message
+{
+    UIApplication *application = [UIApplication sharedApplication];
+    self.tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
+    self.tripleTapGesture.numberOfTapsRequired = 3;
+    self.tripleTapGesture.numberOfTouchesRequired = 1;
+    UIWindow *applicationWindow = application.keyWindow;
+    [applicationWindow addGestureRecognizer:self.tripleTapGesture];
 }
 
 @end
