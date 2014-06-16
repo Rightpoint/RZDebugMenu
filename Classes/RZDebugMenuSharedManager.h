@@ -17,6 +17,6 @@
 @property(strong, nonatomic) RZDebugMenuDummyViewController *clearViewController;
 
 + (RZDebugMenuSharedManager *)sharedTopLevel;
-- (void)showViewController;
+- (void)showDebugMenu;
 
 @end

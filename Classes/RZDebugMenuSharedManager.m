@@ -23,7 +23,7 @@
     return sharedManager;
 }
 
-- (void)showViewController
+- (void)showDebugMenu
 {
     RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.clearViewController.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
