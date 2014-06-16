@@ -8,7 +8,6 @@
 
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenu.h"
-#import "RZDebugMenuSharedManager.h"
 
 @implementation RZDebugMenuWindow
 
