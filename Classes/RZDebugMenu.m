@@ -74,8 +74,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 + (void)enable
 {
-    RZDebugMenu *sharedInstance = [self privateSharedInstance];
-    sharedInstance.enabled = YES;
+    [[self privateSharedInstance] setEnabled:YES];
 }
 
 - (void)showDebugMenu
