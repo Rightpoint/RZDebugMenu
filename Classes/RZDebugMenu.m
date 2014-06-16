@@ -21,7 +21,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @property(nonatomic, strong) RZDebugMenuSharedManager *sharedManager;
 
-- (void)initSharedManager;
+- (void)initSharedManagerWithAssets;
 
 @end
 
@@ -34,7 +34,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                  userInfo:nil];
 }
 
-- (void)initSharedManager
+- (void)initSharedManagerWithAssets
 {
     _sharedManager = [RZDebugMenuSharedManager sharedTopLevel];
     
@@ -64,7 +64,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 + (void)enable
 {
-    [[self alloc] initSharedManager];
+    [[self alloc] initSharedManagerWithAssets];
 }
 
 @end
