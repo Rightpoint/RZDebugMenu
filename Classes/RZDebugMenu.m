@@ -92,6 +92,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     self.tripleTapGesture.numberOfTapsRequired = 3;
     self.tripleTapGesture.numberOfTouchesRequired = 1;
     UIWindow *applicationWindow = application.keyWindow;
+    self.tripleTapGesture.delegate = self;
     [applicationWindow addGestureRecognizer:self.tripleTapGesture];
 }
 
