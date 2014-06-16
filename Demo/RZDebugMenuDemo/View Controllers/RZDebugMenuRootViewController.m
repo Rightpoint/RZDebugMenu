@@ -7,7 +7,7 @@
 //
 
 #import "RZDebugMenuRootViewController.h"
-#import "RZDebugMenuModalViewController.h"
+#import "RZTestViewController.h"
 
 @interface RZDebugMenuRootViewController ()
 
@@ -19,6 +19,18 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blueColor];
+    
+    self.tester = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 200, 100)];
+    self.tester.backgroundColor = [UIColor redColor];
+    [self.tester addTarget:self action:@selector(goToNext) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:self.tester];
+}
+
+- (void)goToNext
+{
+    RZTestViewController *testerController = [[RZTestViewController alloc] init];
+    [self.navigationController pushViewController:testerController animated:YES];
 }
 
 @end
