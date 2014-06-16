@@ -7,8 +7,7 @@
 //
 
 #import "RZDebugMenuWindow.h"
-#import "RZDebugMenuDummyViewController.h"
-#import "RZDebugMenuModalViewController.h"
+#import "RZDebugMenuSharedManager.h"
 
 @implementation RZDebugMenuWindow
 
@@ -24,12 +23,11 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView *hitView = [super hitTest:point withEvent:event];
-//    if ( [[hitView nextResponder] isMemberOfClass:[RZDebugMenuDummyViewController class]] ) {
-    if ( [hitView isKindOfClass:[RZDebugMenuDummyViewController class]] ) {
-        NSLog(@"dummy");
+    RZDebugMenuSharedManager *sharedManager = [RZDebugMenuSharedManager sharedTopLevel];
+    
+    if ( [hitView isDescendantOfView:sharedManager.clearViewController.view] ) {
         return nil;
     }
-    NSLog(@"main");
     return hitView;
 }
 
