@@ -7,10 +7,12 @@
 //
 
 #import "RZDebugMenu.h"
-#import "RZDebugMenuSharedManager.h"
+
 #import "RZDebugMenuWindow.h"
-#import "RZDebugMenuDummyViewController.h"
+#import "RZDebugMenuSharedManager.h"
 #import "RZDebugMenuSettingsInterface.h"
+
+#import "RZDebugMenuDummyViewController.h"
 
 static NSString * const kRZSettingsFileTitle = @"Settings";
 static NSString * const kRZSettingsFileExtension = @"plist";
@@ -44,11 +46,9 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     
     UIApplication *application = [UIApplication sharedApplication];
     UIWindow *applicationWindow = application.keyWindow;
-    
     UITapGestureRecognizer *tripleTap = [[UITapGestureRecognizer alloc] initWithTarget:_sharedManager action:@selector(showDebugMenu)];
     tripleTap.numberOfTapsRequired = 3;
     tripleTap.numberOfTouchesRequired = 1;
-    
     [applicationWindow addGestureRecognizer:tripleTap];
     
     UIScreen *mainScreen = [UIScreen mainScreen];
@@ -58,8 +58,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     window.hidden = NO;
     
     _sharedManager.topWindow = window;
-    _sharedManager.tripleTap = tripleTap;
-    _sharedManager.clearViewController = dummyViewController;
+    _sharedManager.tripleTapGesture = tripleTap;
+    _sharedManager.clearRootViewController = dummyViewController;
 }
 
 + (void)enable

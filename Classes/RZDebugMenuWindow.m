@@ -16,7 +16,7 @@
     UIView *hitView = [super hitTest:point withEvent:event];
     RZDebugMenuSharedManager *sharedManager = [RZDebugMenuSharedManager sharedTopLevel];
     
-    if ( [hitView isDescendantOfView:sharedManager.clearViewController.view] ) {
+    if ( [hitView isDescendantOfView:sharedManager.clearRootViewController.view] ) {
         return nil;
     }
     return hitView;

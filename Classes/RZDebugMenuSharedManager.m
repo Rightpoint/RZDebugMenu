@@ -25,9 +25,9 @@
 
 - (void)showDebugMenu
 {
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.clearViewController.interface];
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.clearRootViewController.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
-    [self.clearViewController presentViewController:modalNavigationController animated:YES completion:nil];
+    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
 
 @end

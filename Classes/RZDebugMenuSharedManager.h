@@ -13,8 +13,8 @@
 @interface RZDebugMenuSharedManager : NSObject
 
 @property(strong, nonatomic) RZDebugMenuWindow *topWindow;
-@property(strong, nonatomic) UITapGestureRecognizer *tripleTap;
-@property(strong, nonatomic) RZDebugMenuDummyViewController *clearViewController;
+@property(strong, nonatomic) UITapGestureRecognizer *tripleTapGesture;
+@property(strong, nonatomic) RZDebugMenuDummyViewController *clearRootViewController;
 
 + (RZDebugMenuSharedManager *)sharedTopLevel;
 - (void)showDebugMenu;

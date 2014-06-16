@@ -7,7 +7,6 @@
 //
 
 #import "RZDebugMenuDummyViewController.h"
-#import "RZDebugMenuModalViewController.h"
 
 @interface RZDebugMenuDummyViewController ()
 
