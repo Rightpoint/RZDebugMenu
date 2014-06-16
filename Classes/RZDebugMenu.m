@@ -28,7 +28,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @implementation RZDebugMenu
 
-+ (instancetype)privateSharedInstance {
++ (instancetype)privateSharedInstance
+{
     static RZDebugMenu *s_sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -39,7 +40,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (id)init
 {
-    @throw [NSException exceptionWithName:@"Illegal allocation of setup interface"
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:@"You can't instantiate RZDebugMenu. Only method is + (void)enable"
                                  userInfo:nil];
 }
