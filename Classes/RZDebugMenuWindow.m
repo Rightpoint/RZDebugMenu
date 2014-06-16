@@ -7,6 +7,7 @@
 //
 
 #import "RZDebugMenuWindow.h"
+#import "RZDebugMenu.h"
 #import "RZDebugMenuSharedManager.h"
 
 @implementation RZDebugMenuWindow
@@ -14,9 +15,7 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView *hitView = [super hitTest:point withEvent:event];
-    RZDebugMenuSharedManager *sharedManager = [RZDebugMenuSharedManager sharedTopLevel];
-    
-    if ( [hitView isDescendantOfView:sharedManager.clearRootViewController.view] ) {
+    if ( [hitView isDescendantOfView:self.rootViewController.view] ) {
         return nil;
     }
     return hitView;
