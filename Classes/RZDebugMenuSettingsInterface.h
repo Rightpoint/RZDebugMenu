@@ -11,7 +11,7 @@
 
 @interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
 
-@property(nonatomic, weak) UITableView *settingsOptionsTableView;
+@property(weak, nonatomic) UITableView *settingsOptionsTableView;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;

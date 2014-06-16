@@ -21,8 +21,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuModalViewController ()
 
-@property(nonatomic, strong) RZDebugMenuSettingsInterface *debugSettingsInterface;
-@property(nonatomic, strong) UITableView *optionsTableView;
+@property(strong, nonatomic) RZDebugMenuSettingsInterface *debugSettingsInterface;
+@property(strong, nonatomic) UITableView *optionsTableView;
 
 @end
 

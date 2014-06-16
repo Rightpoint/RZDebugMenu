@@ -19,7 +19,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @interface RZDebugMenu ()
 
-@property(nonatomic, strong) RZDebugMenuSharedManager *sharedManager;
+@property(strong, nonatomic) RZDebugMenuSharedManager *sharedManager;
 
 - (void)initSharedManagerWithAssets;
 

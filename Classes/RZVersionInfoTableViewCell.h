@@ -10,6 +10,6 @@
 
 @interface RZVersionInfoTableViewCell : UITableViewCell
 
-@property(nonatomic, strong) NSString *versionNumber;
+@property(strong, nonatomic) NSString *versionNumber;
 
 @end
