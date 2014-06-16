@@ -20,7 +20,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *interface;
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
-@property (strong, nonatomic) UITapGestureRecognizer *tripleTapGesture;
+@property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
 @property (strong, nonatomic) UIViewController *clearRootViewController;
 @property (assign, nonatomic) BOOL enabled;
 
@@ -88,12 +88,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 - (void)attachGesture:(NSNotification *)message
 {
     UIApplication *application = [UIApplication sharedApplication];
-    self.tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
-    self.tripleTapGesture.numberOfTapsRequired = 3;
-    self.tripleTapGesture.numberOfTouchesRequired = 1;
-    self.tripleTapGesture.delegate = self;
+    self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
+    self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
+    self.swipeUpGesture.numberOfTouchesRequired = 3;
+    self.swipeUpGesture.delegate = self;
     UIWindow *applicationWindow = application.keyWindow;
-    [applicationWindow addGestureRecognizer:self.tripleTapGesture];
+    [applicationWindow addGestureRecognizer:self.swipeUpGesture];
 }
 
 #pragma mark - gesture recognizer delegate
