@@ -10,6 +10,6 @@
 
 @interface RZDebugMenuSettingsItem : NSObject
 
-@property(strong, nonatomic) NSString *tableViewCellTitle;
+@property (strong, nonatomic) NSString *tableViewCellTitle;
 
 @end

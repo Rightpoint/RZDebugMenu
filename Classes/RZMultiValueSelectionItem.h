@@ -10,8 +10,8 @@
 
 @interface RZMultiValueSelectionItem : NSObject
 
-@property(strong, nonatomic, readonly) NSString *selectionTitle;
-@property(strong, nonatomic, readonly) NSNumber *selectionValue;
+@property (strong, nonatomic, readonly) NSString *selectionTitle;
+@property (strong, nonatomic, readonly) NSNumber *selectionValue;
 
 - (id)initWithTitle:(NSString *)title andValue:(NSNumber *)value;
 

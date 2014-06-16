@@ -10,8 +10,8 @@
 
 @interface RZDebugMenuMultiValueItem ()
 
-@property(strong, nonatomic, readwrite) NSNumber *disclosureTableViewCellDefaultValue;
-@property(strong, nonatomic, readwrite) NSArray *selectionItems;
+@property (strong, nonatomic, readwrite) NSNumber *disclosureTableViewCellDefaultValue;
+@property (strong, nonatomic, readwrite) NSArray *selectionItems;
 
 @end
 

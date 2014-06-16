@@ -10,7 +10,7 @@
 
 @interface RZDebugMenuVersionItem ()
 
-@property(strong, nonatomic, readwrite) NSString *versionNumber;
+@property (strong, nonatomic, readwrite) NSString *versionNumber;
 
 @end
 

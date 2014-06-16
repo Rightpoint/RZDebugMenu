@@ -10,6 +10,6 @@
 
 @interface RZToggleTableViewCell : UITableViewCell
 
-@property(strong, nonatomic) UISwitch *applySettingsSwitch;
+@property (strong, nonatomic) UISwitch *applySettingsSwitch;
 
 @end

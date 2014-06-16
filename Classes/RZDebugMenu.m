@@ -18,11 +18,11 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @interface RZDebugMenu ()
 
-@property(strong, nonatomic) RZDebugMenuSettingsInterface *interface;
-@property(strong, nonatomic) RZDebugMenuWindow *topWindow;
-@property(strong, nonatomic) UITapGestureRecognizer *tripleTapGesture;
-@property(strong, nonatomic) UIViewController *clearRootViewController;
-@property(assign, nonatomic) BOOL enabled;
+@property (strong, nonatomic) RZDebugMenuSettingsInterface *interface;
+@property (strong, nonatomic) RZDebugMenuWindow *topWindow;
+@property (strong, nonatomic) UITapGestureRecognizer *tripleTapGesture;
+@property (strong, nonatomic) UIViewController *clearRootViewController;
+@property (assign, nonatomic) BOOL enabled;
 
 @end
 

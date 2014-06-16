@@ -10,7 +10,7 @@
 
 @interface RZDebugMenuToggleItem ()
 
-@property(readwrite, assign) BOOL toggleCellDefaultValue;
+@property (readwrite, assign) BOOL toggleCellDefaultValue;
 
 @end
 

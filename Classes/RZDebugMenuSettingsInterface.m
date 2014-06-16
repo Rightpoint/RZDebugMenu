@@ -35,7 +35,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuSettingsInterface ()
 
-@property(strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
+@property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
 
 @end
 
