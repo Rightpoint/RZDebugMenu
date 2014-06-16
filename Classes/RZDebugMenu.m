@@ -15,6 +15,8 @@
 
 static NSString * const kRZSettingsFileTitle = @"Settings";
 static NSString * const kRZSettingsFileExtension = @"plist";
+static NSString * const kRZSettingsDotFileExtension = @".plist";
+static NSString * const kRZEmptyString = @"";
 
 @interface RZDebugMenu ()
 
@@ -22,6 +24,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
 @property (strong, nonatomic) UIViewController *clearRootViewController;
+@property (strong, nonatomic) NSString *settingsFileName;
 @property (assign, nonatomic) BOOL enabled;
 
 @end
@@ -49,9 +52,17 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     self = [super init];
     if ( self ) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attachGesture:) name:UIApplicationDidFinishLaunchingNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(attachGesture:)
+                                                     name:UIApplicationDidFinishLaunchingNotification
+                                                   object:nil];
+
+        NSRange fileExtensionRange = [_settingsFileName rangeOfString:kRZSettingsDotFileExtension];
+        if ( fileExtensionRange.location != NSNotFound ) {
+            _settingsFileName = [_settingsFileName stringByReplacingCharactersInRange:fileExtensionRange withString:kRZEmptyString];
+        }
         
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:_settingsFileName ofType:kRZSettingsFileExtension];
         if ( !plistPath ) {
             @throw [NSException exceptionWithName:@"Settings.plist doesn't exist"
                                            reason:@"Make sure you have a 'Settings.plist' file in the Resources directory of your application"
@@ -73,8 +84,9 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     return self;
 }
 
-+ (void)enable
++ (void)enableWithSettingsPlist:(NSString *)fileName
 {
+    [[self privateSharedInstance] setSettingsFileName:fileName];
     [[self privateSharedInstance] setEnabled:YES];
 }
 
@@ -90,7 +102,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     UIApplication *application = [UIApplication sharedApplication];
     self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
     self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    self.swipeUpGesture.numberOfTouchesRequired = 3;
+    self.swipeUpGesture.numberOfTouchesRequired = 2;
     self.swipeUpGesture.delegate = self;
     UIWindow *applicationWindow = application.keyWindow;
     [applicationWindow addGestureRecognizer:self.swipeUpGesture];
@@ -102,5 +114,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     return YES;
 }
+
+//#pragma mark - setter override
+//
+//- (void)setSettingsFileName:(NSString *)settingsFileName
+//{
+//    self.settingsFileName = [[NSString alloc] initWithString:settingsFileName];
+//}
 
 @end

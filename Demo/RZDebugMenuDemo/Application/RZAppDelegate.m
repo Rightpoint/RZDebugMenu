@@ -25,7 +25,7 @@
     [self.window makeKeyAndVisible];
     
 #if (DEBUG)
-    [RZDebugMenu enable];
+    [RZDebugMenu enableWithSettingsPlist:@"Settings.plist"];
 #endif
     
     return YES;
