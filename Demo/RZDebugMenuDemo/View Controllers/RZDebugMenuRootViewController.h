@@ -11,6 +11,7 @@
 
 @interface RZDebugMenuRootViewController : UIViewController
 
-@property(nonatomic, strong) RZDebugMenuSettingsInterface *debugSettingsInterface;
+@property (strong, nonatomic) UIButton *tester;
 
+- (void)goToNext;
 @end

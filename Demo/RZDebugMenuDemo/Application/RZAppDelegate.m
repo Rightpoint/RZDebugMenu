@@ -7,6 +7,7 @@
 //
 
 #import "RZAppDelegate.h"
+#import "RZDebugMenu.h"
 #import "RZDebugMenuRootViewController.h"
 #import "RZDebugMenuModalViewController.h"
 #import "RZDebugMenuSettingsInterface.h"
@@ -15,19 +16,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    #if DEBUG
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-        NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
-    #endif
-    
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
-    rootViewController.debugSettingsInterface = debugSettingsInterface;
+    UINavigationController *rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = rootViewController;
+    self.window.rootViewController = rootNavigationController;
     [self.window makeKeyAndVisible];
+    
+#if (DEBUG)
+    [RZDebugMenu enable];
+#endif
     
     return YES;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "RZDebugMenuRootViewController.h"
-#import "RZDebugMenuModalViewController.h"
+#import "RZTestViewController.h"
 
 @interface RZDebugMenuRootViewController ()
 
@@ -15,36 +15,22 @@
 
 @implementation RZDebugMenuRootViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blueColor];
     
-#if DEBUG
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
-    doubleTap.numberOfTapsRequired = 3;
-    doubleTap.numberOfTouchesRequired = 1;
-    [self.view addGestureRecognizer:doubleTap];
-#endif
+    self.tester = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 200, 100)];
+    self.tester.backgroundColor = [UIColor redColor];
+    [self.tester addTarget:self action:@selector(goToNext) forControlEvents:UIControlEventTouchUpInside];
     
+    [self.view addSubview:self.tester];
 }
 
-#pragma mark - Display menu methods
-
-- (void)displayDebugMenu
+- (void)goToNext
 {
-    RZDebugMenuModalViewController *debugTableViewController = [[RZDebugMenuModalViewController alloc] initWithInterface:self.debugSettingsInterface];
-    UINavigationController *navigationControllerWrapper = [[UINavigationController alloc] initWithRootViewController:debugTableViewController];
-
-    [self presentViewController:navigationControllerWrapper animated:YES completion:nil];
+    RZTestViewController *testerController = [[RZTestViewController alloc] init];
+    [self.navigationController pushViewController:testerController animated:YES];
 }
 
 @end

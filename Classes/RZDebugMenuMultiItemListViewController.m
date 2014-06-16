@@ -14,8 +14,8 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 @interface RZDebugMenuMultiItemListViewController ()
 
-@property(nonatomic, strong) UITableView *selectionsTableView;
-@property(nonatomic, strong) NSArray *cellItems;
+@property (strong, nonatomic) UITableView *selectionsTableView;
+@property (strong, nonatomic) NSArray *cellItems;
 
 @end
 

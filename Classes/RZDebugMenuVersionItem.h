@@ -11,7 +11,7 @@
 
 @interface RZDebugMenuVersionItem : RZDebugMenuSettingsItem
 
-@property(nonatomic, readonly, strong) NSString *versionNumber;
+@property (strong, nonatomic, readonly) NSString *versionNumber;
 
 - (id)initWithTitle:(NSString *)title andVersionNumber:(NSString *)version;
 

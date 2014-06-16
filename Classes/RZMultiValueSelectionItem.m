@@ -10,8 +10,8 @@
 
 @interface RZMultiValueSelectionItem ()
 
-@property(nonatomic, readwrite, strong) NSString *selectionTitle;
-@property(nonatomic, readwrite, strong) NSNumber *selectionValue;
+@property (strong, nonatomic, readwrite) NSString *selectionTitle;
+@property (strong, nonatomic, readwrite) NSNumber *selectionValue;
 
 @end
 
