@@ -62,13 +62,6 @@ static NSString * const kRZFinishedLaunchingNotificationName = @"finishedLaunchi
         _clearRootViewController = [[RZDebugMenuDummyViewController alloc] init];
         _clearRootViewController.view.backgroundColor = [UIColor clearColor];
         
-//        UIApplication *application = [UIApplication sharedApplication];
-//        UIWindow *applicationWindow = application.keyWindow;
-//        _tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
-//        _tripleTapGesture.numberOfTapsRequired = 3;
-//        _tripleTapGesture.numberOfTouchesRequired = 1;
-//        [applicationWindow addGestureRecognizer:_tripleTapGesture];
-        
         UIScreen *mainScreen = [UIScreen mainScreen];
         _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
         _topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
@@ -76,7 +69,7 @@ static NSString * const kRZFinishedLaunchingNotificationName = @"finishedLaunchi
         _topWindow.rootViewController = _clearRootViewController;
         _topWindow.hidden = NO;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attachGesture:) name:kRZFinishedLaunchingNotificationName object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(attachGesture:) name:UIApplicationDidFinishLaunchingNotification object:nil];
     }
     return self;
 }
