@@ -45,25 +45,27 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (RZDebugMenu *)init_internal
 {
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
-    NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
-    _clearRootViewController = [[RZDebugMenuDummyViewController alloc] initWithInterface:debugSettingsInterface];
-    _clearRootViewController.view.backgroundColor = [UIColor clearColor];
-    
-    UIApplication *application = [UIApplication sharedApplication];
-    UIWindow *applicationWindow = application.keyWindow;
-    _tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
-    _tripleTapGesture.numberOfTapsRequired = 3;
-    _tripleTapGesture.numberOfTouchesRequired = 1;
-    [applicationWindow addGestureRecognizer:_tripleTapGesture];
-    
-    UIScreen *mainScreen = [UIScreen mainScreen];
-    _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
-    _topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _topWindow.rootViewController = _clearRootViewController;
-    _topWindow.hidden = NO;
-    
+    self = [super init];
+    if ( self ) {
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:kRZSettingsFileTitle ofType:kRZSettingsFileExtension];
+        NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        RZDebugMenuSettingsInterface *debugSettingsInterface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
+        _clearRootViewController = [[RZDebugMenuDummyViewController alloc] initWithInterface:debugSettingsInterface];
+        _clearRootViewController.view.backgroundColor = [UIColor clearColor];
+        
+        UIApplication *application = [UIApplication sharedApplication];
+        UIWindow *applicationWindow = application.keyWindow;
+        _tripleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
+        _tripleTapGesture.numberOfTapsRequired = 3;
+        _tripleTapGesture.numberOfTouchesRequired = 1;
+        [applicationWindow addGestureRecognizer:_tripleTapGesture];
+        
+        UIScreen *mainScreen = [UIScreen mainScreen];
+        _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
+        _topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _topWindow.rootViewController = _clearRootViewController;
+        _topWindow.hidden = NO;
+    }
     return self;
 }
 
