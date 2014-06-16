@@ -71,6 +71,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         
         UIScreen *mainScreen = [UIScreen mainScreen];
         _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
+        _topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
         _topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _topWindow.rootViewController = _clearRootViewController;
         _topWindow.hidden = NO;
