@@ -8,6 +8,8 @@
 
 #import "RZDebugMenuClearViewController.h"
 
+#import "RZDebugMenuWindow.h"
+
 @interface RZDebugMenuClearViewController ()
 
 @end
@@ -22,7 +24,14 @@
 
 - (void)changeGestureOrientation:(NSNotification *)message
 {
-    NSLog(@"change here");
+    UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if ( UIDeviceOrientationIsLandscape(statusBarOrientation) ) {
+        NSLog(@"change gesture");
+    }
+    else {
+        NSLog(@"Direction up");
+    }
 }
 
 @end
