@@ -99,6 +99,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
 }
 
+#pragma mark - RZDebugMenuClearViewController delegate method
+
 - (void)changeOrientation
 {
     [_clearRootViewController changeGestureOrientation:_swipeUpGesture];
