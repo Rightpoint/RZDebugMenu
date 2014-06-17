@@ -15,7 +15,7 @@
 
 static NSString * const kRZSettingsFileTitle = @"Settings";
 static NSString * const kRZSettingsFileExtension = @"plist";
-static NSString * const kRZSettingsDotFileExtension = @".plist";
+static NSString * const kRZDotFileExtension = @".plist";
 static NSString * const kRZEmptyString = @"";
 
 @interface RZDebugMenu ()
@@ -106,7 +106,7 @@ static NSString * const kRZEmptyString = @"";
 - (void)setSettingsFileName:(NSString *)settingsFileName
 {
     _settingsFileName = settingsFileName;
-    NSRange fileExtensionRange = [_settingsFileName rangeOfString:kRZSettingsDotFileExtension];
+    NSRange fileExtensionRange = [_settingsFileName rangeOfString:kRZDotFileExtension];
     if ( fileExtensionRange.location != NSNotFound ) {
         _settingsFileName = [_settingsFileName stringByReplacingCharactersInRange:fileExtensionRange withString:kRZEmptyString];
     }
