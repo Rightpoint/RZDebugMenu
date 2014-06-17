@@ -25,9 +25,14 @@
 - (void)changeGestureOrientation:(NSNotification *)message
 {
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UIApplication *mainApplication = [UIApplication sharedApplication];
+    UIWindow *mainWindow = mainApplication.keyWindow;
     
-    if ( UIDeviceOrientationIsLandscape(statusBarOrientation) ) {
-        NSLog(@"change gesture");
+    if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
+        NSLog(@"Left");
+    }
+    else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
+        NSLog(@"Right");
     }
     else {
         NSLog(@"Direction up");
