@@ -83,7 +83,7 @@ static NSString * const kRZEmptyString = @"";
     UIApplication *application = [UIApplication sharedApplication];
     self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
     self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    self.swipeUpGesture.numberOfTouchesRequired = 2;
+    self.swipeUpGesture.numberOfTouchesRequired = 3;
     self.swipeUpGesture.delegate = self;
     UIWindow *applicationWindow = application.keyWindow;
     [applicationWindow addGestureRecognizer:self.swipeUpGesture];
