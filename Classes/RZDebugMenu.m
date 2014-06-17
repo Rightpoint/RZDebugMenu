@@ -51,11 +51,7 @@ static NSString * const kRZEmptyString = @"";
 {
     self = [super init];
     if ( self ) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(attachGesture:)
-                                                     name:UIApplicationDidFinishLaunchingNotification
-                                                   object:nil];
-
+    
         _clearRootViewController = [[UIViewController alloc] init];
         _clearRootViewController.view.backgroundColor = [UIColor clearColor];
         
@@ -87,7 +83,7 @@ static NSString * const kRZEmptyString = @"";
     UIApplication *application = [UIApplication sharedApplication];
     self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
     self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    self.swipeUpGesture.numberOfTouchesRequired = 3;
+    self.swipeUpGesture.numberOfTouchesRequired = 2;
     self.swipeUpGesture.delegate = self;
     UIWindow *applicationWindow = application.keyWindow;
     [applicationWindow addGestureRecognizer:self.swipeUpGesture];
@@ -105,11 +101,7 @@ static NSString * const kRZEmptyString = @"";
 - (void)setSettingsFileName:(NSString *)settingsFileName
 {
     _settingsFileName = settingsFileName;
-    NSRange fileExtensionRange = [_settingsFileName rangeOfString:kRZDotFileExtension];
-    if ( fileExtensionRange.location != NSNotFound ) {
-        _settingsFileName = [_settingsFileName stringByReplacingCharactersInRange:fileExtensionRange withString:kRZEmptyString];
-    }
-    
+    _settingsFileName = [_settingsFileName stringByDeletingPathExtension];
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:_settingsFileName ofType:kRZSettingsFileExtension];
     if ( !plistPath ) {
         NSString *exceptionName = [_settingsFileName stringByAppendingString:@".plist doesn't exist"];
@@ -120,6 +112,17 @@ static NSString * const kRZEmptyString = @"";
     
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     _interface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
+}
+
+- (void)setEnabled:(BOOL)enabled
+{
+    _enabled = enabled;
+    if ( _enabled ) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(attachGesture:)
+                                                     name:UIApplicationDidFinishLaunchingNotification
+                                                   object:nil];
+    }
 }
 
 @end
