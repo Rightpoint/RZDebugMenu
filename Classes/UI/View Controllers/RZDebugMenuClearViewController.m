@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuClearViewController.h"
 
+#import "RZDebugMenu.h"
 #import "RZDebugMenuWindow.h"
 
 @interface RZDebugMenuClearViewController ()
@@ -27,6 +28,8 @@
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     UIApplication *mainApplication = [UIApplication sharedApplication];
     UIWindow *mainWindow = mainApplication.keyWindow;
+    NSArray *gestureRecognizers = mainWindow.gestureRecognizers;
+    NSLog(@"%i", gestureRecognizers.count);
     
     if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
         NSLog(@"Left");
