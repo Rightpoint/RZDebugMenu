@@ -14,8 +14,6 @@
 #import "RZDebugMenuModalViewController.h"
 
 static NSString * const kRZSettingsFileExtension = @"plist";
-static NSString * const kRZDotFileExtension = @".plist";
-static NSString * const kRZEmptyString = @"";
 
 @interface RZDebugMenu ()
 
