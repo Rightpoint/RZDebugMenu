@@ -8,9 +8,6 @@
 
 #import "RZDebugMenuClearViewController.h"
 
-#import "RZDebugMenu.h"
-#import "RZDebugMenuWindow.h"
-
 @interface RZDebugMenuClearViewController ()
 
 @end
@@ -23,22 +20,18 @@
     self.view.backgroundColor = [UIColor clearColor];
 }
 
-- (void)changeGestureOrientation:(NSNotification *)message
+- (void)changeGestureOrientation:(UISwipeGestureRecognizer *)swipeGesture
 {
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    UIApplication *mainApplication = [UIApplication sharedApplication];
-    UIWindow *mainWindow = mainApplication.keyWindow;
-    NSArray *gestureRecognizers = mainWindow.gestureRecognizers;
-    NSLog(@"%i", gestureRecognizers.count);
     
     if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
-        NSLog(@"Left");
+        swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
     }
     else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
-        NSLog(@"Right");
+        swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
     }
     else {
-        NSLog(@"Direction up");
+        swipeGesture.direction = UISwipeGestureRecognizerDirectionUp;
     }
 }
 

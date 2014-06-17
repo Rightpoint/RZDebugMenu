@@ -11,7 +11,6 @@
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenuSettingsInterface.h"
 
-#import "RZDebugMenuClearViewController.h"
 #import "RZDebugMenuModalViewController.h"
 
 static NSString * const kRZSettingsFileExtension = @"plist";
@@ -78,14 +77,16 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         UIApplication *application = [UIApplication sharedApplication];
         self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        self.swipeUpGesture.numberOfTouchesRequired = 2;
+        self.swipeUpGesture.numberOfTouchesRequired = 3;
         self.swipeUpGesture.delegate = self;
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
         
         _clearRootViewController = [[RZDebugMenuClearViewController alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:_clearRootViewController
-                                                 selector:@selector(changeGestureOrientation:)
+        _clearRootViewController.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeOrientation)
                                                      name:UIApplicationDidChangeStatusBarOrientationNotification
                                                    object:nil];
         
@@ -96,6 +97,11 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         _topWindow.rootViewController = _clearRootViewController;
         _topWindow.hidden = NO;
     }
+}
+
+- (void)changeOrientation
+{
+    [_clearRootViewController changeGestureOrientation:_swipeUpGesture];
 }
 
 #pragma mark - gesture recognizer delegate
