@@ -33,6 +33,7 @@
 		0C781149194F859900F25AE5 /* RZToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78113A194F859900F25AE5 /* RZToggleTableViewCell.m */; };
 		0C78114A194F859900F25AE5 /* RZVersionInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78113C194F859900F25AE5 /* RZVersionInfoTableViewCell.m */; };
 		0C78114B194F859900F25AE5 /* RZDebugMenuWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78113E194F859900F25AE5 /* RZDebugMenuWindow.m */; };
+		0C78114E1950A7B900F25AE5 /* RZDebugMenuClearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78114D1950A7B900F25AE5 /* RZDebugMenuClearViewController.m */; };
 		0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C972B02193E0CBB00EA84FF /* Settings.plist */; };
 		0C972B0D193E1A9900EA84FF /* RZDebugMenuRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C972B0A193E1A9900EA84FF /* RZDebugMenuRootViewController.m */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,8 @@
 		0C78113C194F859900F25AE5 /* RZVersionInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZVersionInfoTableViewCell.m; sourceTree = "<group>"; };
 		0C78113D194F859900F25AE5 /* RZDebugMenuWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuWindow.h; sourceTree = "<group>"; };
 		0C78113E194F859900F25AE5 /* RZDebugMenuWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuWindow.m; sourceTree = "<group>"; };
+		0C78114C1950A7B900F25AE5 /* RZDebugMenuClearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuClearViewController.h; sourceTree = "<group>"; };
+		0C78114D1950A7B900F25AE5 /* RZDebugMenuClearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuClearViewController.m; sourceTree = "<group>"; };
 		0C972B02193E0CBB00EA84FF /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		0C972B09193E1A9900EA84FF /* RZDebugMenuRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuRootViewController.h; sourceTree = "<group>"; };
 		0C972B0A193E1A9900EA84FF /* RZDebugMenuRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuRootViewController.m; sourceTree = "<group>"; };
@@ -247,6 +250,8 @@
 				0C781132194F859900F25AE5 /* RZDebugMenuModalViewController.m */,
 				0C781133194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.h */,
 				0C781134194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.m */,
+				0C78114C1950A7B900F25AE5 /* RZDebugMenuClearViewController.h */,
+				0C78114D1950A7B900F25AE5 /* RZDebugMenuClearViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 				0C781141194F859900F25AE5 /* RZDebugMenuSettingsItem.m in Sources */,
 				0C781144194F859900F25AE5 /* RZMultiValueSelectionItem.m in Sources */,
 				0C781147194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.m in Sources */,
+				0C78114E1950A7B900F25AE5 /* RZDebugMenuClearViewController.m in Sources */,
 				0C78114A194F859900F25AE5 /* RZVersionInfoTableViewCell.m in Sources */,
 				0C781148194F859900F25AE5 /* RZDisclosureTableViewCell.m in Sources */,
 				0C781143194F859900F25AE5 /* RZDebugMenuVersionItem.m in Sources */,

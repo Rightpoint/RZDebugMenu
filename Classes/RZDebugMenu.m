@@ -11,6 +11,7 @@
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenuSettingsInterface.h"
 
+#import "RZDebugMenuClearViewController.h"
 #import "RZDebugMenuModalViewController.h"
 
 static NSString * const kRZSettingsFileExtension = @"plist";
@@ -20,7 +21,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *interface;
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
-@property (strong, nonatomic) UIViewController *clearRootViewController;
+@property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
 @property (copy, nonatomic) NSString *settingsFileName;
 @property (assign, nonatomic) BOOL enabled;
 
@@ -49,7 +50,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     self = [super init];
     if ( self ) {
-    
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(createWindowAndGesture:)
                                                      name:UIApplicationDidFinishLaunchingNotification
@@ -77,13 +78,16 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         UIApplication *application = [UIApplication sharedApplication];
         self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        self.swipeUpGesture.numberOfTouchesRequired = 3;
+        self.swipeUpGesture.numberOfTouchesRequired = 2;
         self.swipeUpGesture.delegate = self;
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
         
-        _clearRootViewController = [[UIViewController alloc] init];
-        _clearRootViewController.view.backgroundColor = [UIColor clearColor];
+        _clearRootViewController = [[RZDebugMenuClearViewController alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:_clearRootViewController
+                                                 selector:@selector(changeGestureOrientation:)
+                                                     name:UIApplicationDidChangeStatusBarOrientationNotification
+                                                   object:nil];
         
         UIScreen *mainScreen = [UIScreen mainScreen];
         _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
