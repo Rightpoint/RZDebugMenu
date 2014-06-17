@@ -52,15 +52,13 @@ static NSString * const kRZEmptyString = @"";
     self = [super init];
     if ( self ) {
     
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(createWindowAndGesture:)
+                                                     name:UIApplicationDidFinishLaunchingNotification
+                                                   object:nil];
+        
         _clearRootViewController = [[UIViewController alloc] init];
         _clearRootViewController.view.backgroundColor = [UIColor clearColor];
-        
-        UIScreen *mainScreen = [UIScreen mainScreen];
-        _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
-        _topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
-        _topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _topWindow.rootViewController = _clearRootViewController;
-        _topWindow.hidden = NO;
     }
     return self;
 }
@@ -78,15 +76,24 @@ static NSString * const kRZEmptyString = @"";
     [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
 
-- (void)attachGesture:(NSNotification *)message
+- (void)createWindowAndGesture:(NSNotification *)message
 {
-    UIApplication *application = [UIApplication sharedApplication];
-    self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
-    self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    self.swipeUpGesture.numberOfTouchesRequired = 3;
-    self.swipeUpGesture.delegate = self;
-    UIWindow *applicationWindow = application.keyWindow;
-    [applicationWindow addGestureRecognizer:self.swipeUpGesture];
+    if ( _enabled ) {
+        UIApplication *application = [UIApplication sharedApplication];
+        self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
+        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
+        self.swipeUpGesture.numberOfTouchesRequired = 3;
+        self.swipeUpGesture.delegate = self;
+        UIWindow *applicationWindow = application.keyWindow;
+        [applicationWindow addGestureRecognizer:self.swipeUpGesture];
+        
+        UIScreen *mainScreen = [UIScreen mainScreen];
+        _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
+        _topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
+        _topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _topWindow.rootViewController = _clearRootViewController;
+        _topWindow.hidden = NO;
+    }
 }
 
 #pragma mark - gesture recognizer delegate
@@ -112,17 +119,6 @@ static NSString * const kRZEmptyString = @"";
     
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     _interface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
-}
-
-- (void)setEnabled:(BOOL)enabled
-{
-    _enabled = enabled;
-    if ( _enabled ) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(attachGesture:)
-                                                     name:UIApplicationDidFinishLaunchingNotification
-                                                   object:nil];
-    }
 }
 
 @end
