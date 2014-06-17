@@ -112,8 +112,9 @@ static NSString * const kRZEmptyString = @"";
     
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:_settingsFileName ofType:kRZSettingsFileExtension];
     if ( !plistPath ) {
-        @throw [NSException exceptionWithName:@"Settings.plist doesn't exist"
-                                       reason:@"Make sure you have a 'Settings.plist' file in the Resources directory of your application"
+        NSString *exceptionName = [_settingsFileName stringByAppendingString:@".plist doesn't exist"];
+        @throw [NSException exceptionWithName:exceptionName
+                                       reason:@"Make sure you have a settings plist file in the Resources directory of your application"
                                      userInfo:nil];
     }
     
