@@ -7,10 +7,9 @@
 //
 
 #import "RZAppDelegate.h"
+
 #import "RZDebugMenu.h"
 #import "RZDebugMenuRootViewController.h"
-#import "RZDebugMenuModalViewController.h"
-#import "RZDebugMenuSettingsInterface.h"
 
 @implementation RZAppDelegate
 
