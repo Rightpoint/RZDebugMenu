@@ -23,7 +23,7 @@ static NSString * const kRZEmptyString = @"";
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
 @property (strong, nonatomic) UIViewController *clearRootViewController;
-@property (strong, nonatomic) NSString *settingsFileName;
+@property (copy, nonatomic) NSString *settingsFileName;
 @property (assign, nonatomic) BOOL enabled;
 
 @end
@@ -87,7 +87,7 @@ static NSString * const kRZEmptyString = @"";
     UIApplication *application = [UIApplication sharedApplication];
     self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
     self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    self.swipeUpGesture.numberOfTouchesRequired = 2;
+    self.swipeUpGesture.numberOfTouchesRequired = 3;
     self.swipeUpGesture.delegate = self;
     UIWindow *applicationWindow = application.keyWindow;
     [applicationWindow addGestureRecognizer:self.swipeUpGesture];
