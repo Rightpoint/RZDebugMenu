@@ -54,9 +54,6 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                                  selector:@selector(createWindowAndGesture:)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
-        
-        _clearRootViewController = [[UIViewController alloc] init];
-        _clearRootViewController.view.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -84,6 +81,9 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         self.swipeUpGesture.delegate = self;
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
+        
+        _clearRootViewController = [[UIViewController alloc] init];
+        _clearRootViewController.view.backgroundColor = [UIColor clearColor];
         
         UIScreen *mainScreen = [UIScreen mainScreen];
         _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
