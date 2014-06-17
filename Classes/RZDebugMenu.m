@@ -57,20 +57,6 @@ static NSString * const kRZEmptyString = @"";
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
 
-        NSRange fileExtensionRange = [_settingsFileName rangeOfString:kRZSettingsDotFileExtension];
-        if ( fileExtensionRange.location != NSNotFound ) {
-            _settingsFileName = [_settingsFileName stringByReplacingCharactersInRange:fileExtensionRange withString:kRZEmptyString];
-        }
-        
-        NSString *plistPath = [[NSBundle mainBundle] pathForResource:_settingsFileName ofType:kRZSettingsFileExtension];
-        if ( !plistPath ) {
-            @throw [NSException exceptionWithName:@"Settings.plist doesn't exist"
-                                           reason:@"Make sure you have a 'Settings.plist' file in the Resources directory of your application"
-                                         userInfo:nil];
-        }
-        
-        NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        _interface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
         _clearRootViewController = [[UIViewController alloc] init];
         _clearRootViewController.view.backgroundColor = [UIColor clearColor];
         
@@ -115,11 +101,25 @@ static NSString * const kRZEmptyString = @"";
     return YES;
 }
 
-//#pragma mark - setter override
-//
-//- (void)setSettingsFileName:(NSString *)settingsFileName
-//{
-//    self.settingsFileName = [[NSString alloc] initWithString:settingsFileName];
-//}
+#pragma mark - setter override
+
+- (void)setSettingsFileName:(NSString *)settingsFileName
+{
+    _settingsFileName = settingsFileName;
+    NSRange fileExtensionRange = [_settingsFileName rangeOfString:kRZSettingsDotFileExtension];
+    if ( fileExtensionRange.location != NSNotFound ) {
+        _settingsFileName = [_settingsFileName stringByReplacingCharactersInRange:fileExtensionRange withString:kRZEmptyString];
+    }
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:_settingsFileName ofType:kRZSettingsFileExtension];
+    if ( !plistPath ) {
+        @throw [NSException exceptionWithName:@"Settings.plist doesn't exist"
+                                       reason:@"Make sure you have a 'Settings.plist' file in the Resources directory of your application"
+                                     userInfo:nil];
+    }
+    
+    NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+    _interface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
+}
 
 @end
