@@ -98,8 +98,6 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
 }
 
-#pragma mark - RZDebugMenuClearViewController delegate method
-
 - (void)changeOrientation
 {
     _clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
@@ -107,6 +105,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     [self changeOrientation:_clearRootViewController orientation:statusBarOrientation];
 }
+
+#pragma mark - RZDebugMenuClearViewController delegate method
 
 - (void)changeOrientation:(RZDebugMenuClearViewController *)clearViewController orientation:(UIInterfaceOrientation)deviceOrientation
 {
