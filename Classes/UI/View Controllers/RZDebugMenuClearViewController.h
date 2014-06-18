@@ -8,17 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class RZDebugMenuClearViewController;
-@protocol RZDebugMenuClearViewControllerDelegate <NSObject>
-
-- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController didChangeOrientation:(UIInterfaceOrientation)deviceOrientation;
-
-@end
-
 @interface RZDebugMenuClearViewController : UIViewController
 
-@property (weak, nonatomic) id<RZDebugMenuClearViewControllerDelegate> delegate;
-
-- (instancetype)initWithDelegate:(id<RZDebugMenuClearViewControllerDelegate>)delegate;
+-(void)changeGestureDirection:(UISwipeGestureRecognizer *)swipeUpGesture;
 
 @end

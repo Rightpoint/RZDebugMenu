@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RZDebugMenuClearViewController.h"
 
-@interface RZDebugMenu : NSObject <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
+@interface RZDebugMenu : NSObject <UIGestureRecognizerDelegate>
 
 + (void)enableWithSettingsPlist:(NSString *)fileName;
 

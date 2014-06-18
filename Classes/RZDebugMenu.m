@@ -82,7 +82,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
         
-        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeOrientation)
@@ -100,10 +100,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (void)changeOrientation
 {
-    self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
-    self.topWindow.rootViewController = _clearRootViewController;
-    UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    [self clearViewController:self.clearRootViewController didChangeOrientation:statusBarOrientation];
+    [self.clearRootViewController changeGestureDirection:self.swipeUpGesture];
 }
 
 #pragma mark - RZDebugMenuClearViewController delegate method
