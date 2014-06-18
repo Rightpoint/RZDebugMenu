@@ -103,21 +103,6 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     [self.clearRootViewController changeGestureDirection:self.swipeUpGesture];
 }
 
-#pragma mark - RZDebugMenuClearViewController delegate method
-
-- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController didChangeOrientation:(UIInterfaceOrientation)deviceOrientation
-{
-    if ( deviceOrientation == UIDeviceOrientationLandscapeLeft ) {
-        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    }
-    else if ( deviceOrientation == UIDeviceOrientationLandscapeRight ) {
-        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    }
-    else {
-        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    }
-}
-
 #pragma mark - gesture recognizer delegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
