@@ -11,13 +11,13 @@
 @class RZDebugMenuClearViewController;
 @protocol RZDebugMenuClearViewControllerDelegate <NSObject>
 
-- (void)changeOrientation:(RZDebugMenuClearViewController *)clearViewController orientation:(UIInterfaceOrientation)deviceOrientation;
+- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController didChangeOrientation:(UIInterfaceOrientation)deviceOrientation;
 
 @end
 
 @interface RZDebugMenuClearViewController : UIViewController
 
-@property(assign, nonatomic) id delegate;
+@property (weak, nonatomic) id<RZDebugMenuClearViewControllerDelegate> delegate;
 
 - (id)initWithDelegate:(id)delegate;
 

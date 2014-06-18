@@ -82,7 +82,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
         
-        _clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeOrientation)
@@ -90,34 +90,34 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                                    object:nil];
         
         UIScreen *mainScreen = [UIScreen mainScreen];
-        _topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
-        _topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
-        _topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _topWindow.rootViewController = _clearRootViewController;
-        _topWindow.hidden = NO;
+        self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
+        self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
+        self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.topWindow.rootViewController = _clearRootViewController;
+        self.topWindow.hidden = NO;
     }
 }
 
 - (void)changeOrientation
 {
-    _clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
-    _topWindow.rootViewController = _clearRootViewController;
+    self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+    self.topWindow.rootViewController = _clearRootViewController;
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    [self changeOrientation:_clearRootViewController orientation:statusBarOrientation];
+    [self clearViewController:self.clearRootViewController didChangeOrientation:statusBarOrientation];
 }
 
 #pragma mark - RZDebugMenuClearViewController delegate method
 
-- (void)changeOrientation:(RZDebugMenuClearViewController *)clearViewController orientation:(UIInterfaceOrientation)deviceOrientation
+- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController didChangeOrientation:(UIInterfaceOrientation)deviceOrientation
 {
     if ( deviceOrientation == UIDeviceOrientationLandscapeLeft ) {
-        _swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
+        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
     }
     else if ( deviceOrientation == UIDeviceOrientationLandscapeRight ) {
-        _swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
     }
     else {
-        _swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
+        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
     }
 }
 
