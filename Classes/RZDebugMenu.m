@@ -73,7 +73,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (void)createWindowAndGesture:(NSNotification *)message
 {
-    if ( _enabled ) {
+    if ( self.enabled ) {
         UIApplication *application = [UIApplication sharedApplication];
         self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
