@@ -41,7 +41,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 - (id)init
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:@"Can't instantiate RZDebugMenu. Only method is + (void)enableWithSettingsPlist:(NSString *)fileName"
+                                   reason:@"RZDebugMenu cannot be instantiated. Please use the class method interface."
                                  userInfo:nil];
 }
 
