@@ -14,7 +14,7 @@
 
 @implementation RZDebugMenuClearViewController
 
-- (id)initWithDelegate:(id)delegate
+- (instancetype)initWithDelegate:(id<RZDebugMenuClearViewControllerDelegate>)delegate
 {
     self = [super init];
     if ( self ) {

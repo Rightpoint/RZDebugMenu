@@ -19,6 +19,6 @@
 
 @property (weak, nonatomic) id<RZDebugMenuClearViewControllerDelegate> delegate;
 
-- (id)initWithDelegate:(id)delegate;
+- (instancetype)initWithDelegate:(id<RZDebugMenuClearViewControllerDelegate>)delegate;
 
 @end
