@@ -14,25 +14,19 @@
 
 @implementation RZDebugMenuClearViewController
 
+- (id)initWithDelegate:(id)delegate
+{
+    self = [super init];
+    if ( self ) {
+        _delegate = delegate;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
-}
-
-- (void)changeGestureOrientation:(UISwipeGestureRecognizer *)swipeGesture
-{
-    UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    
-    if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
-        swipeGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    }
-    else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
-        swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    }
-    else {
-        swipeGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    }
 }
 
 @end

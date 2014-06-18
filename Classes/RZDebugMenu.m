@@ -77,13 +77,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         UIApplication *application = [UIApplication sharedApplication];
         self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        self.swipeUpGesture.numberOfTouchesRequired = 3;
+        self.swipeUpGesture.numberOfTouchesRequired = 2;
         self.swipeUpGesture.delegate = self;
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
         
-        _clearRootViewController = [[RZDebugMenuClearViewController alloc] init];
-        _clearRootViewController.delegate = self;
+        _clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeOrientation)
@@ -103,7 +102,23 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (void)changeOrientation
 {
-    [_clearRootViewController changeGestureOrientation:_swipeUpGesture];
+    _clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+    _topWindow.rootViewController = _clearRootViewController;
+    UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    [self changeOrientation:_clearRootViewController orientation:statusBarOrientation];
+}
+
+- (void)changeOrientation:(RZDebugMenuClearViewController *)clearViewController orientation:(UIInterfaceOrientation)deviceOrientation
+{
+    if ( deviceOrientation == UIDeviceOrientationLandscapeLeft ) {
+        _swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    }
+    else if ( deviceOrientation == UIDeviceOrientationLandscapeRight ) {
+        _swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    }
+    else {
+        _swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
+    }
 }
 
 #pragma mark - gesture recognizer delegate

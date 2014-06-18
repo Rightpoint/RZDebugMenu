@@ -259,9 +259,9 @@
 		0C781135194F859900F25AE5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0C781136194F859900F25AE5 /* Cells */,
 				0C78113D194F859900F25AE5 /* RZDebugMenuWindow.h */,
 				0C78113E194F859900F25AE5 /* RZDebugMenuWindow.m */,
+				0C781136194F859900F25AE5 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";

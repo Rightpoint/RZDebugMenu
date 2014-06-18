@@ -11,7 +11,7 @@
 @class RZDebugMenuClearViewController;
 @protocol RZDebugMenuClearViewControllerDelegate <NSObject>
 
-- (void)changeOrientation;
+- (void)changeOrientation:(RZDebugMenuClearViewController *)clearViewController orientation:(UIInterfaceOrientation)deviceOrientation;
 
 @end
 
@@ -19,6 +19,6 @@
 
 @property(assign, nonatomic) id delegate;
 
-- (void)changeGestureOrientation:(UISwipeGestureRecognizer *)swipeGesture;
+- (id)initWithDelegate:(id)delegate;
 
 @end
