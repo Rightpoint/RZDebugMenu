@@ -77,7 +77,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         UIApplication *application = [UIApplication sharedApplication];
         self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        self.swipeUpGesture.numberOfTouchesRequired = 2;
+        self.swipeUpGesture.numberOfTouchesRequired = 3;
         self.swipeUpGesture.delegate = self;
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
@@ -106,6 +106,9 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
     else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    }
+    else if ( statusBarOrientation == UIDeviceOrientationPortraitUpsideDown ) {
+        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionDown;
     }
     else {
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
