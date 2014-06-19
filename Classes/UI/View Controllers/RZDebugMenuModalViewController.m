@@ -11,7 +11,6 @@
 #import "RZDebugMenuSettingsItem.h"
 #import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDebugMenuMultiValueItem.h"
-#import "RZDebugMenuToggleItem.h"
 
 static NSString * const kRZNavigationBarTitle = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";

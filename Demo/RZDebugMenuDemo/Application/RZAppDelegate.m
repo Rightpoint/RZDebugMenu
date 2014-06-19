@@ -7,10 +7,9 @@
 //
 
 #import "RZAppDelegate.h"
+
 #import "RZDebugMenu.h"
 #import "RZDebugMenuRootViewController.h"
-#import "RZDebugMenuModalViewController.h"
-#import "RZDebugMenuSettingsInterface.h"
 
 @implementation RZAppDelegate
 
@@ -25,7 +24,7 @@
     [self.window makeKeyAndVisible];
     
 #if (DEBUG)
-    [RZDebugMenu enable];
+    [RZDebugMenu enableWithSettingsPlist:@"Settings.plist"];
 #endif
     
     return YES;

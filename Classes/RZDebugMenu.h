@@ -10,6 +10,6 @@
 
 @interface RZDebugMenu : NSObject <UIGestureRecognizerDelegate>
 
-+ (void)enable;
++ (void)enableWithSettingsPlist:(NSString *)fileName;
 
 @end
