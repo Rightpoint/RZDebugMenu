@@ -118,7 +118,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 #pragma mark - RZDebugMenuClearViewController delegate method
 
-- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController debugMenuWillAppear:(id)sender
+- (void)clearViewControllerDebugMenuButtonPressed:(RZDebugMenuClearViewController *)clearViewController
 {
     [self displayDebugMenu];
 }

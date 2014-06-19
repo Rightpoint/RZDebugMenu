@@ -53,7 +53,7 @@ static NSString * const kRZDebugMenuButtonImageName = @"greg.jpeg";
 
 - (void)displayDebugMenu
 {
-    [self.delegate clearViewController:self debugMenuWillAppear:nil];
+    [self.delegate clearViewControllerDebugMenuButtonPressed:self];
 }
 
 - (void)dragButton:(UIPanGestureRecognizer *)panGesture
