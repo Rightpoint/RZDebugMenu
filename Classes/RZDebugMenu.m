@@ -93,7 +93,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
         self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
         self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.topWindow.rootViewController = _clearRootViewController;
+        self.topWindow.rootViewController = self.clearRootViewController;
         self.topWindow.hidden = NO;
     }
 }
