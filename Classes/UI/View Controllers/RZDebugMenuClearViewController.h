@@ -11,7 +11,7 @@
 @class RZDebugMenuClearViewController;
 @protocol RZDebugMenuClearViewControllerDelegate <NSObject>
 
-- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController didShowDebugMenu:(id)sender;
+- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController debugMenuWillAppear:(id)sender;
 
 @end
 

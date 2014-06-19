@@ -29,7 +29,7 @@
         
         _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 37, 37)];
         [_displayDebugMenuButton setImage:[UIImage imageNamed:@"greg.jpeg"] forState:UIControlStateNormal];
-        [_displayDebugMenuButton addTarget:self.delegate action:@selector(clearViewController:didShowDebugMenu:) forControlEvents:UIControlEventTouchUpInside];
+        [_displayDebugMenuButton addTarget:self.delegate action:@selector(clearViewController:debugMenuWillAppear:) forControlEvents:UIControlEventTouchUpInside];
         _displayDebugMenuButton.clipsToBounds = YES;
         _displayDebugMenuButton.layer.cornerRadius = 12;
         _displayDebugMenuButton.layer.borderWidth = 1.5f;
