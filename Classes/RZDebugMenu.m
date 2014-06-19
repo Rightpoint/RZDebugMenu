@@ -75,7 +75,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     if ( self.enabled ) {
         UIApplication *application = [UIApplication sharedApplication];
-        self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
+        self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(clearViewController:didShowDebugMenu:)];
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
         self.swipeUpGesture.numberOfTouchesRequired = 3;
         self.swipeUpGesture.delegate = self;

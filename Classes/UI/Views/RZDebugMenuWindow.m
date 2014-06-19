@@ -14,6 +14,9 @@
 {
     UIView *hitView = [super hitTest:point withEvent:event];
     if ( [hitView isDescendantOfView:self.rootViewController.view] ) {
+        if ( [hitView isKindOfClass:[UIButton class]] ) {
+            return hitView;
+        }
         return nil;
     }
     return hitView;
