@@ -93,7 +93,9 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (void)displayDebugMenu
 {
-    [self clearViewController:self.clearRootViewController debugMenuWillAppear:nil];
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
+    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
+    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
 
 // NOTE: Add a runtime version check to disable the gesture update when this is needed in an iOS 8 app. Gesutres with a 'direction' property automatically change direction relative to the device orientation in iOS 8.
@@ -118,9 +120,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController debugMenuWillAppear:(id)sender
 {
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
-    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
-    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
+    [self displayDebugMenu];
 }
 
 #pragma mark - gesture recognizer delegate
