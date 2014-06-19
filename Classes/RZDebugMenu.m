@@ -98,7 +98,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
 }
 
-// NOTE: Add a runtime version check to disable the gesture update when this is needed in an iOS 8 app
+// NOTE: Add a runtime version check to disable the gesture update when this is needed in an iOS 8 app. Gesutres with a 'direction' property automatically change direction relative to the device orientation in iOS 8.
 - (void)changeOrientation
 {
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
