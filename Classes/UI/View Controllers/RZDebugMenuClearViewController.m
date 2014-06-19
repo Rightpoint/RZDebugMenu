@@ -10,7 +10,7 @@
 
 #import "RZDebugMenu.h"
 
-static NSString * const kRZDebugMenuButtonImageName = @"greg.jpeg";
+static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
 
 @interface RZDebugMenuClearViewController ()
 
@@ -30,10 +30,17 @@ static NSString * const kRZDebugMenuButtonImageName = @"greg.jpeg";
         
         _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
         
-        _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 37, 37)];
+        _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(70, 225, 37, 37)];
         _displayDebugMenuButton.alpha = 0.80;
-        _displayDebugMenuButton.backgroundColor = [UIColor blackColor];
-        [_displayDebugMenuButton setImage:[UIImage imageNamed:kRZDebugMenuButtonImageName] forState:UIControlStateNormal];
+        _displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
+        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
+        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateHighlighted];
+        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateSelected];
+        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [_displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
+        _displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
         _displayDebugMenuButton.clipsToBounds = YES;
         _displayDebugMenuButton.layer.cornerRadius = 12;
