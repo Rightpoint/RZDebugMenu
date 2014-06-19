@@ -14,6 +14,7 @@ static NSString * const kRZDebugMenuButtonImageName = @"greg.jpeg";
 
 @interface RZDebugMenuClearViewController ()
 
+@property (weak, nonatomic) id<RZDebugMenuClearViewControllerDelegate> delegate;
 @property (strong, nonatomic) UIButton *displayDebugMenuButton;
 @property (strong, nonatomic) UIPanGestureRecognizer *dragGesture;
 
@@ -32,7 +33,7 @@ static NSString * const kRZDebugMenuButtonImageName = @"greg.jpeg";
         _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 37, 37)];
         _displayDebugMenuButton.backgroundColor = [UIColor blackColor];
         [_displayDebugMenuButton setImage:[UIImage imageNamed:kRZDebugMenuButtonImageName] forState:UIControlStateNormal];
-        [_displayDebugMenuButton addTarget:self.delegate action:@selector(clearViewController:debugMenuWillAppear:) forControlEvents:UIControlEventTouchUpInside];
+        [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
         _displayDebugMenuButton.clipsToBounds = YES;
         _displayDebugMenuButton.layer.cornerRadius = 12;
         _displayDebugMenuButton.layer.borderWidth = 1.5f;
@@ -49,15 +50,18 @@ static NSString * const kRZDebugMenuButtonImageName = @"greg.jpeg";
     [self.view addSubview:self.displayDebugMenuButton];
 }
 
+- (void)displayDebugMenu
+{
+    [self.delegate clearViewController:self debugMenuWillAppear:nil];
+}
+
 - (void)dragButton:(UIPanGestureRecognizer *)panGesture
 {
     CGPoint translation = [panGesture translationInView:self.view];
-    CGPoint velocity = [panGesture velocityInView:self.view];
     UIView *draggedButton = panGesture.view;
     CGRect newButtonFrame = draggedButton.frame;
     
     if ( panGesture.state == UIGestureRecognizerStateChanged || panGesture.state == UIGestureRecognizerStateEnded ) {
-        velocity = [panGesture velocityInView:self.view];
         newButtonFrame.origin.x += translation.x;
         newButtonFrame.origin.y += translation.y;
         draggedButton.frame = newButtonFrame;

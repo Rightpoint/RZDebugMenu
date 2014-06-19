@@ -17,8 +17,6 @@
 
 @interface RZDebugMenuClearViewController : UIViewController
 
-@property (weak, nonatomic) id<RZDebugMenuClearViewControllerDelegate> delegate;
-
 - (id)initWithDelegate:(id)delegate;
 
 @end
