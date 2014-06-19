@@ -23,8 +23,9 @@
 {
     self = [super init];
     if ( self ) {
-
         _delegate = delegate;
+        
+        _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
         
         _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 37, 37)];
         [_displayDebugMenuButton setImage:[UIImage imageNamed:@"greg.jpeg"] forState:UIControlStateNormal];
@@ -32,8 +33,6 @@
         _displayDebugMenuButton.clipsToBounds = YES;
         _displayDebugMenuButton.layer.cornerRadius = 12;
         _displayDebugMenuButton.layer.borderWidth = 1.5f;
-        
-        _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
     }
     return self;
 }
@@ -41,7 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.view.backgroundColor = [UIColor clearColor];
     
     [self.displayDebugMenuButton addGestureRecognizer:self.dragGesture];
