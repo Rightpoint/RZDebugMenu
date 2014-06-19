@@ -13,11 +13,8 @@
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     UIView *hitView = [super hitTest:point withEvent:event];
-    if ( [hitView isDescendantOfView:self.rootViewController.view] ) {
-        if ( hitView == self.rootViewController.view ) {
-            return nil;
-        }
-        return hitView;
+    if ( hitView == self.rootViewController.view ) {
+        return nil;
     }
     return hitView;
 }
