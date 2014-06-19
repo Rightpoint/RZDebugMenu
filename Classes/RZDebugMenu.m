@@ -20,7 +20,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *interface;
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
-@property (strong, nonatomic) UIViewController *clearRootViewController;
+@property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
 @property (copy, nonatomic) NSString *settingsFileName;
 @property (assign, nonatomic) BOOL enabled;
 
@@ -64,7 +64,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     [[self privateSharedInstance] setEnabled:YES];
 }
 
-- (void)showDebugMenu
+- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController didShowDebugMenu:(id)sender
 {
     RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
@@ -82,7 +82,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
         
-        self.clearRootViewController = [[UIViewController alloc] init];
+        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeOrientation)
