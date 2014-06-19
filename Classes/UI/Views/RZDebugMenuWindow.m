@@ -14,10 +14,10 @@
 {
     UIView *hitView = [super hitTest:point withEvent:event];
     if ( [hitView isDescendantOfView:self.rootViewController.view] ) {
-        if ( [hitView isKindOfClass:[UIButton class]] ) {
-            return hitView;
+        if ( hitView == self.rootViewController.view ) {
+            return nil;
         }
-        return nil;
+        return hitView;
     }
     return hitView;
 }
