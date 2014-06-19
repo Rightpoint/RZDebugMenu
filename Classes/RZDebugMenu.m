@@ -98,6 +98,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
 }
 
+// NOTE: Add a runtime version check to disable the gesture update when this is needed in an iOS 8 app
 - (void)changeOrientation
 {
     UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
