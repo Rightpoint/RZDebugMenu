@@ -38,6 +38,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     return s_sharedInstance;
 }
 
++ (void)enableWithSettingsPlist:(NSString *)fileName
+{
+    [[self privateSharedInstance] setSettingsFileName:fileName];
+    [[self privateSharedInstance] setEnabled:YES];
+}
+
 - (id)init
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -56,24 +62,6 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                                    object:nil];
     }
     return self;
-}
-
-+ (void)enableWithSettingsPlist:(NSString *)fileName
-{
-    [[self privateSharedInstance] setSettingsFileName:fileName];
-    [[self privateSharedInstance] setEnabled:YES];
-}
-
-- (void)displayDebugMenu
-{
-    [self clearViewController:self.clearRootViewController debugMenuWillAppear:nil];
-}
-
-- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController debugMenuWillAppear:(id)sender
-{
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
-    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
-    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
 
 - (void)createWindowAndGesture:(NSNotification *)message
@@ -103,6 +91,11 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
 }
 
+- (void)displayDebugMenu
+{
+    [self clearViewController:self.clearRootViewController debugMenuWillAppear:nil];
+}
+
 // NOTE: Add a runtime version check to disable the gesture update when this is needed in an iOS 8 app. Gesutres with a 'direction' property automatically change direction relative to the device orientation in iOS 8.
 - (void)changeOrientation
 {
@@ -119,6 +112,15 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     else {
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
     }
+}
+
+#pragma mark - RZDebugMenuClearViewController delegate method
+
+- (void)clearViewController:(RZDebugMenuClearViewController *)clearViewController debugMenuWillAppear:(id)sender
+{
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
+    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
+    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
 
 #pragma mark - gesture recognizer delegate
