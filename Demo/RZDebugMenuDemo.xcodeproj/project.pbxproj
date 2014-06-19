@@ -1,632 +1,1615 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		0C22DAC3193CCDA30042938F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC2193CCDA30042938F /* Foundation.framework */; };
-		0C22DAC5193CCDA30042938F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC4193CCDA30042938F /* CoreGraphics.framework */; };
-		0C22DAC7193CCDA30042938F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC6193CCDA30042938F /* UIKit.framework */; };
-		0C22DACD193CCDA30042938F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C22DACB193CCDA30042938F /* InfoPlist.strings */; };
-		0C22DACF193CCDA30042938F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DACE193CCDA30042938F /* main.m */; };
-		0C22DAD3193CCDA30042938F /* RZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DAD2193CCDA30042938F /* RZAppDelegate.m */; };
-		0C22DAD5193CCDA30042938F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C22DAD4193CCDA30042938F /* Images.xcassets */; };
-		0C22DADC193CCDA30042938F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DADB193CCDA30042938F /* XCTest.framework */; };
-		0C22DADD193CCDA30042938F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC2193CCDA30042938F /* Foundation.framework */; };
-		0C22DADE193CCDA30042938F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC6193CCDA30042938F /* UIKit.framework */; };
-		0C22DAE6193CCDA30042938F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C22DAE4193CCDA30042938F /* InfoPlist.strings */; };
-		0C22DAE8193CCDA30042938F /* RZDebugMenuDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DAE7193CCDA30042938F /* RZDebugMenuDemoTests.m */; };
-		0C781114194F243B00F25AE5 /* RZTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C781113194F243B00F25AE5 /* RZTestViewController.m */; };
-		0C78113F194F859900F25AE5 /* RZDebugMenuMultiValueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C781122194F859900F25AE5 /* RZDebugMenuMultiValueItem.m */; };
-		0C781140194F859900F25AE5 /* RZDebugMenuSettingsInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C781124194F859900F25AE5 /* RZDebugMenuSettingsInterface.m */; };
-		0C781141194F859900F25AE5 /* RZDebugMenuSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C781126194F859900F25AE5 /* RZDebugMenuSettingsItem.m */; };
-		0C781142194F859900F25AE5 /* RZDebugMenuToggleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C781128194F859900F25AE5 /* RZDebugMenuToggleItem.m */; };
-		0C781143194F859900F25AE5 /* RZDebugMenuVersionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78112A194F859900F25AE5 /* RZDebugMenuVersionItem.m */; };
-		0C781144194F859900F25AE5 /* RZMultiValueSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78112C194F859900F25AE5 /* RZMultiValueSelectionItem.m */; };
-		0C781145194F859900F25AE5 /* RZDebugMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78112E194F859900F25AE5 /* RZDebugMenu.m */; };
-		0C781146194F859900F25AE5 /* RZDebugMenuModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C781132194F859900F25AE5 /* RZDebugMenuModalViewController.m */; };
-		0C781147194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C781134194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.m */; };
-		0C781148194F859900F25AE5 /* RZDisclosureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C781138194F859900F25AE5 /* RZDisclosureTableViewCell.m */; };
-		0C781149194F859900F25AE5 /* RZToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78113A194F859900F25AE5 /* RZToggleTableViewCell.m */; };
-		0C78114A194F859900F25AE5 /* RZVersionInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78113C194F859900F25AE5 /* RZVersionInfoTableViewCell.m */; };
-		0C78114B194F859900F25AE5 /* RZDebugMenuWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78113E194F859900F25AE5 /* RZDebugMenuWindow.m */; };
-		0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C972B02193E0CBB00EA84FF /* Settings.plist */; };
-		0C972B0D193E1A9900EA84FF /* RZDebugMenuRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C972B0A193E1A9900EA84FF /* RZDebugMenuRootViewController.m */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		0C22DADF193CCDA30042938F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0C22DAB7193CCDA30042938F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0C22DABE193CCDA30042938F;
-			remoteInfo = RZDebugMenuDemo;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		0C22DABF193CCDA30042938F /* RZDebugMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RZDebugMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C22DAC2193CCDA30042938F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		0C22DAC4193CCDA30042938F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		0C22DAC6193CCDA30042938F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		0C22DACA193CCDA30042938F /* RZDebugMenuDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RZDebugMenuDemo-Info.plist"; sourceTree = "<group>"; };
-		0C22DACC193CCDA30042938F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0C22DACE193CCDA30042938F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0C22DAD0193CCDA30042938F /* RZDebugMenuDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RZDebugMenuDemo-Prefix.pch"; sourceTree = "<group>"; };
-		0C22DAD1193CCDA30042938F /* RZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RZAppDelegate.h; sourceTree = "<group>"; };
-		0C22DAD2193CCDA30042938F /* RZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZAppDelegate.m; sourceTree = "<group>"; };
-		0C22DAD4193CCDA30042938F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0C22DADA193CCDA30042938F /* RZDebugMenuDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RZDebugMenuDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C22DADB193CCDA30042938F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		0C22DAE3193CCDA30042938F /* RZDebugMenuDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RZDebugMenuDemoTests-Info.plist"; sourceTree = "<group>"; };
-		0C22DAE5193CCDA30042938F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0C22DAE7193CCDA30042938F /* RZDebugMenuDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuDemoTests.m; sourceTree = "<group>"; };
-		0C781112194F243B00F25AE5 /* RZTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZTestViewController.h; sourceTree = "<group>"; };
-		0C781113194F243B00F25AE5 /* RZTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZTestViewController.m; sourceTree = "<group>"; };
-		0C781121194F859900F25AE5 /* RZDebugMenuMultiValueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuMultiValueItem.h; sourceTree = "<group>"; };
-		0C781122194F859900F25AE5 /* RZDebugMenuMultiValueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuMultiValueItem.m; sourceTree = "<group>"; };
-		0C781123194F859900F25AE5 /* RZDebugMenuSettingsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingsInterface.h; sourceTree = "<group>"; };
-		0C781124194F859900F25AE5 /* RZDebugMenuSettingsInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettingsInterface.m; sourceTree = "<group>"; };
-		0C781125194F859900F25AE5 /* RZDebugMenuSettingsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingsItem.h; sourceTree = "<group>"; };
-		0C781126194F859900F25AE5 /* RZDebugMenuSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettingsItem.m; sourceTree = "<group>"; };
-		0C781127194F859900F25AE5 /* RZDebugMenuToggleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuToggleItem.h; sourceTree = "<group>"; };
-		0C781128194F859900F25AE5 /* RZDebugMenuToggleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuToggleItem.m; sourceTree = "<group>"; };
-		0C781129194F859900F25AE5 /* RZDebugMenuVersionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuVersionItem.h; sourceTree = "<group>"; };
-		0C78112A194F859900F25AE5 /* RZDebugMenuVersionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuVersionItem.m; sourceTree = "<group>"; };
-		0C78112B194F859900F25AE5 /* RZMultiValueSelectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZMultiValueSelectionItem.h; sourceTree = "<group>"; };
-		0C78112C194F859900F25AE5 /* RZMultiValueSelectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZMultiValueSelectionItem.m; sourceTree = "<group>"; };
-		0C78112D194F859900F25AE5 /* RZDebugMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenu.h; sourceTree = "<group>"; };
-		0C78112E194F859900F25AE5 /* RZDebugMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenu.m; sourceTree = "<group>"; };
-		0C781131194F859900F25AE5 /* RZDebugMenuModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuModalViewController.h; sourceTree = "<group>"; };
-		0C781132194F859900F25AE5 /* RZDebugMenuModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuModalViewController.m; sourceTree = "<group>"; };
-		0C781133194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuMultiItemListViewController.h; sourceTree = "<group>"; };
-		0C781134194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuMultiItemListViewController.m; sourceTree = "<group>"; };
-		0C781137194F859900F25AE5 /* RZDisclosureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDisclosureTableViewCell.h; sourceTree = "<group>"; };
-		0C781138194F859900F25AE5 /* RZDisclosureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDisclosureTableViewCell.m; sourceTree = "<group>"; };
-		0C781139194F859900F25AE5 /* RZToggleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZToggleTableViewCell.h; sourceTree = "<group>"; };
-		0C78113A194F859900F25AE5 /* RZToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZToggleTableViewCell.m; sourceTree = "<group>"; };
-		0C78113B194F859900F25AE5 /* RZVersionInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZVersionInfoTableViewCell.h; sourceTree = "<group>"; };
-		0C78113C194F859900F25AE5 /* RZVersionInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZVersionInfoTableViewCell.m; sourceTree = "<group>"; };
-		0C78113D194F859900F25AE5 /* RZDebugMenuWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuWindow.h; sourceTree = "<group>"; };
-		0C78113E194F859900F25AE5 /* RZDebugMenuWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuWindow.m; sourceTree = "<group>"; };
-		0C972B02193E0CBB00EA84FF /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
-		0C972B09193E1A9900EA84FF /* RZDebugMenuRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuRootViewController.h; sourceTree = "<group>"; };
-		0C972B0A193E1A9900EA84FF /* RZDebugMenuRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuRootViewController.m; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		0C22DABC193CCDA30042938F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C22DAC5193CCDA30042938F /* CoreGraphics.framework in Frameworks */,
-				0C22DAC7193CCDA30042938F /* UIKit.framework in Frameworks */,
-				0C22DAC3193CCDA30042938F /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0C22DAD7193CCDA30042938F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C22DADC193CCDA30042938F /* XCTest.framework in Frameworks */,
-				0C22DADE193CCDA30042938F /* UIKit.framework in Frameworks */,
-				0C22DADD193CCDA30042938F /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		0C22DAB6193CCDA30042938F = {
-			isa = PBXGroup;
-			children = (
-				0C22DAC8193CCDA30042938F /* RZDebugMenuDemo */,
-				0C22DAE1193CCDA30042938F /* RZDebugMenuDemoTests */,
-				0C22DAC1193CCDA30042938F /* Frameworks */,
-				0C22DAC0193CCDA30042938F /* Products */,
-				0C78111F194F859900F25AE5 /* Classes */,
-			);
-			sourceTree = "<group>";
-		};
-		0C22DAC0193CCDA30042938F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0C22DABF193CCDA30042938F /* RZDebugMenuDemo.app */,
-				0C22DADA193CCDA30042938F /* RZDebugMenuDemoTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		0C22DAC1193CCDA30042938F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0C22DAC2193CCDA30042938F /* Foundation.framework */,
-				0C22DAC4193CCDA30042938F /* CoreGraphics.framework */,
-				0C22DAC6193CCDA30042938F /* UIKit.framework */,
-				0C22DADB193CCDA30042938F /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0C22DAC8193CCDA30042938F /* RZDebugMenuDemo */ = {
-			isa = PBXGroup;
-			children = (
-				0C972B0F193E1AEE00EA84FF /* Application */,
-				0C972B0E193E1AB000EA84FF /* Resources */,
-				0C972B04193E1A9900EA84FF /* View Controllers */,
-				0C22DAF9193D085C0042938F /* Views */,
-				0C22DAC9193CCDA30042938F /* Supporting Files */,
-			);
-			path = RZDebugMenuDemo;
-			sourceTree = "<group>";
-		};
-		0C22DAC9193CCDA30042938F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0C22DACA193CCDA30042938F /* RZDebugMenuDemo-Info.plist */,
-				0C22DACB193CCDA30042938F /* InfoPlist.strings */,
-				0C22DACE193CCDA30042938F /* main.m */,
-				0C22DAD0193CCDA30042938F /* RZDebugMenuDemo-Prefix.pch */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0C22DAE1193CCDA30042938F /* RZDebugMenuDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				0C22DAE7193CCDA30042938F /* RZDebugMenuDemoTests.m */,
-				0C22DAE2193CCDA30042938F /* Supporting Files */,
-			);
-			path = RZDebugMenuDemoTests;
-			sourceTree = "<group>";
-		};
-		0C22DAE2193CCDA30042938F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				0C22DAE3193CCDA30042938F /* RZDebugMenuDemoTests-Info.plist */,
-				0C22DAE4193CCDA30042938F /* InfoPlist.strings */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0C22DAF9193D085C0042938F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		0C78111F194F859900F25AE5 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				0C78112D194F859900F25AE5 /* RZDebugMenu.h */,
-				0C78112E194F859900F25AE5 /* RZDebugMenu.m */,
-				0C781120194F859900F25AE5 /* Models */,
-				0C78112F194F859900F25AE5 /* UI */,
-			);
-			name = Classes;
-			path = ../Classes;
-			sourceTree = "<group>";
-		};
-		0C781120194F859900F25AE5 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				0C781123194F859900F25AE5 /* RZDebugMenuSettingsInterface.h */,
-				0C781124194F859900F25AE5 /* RZDebugMenuSettingsInterface.m */,
-				0C781121194F859900F25AE5 /* RZDebugMenuMultiValueItem.h */,
-				0C781122194F859900F25AE5 /* RZDebugMenuMultiValueItem.m */,
-				0C781125194F859900F25AE5 /* RZDebugMenuSettingsItem.h */,
-				0C781126194F859900F25AE5 /* RZDebugMenuSettingsItem.m */,
-				0C781127194F859900F25AE5 /* RZDebugMenuToggleItem.h */,
-				0C781128194F859900F25AE5 /* RZDebugMenuToggleItem.m */,
-				0C781129194F859900F25AE5 /* RZDebugMenuVersionItem.h */,
-				0C78112A194F859900F25AE5 /* RZDebugMenuVersionItem.m */,
-				0C78112B194F859900F25AE5 /* RZMultiValueSelectionItem.h */,
-				0C78112C194F859900F25AE5 /* RZMultiValueSelectionItem.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		0C78112F194F859900F25AE5 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				0C781130194F859900F25AE5 /* View Controllers */,
-				0C781135194F859900F25AE5 /* Views */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		0C781130194F859900F25AE5 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				0C781131194F859900F25AE5 /* RZDebugMenuModalViewController.h */,
-				0C781132194F859900F25AE5 /* RZDebugMenuModalViewController.m */,
-				0C781133194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.h */,
-				0C781134194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.m */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		0C781135194F859900F25AE5 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0C78113D194F859900F25AE5 /* RZDebugMenuWindow.h */,
-				0C78113E194F859900F25AE5 /* RZDebugMenuWindow.m */,
-				0C781136194F859900F25AE5 /* Cells */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		0C781136194F859900F25AE5 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				0C781137194F859900F25AE5 /* RZDisclosureTableViewCell.h */,
-				0C781138194F859900F25AE5 /* RZDisclosureTableViewCell.m */,
-				0C781139194F859900F25AE5 /* RZToggleTableViewCell.h */,
-				0C78113A194F859900F25AE5 /* RZToggleTableViewCell.m */,
-				0C78113B194F859900F25AE5 /* RZVersionInfoTableViewCell.h */,
-				0C78113C194F859900F25AE5 /* RZVersionInfoTableViewCell.m */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		0C972B04193E1A9900EA84FF /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				0C972B09193E1A9900EA84FF /* RZDebugMenuRootViewController.h */,
-				0C972B0A193E1A9900EA84FF /* RZDebugMenuRootViewController.m */,
-				0C781112194F243B00F25AE5 /* RZTestViewController.h */,
-				0C781113194F243B00F25AE5 /* RZTestViewController.m */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		0C972B0E193E1AB000EA84FF /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				0C22DAD4193CCDA30042938F /* Images.xcassets */,
-				0C972B02193E0CBB00EA84FF /* Settings.plist */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		0C972B0F193E1AEE00EA84FF /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				0C22DAD1193CCDA30042938F /* RZAppDelegate.h */,
-				0C22DAD2193CCDA30042938F /* RZAppDelegate.m */,
-			);
-			path = Application;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		0C22DABE193CCDA30042938F /* RZDebugMenuDemo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0C22DAEB193CCDA30042938F /* Build configuration list for PBXNativeTarget "RZDebugMenuDemo" */;
-			buildPhases = (
-				0C22DABB193CCDA30042938F /* Sources */,
-				0C22DABC193CCDA30042938F /* Frameworks */,
-				0C22DABD193CCDA30042938F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = RZDebugMenuDemo;
-			productName = RZDebugMenuDemo;
-			productReference = 0C22DABF193CCDA30042938F /* RZDebugMenuDemo.app */;
-			productType = "com.apple.product-type.application";
-		};
-		0C22DAD9193CCDA30042938F /* RZDebugMenuDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0C22DAEE193CCDA30042938F /* Build configuration list for PBXNativeTarget "RZDebugMenuDemoTests" */;
-			buildPhases = (
-				0C22DAD6193CCDA30042938F /* Sources */,
-				0C22DAD7193CCDA30042938F /* Frameworks */,
-				0C22DAD8193CCDA30042938F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0C22DAE0193CCDA30042938F /* PBXTargetDependency */,
-			);
-			name = RZDebugMenuDemoTests;
-			productName = RZDebugMenuDemoTests;
-			productReference = 0C22DADA193CCDA30042938F /* RZDebugMenuDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		0C22DAB7193CCDA30042938F /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				CLASSPREFIX = RZ;
-				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = Raizlabs;
-				TargetAttributes = {
-					0C22DAD9193CCDA30042938F = {
-						TestTargetID = 0C22DABE193CCDA30042938F;
-					};
-				};
-			};
-			buildConfigurationList = 0C22DABA193CCDA30042938F /* Build configuration list for PBXProject "RZDebugMenuDemo" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 0C22DAB6193CCDA30042938F;
-			productRefGroup = 0C22DAC0193CCDA30042938F /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				0C22DABE193CCDA30042938F /* RZDebugMenuDemo */,
-				0C22DAD9193CCDA30042938F /* RZDebugMenuDemoTests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		0C22DABD193CCDA30042938F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C22DACD193CCDA30042938F /* InfoPlist.strings in Resources */,
-				0C22DAD5193CCDA30042938F /* Images.xcassets in Resources */,
-				0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0C22DAD8193CCDA30042938F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C22DAE6193CCDA30042938F /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		0C22DABB193CCDA30042938F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C781145194F859900F25AE5 /* RZDebugMenu.m in Sources */,
-				0C78113F194F859900F25AE5 /* RZDebugMenuMultiValueItem.m in Sources */,
-				0C22DAD3193CCDA30042938F /* RZAppDelegate.m in Sources */,
-				0C781114194F243B00F25AE5 /* RZTestViewController.m in Sources */,
-				0C781142194F859900F25AE5 /* RZDebugMenuToggleItem.m in Sources */,
-				0C781141194F859900F25AE5 /* RZDebugMenuSettingsItem.m in Sources */,
-				0C781144194F859900F25AE5 /* RZMultiValueSelectionItem.m in Sources */,
-				0C781147194F859900F25AE5 /* RZDebugMenuMultiItemListViewController.m in Sources */,
-				0C78114A194F859900F25AE5 /* RZVersionInfoTableViewCell.m in Sources */,
-				0C781148194F859900F25AE5 /* RZDisclosureTableViewCell.m in Sources */,
-				0C781143194F859900F25AE5 /* RZDebugMenuVersionItem.m in Sources */,
-				0C78114B194F859900F25AE5 /* RZDebugMenuWindow.m in Sources */,
-				0C972B0D193E1A9900EA84FF /* RZDebugMenuRootViewController.m in Sources */,
-				0C781149194F859900F25AE5 /* RZToggleTableViewCell.m in Sources */,
-				0C22DACF193CCDA30042938F /* main.m in Sources */,
-				0C781146194F859900F25AE5 /* RZDebugMenuModalViewController.m in Sources */,
-				0C781140194F859900F25AE5 /* RZDebugMenuSettingsInterface.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0C22DAD6193CCDA30042938F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C22DAE8193CCDA30042938F /* RZDebugMenuDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0C22DAE0193CCDA30042938F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0C22DABE193CCDA30042938F /* RZDebugMenuDemo */;
-			targetProxy = 0C22DADF193CCDA30042938F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		0C22DACB193CCDA30042938F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0C22DACC193CCDA30042938F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		0C22DAE4193CCDA30042938F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0C22DAE5193CCDA30042938F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
-/* Begin XCBuildConfiguration section */
-		0C22DAE9193CCDA30042938F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		0C22DAEA193CCDA30042938F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		0C22DAEC193CCDA30042938F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch";
-				INFOPLIST_FILE = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		0C22DAED193CCDA30042938F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch";
-				INFOPLIST_FILE = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		0C22DAEF193CCDA30042938F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RZDebugMenuDemo.app/RZDebugMenuDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "RZDebugMenuDemoTests/Supporting Files/RZDebugMenuDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		0C22DAF0193CCDA30042938F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RZDebugMenuDemo.app/RZDebugMenuDemo";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch";
-				INFOPLIST_FILE = "RZDebugMenuDemoTests/Supporting Files/RZDebugMenuDemoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		0C22DABA193CCDA30042938F /* Build configuration list for PBXProject "RZDebugMenuDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0C22DAE9193CCDA30042938F /* Debug */,
-				0C22DAEA193CCDA30042938F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0C22DAEB193CCDA30042938F /* Build configuration list for PBXNativeTarget "RZDebugMenuDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0C22DAEC193CCDA30042938F /* Debug */,
-				0C22DAED193CCDA30042938F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0C22DAEE193CCDA30042938F /* Build configuration list for PBXNativeTarget "RZDebugMenuDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0C22DAEF193CCDA30042938F /* Debug */,
-				0C22DAF0193CCDA30042938F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = 0C22DAB7193CCDA30042938F /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>0C22DAB6193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DAC8193CCDA30042938F</string>
+				<string>0C22DAE1193CCDA30042938F</string>
+				<string>0C22DAC1193CCDA30042938F</string>
+				<string>0C22DAC0193CCDA30042938F</string>
+				<string>0C78111F194F859900F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAB7193CCDA30042938F</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>CLASSPREFIX</key>
+				<string>RZ</string>
+				<key>LastUpgradeCheck</key>
+				<string>0510</string>
+				<key>ORGANIZATIONNAME</key>
+				<string>Raizlabs</string>
+				<key>TargetAttributes</key>
+				<dict>
+					<key>0C22DAD9193CCDA30042938F</key>
+					<dict>
+						<key>TestTargetID</key>
+						<string>0C22DABE193CCDA30042938F</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>0C22DABA193CCDA30042938F</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>0C22DAB6193CCDA30042938F</string>
+			<key>productRefGroup</key>
+			<string>0C22DAC0193CCDA30042938F</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>0C22DABE193CCDA30042938F</string>
+				<string>0C22DAD9193CCDA30042938F</string>
+			</array>
+		</dict>
+		<key>0C22DABA193CCDA30042938F</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>0C22DAE9193CCDA30042938F</string>
+				<string>0C22DAEA193CCDA30042938F</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>0C22DABB193CCDA30042938F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>0C781145194F859900F25AE5</string>
+				<string>0C78113F194F859900F25AE5</string>
+				<string>0C22DAD3193CCDA30042938F</string>
+				<string>0C781114194F243B00F25AE5</string>
+				<string>0C781142194F859900F25AE5</string>
+				<string>0C781141194F859900F25AE5</string>
+				<string>0C781144194F859900F25AE5</string>
+				<string>0C781147194F859900F25AE5</string>
+				<string>0C78114A194F859900F25AE5</string>
+				<string>0C781148194F859900F25AE5</string>
+				<string>0C781143194F859900F25AE5</string>
+				<string>0C78114B194F859900F25AE5</string>
+				<string>0C972B0D193E1A9900EA84FF</string>
+				<string>0C781149194F859900F25AE5</string>
+				<string>0C22DACF193CCDA30042938F</string>
+				<string>0C781146194F859900F25AE5</string>
+				<string>0C781140194F859900F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>0C22DABC193CCDA30042938F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>0C22DAC5193CCDA30042938F</string>
+				<string>0C22DAC7193CCDA30042938F</string>
+				<string>0C22DAC3193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>0C22DABD193CCDA30042938F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>0C22DACD193CCDA30042938F</string>
+				<string>0C22DAD5193CCDA30042938F</string>
+				<string>0C972B03193E0CBB00EA84FF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>0C22DABE193CCDA30042938F</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>0C22DAEB193CCDA30042938F</string>
+			<key>buildPhases</key>
+			<array>
+				<string>0C22DABB193CCDA30042938F</string>
+				<string>0C22DABC193CCDA30042938F</string>
+				<string>0C22DABD193CCDA30042938F</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>RZDebugMenuDemo</string>
+			<key>productName</key>
+			<string>RZDebugMenuDemo</string>
+			<key>productReference</key>
+			<string>0C22DABF193CCDA30042938F</string>
+			<key>productType</key>
+			<string>com.apple.product-type.application</string>
+		</dict>
+		<key>0C22DABF193CCDA30042938F</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.application</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>RZDebugMenuDemo.app</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>0C22DAC0193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DABF193CCDA30042938F</string>
+				<string>0C22DADA193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAC1193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DAC2193CCDA30042938F</string>
+				<string>0C22DAC4193CCDA30042938F</string>
+				<string>0C22DAC6193CCDA30042938F</string>
+				<string>0C22DADB193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAC2193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>0C22DAC3193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAC2193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DAC4193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>0C22DAC5193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAC4193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DAC6193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>SDKROOT</string>
+		</dict>
+		<key>0C22DAC7193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAC6193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DAC8193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C972B0F193E1AEE00EA84FF</string>
+				<string>0C972B0E193E1AB000EA84FF</string>
+				<string>0C972B04193E1A9900EA84FF</string>
+				<string>0C22DAF9193D085C0042938F</string>
+				<string>0C22DAC9193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>RZDebugMenuDemo</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAC9193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DACA193CCDA30042938F</string>
+				<string>0C22DACB193CCDA30042938F</string>
+				<string>0C22DACE193CCDA30042938F</string>
+				<string>0C22DAD0193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DACA193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>RZDebugMenuDemo-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DACB193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DACC193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DACC193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DACD193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DACB193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DACE193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>main.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DACF193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DACE193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DAD0193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuDemo-Prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAD1193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZAppDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAD2193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZAppDelegate.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAD3193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAD2193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DAD4193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>folder.assetcatalog</string>
+			<key>path</key>
+			<string>Images.xcassets</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAD5193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAD4193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DAD6193CCDA30042938F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>0C22DAE8193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>0C22DAD7193CCDA30042938F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>0C22DADC193CCDA30042938F</string>
+				<string>0C22DADE193CCDA30042938F</string>
+				<string>0C22DADD193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>0C22DAD8193CCDA30042938F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>0C22DAE6193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>0C22DAD9193CCDA30042938F</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>0C22DAEE193CCDA30042938F</string>
+			<key>buildPhases</key>
+			<array>
+				<string>0C22DAD6193CCDA30042938F</string>
+				<string>0C22DAD7193CCDA30042938F</string>
+				<string>0C22DAD8193CCDA30042938F</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>0C22DAE0193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>RZDebugMenuDemoTests</string>
+			<key>productName</key>
+			<string>RZDebugMenuDemoTests</string>
+			<key>productReference</key>
+			<string>0C22DADA193CCDA30042938F</string>
+			<key>productType</key>
+			<string>com.apple.product-type.bundle.unit-test</string>
+		</dict>
+		<key>0C22DADA193CCDA30042938F</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.cfbundle</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>RZDebugMenuDemoTests.xctest</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>0C22DADB193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>XCTest.framework</string>
+			<key>path</key>
+			<string>Library/Frameworks/XCTest.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>0C22DADC193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DADB193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DADD193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAC2193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DADE193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAC6193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DADF193CCDA30042938F</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>0C22DAB7193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>0C22DABE193CCDA30042938F</string>
+			<key>remoteInfo</key>
+			<string>RZDebugMenuDemo</string>
+		</dict>
+		<key>0C22DAE0193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>target</key>
+			<string>0C22DABE193CCDA30042938F</string>
+			<key>targetProxy</key>
+			<string>0C22DADF193CCDA30042938F</string>
+		</dict>
+		<key>0C22DAE1193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DAE7193CCDA30042938F</string>
+				<string>0C22DAE2193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>RZDebugMenuDemoTests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAE2193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DAE3193CCDA30042938F</string>
+				<string>0C22DAE4193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Supporting Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAE3193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>RZDebugMenuDemoTests-Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAE4193CCDA30042938F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DAE5193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXVariantGroup</string>
+			<key>name</key>
+			<string>InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAE5193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.strings</string>
+			<key>name</key>
+			<string>en</string>
+			<key>path</key>
+			<string>en.lproj/InfoPlist.strings</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAE6193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAE4193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DAE7193CCDA30042938F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuDemoTests.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C22DAE8193CCDA30042938F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C22DAE7193CCDA30042938F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C22DAE9193CCDA30042938F</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.1</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>0C22DAEA193CCDA30042938F</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES_ERROR</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES_ERROR</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES_AGGRESSIVE</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.1</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>0C22DAEB193CCDA30042938F</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>0C22DAEC193CCDA30042938F</string>
+				<string>0C22DAED193CCDA30042938F</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>0C22DAEC193CCDA30042938F</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>0C22DAED193CCDA30042938F</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
+				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
+				<string>LaunchImage</string>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>app</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>0C22DAEE193CCDA30042938F</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>0C22DAEF193CCDA30042938F</string>
+				<string>0C22DAF0193CCDA30042938F</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>0C22DAEF193CCDA30042938F</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/RZDebugMenuDemo.app/RZDebugMenuDemo</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>INFOPLIST_FILE</key>
+				<string>RZDebugMenuDemoTests/Supporting Files/RZDebugMenuDemoTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>0C22DAF0193CCDA30042938F</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>BUNDLE_LOADER</key>
+				<string>$(BUILT_PRODUCTS_DIR)/RZDebugMenuDemo.app/RZDebugMenuDemo</string>
+				<key>FRAMEWORK_SEARCH_PATHS</key>
+				<array>
+					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
+					<string>$(inherited)</string>
+					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
+				</array>
+				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>RZDebugMenuDemoTests/Supporting Files/RZDebugMenuDemoTests-Info.plist</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>TEST_HOST</key>
+				<string>$(BUNDLE_LOADER)</string>
+				<key>WRAPPER_EXTENSION</key>
+				<string>xctest</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>0C22DAF9193D085C0042938F</key>
+		<dict>
+			<key>children</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Views</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781112194F243B00F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZTestViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781113194F243B00F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZTestViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781114194F243B00F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C781113194F243B00F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C78111F194F859900F25AE5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C78112D194F859900F25AE5</string>
+				<string>0C78112E194F859900F25AE5</string>
+				<string>0C781120194F859900F25AE5</string>
+				<string>0C78112F194F859900F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Classes</string>
+			<key>path</key>
+			<string>../Classes</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781120194F859900F25AE5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C781123194F859900F25AE5</string>
+				<string>0C781124194F859900F25AE5</string>
+				<string>0C781121194F859900F25AE5</string>
+				<string>0C781122194F859900F25AE5</string>
+				<string>0C781125194F859900F25AE5</string>
+				<string>0C781126194F859900F25AE5</string>
+				<string>0C781127194F859900F25AE5</string>
+				<string>0C781128194F859900F25AE5</string>
+				<string>0C781129194F859900F25AE5</string>
+				<string>0C78112A194F859900F25AE5</string>
+				<string>0C78112B194F859900F25AE5</string>
+				<string>0C78112C194F859900F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Models</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781121194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuMultiValueItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781122194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuMultiValueItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781123194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuSettingsInterface.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781124194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuSettingsInterface.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781125194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuSettingsItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781126194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuSettingsItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781127194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuToggleItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781128194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuToggleItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781129194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuVersionItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78112A194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuVersionItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78112B194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZMultiValueSelectionItem.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78112C194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZMultiValueSelectionItem.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78112D194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenu.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78112E194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenu.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78112F194F859900F25AE5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C781130194F859900F25AE5</string>
+				<string>0C781135194F859900F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>UI</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781130194F859900F25AE5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C781131194F859900F25AE5</string>
+				<string>0C781132194F859900F25AE5</string>
+				<string>0C781133194F859900F25AE5</string>
+				<string>0C781134194F859900F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>View Controllers</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781131194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuModalViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781132194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuModalViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781133194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuMultiItemListViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781134194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuMultiItemListViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781135194F859900F25AE5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C78113D194F859900F25AE5</string>
+				<string>0C78113E194F859900F25AE5</string>
+				<string>0C781136194F859900F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Views</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781136194F859900F25AE5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C781137194F859900F25AE5</string>
+				<string>0C781138194F859900F25AE5</string>
+				<string>0C781139194F859900F25AE5</string>
+				<string>0C78113A194F859900F25AE5</string>
+				<string>0C78113B194F859900F25AE5</string>
+				<string>0C78113C194F859900F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Cells</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781137194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDisclosureTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781138194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDisclosureTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C781139194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZToggleTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78113A194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZToggleTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78113B194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZVersionInfoTableViewCell.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78113C194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZVersionInfoTableViewCell.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78113D194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuWindow.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78113E194F859900F25AE5</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuWindow.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C78113F194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C781122194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781140194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C781124194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781141194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C781126194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781142194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C781128194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781143194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C78112A194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781144194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C78112C194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781145194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C78112E194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781146194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C781132194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781147194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C781134194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781148194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C781138194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C781149194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C78113A194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C78114A194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C78113C194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C78114B194F859900F25AE5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C78113E194F859900F25AE5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C972B02193E0CBB00EA84FF</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Settings.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C972B03193E0CBB00EA84FF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C972B02193E0CBB00EA84FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C972B04193E1A9900EA84FF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C972B09193E1A9900EA84FF</string>
+				<string>0C972B0A193E1A9900EA84FF</string>
+				<string>0C781112194F243B00F25AE5</string>
+				<string>0C781113194F243B00F25AE5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>View Controllers</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C972B09193E1A9900EA84FF</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>RZDebugMenuRootViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C972B0A193E1A9900EA84FF</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>RZDebugMenuRootViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C972B0D193E1A9900EA84FF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0C972B0A193E1A9900EA84FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0C972B0E193E1AB000EA84FF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DAD4193CCDA30042938F</string>
+				<string>0C972B02193E0CBB00EA84FF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Resources</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0C972B0F193E1AEE00EA84FF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0C22DAD1193CCDA30042938F</string>
+				<string>0C22DAD2193CCDA30042938F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>path</key>
+			<string>Application</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>0C22DAB7193CCDA30042938F</string>
+</dict>
+</plist>
