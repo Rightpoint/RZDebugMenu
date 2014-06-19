@@ -74,15 +74,15 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 - (void)createWindowAndGesture:(NSNotification *)message
 {
     if ( self.enabled ) {
+        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+        
         UIApplication *application = [UIApplication sharedApplication];
         self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(clearViewController:didShowDebugMenu:)];
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        self.swipeUpGesture.numberOfTouchesRequired = 3;
+        self.swipeUpGesture.numberOfTouchesRequired = 2;
         self.swipeUpGesture.delegate = self;
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
-        
-        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeOrientation)
