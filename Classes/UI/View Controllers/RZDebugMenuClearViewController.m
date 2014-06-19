@@ -30,6 +30,7 @@ static NSString * const kRZDebugMenuButtonImageName = @"greg.jpeg";
         _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
         
         _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 37, 37)];
+        _displayDebugMenuButton.backgroundColor = [UIColor blackColor];
         [_displayDebugMenuButton setImage:[UIImage imageNamed:kRZDebugMenuButtonImageName] forState:UIControlStateNormal];
         [_displayDebugMenuButton addTarget:self.delegate action:@selector(clearViewController:debugMenuWillAppear:) forControlEvents:UIControlEventTouchUpInside];
         _displayDebugMenuButton.clipsToBounds = YES;
