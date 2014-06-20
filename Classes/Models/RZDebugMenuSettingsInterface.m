@@ -92,7 +92,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         RZDebugMenuSettingsItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
         [_settingsCellItemsMetaData addObject:versionItem];
         
-        [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultSettings];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:[userDefaultSettings mutableCopy]];
     }
     
     return self;
@@ -184,7 +184,10 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (void)changeSettingsValue:(id)value forKey:(NSString *)key
 {
-    NSLog(@"Change NSUserDefaults here");
+    
+    NSDictionary *settingItem = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    [settingItem setValue:value forKey:@"DefaultValue"];
+    [[NSUserDefaults standardUserDefaults] setValue:settingItem forKey:key];
 }
 
 @end

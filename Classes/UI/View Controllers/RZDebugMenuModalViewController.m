@@ -67,6 +67,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (void)closeView
 {
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
