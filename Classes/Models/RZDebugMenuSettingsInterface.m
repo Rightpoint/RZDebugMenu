@@ -146,6 +146,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *) cell;
         
         toggleCell.applySettingsSwitch.on = currentToggleItem.toggleCellDefaultValue;
+        toggleCell.delegate = self;
         cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
@@ -158,7 +159,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return cell;
 }
 
-#pragma mark - RZToggleTableViewCellDelegat method
+#pragma mark - RZToggleTableViewCellDelegate method
 
 - (void)didChangeToggleStateOfCell:(RZToggleTableViewCell *)cell
 {
