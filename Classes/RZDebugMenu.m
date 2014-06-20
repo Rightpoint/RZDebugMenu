@@ -20,7 +20,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *interface;
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
-@property (strong, nonatomic) UIViewController *clearRootViewController;
+@property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
 @property (copy, nonatomic) NSString *settingsFileName;
 @property (assign, nonatomic) BOOL enabled;
 
@@ -36,6 +36,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         s_sharedInstance = [[RZDebugMenu alloc] init_internal];
     });
     return s_sharedInstance;
+}
+
++ (void)enableWithSettingsPlist:(NSString *)fileName
+{
+    [[self privateSharedInstance] setSettingsFileName:fileName];
+    [[self privateSharedInstance] setEnabled:YES];
 }
 
 - (id)init
@@ -58,44 +64,38 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     return self;
 }
 
-+ (void)enableWithSettingsPlist:(NSString *)fileName
-{
-    [[self privateSharedInstance] setSettingsFileName:fileName];
-    [[self privateSharedInstance] setEnabled:YES];
-}
-
-- (void)showDebugMenu
-{
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
-    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
-    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
-}
-
 - (void)createWindowAndGesture:(NSNotification *)message
 {
     if ( self.enabled ) {
+        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+        
+        UIScreen *mainScreen = [UIScreen mainScreen];
+        self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
+        self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
+        self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.topWindow.rootViewController = self.clearRootViewController;
+        self.topWindow.hidden = NO;
+        
         UIApplication *application = [UIApplication sharedApplication];
-        self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDebugMenu)];
+        self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
         self.swipeUpGesture.numberOfTouchesRequired = 3;
         self.swipeUpGesture.delegate = self;
         UIWindow *applicationWindow = application.keyWindow;
         [applicationWindow addGestureRecognizer:self.swipeUpGesture];
         
-        self.clearRootViewController = [[UIViewController alloc] init];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeOrientation)
                                                      name:UIApplicationDidChangeStatusBarOrientationNotification
                                                    object:nil];
-        
-        UIScreen *mainScreen = [UIScreen mainScreen];
-        self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
-        self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.0;
-        self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.topWindow.rootViewController = _clearRootViewController;
-        self.topWindow.hidden = NO;
     }
+}
+
+- (void)displayDebugMenu
+{
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
+    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
+    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
 
 // NOTE: Add a runtime version check to disable the gesture update when this is needed in an iOS 8 app. Gesutres with a 'direction' property automatically change direction relative to the device orientation in iOS 8.
@@ -114,6 +114,13 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     else {
         self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
     }
+}
+
+#pragma mark - RZDebugMenuClearViewController delegate method
+
+- (void)clearViewControllerDebugMenuButtonPressed:(RZDebugMenuClearViewController *)clearViewController
+{
+    [self displayDebugMenu];
 }
 
 #pragma mark - gesture recognizer delegate
