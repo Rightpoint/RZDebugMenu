@@ -50,6 +50,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         
         NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
+        NSMutableDictionary *userDefaultSettings = [[NSMutableDictionary alloc] init];
+        NSInteger settingNumber = 0;
         
         for (id settingsItem in preferenceSpecifiers) {
             NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
@@ -83,11 +85,16 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
             }
+            
+            [userDefaultSettings setObject:settingsItem forKey:[NSNumber numberWithInt:settingNumber]];
+            settingNumber += 1;
         }
         
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
         RZDebugMenuSettingsItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
         [_settingsCellItemsMetaData addObject:versionItem];
+        
+        [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultSettings];
     }
     
     return self;
