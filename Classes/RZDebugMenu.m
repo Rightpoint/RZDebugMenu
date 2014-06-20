@@ -44,6 +44,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     [[self privateSharedInstance] setEnabled:YES];
 }
 
++ (id)debugSettingForKey:(NSString *)key
+{
+    // TODO: Implement this feature
+    return [NSNumber numberWithInt:0];
+}
+
 - (id)init
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException

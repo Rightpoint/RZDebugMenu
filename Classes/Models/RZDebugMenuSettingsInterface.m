@@ -49,7 +49,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
         NSMutableDictionary *userDefaultSettings = [[NSMutableDictionary alloc] init];
-        NSInteger settingNumber = 0;
+        NSInteger toggleSwitchNumber = 0;
         
         for (id settingsItem in preferenceSpecifiers) {
             NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
@@ -80,12 +80,15 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
                 
                 BOOL cellDefaultValue = [[settingsItem objectForKey:kRZKeyDefaultValue] boolValue];
+                
+                NSString *userDefaultKey = [kRZToggleSwitchSpecifier stringByAppendingString:[[NSNumber numberWithInt:toggleSwitchNumber] stringValue]];
+                [[NSUserDefaults standardUserDefaults] setBool:cellDefaultValue forKey:userDefaultKey];
+                
                 RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
+                
+                toggleSwitchNumber += 1;
             }
-            
-            [userDefaultSettings setObject:settingsItem forKey:[[NSNumber numberWithInt:settingNumber] stringValue]];
-            settingNumber += 1;
         }
         
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
@@ -166,9 +169,10 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     NSIndexPath *currentCellIndexPath = [self.settingsOptionsTableView indexPathForCell:cell];
     NSUInteger currentCellRow = currentCellIndexPath.row;
     NSString *userSettingKey = [NSString stringWithFormat:@"%i", currentCellRow];
+    NSString *defaultsKey = [kRZToggleSwitchSpecifier stringByAppendingString:userSettingKey];
     NSNumber *toggleSwitchValue = [NSNumber numberWithBool:cell.applySettingsSwitch.on];
     
-    [self changeSettingsValue:toggleSwitchValue forKey:userSettingKey];
+    [self changeSettingsValue:toggleSwitchValue forKey:defaultsKey];
 }
 
 #pragma mark - other methods
@@ -184,10 +188,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (void)changeSettingsValue:(id)value forKey:(NSString *)key
 {
-    
-    NSDictionary *settingItem = [[NSUserDefaults standardUserDefaults] objectForKey:key];
-    [settingItem setValue:value forKey:@"DefaultValue"];
-    [[NSUserDefaults standardUserDefaults] setValue:settingItem forKey:key];
+    [[NSUserDefaults standardUserDefaults] setBool:[value boolValue] forKey:key];
 }
 
 @end
