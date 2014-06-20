@@ -14,7 +14,6 @@
 #import "RZDebugMenuVersionItem.h"
 
 #import "RZDisclosureTableViewCell.h"
-#import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 
 #import "RZMultiValueSelectionItem.h"
@@ -46,7 +45,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     self = [super init];
     if ( self ) {
-        
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         
         NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
@@ -158,6 +156,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     }
     
     return cell;
+}
+
+#pragma mark - RZToggleTableViewCellDelegat method
+
+- (void)didChangeToggleStateOfCell:(RZToggleTableViewCell *)cell
+{
+    NSLog(@"changed");
 }
 
 #pragma mark - other methods

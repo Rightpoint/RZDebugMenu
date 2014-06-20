@@ -22,7 +22,6 @@
     if ( self ) {
         self.tableViewCellTitle = title;
         _toggleCellDefaultValue = value;
-
     }
     return self;
 }

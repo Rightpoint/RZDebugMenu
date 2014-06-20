@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "RZDebugMenuSettingsItem.h"
+#import "RZToggleTableViewCell.h"
 
-@interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
+@interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource, RZToggleTableViewCellDelegate>
 
 @property (weak, nonatomic) UITableView *settingsOptionsTableView;
 
