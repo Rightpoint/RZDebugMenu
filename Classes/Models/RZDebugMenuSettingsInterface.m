@@ -84,7 +84,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
             }
             
-            [userDefaultSettings setObject:settingsItem forKey:[NSNumber numberWithInt:settingNumber]];
+            [userDefaultSettings setObject:settingsItem forKey:[[NSNumber numberWithInt:settingNumber] stringValue]];
             settingNumber += 1;
         }
         
@@ -163,7 +163,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (void)didChangeToggleStateOfCell:(RZToggleTableViewCell *)cell
 {
-    NSLog(@"changed");
+    NSIndexPath *currentCellIndexPath = [self.settingsOptionsTableView indexPathForCell:cell];
+    NSUInteger currentCellRow = currentCellIndexPath.row;
+    NSString *userSettingKey = [NSString stringWithFormat:@"%i", currentCellRow];
+    NSNumber *toggleSwitchValue = [NSNumber numberWithBool:cell.applySettingsSwitch.on];
+    
+    [self changeSettingsValue:toggleSwitchValue forKey:userSettingKey];
 }
 
 #pragma mark - other methods
@@ -177,7 +182,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
 
-- (void)changeSettingsForKey:(NSString *)key withValue:(id)value
+- (void)changeSettingsValue:(id)value forKey:(NSString *)key
 {
     NSLog(@"Change NSUserDefaults here");
 }
