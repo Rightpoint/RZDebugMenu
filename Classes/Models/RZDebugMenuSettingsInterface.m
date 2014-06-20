@@ -176,4 +176,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
 
+- (void)changeSettingsForKey:(NSString *)key withValue:(id)value
+{
+    NSLog(@"Change NSUserDefaults here");
+}
+
 @end
