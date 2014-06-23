@@ -80,9 +80,14 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                                                           andSelectionItems:selectionItems];
                 [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
                 
+                NSLog(@"CELLDEFAULT: %i", [cellDefaultValue intValue]);
                 NSString *disclosureKey = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:[numberDisclosureCells intValue]];
                 [userSettings setObject:cellDefaultValue forKey:disclosureKey];
                 numberDisclosureCells = [NSNumber numberWithInt:[numberDisclosureCells intValue]+1];
+                
+                
+                NSNumber *selectionDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:disclosureKey];
+                NSLog(@"%@", disclosureKey);
             }
             else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
                 
@@ -143,7 +148,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         NSString *multiValueSettingsKey = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:indexPath.row];
         NSNumber *selectionDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:multiValueSettingsKey];
-        NSInteger defaultValue = [selectionDefaultValue integerValue];
+        NSInteger defaultValue = [selectionDefaultValue integerValue]-1; // always 1-off
         RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:defaultValue];
         
         disclosureCell.detailTextLabel.text = currentSelection.selectionTitle;
