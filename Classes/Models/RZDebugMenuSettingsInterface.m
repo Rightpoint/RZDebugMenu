@@ -21,6 +21,7 @@
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
 static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
+static NSString * const kRZDefaultValueSpecifier = @"DefaultValue";
 static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
 static NSString * const kRZKeyTitle = @"Title";
 static NSString * const kRZKeyType = @"Type";
@@ -136,8 +137,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *) cell;
         
-        NSNumber *toggleSwitchDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"PSToggleSwitchSpecifier1"];
-        
+        NSNumber *toggleSwitchDefaultValue = [[[[NSUserDefaults standardUserDefaults] objectForKey:kRZPreferenceSpecifiersKey] objectAtIndex:indexPath.row] objectForKey:kRZDefaultValueSpecifier];
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
         toggleCell.delegate = self;
         cell = toggleCell;
@@ -162,7 +162,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     NSString *defaultsKey = [kRZToggleSwitchSpecifier stringByAppendingString:userSettingKey];
     NSNumber *toggleSwitchValue = [NSNumber numberWithBool:cell.applySettingsSwitch.on];
     
-    [self changeSettingsValue:toggleSwitchValue forKey:defaultsKey];
+    [self changeSettingsValue:toggleSwitchValue forKey:defaultsKey atIndex:currentCellIndexPath];
 }
 
 #pragma mark - other methods
@@ -176,13 +176,16 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
 
-- (void)changeSettingsValue:(id)value forKey:(NSString *)key
+- (void)changeSettingsValue:(NSNumber *)value forKey:(NSString *)key atIndex:(NSIndexPath *)indexPath
 {
-    [[NSUserDefaults standardUserDefaults] setBool:[value boolValue] forKey:key];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    for (NSString *item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys]) {
-        NSLog(@"%@: %d", item, [[NSUserDefaults standardUserDefaults] boolForKey:item]);
-    }
+    NSMutableDictionary *mutableUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] mutableCopy];
+    NSMutableArray *settingsArray = [[mutableUserDefaults objectForKey:kRZPreferenceSpecifiersKey] mutableCopy];
+    NSMutableDictionary *currentSettingDict = [[[mutableUserDefaults objectForKey:kRZPreferenceSpecifiersKey] objectAtIndex:indexPath.row] mutableCopy];
+    [currentSettingDict setValue:value forKey:kRZDefaultValueSpecifier];
+    [settingsArray replaceObjectAtIndex:indexPath.row withObject:currentSettingDict];
+    [mutableUserDefaults setObject:settingsArray forKey:kRZPreferenceSpecifiersKey];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
 }
 
 @end
