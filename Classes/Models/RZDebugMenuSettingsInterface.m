@@ -47,9 +47,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     if ( self ) {
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         
-        NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
-        NSMutableDictionary *userDefaultSettings = [[NSMutableDictionary alloc] init];
-        NSInteger toggleSwitchNumber = 0;
+        NSArray *preferenceSpecifiers = [[NSUserDefaults standardUserDefaults] objectForKey:kRZPreferenceSpecifiersKey];
         
         for (id settingsItem in preferenceSpecifiers) {
             NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
@@ -81,21 +79,15 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 
                 BOOL cellDefaultValue = [[settingsItem objectForKey:kRZKeyDefaultValue] boolValue];
                 
-                NSString *userDefaultKey = [kRZToggleSwitchSpecifier stringByAppendingString:[[NSNumber numberWithInt:toggleSwitchNumber] stringValue]];
-                [[NSUserDefaults standardUserDefaults] setBool:cellDefaultValue forKey:userDefaultKey];
-                
                 RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
                 
-                toggleSwitchNumber += 1;
             }
         }
         
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
         RZDebugMenuSettingsItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
         [_settingsCellItemsMetaData addObject:versionItem];
-        
-        [[NSUserDefaults standardUserDefaults] registerDefaults:[userDefaultSettings mutableCopy]];
     }
     
     return self;
@@ -189,6 +181,10 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (void)changeSettingsValue:(id)value forKey:(NSString *)key
 {
     [[NSUserDefaults standardUserDefaults] setBool:[value boolValue] forKey:key];
+    
+    for (NSString *item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys]) {
+        NSLog(@"%@: %d", item, [[NSUserDefaults standardUserDefaults] boolForKey:item]);
+    }
 }
 
 @end
