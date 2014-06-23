@@ -1,5 +1,5 @@
 //
-//  RZDebugMenuEnvironmentsListViewController.h
+//  RZDebugMenuMultiItemListViewController.h
 //  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/3/14.
@@ -11,7 +11,7 @@
 @class RZDebugMenuMultiItemListViewController;
 @protocol RZDebugMenuMultiItemListViewControllerDelegate <NSObject>
 
-- (void)placeHolder;
+- (void)didMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -8,11 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@class RZMultiValueSelectionItem;
+@protocol RZMultiValueSelectionItemDelegate <NSObject>
+
+- (void)didMakeNewSelection:(NSIndexPath *)indexPath;
+
+@end
+
 @interface RZMultiValueSelectionItem : NSObject
 
+@property (weak, nonatomic) id<RZMultiValueSelectionItemDelegate>delegate;
 @property (strong, nonatomic, readonly) NSString *selectionTitle;
 @property (strong, nonatomic, readonly) NSNumber *selectionValue;
 
-- (id)initWithTitle:(NSString *)title andValue:(NSNumber *)value;
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value;
 
 @end
