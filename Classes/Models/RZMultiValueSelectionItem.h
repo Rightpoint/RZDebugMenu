@@ -11,7 +11,7 @@
 @class RZMultiValueSelectionItem;
 @protocol RZMultiValueSelectionItemDelegate <NSObject>
 
-- (void)didMakeNewSelection:(NSIndexPath *)indexPath;
+- (void)didMakeNewSelection:(RZMultiValueSelectionItem *)item atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

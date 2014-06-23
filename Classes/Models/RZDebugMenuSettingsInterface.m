@@ -86,6 +86,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
         RZDebugMenuSettingsItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
         [_settingsCellItemsMetaData addObject:versionItem];
+        
     }
     
     return self;
@@ -128,8 +129,15 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         NSNumber *selectionDefaultValue = [[[[NSUserDefaults standardUserDefaults] objectForKey:kRZPreferenceSpecifiersKey] objectAtIndex:indexPath.row] objectForKey:kRZDefaultValueSpecifier];
         
-        NSInteger defaultValue = [selectionDefaultValue integerValue];
-        RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:(unsigned long)defaultValue];
+//        NSInteger defaultValue = [selectionDefaultValue integerValue];
+        RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:[selectionDefaultValue integerValue]];
+
+//        NSDictionary *defaultSettings = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+//        NSArray *settingsArray = [defaultSettings objectForKey:kRZPreferenceSpecifiersKey];
+//        NSDictionary *disclosureSetting = [settingsArray objectAtIndex:0];
+//        NSNumber *defaultV = [disclosureSetting objectForKey:kRZDefaultValueSpecifier];
+//        NSString *environmentTitle = [[disclosureSetting objectForKey:kRZKeyEnvironmentsTitles] objectAtIndex:[defaultV intValue]];
+        
         disclosureCell.detailTextLabel.text = currentSelection.selectionTitle;
         cell = disclosureCell;
     }
@@ -164,7 +172,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     NSMutableDictionary *mutableUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] mutableCopy];
     NSMutableArray *settingsArray = [[mutableUserDefaults objectForKey:kRZPreferenceSpecifiersKey] mutableCopy];
-    NSMutableDictionary *currentSettingDict = [[[mutableUserDefaults objectForKey:kRZPreferenceSpecifiersKey] objectAtIndex:currentCellIndexPath.row] mutableCopy];
+    NSMutableDictionary *currentSettingDict = [[settingsArray objectAtIndex:currentCellIndexPath.row] mutableCopy];
     [currentSettingDict setValue:toggleSwitchValue forKey:kRZDefaultValueSpecifier];
     [settingsArray replaceObjectAtIndex:currentCellIndexPath.row withObject:currentSettingDict];
     [mutableUserDefaults setObject:settingsArray forKey:kRZPreferenceSpecifiersKey];
@@ -173,22 +181,26 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
 }
 
-- (void)didMakeNewSelection:(NSIndexPath *)indexPath
+- (void)didMakeNewSelection:(RZMultiValueSelectionItem *)item atIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableDictionary *mutableUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] mutableCopy];
     NSMutableArray *settingsArray = [[mutableUserDefaults objectForKey:kRZPreferenceSpecifiersKey] mutableCopy];
-    NSMutableDictionary *currentSettingDict = [[[mutableUserDefaults objectForKey:kRZPreferenceSpecifiersKey] objectAtIndex:indexPath.row] mutableCopy];
-    [currentSettingDict setValue:[NSNumber numberWithInt:indexPath.row] forKey:kRZDefaultValueSpecifier];
+    NSMutableDictionary *currentSettingDict = [[settingsArray objectAtIndex:0] mutableCopy];
+    [currentSettingDict setValue:item.selectionValue forKey:kRZDefaultValueSpecifier];
     
-    [settingsArray replaceObjectAtIndex:indexPath.row withObject:currentSettingDict];
+    NSArray *visible = [self.settingsOptionsTableView indexPathsForVisibleRows];
+    NSIndexPath *test = [visible objectAtIndex:0];
+    UITableViewCell *currentDisclosureCell = [self.settingsOptionsTableView cellForRowAtIndexPath:test];
+    currentDisclosureCell.detailTextLabel.text = item.selectionTitle;
+    
+    [settingsArray replaceObjectAtIndex:0 withObject:currentSettingDict];
     [mutableUserDefaults setObject:settingsArray forKey:kRZPreferenceSpecifiersKey];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
     
-    NSLog(@"%i", indexPath.row);
-    
-    UITableViewCell *currentDisclosureCell = [self.settingsOptionsTableView cellForRowAtIndexPath:indexPath];
-    currentDisclosureCell.detailTextLabel.text = [[currentSettingDict objectForKey:kRZKeyEnvironmentsTitles] objectAtIndex:indexPath.row];
+    for (id item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys]) {
+        NSLog(@"%@: %@", item, [[NSUserDefaults standardUserDefaults] objectForKey:item]);
+    }
 }
 
 #pragma mark - other methods

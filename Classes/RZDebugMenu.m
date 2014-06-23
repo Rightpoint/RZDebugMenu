@@ -151,9 +151,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
     
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    
     [[NSUserDefaults standardUserDefaults] registerDefaults:plistData];
-    
     _interface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
 }
 

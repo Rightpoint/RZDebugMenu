@@ -76,7 +76,7 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 {
 //    [self.delegate didMakeNewSelectionAtIndexPath:indexPath];
     RZMultiValueSelectionItem* selectedItem = [self.cellItems objectAtIndex:indexPath.row];
-    [selectedItem.delegate didMakeNewSelection:indexPath];
+    [selectedItem.delegate didMakeNewSelection:selectedItem atIndexPath:indexPath];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
