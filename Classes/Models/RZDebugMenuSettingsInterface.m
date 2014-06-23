@@ -47,7 +47,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     if ( self ) {
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         
-        NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey]; //[[NSUserDefaults standardUserDefaults] objectForKey:kRZPreferenceSpecifiersKey];
+        NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
         
         NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
         NSNumber *numberDisclosureCells = [[NSNumber alloc] initWithInt:0];
@@ -80,7 +80,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                                                           andSelectionItems:selectionItems];
                 [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
                 
-                NSString *disclosureKey = [NSString stringWithFormat:@"%@%i", kRZMultiValueSpecifier, [numberDisclosureCells intValue]];
+                NSString *disclosureKey = [NSString stringWithFormat:@"%@%@%i", @"DEBUG", kRZMultiValueSpecifier, [numberDisclosureCells intValue]];
                 [userSettings setObject:[settingsItem objectForKey:kRZDefaultValueSpecifier] forKey:disclosureKey];
                 numberDisclosureCells = [NSNumber numberWithInt:[numberDisclosureCells intValue]+1];
             }
@@ -89,7 +89,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle];
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
                 
-                NSString *toggleKey = [NSString stringWithFormat:@"%@%i", kRZToggleSwitchSpecifier, [numberToggleCells intValue]];
+                NSString *toggleKey = [NSString stringWithFormat:@"%@%@%i", @"DEBUG", kRZToggleSwitchSpecifier, [numberToggleCells intValue]];
                 [userSettings setObject:[settingsItem objectForKey:kRZDefaultValueSpecifier] forKey:toggleKey];
                 numberToggleCells = [NSNumber numberWithInt:[numberToggleCells intValue]+1];
             }
@@ -141,10 +141,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         
-//        NSNumber *selectionDefaultValue = [[[[NSUserDefaults standardUserDefaults] objectForKey:kRZPreferenceSpecifiersKey] objectAtIndex:indexPath.row] objectForKey:kRZDefaultValueSpecifier];
-        
-        NSString *valueToChange = [NSString stringWithFormat:@"%@%i", kRZMultiValueSpecifier, indexPath.row];
-        NSNumber *selectionDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:valueToChange];
+        NSString *multiValueSettingsKey = [NSString stringWithFormat:@"%@%@%i", @"DEBUG", kRZMultiValueSpecifier, indexPath.row];
+        NSNumber *selectionDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:multiValueSettingsKey];
         NSInteger defaultValue = [selectionDefaultValue integerValue];
         RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:defaultValue];
         
@@ -157,8 +155,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *) cell;
-        
-//        NSNumber *toggleSwitchDefaultValue = [[[[NSUserDefaults standardUserDefaults] objectForKey:kRZPreferenceSpecifiersKey] objectAtIndex:indexPath.row] objectForKey:kRZDefaultValueSpecifier];
         
         NSString *toggleDefault = [NSString stringWithFormat:@"%@%@%i", @"DEBUG", kRZToggleSwitchSpecifier, indexPath.row];
         NSNumber *toggleSwitchDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:toggleDefault];
@@ -195,10 +191,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (void)didMakeNewSelection:(RZMultiValueSelectionItem *)item withIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableDictionary *mutableUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] mutableCopy];
-//    NSMutableArray *settingsArray = [[mutableUserDefaults objectForKey:kRZPreferenceSpecifiersKey] mutableCopy];
-//    NSMutableDictionary *currentSettingDict = [[settingsArray objectAtIndex:0] mutableCopy];
 
-    NSString *valueToChange = [NSString stringWithFormat:@"%@%i", kRZMultiValueSpecifier, indexPath.row];
+    // TODO: Get index path of the disclosure cell on the main menu
+    NSString *valueToChange = [NSString stringWithFormat:@"%@%@%i", @"DEBUG", kRZMultiValueSpecifier, indexPath.row-1];
     [mutableUserDefaults setValue:item.selectionValue forKey:valueToChange];
     
     NSArray *visible = [self.settingsOptionsTableView indexPathsForVisibleRows];
@@ -206,17 +201,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     UITableViewCell *currentDisclosureCell = [self.settingsOptionsTableView cellForRowAtIndexPath:test];
     currentDisclosureCell.detailTextLabel.text = item.selectionTitle;
     
-//    [settingsArray replaceObjectAtIndex:0 withObject:currentSettingDict];
-//    [mutableUserDefaults setObject:settingsArray forKey:kRZPreferenceSpecifiersKey];
-    
     [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
-
-    
-    NSLog(@"%@: %@", valueToChange, [[NSUserDefaults standardUserDefaults] objectForKey:valueToChange]);
-    //
-//    for (id item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys]) {
-//        NSLog(@"%@: %@", item, [[NSUserDefaults standardUserDefaults] objectForKey:item]);
-//    }
 }
 
 #pragma mark - other methods
