@@ -77,11 +77,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             }
             else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
                 
-                BOOL cellDefaultValue = [[settingsItem objectForKey:kRZKeyDefaultValue] boolValue];
-                
-                RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle andValue:cellDefaultValue];
+                RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle];
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
-                
             }
         }
         
@@ -137,10 +134,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         
-        RZDebugMenuToggleItem *currentToggleItem = (RZDebugMenuToggleItem *)currentMetaDataObject;
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *) cell;
         
-        toggleCell.applySettingsSwitch.on = currentToggleItem.toggleCellDefaultValue;
+        NSNumber *toggleSwitchDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"PSToggleSwitchSpecifier1"];
+        
+        toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
         toggleCell.delegate = self;
         cell = toggleCell;
     }
@@ -181,7 +179,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (void)changeSettingsValue:(id)value forKey:(NSString *)key
 {
     [[NSUserDefaults standardUserDefaults] setBool:[value boolValue] forKey:key];
-    
+    [[NSUserDefaults standardUserDefaults] synchronize];
     for (NSString *item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys]) {
         NSLog(@"%@: %d", item, [[NSUserDefaults standardUserDefaults] boolForKey:item]);
     }

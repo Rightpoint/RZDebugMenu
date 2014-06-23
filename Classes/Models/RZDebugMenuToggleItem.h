@@ -11,8 +11,6 @@
 
 @interface RZDebugMenuToggleItem : RZDebugMenuSettingsItem
 
-@property (readonly, assign) BOOL toggleCellDefaultValue;
-
-- (id)initWithTitle:(NSString *)title andValue:(BOOL)value;
+- (id)initWithTitle:(NSString *)title;
 
 @end
