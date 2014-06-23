@@ -84,10 +84,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 NSString *disclosureKey = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:[numberDisclosureCells intValue]];
                 [userSettings setObject:cellDefaultValue forKey:disclosureKey];
                 numberDisclosureCells = [NSNumber numberWithInt:[numberDisclosureCells intValue]+1];
-                
-                
-                NSNumber *selectionDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:disclosureKey];
-                NSLog(@"%@", disclosureKey);
             }
             else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
                 
