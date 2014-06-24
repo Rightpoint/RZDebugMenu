@@ -182,9 +182,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     NSIndexPath *currentCellIndexPath = [self.settingsOptionsTableView indexPathForCell:cell];
     NSNumber *toggleSwitchValue = [NSNumber numberWithBool:cell.applySettingsSwitch.on];
     
-    NSMutableDictionary *mutableUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] mutableCopy];
+    NSMutableDictionary *mutableUserDefaults = [self getMutableUserDefaults];
     NSString *valueToChange = [self generateSettingsKey:kRZToggleSwitchSpecifier withNumber:currentCellIndexPath.row];
-    [mutableUserDefaults setObject:toggleSwitchValue forKey:valueToChange];
+    [mutableUserDefaults setValue:toggleSwitchValue forKey:valueToChange];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
 }
@@ -192,14 +192,10 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (void)didMakeNewSelection:(RZMultiValueSelectionItem *)item withIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath *disclosureCellIndexPath = [self.settingsOptionsTableView indexPathForCell:self.selectedDisclosureCell];
-    NSMutableDictionary *mutableUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] mutableCopy];
+    NSMutableDictionary *mutableUserDefaults = [self getMutableUserDefaults];
     NSString *valueToChange = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:disclosureCellIndexPath.row];
     [mutableUserDefaults setValue:item.selectionValue forKey:valueToChange];
-    
-    NSArray *visible = [self.settingsOptionsTableView indexPathsForVisibleRows];
-    NSIndexPath *test = [visible objectAtIndex:disclosureCellIndexPath.row];
-    UITableViewCell *currentDisclosureCell = [self.settingsOptionsTableView cellForRowAtIndexPath:test];
-    currentDisclosureCell.detailTextLabel.text = item.selectionTitle;
+    self.selectedDisclosureCell.detailTextLabel.text = item.selectionTitle;
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
 }
@@ -223,6 +219,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (NSString *)generateSettingsKey:(NSString *)specifier withNumber:(NSInteger)index
 {
     return [NSString stringWithFormat:@"%@%@%i", kRZUserSettingsDebugPrefix, specifier, index];
+}
+
+- (NSMutableDictionary *)getMutableUserDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [[defaults dictionaryRepresentation] mutableCopy];
 }
 
 @end
