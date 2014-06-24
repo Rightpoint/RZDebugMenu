@@ -14,7 +14,7 @@
 #import "RZDebugMenuVersionItem.h"
 //#import "RZMultiValueSelectionItem.h"
 
-#import "RZDisclosureTableViewCell.h"
+//#import "RZDisclosureTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG";
@@ -35,6 +35,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 @interface RZDebugMenuSettingsInterface ()
 
 @property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
+@property (strong, nonatomic) RZDisclosureTableViewCell *selectedDisclosureCell;
 
 @end
 
@@ -80,7 +81,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                                                           andSelectionItems:selectionItems];
                 [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
                 
-                NSLog(@"CELLDEFAULT: %i", [cellDefaultValue intValue]);
+//                NSLog(@"CELLDEFAULT: %i", [cellDefaultValue intValue]);
                 NSString *disclosureKey = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:[numberDisclosureCells intValue]];
                 [userSettings setObject:cellDefaultValue forKey:disclosureKey];
                 numberDisclosureCells = [NSNumber numberWithInt:[numberDisclosureCells intValue]+1];
@@ -139,12 +140,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
         RZDisclosureTableViewCell *disclosureCell = (RZDisclosureTableViewCell *)cell;
         disclosureCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
-        
+        disclosureCell.delegate = self;
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         
         NSString *multiValueSettingsKey = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:indexPath.row];
         NSNumber *selectionDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:multiValueSettingsKey];
-        NSInteger defaultValue = [selectionDefaultValue integerValue]-1; // always 1-off
+        NSInteger defaultValue = [selectionDefaultValue integerValue]; // always 1-off
         RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:defaultValue];
         
         disclosureCell.detailTextLabel.text = currentSelection.selectionTitle;
@@ -186,23 +187,26 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     [mutableUserDefaults setObject:toggleSwitchValue forKey:valueToChange];
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
-    NSLog(@"%@: %@", valueToChange, [[NSUserDefaults standardUserDefaults] objectForKey:valueToChange]);
 }
 
 - (void)didMakeNewSelection:(RZMultiValueSelectionItem *)item withIndexPath:(NSIndexPath *)indexPath
 {
+    NSIndexPath *disclosureCellIndexPath = [self.settingsOptionsTableView indexPathForCell:self.selectedDisclosureCell];
     NSMutableDictionary *mutableUserDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] mutableCopy];
-
-    // TODO: Get index path of the disclosure cell on the main menu and replace 'indexPath.row-1' with it
-    NSString *valueToChange = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:0];
+    NSString *valueToChange = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:disclosureCellIndexPath.row];
     [mutableUserDefaults setValue:item.selectionValue forKey:valueToChange];
     
     NSArray *visible = [self.settingsOptionsTableView indexPathsForVisibleRows];
-    NSIndexPath *test = [visible objectAtIndex:0];
+    NSIndexPath *test = [visible objectAtIndex:disclosureCellIndexPath.row];
     UITableViewCell *currentDisclosureCell = [self.settingsOptionsTableView cellForRowAtIndexPath:test];
     currentDisclosureCell.detailTextLabel.text = item.selectionTitle;
     
     [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
+}
+
+- (void)didSelectDisclosureCell:(RZDisclosureTableViewCell *)cell
+{
+    self.selectedDisclosureCell = cell;
 }
 
 #pragma mark - other methods
@@ -218,7 +222,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (NSString *)generateSettingsKey:(NSString *)specifier withNumber:(NSInteger)index
 {
-    return [NSString stringWithFormat:@"%@%@%i", kRZUserSettingsDebugPrefix, kRZToggleSwitchSpecifier, index];
+    return [NSString stringWithFormat:@"%@%@%i", kRZUserSettingsDebugPrefix, specifier, index];
 }
 
 @end

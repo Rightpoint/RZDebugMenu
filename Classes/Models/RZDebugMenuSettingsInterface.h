@@ -10,9 +10,11 @@
 #import "RZDebugMenuSettingsItem.h"
 #import "RZToggleTableViewCell.h"
 #import "RZMultiValueSelectionItem.h"
+#import "RZDisclosureTableViewCell.h"
 
 @interface RZDebugMenuSettingsInterface : NSObject
-<RZMultiValueSelectionItemDelegate,
+<RZDisclosureTableViewCellDelegate,
+RZMultiValueSelectionItemDelegate,
 RZToggleTableViewCellDelegate,
 UITableViewDataSource>
 

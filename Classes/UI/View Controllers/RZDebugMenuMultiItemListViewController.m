@@ -74,7 +74,6 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [self.delegate didMakeNewSelectionAtIndexPath:indexPath];
     RZMultiValueSelectionItem* selectedItem = [self.cellItems objectAtIndex:indexPath.row];
     [selectedItem.delegate didMakeNewSelection:selectedItem withIndexPath:indexPath];
     [self.navigationController popViewControllerAnimated:YES];

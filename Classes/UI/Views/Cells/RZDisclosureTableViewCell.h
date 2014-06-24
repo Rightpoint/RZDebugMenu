@@ -11,7 +11,7 @@
 @class RZDisclosureTableViewCell;
 @protocol RZDisclosureTableViewCellDelegate <NSObject>
 
-- (void)didMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath;
+- (void)didSelectDisclosureCell:(RZDisclosureTableViewCell *)cell;
 
 @end
 
