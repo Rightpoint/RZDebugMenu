@@ -18,11 +18,12 @@
 #import "RZDisclosureTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 
-static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG";
+static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
 static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
 static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
+static NSString * const kRZKeyItemIdentifier = @"Key";
 static NSString * const kRZKeyTitle = @"Title";
 static NSString * const kRZKeyType = @"Type";
 static NSString * const kRZKeyDefaultValue = @"DefaultValue";
@@ -39,6 +40,7 @@ RZMultiValueSelectionItemDelegate,
 RZToggleTableViewCellDelegate>
 
 @property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
+@property (strong, nonatomic) NSArray *preferenceSpecifiers;
 @property (strong, nonatomic) RZDisclosureTableViewCell *selectedDisclosureCell;
 
 @end
@@ -52,14 +54,15 @@ RZToggleTableViewCellDelegate>
     if ( self ) {
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         
-        NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
+        _preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
         
         NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
-        NSNumber *cellNumber = @(0);
+//        NSNumber *cellNumber = @(0);
         
-        for (id settingsItem in preferenceSpecifiers) {
+        for (id settingsItem in _preferenceSpecifiers) {
             NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
             NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
+            NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
             
             if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
                 NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
@@ -83,7 +86,7 @@ RZToggleTableViewCellDelegate>
                                                                                                                defaultValue:cellDefaultValue
                                                                                                           andSelectionItems:selectionItems];
                 [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
-                NSString *multiValueSettingsKey = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:[cellNumber intValue]];
+                NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
                 [userSettings setObject:cellDefaultValue forKey:multiValueSettingsKey];
             }
             else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
@@ -91,11 +94,11 @@ RZToggleTableViewCellDelegate>
                 RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle];
                 [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
                 
-                NSString *toggleKey = [self generateSettingsKey:kRZToggleSwitchSpecifier withNumber:[cellNumber intValue]];
+                NSString *toggleKey = [self generateSettingsKey:plistItemIdentifier];
                 [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
                 
             }
-            cellNumber = [NSNumber numberWithInt:[cellNumber intValue]+1];
+//            cellNumber = [NSNumber numberWithInt:[cellNumber intValue]+1];
         }
         
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
@@ -103,6 +106,10 @@ RZToggleTableViewCellDelegate>
         [_settingsCellItemsMetaData addObject:versionItem];
         
         [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
+        
+        for (id item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]allKeys]) {
+            NSLog(@"%@: %@", item, [[NSUserDefaults standardUserDefaults] objectForKey:item]);
+        }
     }
     
     return self;
@@ -143,7 +150,8 @@ RZToggleTableViewCellDelegate>
         disclosureCell.delegate = self;
         
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
-        NSString *multiValueSettingsKey = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:indexPath.row];
+        NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
+        NSString *multiValueSettingsKey = [self generateSettingsKey:settingsDefaultKey];
         NSNumber *selectionDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:multiValueSettingsKey];
         NSInteger defaultValue = [selectionDefaultValue integerValue];
         RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:defaultValue];
@@ -158,7 +166,8 @@ RZToggleTableViewCellDelegate>
         
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *) cell;
         
-        NSString *toggleDefault = [self generateSettingsKey:kRZToggleSwitchSpecifier withNumber:indexPath.row];
+        NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
+        NSString *toggleDefault = [self generateSettingsKey:settingsDefaultKey];
         NSNumber *toggleSwitchDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:toggleDefault];
         
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
@@ -180,16 +189,30 @@ RZToggleTableViewCellDelegate>
 - (void)didChangeToggleStateOfCell:(RZToggleTableViewCell *)cell
 {
     NSIndexPath *currentCellIndexPath = [self.settingsOptionsTableView indexPathForCell:cell];
-    NSString *valueToChange = [self generateSettingsKey:kRZToggleSwitchSpecifier withNumber:currentCellIndexPath.row];
+    NSString *itemIdentifier = [self getKeyIdentifierForIndexPath:currentCellIndexPath];
+    NSString *valueToChange = [self generateSettingsKey:itemIdentifier];
     [[NSUserDefaults standardUserDefaults] setBool:cell.applySettingsSwitch.on forKey:valueToChange];
+    
+    
+    for (id item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]allKeys]) {
+        NSLog(@"==========================================================================");
+        NSLog(@"%@: %@", item, [[NSUserDefaults standardUserDefaults] objectForKey:item]);
+    }
 }
 
 - (void)didMakeNewSelection:(RZMultiValueSelectionItem *)item withIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath *disclosureCellIndexPath = [self.settingsOptionsTableView indexPathForCell:self.selectedDisclosureCell];
-    NSString *valueToChange = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:disclosureCellIndexPath.row];
+    NSString *itemIdentifier = [self getKeyIdentifierForIndexPath:disclosureCellIndexPath];
+    NSString *valueToChange = [self generateSettingsKey:itemIdentifier];
     [[NSUserDefaults standardUserDefaults] setObject:item.selectionValue forKey:valueToChange];
     self.selectedDisclosureCell.detailTextLabel.text = item.selectionTitle;
+
+    
+    for (id item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]allKeys]) {
+        NSLog(@"==========================================================================");
+        NSLog(@"%@: %@", item, [[NSUserDefaults standardUserDefaults] objectForKey:item]);
+    }
 }
 
 - (void)didSelectDisclosureCell:(RZDisclosureTableViewCell *)cell
@@ -208,9 +231,19 @@ RZToggleTableViewCellDelegate>
     return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
 
-- (NSString *)generateSettingsKey:(NSString *)specifier withNumber:(NSInteger)index
+- (NSString *)generateSettingsKey:(NSString *)identifier
 {
-    return [NSString stringWithFormat:@"%@%@%i", kRZUserSettingsDebugPrefix, specifier, index];
+    return [NSString stringWithFormat:@"%@%@", kRZUserSettingsDebugPrefix, identifier];
+}
+
+- (NSString *)getKeyIdentifierForIndexPath:(NSIndexPath *)indexPath
+{
+    id setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row];
+    if ( [setting isKindOfClass:[NSDictionary class]] ) {
+        NSLog(@"DICTIONARY");
+        return [setting objectForKey:kRZKeyItemIdentifier];
+    }
+    return nil;
 }
 
 @end
