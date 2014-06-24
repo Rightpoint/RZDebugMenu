@@ -186,10 +186,6 @@ RZToggleTableViewCellDelegate>
     NSString *valueToChange = [self generateSettingsKey:itemIdentifier];
     [[NSUserDefaults standardUserDefaults] setObject:item.selectionValue forKey:valueToChange];
     self.selectedDisclosureCell.detailTextLabel.text = item.selectionTitle;
-//    for (id item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]allKeys]) {
-//        NSLog(@"==========================================================================");
-//        NSLog(@"%@: %@", item, [[NSUserDefaults standardUserDefaults] objectForKey:item]);
-//    }
 }
 
 - (void)didSelectDisclosureCell:(RZDisclosureTableViewCell *)cell
@@ -231,7 +227,6 @@ RZToggleTableViewCellDelegate>
 {
     id setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row];
     if ( [setting isKindOfClass:[NSDictionary class]] ) {
-        NSLog(@"DICTIONARY");
         return [setting objectForKey:kRZKeyItemIdentifier];
     }
     return nil;
