@@ -12,9 +12,7 @@
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
-#import "RZMultiValueSelectionItem.h"
 
-#import "RZToggleTableViewCell.h"
 #import "RZDisclosureTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 
@@ -35,13 +33,9 @@ static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuSettingsInterface ()
-<RZDisclosureTableViewCellDelegate,
-RZMultiValueSelectionItemDelegate,
-RZToggleTableViewCellDelegate>
 
 @property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
 @property (strong, nonatomic) NSArray *preferenceSpecifiers;
-@property (strong, nonatomic) RZDisclosureTableViewCell *selectedDisclosureCell;
 
 @end
 
@@ -132,7 +126,7 @@ RZToggleTableViewCellDelegate>
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
         RZDisclosureTableViewCell *disclosureCell = (RZDisclosureTableViewCell *)cell;
         disclosureCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
-        disclosureCell.delegate = self;
+//        disclosureCell.delegate = self;
         
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
@@ -156,7 +150,6 @@ RZToggleTableViewCellDelegate>
         NSNumber *toggleSwitchDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:toggleDefault];
         
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
-        toggleCell.delegate = self;
         cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
@@ -169,9 +162,7 @@ RZToggleTableViewCellDelegate>
     return cell;
 }
 
-#pragma mark - RZToggleTableViewCellDelegate method
-
-- (void)didChangeToggleStateOfCell:(RZToggleTableViewCell *)cell
+- (void)setNewToggleStateOfCell:(RZToggleTableViewCell *)cell
 {
     NSIndexPath *currentCellIndexPath = [self.settingsOptionsTableView indexPathForCell:cell];
     NSString *itemIdentifier = [self getKeyIdentifierForIndexPath:currentCellIndexPath];
@@ -179,21 +170,14 @@ RZToggleTableViewCellDelegate>
     [[NSUserDefaults standardUserDefaults] setBool:cell.applySettingsSwitch.on forKey:valueToChange];
 }
 
-- (void)didMakeNewSelection:(RZMultiValueSelectionItem *)item withIndexPath:(NSIndexPath *)indexPath
+- (void)setNewMultiChoiceItem:(RZMultiValueSelectionItem *)item withModalCellIndexPath:(NSIndexPath *)indexPath
 {
-    NSIndexPath *disclosureCellIndexPath = [self.settingsOptionsTableView indexPathForCell:self.selectedDisclosureCell];
-    NSString *itemIdentifier = [self getKeyIdentifierForIndexPath:disclosureCellIndexPath];
+    UITableViewCell *disclosureCell = [self.settingsOptionsTableView cellForRowAtIndexPath:indexPath];
+    NSString *itemIdentifier = [self getKeyIdentifierForIndexPath:indexPath];
     NSString *valueToChange = [self generateSettingsKey:itemIdentifier];
     [[NSUserDefaults standardUserDefaults] setObject:item.selectionValue forKey:valueToChange];
-    self.selectedDisclosureCell.detailTextLabel.text = item.selectionTitle;
+    disclosureCell.detailTextLabel.text = item.selectionTitle;
 }
-
-- (void)didSelectDisclosureCell:(RZDisclosureTableViewCell *)cell
-{
-    self.selectedDisclosureCell = cell;
-}
-
-#pragma mark - other methods
 
 - (NSMutableArray *)generateMultiValueOptionsArray:(NSArray *)optionTitles withValues:(NSArray *)optionValues
 {
@@ -203,7 +187,6 @@ RZToggleTableViewCellDelegate>
         NSNumber *value = [optionValues objectAtIndex:i];
         
         RZMultiValueSelectionItem *selectionItemMetaData = [[RZMultiValueSelectionItem alloc] initWithTitle:title defaultValue:value];
-        selectionItemMetaData.delegate = self;
         [selectionItems addObject:selectionItemMetaData];
     }
     return selectionItems;
