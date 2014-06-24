@@ -47,7 +47,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     self = [super init];
     if ( self ) {
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
-        
         _preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
         
         NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
@@ -83,11 +82,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 
             }
         }
-        
-        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
-        RZDebugMenuSettingsItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
-        [_settingsCellItemsMetaData addObject:versionItem];
-        
+        [self setUpVersionCellMetaData];
         [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
     }
     
@@ -126,7 +121,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
         RZDisclosureTableViewCell *disclosureCell = (RZDisclosureTableViewCell *)cell;
         disclosureCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
-//        disclosureCell.delegate = self;
         
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
@@ -190,6 +184,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         [selectionItems addObject:selectionItemMetaData];
     }
     return selectionItems;
+}
+
+- (void)setUpVersionCellMetaData
+{
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
+    RZDebugMenuSettingsItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
+    [_settingsCellItemsMetaData addObject:versionItem];
 }
 
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
