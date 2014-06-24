@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class RZDebugMenuMultiItemListViewController;
+@protocol RZDebugMenuMultiItemListViewControllerDelegate <NSObject>
+
+- (void)didMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
 @interface RZDebugMenuMultiItemListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (id)initWithSelectionItems:(NSArray *)selectionItems;

@@ -19,7 +19,7 @@ static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
-@interface RZDebugMenuModalViewController ()
+@interface RZDebugMenuModalViewController () <RZDebugMenuMultiItemListViewControllerDelegate>
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *debugSettingsInterface;
 @property (strong, nonatomic) UITableView *optionsTableView;
@@ -73,6 +73,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 #pragma mark - table view delegate methods
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZDebugMenuSettingsItem *currentMetaDataObject = [self.debugSettingsInterface settingsItemAtIndexPath:indexPath];
@@ -90,6 +95,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         [self.navigationController pushViewController:environmentsViewController animated:YES];
         [self.optionsTableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+}
+
+- (void)didMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 @end

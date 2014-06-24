@@ -16,15 +16,17 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 @property (strong, nonatomic) UITableView *selectionsTableView;
 @property (strong, nonatomic) NSArray *cellItems;
+@property (weak, nonatomic) id<RZDebugMenuMultiItemListViewControllerDelegate>delegate;
 
 @end
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems
+- (id)initWithSelectionItems:(NSArray *)selectionItems andDelegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate
 {
     self = [super init];
     if ( self ) {
+        _delegate = delegate;
         _cellItems = [[NSArray alloc] initWithArray:selectionItems];
         self.title = kRZNavigationBarTitle;
     }
@@ -75,7 +77,7 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZMultiValueSelectionItem* selectedItem = [self.cellItems objectAtIndex:indexPath.row];
-    [selectedItem.delegate didMakeNewSelection:selectedItem withIndexPath:indexPath];
+    [self.delegate didMakeNewSelectionAtIndexPath:indexPath];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
