@@ -64,11 +64,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"The disclosure selection arrays must be of non-zero length and equal length. Check to see in the Plist under your MultiValue item that your Titles and Values items are equal in length and are not 0");
                 
                 NSMutableArray *selectionItems = [self generateMultiValueOptionsArray:optionTitles withValues:optionValues];
-                
                 RZDebugMenuSettingsItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
                                                                                                                defaultValue:cellDefaultValue
                                                                                                           andSelectionItems:selectionItems];
                 [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
+                
                 NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
                 [userSettings setObject:cellDefaultValue forKey:multiValueSettingsKey];
             }
@@ -79,9 +79,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 
                 NSString *toggleKey = [self generateSettingsKey:plistItemIdentifier];
                 [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
-                
             }
         }
+        
         [self setUpVersionCellMetaData];
         [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
     }
