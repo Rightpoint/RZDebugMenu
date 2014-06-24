@@ -180,24 +180,16 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (void)didChangeToggleStateOfCell:(RZToggleTableViewCell *)cell
 {
     NSIndexPath *currentCellIndexPath = [self.settingsOptionsTableView indexPathForCell:cell];
-    NSNumber *toggleSwitchValue = [NSNumber numberWithBool:cell.applySettingsSwitch.on];
-    
-    NSMutableDictionary *mutableUserDefaults = [self getMutableUserDefaults];
     NSString *valueToChange = [self generateSettingsKey:kRZToggleSwitchSpecifier withNumber:currentCellIndexPath.row];
-    [mutableUserDefaults setValue:toggleSwitchValue forKey:valueToChange];
-    
-    [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
+    [[NSUserDefaults standardUserDefaults] setBool:cell.applySettingsSwitch.on forKey:valueToChange];
 }
 
 - (void)didMakeNewSelection:(RZMultiValueSelectionItem *)item withIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath *disclosureCellIndexPath = [self.settingsOptionsTableView indexPathForCell:self.selectedDisclosureCell];
-    NSMutableDictionary *mutableUserDefaults = [self getMutableUserDefaults];
     NSString *valueToChange = [self generateSettingsKey:kRZMultiValueSpecifier withNumber:disclosureCellIndexPath.row];
-    [mutableUserDefaults setValue:item.selectionValue forKey:valueToChange];
+    [[NSUserDefaults standardUserDefaults] setObject:item.selectionValue forKey:valueToChange];
     self.selectedDisclosureCell.detailTextLabel.text = item.selectionTitle;
-    
-    [[NSUserDefaults standardUserDefaults] registerDefaults:mutableUserDefaults];
 }
 
 - (void)didSelectDisclosureCell:(RZDisclosureTableViewCell *)cell
@@ -219,12 +211,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (NSString *)generateSettingsKey:(NSString *)specifier withNumber:(NSInteger)index
 {
     return [NSString stringWithFormat:@"%@%@%i", kRZUserSettingsDebugPrefix, specifier, index];
-}
-
-- (NSMutableDictionary *)getMutableUserDefaults
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [[defaults dictionaryRepresentation] mutableCopy];
 }
 
 @end
