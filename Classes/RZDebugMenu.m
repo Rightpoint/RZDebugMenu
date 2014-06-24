@@ -46,8 +46,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 + (id)debugSettingForKey:(NSString *)key
 {
-    // TODO: Implement this feature
-    return [NSNumber numberWithInt:0];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
 
 - (id)init
