@@ -11,6 +11,7 @@
 #import "RZDebugMenuSettingsItem.h"
 #import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDebugMenuMultiValueItem.h"
+#import "RZDisclosureTableViewCell.h"
 
 static NSString * const kRZNavigationBarTitle = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
@@ -67,7 +68,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (void)closeView
 {
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

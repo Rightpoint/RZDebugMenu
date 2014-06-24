@@ -55,7 +55,7 @@ RZToggleTableViewCellDelegate>
         NSArray *preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
         
         NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
-        NSNumber *cellNumber = [[NSNumber alloc] initWithInt:0];
+        NSNumber *cellNumber = @(0);
         
         for (id settingsItem in preferenceSpecifiers) {
             NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
