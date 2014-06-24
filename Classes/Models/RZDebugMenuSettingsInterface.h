@@ -8,15 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "RZDebugMenuSettingsItem.h"
-#import "RZToggleTableViewCell.h"
-#import "RZMultiValueSelectionItem.h"
-#import "RZDisclosureTableViewCell.h"
 
-@interface RZDebugMenuSettingsInterface : NSObject
-<RZDisclosureTableViewCellDelegate,
-RZMultiValueSelectionItemDelegate,
-RZToggleTableViewCellDelegate,
-UITableViewDataSource>
+@interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
 
 @property (weak, nonatomic) UITableView *settingsOptionsTableView;
 

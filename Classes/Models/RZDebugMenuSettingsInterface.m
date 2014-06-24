@@ -12,7 +12,10 @@
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
+#import "RZMultiValueSelectionItem.h"
 
+#import "RZToggleTableViewCell.h"
+#import "RZDisclosureTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG";
@@ -31,6 +34,9 @@ static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuSettingsInterface ()
+<RZDisclosureTableViewCellDelegate,
+RZMultiValueSelectionItemDelegate,
+RZToggleTableViewCellDelegate>
 
 @property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
 @property (strong, nonatomic) RZDisclosureTableViewCell *selectedDisclosureCell;
