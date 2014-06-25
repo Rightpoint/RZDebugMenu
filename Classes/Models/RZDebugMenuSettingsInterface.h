@@ -17,7 +17,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
-- (void)setNewMultiChoiceItem:(RZMultiValueSelectionItem *)item withModalCellIndexPath:(NSIndexPath *)indexPath;
-- (void)setNewToggleStateOfCell:(RZToggleTableViewCell *)cell;
+- (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;
 
 @end

@@ -10,17 +10,20 @@
 
 @interface RZDebugMenuToggleItem ()
 
-@property (readwrite, assign) BOOL toggleCellDefaultValue;
+@property (strong, nonatomic, readwrite) NSNumber *toggleCellDefaultValue;
+@property (strong, nonatomic, readwrite) NSString *userDefaultsKey;
 
 @end
 
 @implementation RZDebugMenuToggleItem
 
-- (id)initWithTitle:(NSString *)title
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andKey:(NSString *)key
 {
     self = [super init];
     if ( self ) {
         self.tableViewCellTitle = title;
+        _toggleCellDefaultValue = value;
+        _userDefaultsKey = key;
     }
     return self;
 }

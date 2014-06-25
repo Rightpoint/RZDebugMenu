@@ -12,18 +12,20 @@
 
 @property (strong, nonatomic, readwrite) NSNumber *disclosureTableViewCellDefaultValue;
 @property (strong, nonatomic, readwrite) NSArray *selectionItems;
+@property (strong, nonatomic, readwrite) NSString *userDefaultsKey;
 
 @end
 
 @implementation RZDebugMenuMultiValueItem
 
-- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andSelectionItems:(NSArray *)selectionItems
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value defaultsKey:(NSString *)key andSelectionItems:(NSArray *)selectionItems
 {
     self = [super init];
     if ( self ) {
         self.tableViewCellTitle = title;
         _disclosureTableViewCellDefaultValue = value;
         _selectionItems = selectionItems;
+        _userDefaultsKey = key;
     }
     return self;
 }

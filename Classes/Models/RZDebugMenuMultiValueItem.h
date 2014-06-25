@@ -13,7 +13,8 @@
 
 @property (strong, nonatomic, readonly) NSNumber *disclosureTableViewCellDefaultValue;
 @property (strong, nonatomic, readonly) NSArray *selectionItems;
+@property (strong, nonatomic, readonly) NSString *userDefaultsKey;
 
-- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andSelectionItems:(NSArray *)selectionItems;
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value defaultsKey:(NSString *)key andSelectionItems:(NSArray *)selectionItems;
 
 @end

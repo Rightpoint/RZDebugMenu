@@ -49,11 +49,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         _preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
         
-        NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
-        
-        for (id settingsItem in _preferenceSpecifiers) {
-            [self generateMetaDataObjects:settingsItem withUserDefaults:userSettings];
-        }
+        NSMutableDictionary *userSettings = [self createMetaDataObjectsAndGenerateUserDefaults:_preferenceSpecifiers];
         
         [self setUpVersionCellMetaData];
         [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
@@ -129,53 +125,54 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return cell;
 }
 
-- (void)setNewToggleStateOfCell:(RZToggleTableViewCell *)cell
+- (void)setValue:(id)value forDebugSettingsKey:(NSString *)key
 {
-    NSIndexPath *currentCellIndexPath = [self.settingsOptionsTableView indexPathForCell:cell];
-    NSString *itemIdentifier = [self getKeyIdentifierForIndexPath:currentCellIndexPath];
-    NSString *valueToChange = [self generateSettingsKey:itemIdentifier];
-    [[NSUserDefaults standardUserDefaults] setBool:cell.applySettingsSwitch.on forKey:valueToChange];
+    if ( key != nil && value != nil ) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *userDefaultsKey = [self generateSettingsKey:key];
+        
+        if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
+            [userDefaults setObject:value forKey:userDefaultsKey];
+        }
+    }
 }
 
-- (void)setNewMultiChoiceItem:(RZMultiValueSelectionItem *)item withModalCellIndexPath:(NSIndexPath *)indexPath
+- (NSMutableDictionary *)createMetaDataObjectsAndGenerateUserDefaults:(NSArray *)preferences
 {
-    UITableViewCell *disclosureCell = [self.settingsOptionsTableView cellForRowAtIndexPath:indexPath];
-    NSString *itemIdentifier = [self getKeyIdentifierForIndexPath:indexPath];
-    NSString *valueToChange = [self generateSettingsKey:itemIdentifier];
-    [[NSUserDefaults standardUserDefaults] setObject:item.selectionValue forKey:valueToChange];
-    disclosureCell.detailTextLabel.text = item.selectionTitle;
-}
-
-- (void)generateMetaDataObjects:(id)settingsItem withUserDefaults:(NSMutableDictionary *)userSettings
-{
-    NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
-    NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
-    NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
-    
-    if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
-        NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
-        NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
-        NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
+    NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
+    for (id settingsItem in preferences) {
+        NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
+        NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
+        NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
         
-        NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"The disclosure selection arrays must be of non-zero length and equal length. Check to see in the Plist under your MultiValue item that your Titles and Values items are equal in length and are not 0");
-        
-        NSMutableArray *selectionItems = [self generateMultiValueOptionsArray:optionTitles withValues:optionValues];
-        RZDebugMenuSettingsItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
-                                                                                                       defaultValue:cellDefaultValue
-                                                                                                  andSelectionItems:selectionItems];
-        [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
-        
-        NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
-        [userSettings setObject:cellDefaultValue forKey:multiValueSettingsKey];
+        if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
+            NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
+            NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
+            
+            NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"The disclosure selection arrays must be of non-zero length and equal length. Check to see in the Plist under your MultiValue item that your Titles and Values items are equal in length and are not 0");
+            
+            NSMutableArray *selectionItems = [self generateMultiValueOptionsArray:optionTitles withValues:optionValues];
+            RZDebugMenuSettingsItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithTitle:cellTitle
+                                                                                                           defaultValue:cellDefaultValue
+                                                                                                            defaultsKey:plistItemIdentifier
+                                                                                                      andSelectionItems:selectionItems];
+            [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
+            
+            NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
+            [userSettings setObject:cellDefaultValue forKey:multiValueSettingsKey];
+        }
+        else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
+            
+            NSNumber *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle defaultValue:defaultValue andKey:plistItemIdentifier];
+            [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
+            
+            NSString *toggleKey = [self generateSettingsKey:plistItemIdentifier];
+            [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
+        }
     }
-    else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
-        
-        RZDebugMenuSettingsItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithTitle:cellTitle];
-        [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
-        
-        NSString *toggleKey = [self generateSettingsKey:plistItemIdentifier];
-        [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
-    }
+    return userSettings;
 }
 
 - (NSMutableArray *)generateMultiValueOptionsArray:(NSArray *)optionTitles withValues:(NSArray *)optionValues

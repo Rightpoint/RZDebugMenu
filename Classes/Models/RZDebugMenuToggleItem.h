@@ -11,6 +11,9 @@
 
 @interface RZDebugMenuToggleItem : RZDebugMenuSettingsItem
 
-- (id)initWithTitle:(NSString *)title;
+@property (strong, nonatomic, readonly) NSNumber *toggleCellDefaultValue;
+@property (strong, nonatomic, readonly) NSString *userDefaultsKey;
+
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value andKey:(NSString *)key;
 
 @end
