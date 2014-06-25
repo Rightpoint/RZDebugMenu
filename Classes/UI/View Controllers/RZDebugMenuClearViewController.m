@@ -136,7 +136,7 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
                                  newButtonFrame.origin.y = CGRectGetMinY(self.view.frame) + topBoundaryInset;
                              }
                              
-                             [UIView animateWithDuration:0.15 animations:^{
+                             [UIView animateWithDuration:0.25 animations:^{
                                  draggedButton.frame = newButtonFrame;
                                  [panGesture setTranslation:CGPointZero inView:self.view];
                              }];
