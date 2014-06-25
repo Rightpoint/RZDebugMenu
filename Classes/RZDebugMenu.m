@@ -107,6 +107,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     CGFloat const iOSOrientationDepricationVersion = 8.0;
     NSString *systemVersionString = [[UIDevice currentDevice] systemVersion];
+    systemVersionString = [systemVersionString substringToIndex:3];
     CGFloat systemVersion = [systemVersionString floatValue];
     if ( systemVersion < iOSOrientationDepricationVersion ) {
         UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
