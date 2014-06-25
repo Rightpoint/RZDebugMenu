@@ -109,8 +109,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (void)didMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
-    RZDebugMenuMultiValueItem *disclosureCell = (RZDebugMenuMultiValueItem *)[self.debugSettingsInterface settingsItemAtIndexPath:selectedIndexPath];
-    RZMultiValueSelectionItem *selectedItem = [disclosureCell.selectionItems objectAtIndex:indexPath.row];
+    RZDebugMenuMultiValueItem *disclosureMultiValueItem = (RZDebugMenuMultiValueItem *)[self.debugSettingsInterface settingsItemAtIndexPath:selectedIndexPath];
+    RZMultiValueSelectionItem *selectedItem = [disclosureMultiValueItem.selectionItems objectAtIndex:indexPath.row];
     [self.debugSettingsInterface setNewMultiChoiceItem:selectedItem withModalCellIndexPath:selectedIndexPath];
 }
 
