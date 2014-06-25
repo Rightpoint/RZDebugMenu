@@ -77,17 +77,17 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
         newButtonFrame.origin.x += translation.x;
         newButtonFrame.origin.y += translation.y;
         
-        if ( newButtonFrame.origin.x >= CGRectGetMaxX(self.view.frame) - buttonWidth ) {
-            newButtonFrame.origin.x = CGRectGetMaxX(self.view.frame) - buttonWidth;
+        if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
+            newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth;
         }
         if ( newButtonFrame.origin.x <= 0 ) {
             newButtonFrame.origin.x = 0;
         }
-        if ( newButtonFrame.origin.y >= CGRectGetMaxY(self.view.frame) - buttonWidth) {
-            newButtonFrame.origin.y = CGRectGetMaxY(self.view.frame) - buttonWidth;
+        if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+            newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth;
         }
-        if ( newButtonFrame.origin.y <= CGRectGetMinY(self.view.frame) + topBoundaryInset) {
-            newButtonFrame.origin.y = CGRectGetMinY(self.view.frame) + topBoundaryInset;
+        if ( newButtonFrame.origin.y <= topBoundaryInset) {
+            newButtonFrame.origin.y = topBoundaryInset;
         }
         
         draggedButton.frame = newButtonFrame;
@@ -104,17 +104,17 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
                              newButtonFrame.origin.x += velocity.x;
                              newButtonFrame.origin.y += velocity.y;
                              
-                             if ( newButtonFrame.origin.x >= CGRectGetMaxX(self.view.frame) - buttonWidth ) {
-                                 newButtonFrame.origin.x = CGRectGetMaxX(self.view.frame) - buttonWidth + bounceOffset;
+                             if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
+                                 newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth + bounceOffset;
                              }
                              if ( newButtonFrame.origin.x <= 0 ) {
                                  newButtonFrame.origin.x = -bounceOffset;
                              }
-                             if ( newButtonFrame.origin.y >= CGRectGetMaxY(self.view.frame) - buttonWidth) {
-                                 newButtonFrame.origin.y = CGRectGetMaxY(self.view.frame) - buttonWidth + bounceOffset;
+                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+                                 newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth + bounceOffset;
                              }
-                             if ( newButtonFrame.origin.y <= CGRectGetMinY(self.view.frame) + topBoundaryInset) {
-                                 newButtonFrame.origin.y = CGRectGetMinY(self.view.frame) + topBoundaryInset - bounceOffset;
+                             if ( newButtonFrame.origin.y <= topBoundaryInset) {
+                                 newButtonFrame.origin.y = topBoundaryInset - bounceOffset;
                              }
                              
                              draggedButton.frame = newButtonFrame;
@@ -123,17 +123,17 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
                              
                              // Bounce back animation
                              CGRect newButtonFrame = draggedButton.frame;
-                             if ( newButtonFrame.origin.x >= CGRectGetMaxX(self.view.frame) - buttonWidth ) {
-                                 newButtonFrame.origin.x = CGRectGetMaxX(self.view.frame) - buttonWidth;
+                             if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
+                                 newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth;
                              }
                              if ( newButtonFrame.origin.x <= 0 ) {
                                  newButtonFrame.origin.x = 0;
                              }
-                             if ( newButtonFrame.origin.y >= CGRectGetMaxY(self.view.frame) - buttonWidth) {
-                                 newButtonFrame.origin.y = CGRectGetMaxY(self.view.frame) - buttonWidth;
+                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+                                 newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth;
                              }
-                             if ( newButtonFrame.origin.y <= CGRectGetMinY(self.view.frame) + topBoundaryInset) {
-                                 newButtonFrame.origin.y = CGRectGetMinY(self.view.frame) + topBoundaryInset;
+                             if ( newButtonFrame.origin.y <= topBoundaryInset) {
+                                 newButtonFrame.origin.y = topBoundaryInset;
                              }
                              
                              [UIView animateWithDuration:0.25 animations:^{
