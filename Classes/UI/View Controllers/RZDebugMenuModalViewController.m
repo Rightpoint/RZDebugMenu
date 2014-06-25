@@ -25,7 +25,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *debugSettingsInterface;
 @property (strong, nonatomic) UITableView *optionsTableView;
-@property (strong, nonatomic) NSIndexPath *lastHitCellIndexPath;
 
 @end
 
@@ -67,6 +66,14 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     self.navigationItem.rightBarButtonItem = doneButton;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
+    if ( selectedIndexPath ) {
+        [self.optionsTableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
+    }
+}
+
 #pragma mark - nav bar buttons methods
 
 - (void)closeView
@@ -95,17 +102,16 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
         
         RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems andDelegate:self];
-        self.lastHitCellIndexPath = indexPath;
-        [self.optionsTableView deselectRowAtIndexPath:indexPath animated:YES];
         [self.navigationController pushViewController:environmentsViewController animated:YES];
     }
 }
 
 - (void)didMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath
 {
-    RZDebugMenuMultiValueItem *disclosureCell = (RZDebugMenuMultiValueItem *)[self.debugSettingsInterface settingsItemAtIndexPath:self.lastHitCellIndexPath];
+    NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
+    RZDebugMenuMultiValueItem *disclosureCell = (RZDebugMenuMultiValueItem *)[self.debugSettingsInterface settingsItemAtIndexPath:selectedIndexPath];
     RZMultiValueSelectionItem *selectedItem = [disclosureCell.selectionItems objectAtIndex:indexPath.row];
-    [self.debugSettingsInterface setNewMultiChoiceItem:selectedItem withModalCellIndexPath:self.lastHitCellIndexPath];
+    [self.debugSettingsInterface setNewMultiChoiceItem:selectedItem withModalCellIndexPath:selectedIndexPath];
 }
 
 - (void)didChangeToggleStateOfCell:(RZToggleTableViewCell *)cell
