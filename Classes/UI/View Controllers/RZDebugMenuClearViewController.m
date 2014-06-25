@@ -98,7 +98,7 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
     {
         [UIView animateWithDuration:0.3
                               delay:0.0
-                            options:UIViewAnimationOptionCurveEaseOut
+                            options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
                              CGRect newButtonFrame = draggedButton.frame;
                              newButtonFrame.origin.x += velocity.x;
