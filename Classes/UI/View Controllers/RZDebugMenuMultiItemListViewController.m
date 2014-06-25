@@ -76,7 +76,7 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate didMakeNewSelectionAtIndexPath:indexPath];
+    [self.delegate multiItemListDidMakeNewSelectionAtIndexPath:indexPath];
 }
 
 @end

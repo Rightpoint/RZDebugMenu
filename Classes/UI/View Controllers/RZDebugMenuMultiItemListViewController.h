@@ -11,7 +11,7 @@
 @class RZDebugMenuMultiItemListViewController;
 @protocol RZDebugMenuMultiItemListViewControllerDelegate <NSObject>
 
-- (void)didMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath;
+- (void)multiItemListDidMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

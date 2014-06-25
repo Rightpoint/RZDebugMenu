@@ -8,15 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-//@class RZDisclosureTableViewCell;
-//@protocol RZDisclosureTableViewCellDelegate <NSObject>
-//
-//- (void)didSelectDisclosureCell:(RZDisclosureTableViewCell *)cell;
-//
-//@end
-
 @interface RZDisclosureTableViewCell : UITableViewCell
-
-//@property (weak, nonatomic) id<RZDisclosureTableViewCellDelegate>delegate;
 
 @end

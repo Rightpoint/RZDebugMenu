@@ -106,7 +106,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     }
 }
 
-- (void)didMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath
+- (void)multiItemListDidMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath
 {
     NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
     RZDebugMenuMultiValueItem *disclosureMultiValueItem = (RZDebugMenuMultiValueItem *)[self.debugSettingsInterface settingsItemAtIndexPath:selectedIndexPath];
