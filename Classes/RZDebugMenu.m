@@ -46,7 +46,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 + (id)debugSettingForKey:(NSString *)key
 {
-    RZDebugMenu *menu = [self alloc];
+    RZDebugMenu *menu = [self privateSharedInstance];
     return [menu.interface valueForDebugSettingsKey:key];
 }
 
