@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C05D3C7195CAB460047DDF4 /* RZDebugMenuObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C05D3C6195CAB460047DDF4 /* RZDebugMenuObserver.m */; };
 		0C22DAC3193CCDA30042938F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC2193CCDA30042938F /* Foundation.framework */; };
 		0C22DAC5193CCDA30042938F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC4193CCDA30042938F /* CoreGraphics.framework */; };
 		0C22DAC7193CCDA30042938F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC6193CCDA30042938F /* UIKit.framework */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C05D3C5195CAB460047DDF4 /* RZDebugMenuObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuObserver.h; sourceTree = "<group>"; };
+		0C05D3C6195CAB460047DDF4 /* RZDebugMenuObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuObserver.m; sourceTree = "<group>"; };
 		0C22DABF193CCDA30042938F /* RZDebugMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RZDebugMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C22DAC2193CCDA30042938F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C22DAC4193CCDA30042938F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -208,6 +211,8 @@
 			children = (
 				0C78112D194F859900F25AE5 /* RZDebugMenu.h */,
 				0C78112E194F859900F25AE5 /* RZDebugMenu.m */,
+				0C05D3C5195CAB460047DDF4 /* RZDebugMenuObserver.h */,
+				0C05D3C6195CAB460047DDF4 /* RZDebugMenuObserver.m */,
 				0C781120194F859900F25AE5 /* Models */,
 				0C78112F194F859900F25AE5 /* UI */,
 			);
@@ -406,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C781145194F859900F25AE5 /* RZDebugMenu.m in Sources */,
+				0C05D3C7195CAB460047DDF4 /* RZDebugMenuObserver.m in Sources */,
 				0C78113F194F859900F25AE5 /* RZDebugMenuMultiValueItem.m in Sources */,
 				0C22DAD3193CCDA30042938F /* RZAppDelegate.m in Sources */,
 				0C781114194F243B00F25AE5 /* RZTestViewController.m in Sources */,
