@@ -103,7 +103,6 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
     [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
-    
 }
 
 - (void)changeOrientation
