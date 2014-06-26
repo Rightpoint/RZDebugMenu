@@ -19,9 +19,8 @@
 
 - (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title
 {
-    self = [super initWithValue:value forKey:key];
+    self = [super initWithValue:value forKey:key withTitle:title];
     if ( self ) {
-        self.tableViewCellTitle = title;
         _toggleCellDefaultValue = self.settingsValue;
     }
     return self;

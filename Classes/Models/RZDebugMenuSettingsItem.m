@@ -10,10 +10,11 @@
 
 @implementation RZDebugMenuSettingsItem
 
-- (id)initWithValue:(id)value forKey:(NSString *)key
+- (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title
 {
     self = [super init];
     if ( self ) {
+        _tableViewCellTitle = title;
         _settingsKey = key;
         _settingsValue = value;
     }

@@ -18,9 +18,8 @@
 
 - (id)initWithTitle:(NSString *)title andVersionNumber:(NSString *)version
 {
-    self = [super init];
+    self = [super initWithValue:nil forKey:nil withTitle:title];
     if ( self ) {
-        self.tableViewCellTitle = title;
         _versionNumber = version;
     }
     return self;
