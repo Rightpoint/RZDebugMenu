@@ -1,16 +1,16 @@
 //
 //  RZDebugMenuObserver.m
-//  RZDebugMenuDemo
+//  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/26/14.
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuObserver.h"
+#import "RZDebugMenuKeyObserver.h"
 
-@implementation RZDebugMenuObserver
+@implementation RZDebugMenuKeyObserver
 
-- (id)init
+- (id)initWithKeyToObserve:(NSString *)key
 {
     self = [super init];
     if ( self ) {
