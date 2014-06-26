@@ -121,7 +121,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 {
     NSIndexPath *toggleCellIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuToggleItem *toggleItem = (RZDebugMenuToggleItem *)[self.debugSettingsInterface settingsItemAtIndexPath:toggleCellIndexPath];
-    [self.debugSettingsInterface setValue:[NSNumber numberWithBool:cell.applySettingsSwitch.on] forDebugSettingsKey:toggleItem.userDefaultsKey];
+    [self.debugSettingsInterface setValue:[NSNumber numberWithBool:cell.applySettingsSwitch.on] forDebugSettingsKey:toggleItem.settingsKey];
 }
 
 @end

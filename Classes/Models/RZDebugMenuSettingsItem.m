@@ -10,4 +10,14 @@
 
 @implementation RZDebugMenuSettingsItem
 
+- (id)initWithValue:(id)value forKey:(NSString *)key
+{
+    self = [super init];
+    if ( self ) {
+        _settingsKey = key;
+        _settingsValue = value;
+    }
+    return self;
+}
+
 @end

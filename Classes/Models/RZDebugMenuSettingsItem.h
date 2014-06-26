@@ -11,5 +11,9 @@
 @interface RZDebugMenuSettingsItem : NSObject
 
 @property (strong, nonatomic) NSString *tableViewCellTitle;
+@property (strong, nonatomic, readonly) NSString *settingsKey;
+@property (strong, nonatomic, readwrite) id settingsValue;
+
+- (id)initWithValue:(id)value forKey:(NSString *)key;
 
 @end
