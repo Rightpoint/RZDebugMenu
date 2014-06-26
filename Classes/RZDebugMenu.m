@@ -46,7 +46,9 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 + (id)debugSettingForKey:(NSString *)key
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    RZDebugMenu *menu = [self alloc];
+    NSString *settingKey = [menu.interface generateSettingsKey:key];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:settingKey];
 }
 
 - (id)init
@@ -101,6 +103,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
     [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
+    
 }
 
 - (void)changeOrientation
