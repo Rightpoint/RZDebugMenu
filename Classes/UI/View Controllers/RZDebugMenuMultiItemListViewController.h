@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RZMultiValueSelectionItem.h"
 
 @class RZDebugMenuMultiItemListViewController;
 @protocol RZDebugMenuMultiItemListViewControllerDelegate <NSObject>
 
-- (void)multiItemListDidMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath;
+- (void)multiItemListDidMakeNewSelectionAtIndexPath:(RZMultiValueSelectionItem *)selectedItem;
 
 @end
 

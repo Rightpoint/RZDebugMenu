@@ -108,12 +108,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     }
 }
 
-- (void)multiItemListDidMakeNewSelectionAtIndexPath:(NSIndexPath *)indexPath
+- (void)multiItemListDidMakeNewSelectionAtIndexPath:(RZMultiValueSelectionItem *)selectedItem
 {
     NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
     RZDebugMenuMultiValueItem *disclosureMultiValueItem = (RZDebugMenuMultiValueItem *)[self.debugSettingsInterface settingsItemAtIndexPath:selectedIndexPath];
-    RZMultiValueSelectionItem *selectedItem = [disclosureMultiValueItem.selectionItems objectAtIndex:indexPath.row];
-    [self.debugSettingsInterface setValue:[NSNumber numberWithInt:indexPath.row] forDebugSettingsKey:disclosureMultiValueItem.userDefaultsKey];
+    [self.debugSettingsInterface setValue:selectedItem.selectionValue forDebugSettingsKey:disclosureMultiValueItem.settingsKey];
     RZDisclosureTableViewCell *selectedCell = (RZDisclosureTableViewCell *)[self.optionsTableView cellForRowAtIndexPath:selectedIndexPath];
     selectedCell.detailTextLabel.text = selectedItem.selectionTitle;
 }

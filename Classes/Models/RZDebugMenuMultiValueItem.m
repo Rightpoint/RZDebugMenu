@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic, readwrite) NSNumber *disclosureTableViewCellDefaultValue;
 @property (strong, nonatomic, readwrite) NSArray *selectionItems;
-@property (strong, nonatomic, readwrite) NSString *userDefaultsKey;
+@property (strong, nonatomic, readwrite) NSString *settingsKey;
 
 @end
 
@@ -25,7 +25,7 @@
         self.tableViewCellTitle = title;
         _disclosureTableViewCellDefaultValue = value;
         _selectionItems = selectionItems;
-        _userDefaultsKey = key;
+        _settingsKey = key;
     }
     return self;
 }
