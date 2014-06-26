@@ -18,6 +18,6 @@
 - (id)initWithDictionary:(NSDictionary *)plistData;
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;
-- (NSString *)generateSettingsKey:(NSString *)identifier;
+- (id)valueForDebugSettingsKey:(NSString *)key;
 
 @end

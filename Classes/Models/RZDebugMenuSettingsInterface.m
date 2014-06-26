@@ -213,6 +213,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     return [self.settingsCellItemsMetaData objectAtIndex:indexPath.row];
 }
 
+- (id)valueForDebugSettingsKey:(NSString *)key
+{
+    NSString *settingKey = [self generateSettingsKey:key];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:settingKey];
+}
+
 - (NSString *)generateSettingsKey:(NSString *)identifier
 {
     return [NSString stringWithFormat:@"%@%@", kRZUserSettingsDebugPrefix, identifier];
