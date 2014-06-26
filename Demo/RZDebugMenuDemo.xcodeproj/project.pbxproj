@@ -220,10 +220,10 @@
 			children = (
 				0C781123194F859900F25AE5 /* RZDebugMenuSettingsInterface.h */,
 				0C781124194F859900F25AE5 /* RZDebugMenuSettingsInterface.m */,
-				0C781121194F859900F25AE5 /* RZDebugMenuMultiValueItem.h */,
-				0C781122194F859900F25AE5 /* RZDebugMenuMultiValueItem.m */,
 				0C781125194F859900F25AE5 /* RZDebugMenuSettingsItem.h */,
 				0C781126194F859900F25AE5 /* RZDebugMenuSettingsItem.m */,
+				0C781121194F859900F25AE5 /* RZDebugMenuMultiValueItem.h */,
+				0C781122194F859900F25AE5 /* RZDebugMenuMultiValueItem.m */,
 				0C781127194F859900F25AE5 /* RZDebugMenuToggleItem.h */,
 				0C781128194F859900F25AE5 /* RZDebugMenuToggleItem.m */,
 				0C781129194F859900F25AE5 /* RZDebugMenuVersionItem.h */,

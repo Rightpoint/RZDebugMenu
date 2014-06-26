@@ -44,6 +44,11 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     [[self privateSharedInstance] setEnabled:YES];
 }
 
++ (id)debugSettingForKey:(NSString *)key
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+}
+
 - (id)init
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -98,21 +103,26 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
 
-// NOTE: Add a runtime version check to disable the gesture update when this is needed in an iOS 8 app. Gesutres with a 'direction' property automatically change direction relative to the device orientation in iOS 8.
 - (void)changeOrientation
 {
-    UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
-        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
-    }
-    else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
-        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    }
-    else if ( statusBarOrientation == UIDeviceOrientationPortraitUpsideDown ) {
-        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionDown;
-    }
-    else {
-        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
+    CGFloat const iOSOrientationDepricationVersion = 8.0;
+    NSString *systemVersionString = [[UIDevice currentDevice] systemVersion];
+    systemVersionString = [systemVersionString substringToIndex:3];
+    CGFloat systemVersion = [systemVersionString floatValue];
+    if ( systemVersion < iOSOrientationDepricationVersion ) {
+        UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
+            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
+        }
+        else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
+            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+        }
+        else if ( statusBarOrientation == UIDeviceOrientationPortraitUpsideDown ) {
+            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionDown;
+        }
+        else {
+            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
+        }
     }
 }
 

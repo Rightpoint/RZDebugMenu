@@ -13,6 +13,6 @@
 @property (strong, nonatomic, readonly) NSString *selectionTitle;
 @property (strong, nonatomic, readonly) NSNumber *selectionValue;
 
-- (id)initWithTitle:(NSString *)title andValue:(NSNumber *)value;
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value;
 
 @end

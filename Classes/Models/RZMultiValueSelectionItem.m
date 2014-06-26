@@ -17,7 +17,7 @@
 
 @implementation RZMultiValueSelectionItem
 
-- (id)initWithTitle:(NSString *)title andValue:(NSNumber *)value
+- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value
 {
     self = [super init];
     if ( self ) {

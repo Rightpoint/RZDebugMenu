@@ -11,6 +11,10 @@
 #import "RZDebugMenuSettingsItem.h"
 #import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDebugMenuMultiValueItem.h"
+#import "RZDebugMenuToggleItem.h"
+#import "RZMultiValueSelectionItem.h"
+#import "RZDisclosureTableViewCell.h"
+#import "RZToggleTableViewCell.h"
 
 static NSString * const kRZNavigationBarTitle = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
@@ -18,7 +22,7 @@ static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
-@interface RZDebugMenuModalViewController ()
+@interface RZDebugMenuModalViewController () <RZDebugMenuMultiItemListViewControllerDelegate, RZToggleTableViewCellDelegate>
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *debugSettingsInterface;
 @property (strong, nonatomic) UITableView *optionsTableView;
@@ -63,14 +67,32 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     self.navigationItem.rightBarButtonItem = doneButton;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
+    if ( selectedIndexPath ) {
+        [self.optionsTableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
+    }
+}
+
 #pragma mark - nav bar buttons methods
 
 - (void)closeView
 {
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - table view delegate methods
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ( [cell isKindOfClass:[RZToggleTableViewCell class]] ) {
+        RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
+        toggleCell.delegate = self;
+        cell = toggleCell;
+    }
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -81,10 +103,25 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         RZDebugMenuMultiValueItem *disclosureCellOptions = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
         
-        RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems];
+        RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems andDelegate:self];
         [self.navigationController pushViewController:environmentsViewController animated:YES];
-        [self.optionsTableView deselectRowAtIndexPath:indexPath animated:YES];
     }
+}
+
+- (void)multiItemListDidMakeNewSelectionAtIndexPath:(RZMultiValueSelectionItem *)selectedItem
+{
+    NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
+    RZDebugMenuMultiValueItem *disclosureMultiValueItem = (RZDebugMenuMultiValueItem *)[self.debugSettingsInterface settingsItemAtIndexPath:selectedIndexPath];
+    [self.debugSettingsInterface setValue:selectedItem.selectionValue forDebugSettingsKey:disclosureMultiValueItem.settingsKey];
+    RZDisclosureTableViewCell *selectedCell = (RZDisclosureTableViewCell *)[self.optionsTableView cellForRowAtIndexPath:selectedIndexPath];
+    selectedCell.detailTextLabel.text = selectedItem.selectionTitle;
+}
+
+- (void)didChangeToggleStateOfCell:(RZToggleTableViewCell *)cell
+{
+    NSIndexPath *toggleCellIndexPath = [self.optionsTableView indexPathForCell:cell];
+    RZDebugMenuToggleItem *toggleItem = (RZDebugMenuToggleItem *)[self.debugSettingsInterface settingsItemAtIndexPath:toggleCellIndexPath];
+    [self.debugSettingsInterface setValue:[NSNumber numberWithBool:cell.applySettingsSwitch.on] forDebugSettingsKey:toggleItem.settingsKey];
 }
 
 @end

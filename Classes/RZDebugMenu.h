@@ -12,5 +12,6 @@
 @interface RZDebugMenu : NSObject <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
 
 + (void)enableWithSettingsPlist:(NSString *)fileName;
++ (id)debugSettingForKey:(NSString *)key;
 
 @end

@@ -30,7 +30,7 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
         
         _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
         
-        _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(70, 225, 37, 37)];
+        _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(70, 225, 35, 35)];
         _displayDebugMenuButton.alpha = 0.80;
         _displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
         [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
@@ -43,7 +43,7 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
         _displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
         [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
         _displayDebugMenuButton.clipsToBounds = YES;
-        _displayDebugMenuButton.layer.cornerRadius = 12;
+        _displayDebugMenuButton.layer.cornerRadius = 8;
         _displayDebugMenuButton.layer.borderWidth = 1.5f;
     }
     return self;
@@ -66,31 +66,81 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
 - (void)dragButton:(UIPanGestureRecognizer *)panGesture
 {
     CGFloat const topBoundaryInset = 20.0f;
+    CGFloat const bounceOffset = 15.f;
     CGFloat const buttonWidth = self.displayDebugMenuButton.bounds.size.width;
     CGPoint translation = [panGesture translationInView:self.view];
+    CGPoint velocity = [panGesture velocityInView:self.view];
     UIView *draggedButton = panGesture.view;
     CGRect newButtonFrame = draggedButton.frame;
     
-    if ( panGesture.state == UIGestureRecognizerStateChanged || panGesture.state == UIGestureRecognizerStateEnded ) {
+    if ( panGesture.state == UIGestureRecognizerStateChanged ) {
         newButtonFrame.origin.x += translation.x;
         newButtonFrame.origin.y += translation.y;
         
-        if ( newButtonFrame.origin.x >= CGRectGetMaxX(self.view.frame) - buttonWidth ) {
-            newButtonFrame.origin.x = CGRectGetMaxX(self.view.frame) - buttonWidth;
+        if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
+            newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth;
         }
         if ( newButtonFrame.origin.x <= 0 ) {
             newButtonFrame.origin.x = 0;
         }
-        if ( newButtonFrame.origin.y >= CGRectGetMaxY(self.view.frame) - buttonWidth) {
-            newButtonFrame.origin.y = CGRectGetMaxY(self.view.frame) - buttonWidth;
+        if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+            newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth;
         }
-        if ( newButtonFrame.origin.y <= CGRectGetMinY(self.view.frame) + topBoundaryInset) {
-            newButtonFrame.origin.y = CGRectGetMinY(self.view.frame) + topBoundaryInset;
+        if ( newButtonFrame.origin.y <= topBoundaryInset) {
+            newButtonFrame.origin.y = topBoundaryInset;
         }
         
         draggedButton.frame = newButtonFrame;
         [panGesture setTranslation:CGPointZero inView:self.view];
         
+    }
+    else if ( panGesture.state == UIGestureRecognizerStateEnded )
+    {
+        [UIView animateWithDuration:0.3
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                             CGRect newButtonFrame = draggedButton.frame;
+                             newButtonFrame.origin.x += velocity.x;
+                             newButtonFrame.origin.y += velocity.y;
+                             
+                             if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
+                                 newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth + bounceOffset;
+                             }
+                             if ( newButtonFrame.origin.x <= 0 ) {
+                                 newButtonFrame.origin.x = -bounceOffset;
+                             }
+                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+                                 newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth + bounceOffset;
+                             }
+                             if ( newButtonFrame.origin.y <= topBoundaryInset) {
+                                 newButtonFrame.origin.y = topBoundaryInset - bounceOffset;
+                             }
+                             
+                             draggedButton.frame = newButtonFrame;
+                         }
+                         completion:^(BOOL completed) {
+                             
+                             // Bounce back animation
+                             CGRect newButtonFrame = draggedButton.frame;
+                             if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
+                                 newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth;
+                             }
+                             if ( newButtonFrame.origin.x <= 0 ) {
+                                 newButtonFrame.origin.x = 0;
+                             }
+                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+                                 newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth;
+                             }
+                             if ( newButtonFrame.origin.y <= topBoundaryInset) {
+                                 newButtonFrame.origin.y = topBoundaryInset;
+                             }
+                             
+                             [UIView animateWithDuration:0.25 animations:^{
+                                 draggedButton.frame = newButtonFrame;
+                                 [panGesture setTranslation:CGPointZero inView:self.view];
+                             }];
+                         }];
     }
 }
 

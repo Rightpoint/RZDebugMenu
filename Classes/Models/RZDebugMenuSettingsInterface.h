@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "RZDebugMenuSettingsItem.h"
+#import "RZMultiValueSelectionItem.h"
+#import "RZToggleTableViewCell.h"
 
 @interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
 
@@ -15,5 +17,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;
 
 @end

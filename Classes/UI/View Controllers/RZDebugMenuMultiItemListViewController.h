@@ -1,5 +1,5 @@
 //
-//  RZDebugMenuEnvironmentsListViewController.h
+//  RZDebugMenuMultiItemListViewController.h
 //  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/3/14.
@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RZMultiValueSelectionItem.h"
+
+@class RZDebugMenuMultiItemListViewController;
+@protocol RZDebugMenuMultiItemListViewControllerDelegate <NSObject>
+
+- (void)multiItemListDidMakeNewSelectionAtIndexPath:(RZMultiValueSelectionItem *)selectedItem;
+
+@end
 
 @interface RZDebugMenuMultiItemListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems;
+- (id)initWithSelectionItems:(NSArray *)selectionItems andDelegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate;
 
 @end

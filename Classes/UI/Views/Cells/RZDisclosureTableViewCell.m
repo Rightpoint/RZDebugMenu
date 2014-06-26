@@ -1,5 +1,5 @@
 //
-//  RZEnvironmentsListTableViewCell.m
+//  RZDisclosureTableViewCell.m
 //  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/3/14.
