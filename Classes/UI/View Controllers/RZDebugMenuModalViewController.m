@@ -27,7 +27,11 @@ static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
-@interface RZDebugMenuModalViewController () <RZDebugMenuMultiItemListViewControllerDelegate, RZToggleTableViewCellDelegate, RZTextFieldTableViewCellDelegate, RZSliderTableViewCellDelegate>
+@interface RZDebugMenuModalViewController ()
+<RZDebugMenuMultiItemListViewControllerDelegate,
+RZTextFieldTableViewCellDelegate,
+RZToggleTableViewCellDelegate,
+RZSliderTableViewCellDelegate>
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *debugSettingsInterface;
 @property (strong, nonatomic) UITableView *optionsTableView;
