@@ -216,7 +216,15 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             [userSettings setObject:defaultValue forKey:textFieldSettingsKey];
         }
         else if ( [currentSettingsItemType isEqualToString:kRZSliderSpecifier] ) {
-            // set up slider meta data item
+           
+            NSNumber *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            RZDebugMenuSliderItem *sliderTableViewCellMetaData = [[RZDebugMenuSliderItem alloc] initWithValue:defaultValue
+                                                                                                       forKey:plistItemIdentifier
+                                                                                                    withTitle:cellTitle];
+            [_settingsCellItemsMetaData addObject:sliderTableViewCellMetaData];
+            
+            NSString *sliderSettingsKey = [self generateSettingsKey:plistItemIdentifier];
+            [userSettings setObject:defaultValue forKey:sliderSettingsKey];
         }
     }
     return userSettings;
