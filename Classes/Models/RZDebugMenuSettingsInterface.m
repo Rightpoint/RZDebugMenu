@@ -111,15 +111,19 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *) cell;
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
-        NSString *toggleDefault = [self generateSettingsKey:settingsDefaultKey];
-        NSNumber *toggleSwitchDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:toggleDefault];
+        NSString *toggleSettingsKey = [self generateSettingsKey:settingsDefaultKey];
+        NSNumber *toggleSwitchDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:toggleSettingsKey];
         
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
         cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuTextFieldItem class]] ) {
-        //do stuff
+        RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
+        
+        NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
+        NSString *textFieldSettingsKey = [self generateSettingsKey:settingsDefaultKey];
+        
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
@@ -188,6 +192,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             NSString *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
             RZDebugMenuTextFieldItem *textFieldTableViewCellMetaData = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue forKey:plistItemIdentifier withTitle:cellTitle];
             [_settingsCellItemsMetaData addObject:textFieldTableViewCellMetaData];
+            
+            NSString *textFieldSettingsKey = [self generateSettingsKey:plistItemIdentifier];
+            [userSettings setObject:defaultValue forKey:textFieldSettingsKey];
         }
     }
     return userSettings;
