@@ -10,8 +10,8 @@
 
 @interface RZDebugMenuSettingsObserver : NSObject
 
-- (void)addObserver:(NSObject *)observer;
-- (void)removeObserver:(NSObject *)observer;
+- (void)addObserver:(id)observer;
+- (void)removeObserver:(id)observer;
 - (void)notifyObservers:(NSInvocation *)invocation;
 
 @end

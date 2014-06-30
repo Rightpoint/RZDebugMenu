@@ -10,7 +10,7 @@
 
 @interface RZDebugMenuSettingsObserver ()
 
-@property (weak, nonatomic, readwrite) NSMutableSet *observers;
+@property (strong, nonatomic, readwrite) NSMutableSet *observers;
 
 @end
 
@@ -20,17 +20,17 @@
 {
     self = [super init];
     if ( self ) {
-        // do stuff
+        _observers = [[NSMutableSet alloc] init];
     }
     return self;
 }
 
-- (void)addObserver:(NSObject *)observer
+- (void)addObserver:(id)observer
 {
     
 }
 
-- (void)removeObserver:(NSObject *)observer
+- (void)removeObserver:(id)observer
 {
     
 }
