@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RZDebugMenuSettingsItem.h"
 
-@interface RZDebugMenuSliderItem : NSObject
+@interface RZDebugMenuSliderItem : RZDebugMenuSettingsItem
 
 @end

@@ -22,7 +22,6 @@
     if ( self ) {
         _textFieldCellDefaultValue = self.settingsValue;
     }
-    
     return self;
 }
 
