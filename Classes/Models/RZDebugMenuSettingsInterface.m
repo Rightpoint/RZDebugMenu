@@ -138,8 +138,14 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuSliderItem class]] ) {
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZSliderReuseIdentifier forIndexPath:indexPath];
+        RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
         
-        // set value for slider from default value here
+        NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
+        NSString *sliderSettingsKey = [self generateSettingsKey:settingsDefaultKey];
+        NSNumber *sliderDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:sliderSettingsKey];
+        
+        sliderCell.cellSlider.value = [sliderDefaultValue floatValue];
+        cell = sliderCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         

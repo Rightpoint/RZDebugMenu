@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class RZSliderTableViewCell;
+@protocol RZSliderTableViewCellDelegate <NSObject>
+
+- (void)didChangeSliderPosition:(RZSliderTableViewCell *)cell;
+
+@end
+
 @interface RZSliderTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) UISlider *cellSlider;
+@property (weak, nonatomic) id<RZSliderTableViewCellDelegate>delegate;
 
 @end

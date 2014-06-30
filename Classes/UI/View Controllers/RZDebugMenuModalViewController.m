@@ -14,10 +14,12 @@
 #import "RZDebugMenuToggleItem.h"
 #import "RZMultiValueSelectionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
+#import "RZDebugMenuSliderItem.h"
 
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
 #import "RZTextFieldTableViewCell.h"
+#import "RZSliderTableViewCell.h"
 
 static NSString * const kRZNavigationBarTitle = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
@@ -25,7 +27,7 @@ static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
-@interface RZDebugMenuModalViewController () <RZDebugMenuMultiItemListViewControllerDelegate, RZToggleTableViewCellDelegate, RZTextFieldTableViewCellDelegate>
+@interface RZDebugMenuModalViewController () <RZDebugMenuMultiItemListViewControllerDelegate, RZToggleTableViewCellDelegate, RZTextFieldTableViewCellDelegate, RZSliderTableViewCellDelegate>
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *debugSettingsInterface;
 @property (strong, nonatomic) UITableView *optionsTableView;
@@ -100,6 +102,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         textFieldCell.delegate = self;
         cell = textFieldCell;
     }
+    else if ( [cell isKindOfClass:[RZSliderTableViewCell class]] ) {
+        RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
+        sliderCell.delegate = self;
+        cell = sliderCell;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,6 +144,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     NSIndexPath *textFieldIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuTextFieldItem *textFieldItem = (RZDebugMenuTextFieldItem *)[self.debugSettingsInterface settingsItemAtIndexPath:textFieldIndexPath];
     [self.debugSettingsInterface setValue:cell.stringTextField.text forDebugSettingsKey:textFieldItem.settingsKey];
+}
+
+- (void)didChangeSliderPosition:(RZSliderTableViewCell *)cell
+{
+    NSIndexPath *sliderIndexPath = [self.optionsTableView indexPathForCell:cell];
+    RZDebugMenuSliderItem *sliderItem = (RZDebugMenuSliderItem *)[self.debugSettingsInterface settingsItemAtIndexPath:sliderIndexPath];
+    [self.debugSettingsInterface setValue:[NSNumber numberWithFloat:cell.cellSlider.value] forDebugSettingsKey:sliderItem.settingsKey];
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal

@@ -18,6 +18,6 @@
 @interface RZTextFieldTableViewCell : UITableViewCell <UITextFieldDelegate>
 
 @property (strong, nonatomic) UITextField *stringTextField;
-@property (strong, nonatomic) id<RZTextFieldTableViewCellDelegate>delegate;
+@property (weak, nonatomic) id<RZTextFieldTableViewCellDelegate>delegate;
 
 @end
