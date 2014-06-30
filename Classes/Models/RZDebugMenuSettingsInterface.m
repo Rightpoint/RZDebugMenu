@@ -123,7 +123,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSString *textFieldSettingsKey = [self generateSettingsKey:settingsDefaultKey];
+        NSString *textFieldDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:textFieldSettingsKey];
         
+        textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        textFieldCell.stringLabel.text = textFieldDefaultValue;
+        cell = textFieldCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
