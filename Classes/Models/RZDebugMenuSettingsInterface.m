@@ -12,6 +12,7 @@
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
+#import "RZDebugMenuTextFieldItem.h"
 
 #import "RZDisclosureTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
@@ -117,6 +118,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
         cell = toggleCell;
     }
+    else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuTextFieldItem class]] ) {
+        //do stuff
+    }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
@@ -162,8 +166,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                                                                    forKey:plistItemIdentifier
                                                                                                                 withTitle:cellTitle
                                                                                                         andSelectionItems:selectionItems];
-            
-            
             [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
             
             NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
@@ -181,6 +183,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             
             NSString *toggleKey = [self generateSettingsKey:plistItemIdentifier];
             [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
+        }
+        else if ( [currentSettingsItemType isEqualToString:kRZTextFieldSpecifier] ) {
+            NSString *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            RZDebugMenuTextFieldItem *textFieldTableViewCellMetaData = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue forKey:plistItemIdentifier withTitle:cellTitle];
+            [_settingsCellItemsMetaData addObject:textFieldTableViewCellMetaData];
         }
     }
     return userSettings;
