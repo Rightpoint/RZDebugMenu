@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class RZTextFieldTableViewCell;
+@protocol RZTextFieldTableViewCellDelegate <NSObject>
+
+- (void) didEditTextLabelOfCell:(RZTextFieldTableViewCell *)cell;
+
+@end
+
 @interface RZTextFieldTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) UILabel *stringLabel;
+@property (strong, nonatomic) UITextField *stringTextField;
+@property (strong, nonatomic) id<RZTextFieldTableViewCellDelegate>delegate;
 
 @end

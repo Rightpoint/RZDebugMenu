@@ -33,6 +33,7 @@ static NSString * const kRZKeyEnvironmentsValues = @"Values";
 static NSString * const kRZVersionCellTitle = @"Version";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
+static NSString * const kRZTextFieldReuseIdentifier = @"text_field";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuSettingsInterface ()
@@ -69,7 +70,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     [_settingsOptionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
     [_settingsOptionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
     [_settingsOptionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
-    [_settingsOptionsTableView registerClass:[RZTextFieldTableViewCell class] forCellReuseIdentifier:kRZTextFieldSpecifier];
+    [_settingsOptionsTableView registerClass:[RZTextFieldTableViewCell class] forCellReuseIdentifier:kRZTextFieldReuseIdentifier];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -119,6 +120,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuTextFieldItem class]] ) {
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZTextFieldReuseIdentifier forIndexPath:indexPath];
         RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
@@ -126,7 +128,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         NSString *textFieldDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:textFieldSettingsKey];
         
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
-        textFieldCell.stringLabel.text = textFieldDefaultValue;
+        textFieldCell.stringTextField.text = @"placeholder";//textFieldDefaultValue;
         cell = textFieldCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
@@ -193,8 +195,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
         }
         else if ( [currentSettingsItemType isEqualToString:kRZTextFieldSpecifier] ) {
+            
             NSString *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
-            RZDebugMenuTextFieldItem *textFieldTableViewCellMetaData = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue forKey:plistItemIdentifier withTitle:cellTitle];
+            RZDebugMenuTextFieldItem *textFieldTableViewCellMetaData = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue
+                                                                                                                forKey:plistItemIdentifier
+                                                                                                             withTitle:cellTitle];
             [_settingsCellItemsMetaData addObject:textFieldTableViewCellMetaData];
             
             NSString *textFieldSettingsKey = [self generateSettingsKey:plistItemIdentifier];
