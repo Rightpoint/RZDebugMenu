@@ -128,7 +128,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         NSString *textFieldDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:textFieldSettingsKey];
         
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
-        textFieldCell.stringTextField.text = @"placeholder";//textFieldDefaultValue;
+        textFieldCell.stringTextField.text = textFieldDefaultValue;
         cell = textFieldCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){

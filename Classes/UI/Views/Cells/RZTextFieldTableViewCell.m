@@ -8,7 +8,7 @@
 
 #import "RZTextFieldTableViewCell.h"
 
-static NSString * const textFieldPlaceHolder = @"Placeholder";
+static NSString * const textFieldPlaceHolder = @"Enter name here";
 
 @implementation RZTextFieldTableViewCell
 
@@ -23,13 +23,20 @@ static NSString * const textFieldPlaceHolder = @"Placeholder";
         _stringTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, width/2, height)];
         _stringTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _stringTextField.placeholder = textFieldPlaceHolder;
-        
+        [_stringTextField setReturnKeyType:UIReturnKeyDone];
+        _stringTextField.delegate = self;
         
         self.accessoryView = [[UIView alloc] initWithFrame:_stringTextField.frame];
         [self.accessoryView addSubview:_stringTextField];
     }
     
     return self;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self changeText];
 }
 
 - (void)changeText

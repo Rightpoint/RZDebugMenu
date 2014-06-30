@@ -13,8 +13,11 @@
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZMultiValueSelectionItem.h"
+#import "RZDebugMenuTextFieldItem.h"
+
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
+#import "RZTextFieldTableViewCell.h"
 
 static NSString * const kRZNavigationBarTitle = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
@@ -22,7 +25,7 @@ static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
-@interface RZDebugMenuModalViewController () <RZDebugMenuMultiItemListViewControllerDelegate, RZToggleTableViewCellDelegate>
+@interface RZDebugMenuModalViewController () <RZDebugMenuMultiItemListViewControllerDelegate, RZToggleTableViewCellDelegate, RZTextFieldTableViewCellDelegate>
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *debugSettingsInterface;
 @property (strong, nonatomic) UITableView *optionsTableView;
@@ -92,6 +95,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         toggleCell.delegate = self;
         cell = toggleCell;
     }
+    else if ( [cell isKindOfClass:[RZTextFieldTableViewCell class]] ) {
+        RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
+        textFieldCell.delegate = self;
+        cell = textFieldCell;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -122,6 +130,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     NSIndexPath *toggleCellIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuToggleItem *toggleItem = (RZDebugMenuToggleItem *)[self.debugSettingsInterface settingsItemAtIndexPath:toggleCellIndexPath];
     [self.debugSettingsInterface setValue:[NSNumber numberWithBool:cell.applySettingsSwitch.on] forDebugSettingsKey:toggleItem.settingsKey];
+}
+
+- (void)didEditTextLabelOfCell:(RZTextFieldTableViewCell *)cell
+{
+    NSIndexPath *textFieldIndexPath = [self.optionsTableView indexPathForCell:cell];
+    RZDebugMenuTextFieldItem *textFieldItem = (RZDebugMenuTextFieldItem *)[self.debugSettingsInterface settingsItemAtIndexPath:textFieldIndexPath];
+    [self.debugSettingsInterface setValue:cell.stringTextField.text forDebugSettingsKey:textFieldItem.settingsKey];
 }
 
 @end
