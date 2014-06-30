@@ -10,4 +10,6 @@
 
 @interface RZSliderTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) UISlider *cellSlider;
+
 @end
