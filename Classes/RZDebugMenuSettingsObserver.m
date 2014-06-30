@@ -16,7 +16,17 @@
 
 @implementation RZDebugMenuSettingsObserver
 
-- (id)init
++ (instancetype)standardObserver
+{
+    static RZDebugMenuSettingsObserver *mainObserver = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        mainObserver = [[RZDebugMenuSettingsObserver alloc] init_private];
+    });
+    return mainObserver;
+}
+
+- (id)init_private
 {
     self = [super init];
     if ( self ) {
