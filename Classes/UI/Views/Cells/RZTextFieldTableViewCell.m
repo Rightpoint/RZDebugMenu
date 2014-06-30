@@ -33,10 +33,11 @@ static NSString * const textFieldPlaceHolder = @"Enter name here";
     return self;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     [self changeText];
+    return NO;
 }
 
 - (void)changeText
