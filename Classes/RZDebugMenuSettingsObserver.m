@@ -8,6 +8,36 @@
 
 #import "RZDebugMenuSettingsObserver.h"
 
+@interface RZDebugMenuSettingsObserver ()
+
+@property (weak, nonatomic, readwrite) NSMutableSet *observers;
+
+@end
+
 @implementation RZDebugMenuSettingsObserver
+
+- (id)init
+{
+    self = [super init];
+    if ( self ) {
+        // do stuff
+    }
+    return self;
+}
+
+- (void)addObserver:(NSObject *)observer
+{
+    
+}
+
+- (void)removeObserver:(NSObject *)observer
+{
+    
+}
+
+- (void)notifyObservers:(NSInvocation *)invocation
+{
+    
+}
 
 @end
