@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0C0B92D3196197CB00A76D6F /* RZTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0B92D2196197CB00A76D6F /* RZTextFieldTableViewCell.m */; };
 		0C0B92D6196199A300A76D6F /* RZDebugMenuTextFieldItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0B92D5196199A300A76D6F /* RZDebugMenuTextFieldItem.m */; };
+		0C214CD21961B94D00DA262D /* RZSliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C214CD11961B94D00DA262D /* RZSliderTableViewCell.m */; };
+		0C214CD51961B97100DA262D /* RZDebugMenuSliderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C214CD41961B97100DA262D /* RZDebugMenuSliderItem.m */; };
 		0C22DAC3193CCDA30042938F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC2193CCDA30042938F /* Foundation.framework */; };
 		0C22DAC5193CCDA30042938F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC4193CCDA30042938F /* CoreGraphics.framework */; };
 		0C22DAC7193CCDA30042938F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC6193CCDA30042938F /* UIKit.framework */; };
@@ -55,6 +57,10 @@
 		0C0B92D2196197CB00A76D6F /* RZTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		0C0B92D4196199A300A76D6F /* RZDebugMenuTextFieldItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuTextFieldItem.h; sourceTree = "<group>"; };
 		0C0B92D5196199A300A76D6F /* RZDebugMenuTextFieldItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuTextFieldItem.m; sourceTree = "<group>"; };
+		0C214CD01961B94D00DA262D /* RZSliderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZSliderTableViewCell.h; sourceTree = "<group>"; };
+		0C214CD11961B94D00DA262D /* RZSliderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZSliderTableViewCell.m; sourceTree = "<group>"; };
+		0C214CD31961B97100DA262D /* RZDebugMenuSliderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSliderItem.h; sourceTree = "<group>"; };
+		0C214CD41961B97100DA262D /* RZDebugMenuSliderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSliderItem.m; sourceTree = "<group>"; };
 		0C22DABF193CCDA30042938F /* RZDebugMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RZDebugMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C22DAC2193CCDA30042938F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C22DAC4193CCDA30042938F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -234,6 +240,8 @@
 				0C781128194F859900F25AE5 /* RZDebugMenuToggleItem.m */,
 				0C0B92D4196199A300A76D6F /* RZDebugMenuTextFieldItem.h */,
 				0C0B92D5196199A300A76D6F /* RZDebugMenuTextFieldItem.m */,
+				0C214CD31961B97100DA262D /* RZDebugMenuSliderItem.h */,
+				0C214CD41961B97100DA262D /* RZDebugMenuSliderItem.m */,
 				0C781129194F859900F25AE5 /* RZDebugMenuVersionItem.h */,
 				0C78112A194F859900F25AE5 /* RZDebugMenuVersionItem.m */,
 				0C78112B194F859900F25AE5 /* RZMultiValueSelectionItem.h */,
@@ -283,6 +291,8 @@
 				0C78113A194F859900F25AE5 /* RZToggleTableViewCell.m */,
 				0C0B92D1196197CB00A76D6F /* RZTextFieldTableViewCell.h */,
 				0C0B92D2196197CB00A76D6F /* RZTextFieldTableViewCell.m */,
+				0C214CD01961B94D00DA262D /* RZSliderTableViewCell.h */,
+				0C214CD11961B94D00DA262D /* RZSliderTableViewCell.m */,
 				0C78113B194F859900F25AE5 /* RZVersionInfoTableViewCell.h */,
 				0C78113C194F859900F25AE5 /* RZVersionInfoTableViewCell.m */,
 			);
@@ -427,8 +437,10 @@
 				0C781148194F859900F25AE5 /* RZDisclosureTableViewCell.m in Sources */,
 				0C781143194F859900F25AE5 /* RZDebugMenuVersionItem.m in Sources */,
 				0C78114B194F859900F25AE5 /* RZDebugMenuWindow.m in Sources */,
+				0C214CD51961B97100DA262D /* RZDebugMenuSliderItem.m in Sources */,
 				0C5B9BBD1953353B0037CAC5 /* RZDebugMenuClearViewController.m in Sources */,
 				0C972B0D193E1A9900EA84FF /* RZDebugMenuRootViewController.m in Sources */,
+				0C214CD21961B94D00DA262D /* RZSliderTableViewCell.m in Sources */,
 				0C781149194F859900F25AE5 /* RZToggleTableViewCell.m in Sources */,
 				0C22DACF193CCDA30042938F /* main.m in Sources */,
 				0C0B92D3196197CB00A76D6F /* RZTextFieldTableViewCell.m in Sources */,
