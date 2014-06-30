@@ -13,16 +13,19 @@
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
+#import "RZDebugMenuSliderItem.h"
 
 #import "RZDisclosureTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 #import "RZTextFieldTableViewCell.h"
+#import "RZSliderTableViewCell.h"
 
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
 static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
 static NSString * const kRZTextFieldSpecifier = @"PSTextFieldSpecifier";
+static NSString * const kRZSliderSpecifier = @"PSSliderSpecifier";
 static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
 static NSString * const kRZKeyItemIdentifier = @"Key";
 static NSString * const kRZKeyTitle = @"Title";
@@ -34,6 +37,7 @@ static NSString * const kRZVersionCellTitle = @"Version";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZTextFieldReuseIdentifier = @"text_field";
+static NSString * const kRZSliderReuseIdentifier = @"slider";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuSettingsInterface ()
@@ -71,6 +75,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     [_settingsOptionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
     [_settingsOptionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
     [_settingsOptionsTableView registerClass:[RZTextFieldTableViewCell class] forCellReuseIdentifier:kRZTextFieldReuseIdentifier];
+    [_settingsOptionsTableView registerClass:[RZSliderTableViewCell class] forCellReuseIdentifier:kRZSliderReuseIdentifier];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -130,6 +135,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         textFieldCell.stringTextField.text = textFieldDefaultValue;
         cell = textFieldCell;
+    }
+    else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuSliderItem class]] ) {
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZSliderReuseIdentifier forIndexPath:indexPath];
+        
+        // set value for slider from default value here
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
@@ -204,6 +214,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             
             NSString *textFieldSettingsKey = [self generateSettingsKey:plistItemIdentifier];
             [userSettings setObject:defaultValue forKey:textFieldSettingsKey];
+        }
+        else if ( [currentSettingsItemType isEqualToString:kRZSliderSpecifier] ) {
+            // set up slider meta data item
         }
     }
     return userSettings;
