@@ -15,11 +15,13 @@
 
 #import "RZDisclosureTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
+#import "RZTextFieldTableViewCell.h"
 
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
 static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
+static NSString * const kRZTextFieldSpecifier = @"PSTextFieldSpecifier";
 static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
 static NSString * const kRZKeyItemIdentifier = @"Key";
 static NSString * const kRZKeyTitle = @"Title";
@@ -66,6 +68,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     [_settingsOptionsTableView registerClass:[RZDisclosureTableViewCell class] forCellReuseIdentifier:kRZDisclosureReuseIdentifier];
     [_settingsOptionsTableView registerClass:[RZToggleTableViewCell class] forCellReuseIdentifier:kRZToggleReuseIdentifier];
     [_settingsOptionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
+    [_settingsOptionsTableView registerClass:[RZTextFieldTableViewCell class] forCellReuseIdentifier:kRZTextFieldSpecifier];
 }
 
 #pragma mark - UITableViewDataSource methods
