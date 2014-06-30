@@ -139,4 +139,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     [self.debugSettingsInterface setValue:cell.stringTextField.text forDebugSettingsKey:textFieldItem.settingsKey];
 }
 
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
+}
+
 @end
