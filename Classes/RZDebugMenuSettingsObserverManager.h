@@ -1,5 +1,5 @@
 //
-//  RZDebugMenuSettingsObserver.h
+//  RZDebugMenuSettingsObserverManager.h
 //  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/26/14.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RZDebugMenuSettingsObserver : NSObject
+@interface RZDebugMenuSettingsObserverManager : NSObject
 
 @end
