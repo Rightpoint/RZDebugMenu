@@ -17,7 +17,17 @@
 
 @implementation RZDebugMenuSettingsObserverManager
 
-- (id)init
++ (instancetype)standardObserverManager
+{
+    static RZDebugMenuSettingsObserverManager *observerManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        observerManager = [[RZDebugMenuSettingsObserverManager alloc] init_private];
+    });
+    return observerManager;
+}
+
+- (id)init_private
 {
     self = [super init];
     if ( self ) {
@@ -41,12 +51,12 @@
     }
 }
 
-- (void)removeObserver:(id)observer
+- (void)removeObserver:(id)observer forKey:(NSString *)key
 {
     
 }
 
-- (void)notifyObservers:(NSInvocation *)invocation
+- (void)notifyObserversForKey:(NSString *)key
 {
     
 }

@@ -13,6 +13,8 @@
 
 #import "RZDebugMenuModalViewController.h"
 
+#import "RZDebugMenuSettingsObserverManager.h"
+
 static NSString * const kRZSettingsFileExtension = @"plist";
 
 @interface RZDebugMenu ()
@@ -48,6 +50,13 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     RZDebugMenu *menu = [self privateSharedInstance];
     return [menu.interface valueForDebugSettingsKey:key];
+}
+
++ (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key
+{
+    [[RZDebugMenuSettingsObserverManager standardObserverManager] addObserver:observer
+                                                                     selector:aSelector
+                                                                       forKey:key];
 }
 
 - (id)init
