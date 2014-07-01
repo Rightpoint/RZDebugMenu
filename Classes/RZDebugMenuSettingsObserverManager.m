@@ -36,14 +36,14 @@
     return self;
 }
 
-- (void)listenForKeysWithArray:(NSArray *)keys
+- (void)setKeysWithArray:(NSArray *)keys
 {
     for (NSString *key in keys) {
         NSMutableSet *observers = [[NSMutableSet alloc] init];
         [self.observerKeyMap setObject:observers forKey:key];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(notifyObserversForKey:)
+                                                 selector:@selector(notifyObserversForNotification:)
                                                      name:key
                                                    object:nil];
     }
@@ -55,16 +55,10 @@
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
     
     if ( !observers ) {
-        observers = [[NSMutableSet alloc] init];
-        [observers addObject:newObserver];
-        [self.observerKeyMap setObject:observers forKey:key];
+        NSLog(@"Warning! Not using a predefined key from the plist");
     }
     else {
         [observers addObject:newObserver];
-    }
-    
-    for (id object in observers) {
-        NSLog(@"%@", object);
     }
 }
 
@@ -78,12 +72,20 @@
 
 - (void)notifyObserversForKey:(NSString *)key
 {
+    
     NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
     for (RZDebugMenuObserver *RZObserver in observers) {
         id target = RZObserver.observer;
         SEL action = RZObserver.aSelector;
         [target performSelector:action];
     }
+}
+
+- (void)notifyObserversForNotification:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *key = [userInfo allKeys][0];
+    [self notifyObserversForKey:key];
 }
 
 @end

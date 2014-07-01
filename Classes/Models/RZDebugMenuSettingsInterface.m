@@ -133,13 +133,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
             
-            // Broadcast change here
-            // -----------------------------
-            // use arg key
             NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
             [userInfo setObject:value forKey:key];
             [[NSNotificationCenter defaultCenter] postNotificationName:key object:nil userInfo:userInfo];
-            // -----------------------------
             
             [userDefaults setObject:value forKey:userDefaultsKey];
         }
@@ -194,7 +190,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         }
     }
     
-    [[RZDebugMenuSettingsObserverManager standardObserverManager] listenForKeysWithArray:itemIdentifiers];
+    [[RZDebugMenuSettingsObserverManager standardObserverManager] setKeysWithArray:itemIdentifiers];
     return userSettings;
 }
 
