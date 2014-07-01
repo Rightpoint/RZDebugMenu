@@ -36,6 +36,19 @@
     return self;
 }
 
+- (void)listenForKeysWithArray:(NSArray *)keys
+{
+    for (NSString *key in keys) {
+        NSMutableSet *observers = [[NSMutableSet alloc] init];
+        [self.observerKeyMap setObject:observers forKey:key];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(notifyObserversForKey:)
+                                                     name:key
+                                                   object:nil];
+    }
+}
+
 - (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
 {
     NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
@@ -48,6 +61,10 @@
     }
     else {
         [observers addObject:newObserver];
+    }
+    
+    for (id object in observers) {
+        NSLog(@"%@", object);
     }
 }
 

@@ -16,6 +16,8 @@
 #import "RZDisclosureTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 
+#import "RZDebugMenuSettingsObserverManager.h"
+
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
@@ -130,6 +132,15 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         NSString *userDefaultsKey = [self generateSettingsKey:key];
         
         if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
+            
+            // Broadcast change here
+            // -----------------------------
+            // use arg key
+            NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+            [userInfo setObject:value forKey:key];
+            [[NSNotificationCenter defaultCenter] postNotificationName:key object:nil userInfo:userInfo];
+            // -----------------------------
+            
             [userDefaults setObject:value forKey:userDefaultsKey];
         }
     }
@@ -138,12 +149,14 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (NSMutableDictionary *)createMetaDataObjectsAndGenerateUserDefaults:(NSArray *)preferences
 {
     NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
+    NSMutableArray *itemIdentifiers = [[NSMutableArray alloc] init];
     
     for (id settingsItem in preferences) {
         
         NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
         NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
         NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
+        [itemIdentifiers addObject:plistItemIdentifier];
         
         if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
             
@@ -180,6 +193,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
         }
     }
+    
+    [[RZDebugMenuSettingsObserverManager standardObserverManager] listenForKeysWithArray:itemIdentifiers];
     return userSettings;
 }
 

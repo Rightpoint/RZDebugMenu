@@ -15,6 +15,5 @@
 + (id)debugSettingForKey:(NSString *)key;
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
 + (void)removeObserver:(id)observer forKey:(NSString *)key;
-// TODO: Add remove method
 
 @end

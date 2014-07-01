@@ -12,6 +12,7 @@
 
 + (instancetype)standardObserverManager;
 
+- (void)listenForKeysWithArray:(NSArray *)keys;
 - (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
 - (void)removeObserver:(id)observer forKey:(NSString *)key;
 - (void)notifyObserversForKey:(NSString *)key;
