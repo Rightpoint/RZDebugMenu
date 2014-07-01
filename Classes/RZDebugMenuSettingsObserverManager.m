@@ -61,7 +61,12 @@
 
 - (void)notifyObserversForKey:(NSString *)key
 {
-    
+    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
+    for (RZDebugMenuObserver *RZObserver in observers) {
+        id target = RZObserver.observer;
+        SEL action = RZObserver.aSelector;
+        [target performSelector:action];
+    }
 }
 
 @end
