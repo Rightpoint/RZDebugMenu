@@ -59,6 +59,11 @@ static NSString * const kRZSettingsFileExtension = @"plist";
                                                                        forKey:key];
 }
 
++ (void)removeObserver:(id)observer forKey:(NSString *)key
+{
+    [[RZDebugMenuSettingsObserverManager standardObserverManager] removeObserver:observer forKey:key];
+}
+
 - (id)init
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException

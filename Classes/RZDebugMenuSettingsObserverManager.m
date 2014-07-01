@@ -53,7 +53,10 @@
 
 - (void)removeObserver:(id)observer forKey:(NSString *)key
 {
-    
+    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
+    if ( !observers ) {
+        [observers removeObject:observer];
+    }
 }
 
 - (void)notifyObserversForKey:(NSString *)key
