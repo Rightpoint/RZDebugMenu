@@ -13,4 +13,6 @@
 @property (weak, nonatomic) id observer;
 @property (assign, nonatomic) SEL aSelector;
 
+- (id)initWithObserver:(id)observer selector:(SEL)aSelector;
+
 @end
