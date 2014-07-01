@@ -26,6 +26,7 @@ static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
 static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
 static NSString * const kRZTextFieldSpecifier = @"PSTextFieldSpecifier";
 static NSString * const kRZSliderSpecifier = @"PSSliderSpecifier";
+static NSString * const kRZGroupSpecifer = @"PSGroupSpecifier";
 static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
 static NSString * const kRZKeyItemIdentifier = @"Key";
 static NSString * const kRZKeyTitle = @"Title";
@@ -44,6 +45,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
 @property (strong, nonatomic) NSArray *preferenceSpecifiers;
+@property (strong, nonatomic) NSMutableArray *groupedSections;
 
 @end
 
@@ -82,7 +84,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    int sectionCount = self.groupedSections.count;
+    if ( sectionCount == 0 ) {
+        return 1;
+    }
+    else {
+        return sectionCount;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -171,6 +179,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (NSMutableDictionary *)createMetaDataObjectsAndGenerateUserDefaults:(NSArray *)preferences
 {
     NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
+    self.groupedSections = [[NSMutableArray alloc] init];
     
     for (id settingsItem in preferences) {
         
@@ -231,6 +240,11 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             
             NSString *sliderSettingsKey = [self generateSettingsKey:plistItemIdentifier];
             [userSettings setObject:defaultValue forKey:sliderSettingsKey];
+        }
+        else if ( [currentSettingsItemType isEqualToString:kRZGroupSpecifer] ) {
+            
+            [self.groupedSections addObject:cellTitle];
+            [_settingsCellItemsMetaData addObject:cellTitle];
         }
     }
     return userSettings;
