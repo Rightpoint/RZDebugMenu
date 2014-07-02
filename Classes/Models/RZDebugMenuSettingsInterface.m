@@ -41,6 +41,7 @@ static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZTextFieldReuseIdentifier = @"text_field";
 static NSString * const kRZSliderReuseIdentifier = @"slider";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
+static NSString * const kRZEmptyString = @"";
 
 @interface RZDebugMenuSettingsInterface ()
 
@@ -107,7 +108,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *currentSection = [self.sectionGroupTitles objectAtIndex:indexPath.section];
-    NSMutableArray *currentSectionsCells = [self.groupedSections objectForKey:currentSection];
+    NSArray *currentSectionsCells = [self.groupedSections objectForKey:currentSection];
     
     UITableViewCell *cell = nil;
     RZDebugMenuSettingsItem *currentMetaDataObject = [currentSectionsCells objectAtIndex:indexPath.row];
@@ -191,6 +192,17 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     NSString *currentSection = [[NSString alloc] init];
     self.groupedSections = [[NSMutableDictionary alloc] init];
     self.sectionGroupTitles = [[NSMutableArray alloc] init];
+    
+    // check if there are specified groups
+    for (id item in preferences) {
+        
+        if ( ![[item objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] ) {
+            
+            NSMutableArray *rows = [[NSMutableArray alloc] init];
+            [self.groupedSections setObject:rows forKey:kRZEmptyString];
+            currentSection = kRZEmptyString;
+        }
+    }
     
     for (id settingsItem in preferences) {
         
