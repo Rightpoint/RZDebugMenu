@@ -44,7 +44,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuSettingsInterface ()
 
-//@property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
 @property (strong, nonatomic) NSArray *preferenceSpecifiers;
 @property (strong, nonatomic, readwrite) NSMutableDictionary *groupedSections;
 @property (strong, nonatomic, readwrite) NSMutableArray *sectionGroupTitles;
@@ -58,21 +57,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     
     self = [super init];
     if ( self ) {
-//        _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         _preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
         
         NSMutableDictionary *userSettings = [self createMetaDataObjectsAndGenerateUserDefaults:_preferenceSpecifiers];
         
         [self setUpVersionCellMetaData];
         [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
-        
-//        for (id item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]allKeys]) {
-//            
-//            NSLog(@"==========================================================================");
-//            
-//            NSLog(@"%@: %@", item, [[NSUserDefaults standardUserDefaults] objectForKey:item]);
-//            
-//        }
     }
     
     return self;
@@ -110,11 +100,8 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    NSArray *sections = self.sectionGroupTitles;
     NSMutableArray *cellItems = [self.groupedSections objectForKey:[self.sectionGroupTitles objectAtIndex:section]];
     return cellItems.count;
-    
-//    return self.settingsCellItemsMetaData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -152,7 +139,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
-        NSLog(@"%@", toggleSwitchDefaultValue);
         cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuTextFieldItem class]] ) {
@@ -161,7 +147,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSString *textFieldSettingsKey = [self generateSettingsKey:settingsDefaultKey];
-//        NSLog(@"%@", textFieldSettingsKey);
         NSString *textFieldDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:textFieldSettingsKey];
         
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
@@ -179,9 +164,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         sliderCell.cellSlider.value = [sliderDefaultValue floatValue];
         cell = sliderCell;
     }
-//    else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuGroupItem class]] ) {
-////        [self.settingsOptionsTableView insert]
-//    }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
@@ -197,10 +179,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *userDefaultsKey = [self generateSettingsKey:key];
         
-//        if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
+        if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
             [userDefaults setObject:value forKey:userDefaultsKey];
-            NSLog(@"Changing key: %@", [userDefaults objectForKey:userDefaultsKey]);
-//        }
+        }
     }
 }
 
@@ -231,12 +212,10 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                                                                    forKey:plistItemIdentifier
                                                                                                                 withTitle:cellTitle
                                                                                                         andSelectionItems:selectionItems];
-            // -------------------------------------------------------------------------------------
+            
             NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
             [objectsInSection addObject:disclosureTableViewCellMetaData];
-            // -------------------------------------------------------------------------------------
             
-//            [_settingsCellItemsMetaData addObject:disclosureTableViewCellMetaData];
             
             NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
             [userSettings setObject:cellDefaultValue forKey:multiValueSettingsKey];
@@ -248,12 +227,9 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             RZDebugMenuToggleItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue
                                                                                                        forKey:plistItemIdentifier
                                                                                                     withTitle:cellTitle];
-            // -------------------------------------------------------------------------------------
+            
             NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
             [objectsInSection addObject:toggleTableViewCellMetaData];
-            // -------------------------------------------------------------------------------------
-            
-//            [_settingsCellItemsMetaData addObject:toggleTableViewCellMetaData];
             
             NSString *toggleKey = [self generateSettingsKey:plistItemIdentifier];
             [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
@@ -261,17 +237,12 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         else if ( [currentSettingsItemType isEqualToString:kRZTextFieldSpecifier] ) {
             
             NSString *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
-            NSLog(@"DEFAULT: %@", defaultValue);
             RZDebugMenuTextFieldItem *textFieldTableViewCellMetaData = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue
                                                                                                                 forKey:plistItemIdentifier
                                                                                                              withTitle:cellTitle];
             
-            // -------------------------------------------------------------------------------------
             NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
             [objectsInSection addObject:textFieldTableViewCellMetaData];
-            // -------------------------------------------------------------------------------------
-            
-//            [_settingsCellItemsMetaData addObject:textFieldTableViewCellMetaData];
             
             NSString *textFieldSettingsKey = [self generateSettingsKey:plistItemIdentifier];
             [userSettings setObject:defaultValue forKey:textFieldSettingsKey];
@@ -283,18 +254,14 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                                                        forKey:plistItemIdentifier
                                                                                                     withTitle:cellTitle];
             
-            // -------------------------------------------------------------------------------------
             NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
             [objectsInSection addObject:sliderTableViewCellMetaData];
-            // -------------------------------------------------------------------------------------
-            
-//            [_settingsCellItemsMetaData addObject:sliderTableViewCellMetaData];
             
             NSString *sliderSettingsKey = [self generateSettingsKey:plistItemIdentifier];
             [userSettings setObject:defaultValue forKey:sliderSettingsKey];
         }
         else if ( [currentSettingsItemType isEqualToString:kRZGroupSpecifer] ) {
-//            RZDebugMenuGroupItem *groupSectionItem = [[RZDebugMenuGroupItem alloc] initWithTitle:cellTitle];
+            
             currentSection = cellTitle;
             NSMutableArray *rows = [self.groupedSections objectForKey:cellTitle];
             if ( !rows ) {
@@ -302,7 +269,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 [self.groupedSections setObject:rows forKey:cellTitle];
             }
             [self.sectionGroupTitles addObject:cellTitle];
-//            [_settingsCellItemsMetaData addObject:groupSectionItem];
         }
     }
     return userSettings;
@@ -353,7 +319,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (NSString *)getKeyIdentifierForIndexPath:(NSIndexPath *)indexPath
 {
-//    NSInteger groupCount = self.sectionGroupTitles.count;
     id setting;
     
     if ( indexPath.section == 0 ) {
