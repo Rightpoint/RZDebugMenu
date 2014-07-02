@@ -9,6 +9,12 @@
 #import "RZDebugMenuSettingsObserverManager.h"
 #import "RZDebugMenuObserver.h"
 
+#ifdef DEBUG
+#define UA_log( s, ... ) NSLog( @"<%@:%d> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__,  [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#endif
+
+#define UA_logNullKeyWarning(key) UA_log(@"Warning -- %@ is not a predefined key from the plist", key)
+
 @interface RZDebugMenuSettingsObserverManager ()
 
 @property (strong, nonatomic, readwrite) NSMutableDictionary *observerKeyMap;
@@ -55,7 +61,7 @@
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
     
     if ( !observers ) {
-        NSLog(@"[RZDebugMenuSettingsObserverManager] Warning -- Not using a predefined key from the plist");
+        UA_logNullKeyWarning(key);
     }
     else {
         [observers addObject:newObserver];
