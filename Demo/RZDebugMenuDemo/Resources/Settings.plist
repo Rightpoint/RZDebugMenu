@@ -5,6 +5,28 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>Title</key>
+			<string>Group 1</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<false/>
+			<key>Key</key>
+			<string>reset_toggle_2</string>
+			<key>Title</key>
+			<string>Something</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Group 2</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
 			<key>DefaultValue</key>
 			<real>0.5</real>
 			<key>Key</key>
@@ -24,7 +46,7 @@
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>Placeholder</string>
 			<key>Key</key>
 			<string>name_preference</string>
 			<key>Title</key>
