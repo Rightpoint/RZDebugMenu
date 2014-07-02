@@ -85,7 +85,7 @@ static NSString * const kRZEmptyString = @"";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    int sectionCount = self.sectionGroupTitles.count;
+    NSUInteger sectionCount = self.sectionGroupTitles.count;
     if ( sectionCount == 0 ) {
         return 1;
     }
@@ -304,15 +304,19 @@ static NSString * const kRZEmptyString = @"";
 {
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
     RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
-//    [_settingsCellItemsMetaData addObject:versionItem];
 }
 
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *currentSection = [self.sectionGroupTitles objectAtIndex:indexPath.section];
     NSMutableArray *cellItemsMetaData = [self.groupedSections objectForKey:currentSection];
+    
+    if ( cellItemsMetaData == nil ) {
+        return nil;
+    }
+    
     NSUInteger numberOfItems = cellItemsMetaData.count;
-    if ( indexPath.row >= numberOfItems ) {
+    if ( indexPath.section >= [self.groupedSections allKeys].count || indexPath.row >= numberOfItems ) {
         return nil;
     }
     return [cellItemsMetaData objectAtIndex:indexPath.row];
@@ -339,8 +343,9 @@ static NSString * const kRZEmptyString = @"";
     }
     else {
         
-        int numberOfPreviousCells = 0;
-        for (int i = 0; i < indexPath.section; i++) {
+        unsigned long numberOfPreviousCells = 0;
+        for (unsigned long i = 0; i < indexPath.section; i++) {
+            
             numberOfPreviousCells = numberOfPreviousCells + [self.settingsOptionsTableView numberOfRowsInSection:i];
         }
         
