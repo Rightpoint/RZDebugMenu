@@ -10,8 +10,8 @@
 
 @interface RZDebugMenuObserver : NSObject
 
-@property (weak, nonatomic) id observer;
-@property (assign, nonatomic) SEL aSelector;
+@property (weak, nonatomic, readonly) id target;
+@property (assign, nonatomic, readonly) SEL aSelector;
 
 - (id)initWithObserver:(id)observer selector:(SEL)aSelector;
 

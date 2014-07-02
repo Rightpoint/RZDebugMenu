@@ -14,7 +14,7 @@
 {
     self = [super init];
     if ( self ) {
-        _observer = observer;
+        _target = observer;
         _aSelector = aSelector;
     }
     return self;
