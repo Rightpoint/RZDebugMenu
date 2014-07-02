@@ -46,7 +46,7 @@
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>DefaultValue</key>
-			<string>Placeholder</string>
+			<string></string>
 			<key>Key</key>
 			<string>name_preference</string>
 			<key>Title</key>

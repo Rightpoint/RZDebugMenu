@@ -89,6 +89,15 @@ RZSliderTableViewCellDelegate>
 - (void)closeView
 {
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+//    for (id item in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]allKeys]) {
+//        
+//        NSLog(@"==========================================================================");
+//        
+//        NSLog(@"%@: %@", item, [[NSUserDefaults standardUserDefaults] objectForKey:item]);
+//        
+//    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
