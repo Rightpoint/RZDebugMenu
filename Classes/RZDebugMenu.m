@@ -54,14 +54,14 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key
 {
-    [[RZDebugMenuSettingsObserverManager standardObserverManager] addObserver:observer
+    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
                                                                      selector:aSelector
                                                                        forKey:key];
 }
 
 + (void)removeObserver:(id)observer forKey:(NSString *)key
 {
-    [[RZDebugMenuSettingsObserverManager standardObserverManager] removeObserver:observer forKey:key];
+    [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:observer forKey:key];
 }
 
 - (id)init

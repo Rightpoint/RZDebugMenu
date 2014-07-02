@@ -17,7 +17,7 @@
 
 @implementation RZDebugMenuSettingsObserverManager
 
-+ (instancetype)standardObserverManager
++ (instancetype)sharedInstance
 {
     static RZDebugMenuSettingsObserverManager *observerManager = nil;
     static dispatch_once_t onceToken;

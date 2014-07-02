@@ -10,7 +10,7 @@
 
 @interface RZDebugMenuSettingsObserverManager : NSObject
 
-+ (instancetype)standardObserverManager;
++ (instancetype)sharedInstance;
 
 - (void)setKeysWithArray:(NSArray *)keys;
 - (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;

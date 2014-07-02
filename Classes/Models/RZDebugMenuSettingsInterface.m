@@ -198,7 +198,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         }
     }
     
-    [[RZDebugMenuSettingsObserverManager standardObserverManager] setKeysWithArray:settingsKeys];
+    [[RZDebugMenuSettingsObserverManager sharedInstance] setKeysWithArray:settingsKeys];
     return userSettings;
 }
 
