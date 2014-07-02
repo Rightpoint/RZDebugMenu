@@ -37,6 +37,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 @interface RZDebugMenuSettingsInterface ()
 
 @property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
+@property (strong, nonatomic, readwrite) NSMutableArray *settingsKeys;
 @property (strong, nonatomic) NSArray *preferenceSpecifiers;
 
 @end
@@ -50,6 +51,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     if ( self ) {
         _settingsCellItemsMetaData = [[NSMutableArray alloc] init];
         _preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
+        _settingsKeys = [[NSMutableArray alloc] init];
         
         NSMutableDictionary *userSettings = [self createMetaDataObjectsAndGenerateUserDefaults:_preferenceSpecifiers];
         
@@ -153,14 +155,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 - (NSMutableDictionary *)createMetaDataObjectsAndGenerateUserDefaults:(NSArray *)preferences
 {
     NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
-    NSMutableArray *settingsKeys = [[NSMutableArray alloc] init];
     
     for (id settingsItem in preferences) {
         
         NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
         NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
         NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
-        [settingsKeys addObject:plistItemIdentifier];
+        [self.settingsKeys addObject:plistItemIdentifier];
         
         if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
             
@@ -198,7 +199,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         }
     }
     
-    [[RZDebugMenuSettingsObserverManager sharedInstance] setKeysWithArray:settingsKeys];
+//    [[RZDebugMenuSettingsObserverManager sharedInstance] setKeysWithArray:self.settingsKeys];
     return userSettings;
 }
 

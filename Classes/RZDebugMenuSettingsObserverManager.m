@@ -9,12 +9,6 @@
 #import "RZDebugMenuSettingsObserverManager.h"
 #import "RZDebugMenuObserver.h"
 
-#ifdef DEBUG
-#define UA_log( s, ... ) NSLog( @"<%@:%d> %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__,  [NSString stringWithFormat:(s), ##__VA_ARGS__] )
-#endif
-
-#define UA_logNullKeyWarning(key) UA_log(@"Warning -- %@ is not a predefined key from the plist", key)
-
 @interface RZDebugMenuSettingsObserverManager ()
 
 @property (strong, nonatomic, readwrite) NSMutableDictionary *observerKeyMap;
@@ -42,30 +36,16 @@
     return self;
 }
 
-- (void)setKeysWithArray:(NSArray *)keys
-{
-    for (NSString *key in keys) {
-        NSMutableSet *observers = [[NSMutableSet alloc] init];
-        [self.observerKeyMap setObject:observers forKey:key];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(notifyObserversForNotification:)
-                                                     name:key
-                                                   object:nil];
-    }
-}
-
 - (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
 {
     NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
     
-    if ( !observers ) {
-        UA_logNullKeyWarning(key);
-    }
-    else {
-        [observers addObject:newObserver];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(notifyObserversForNotification:)
+                                                 name:key
+                                               object:nil];
+    [observers addObject:newObserver];
 }
 
 - (void)removeObserver:(id)observer forKey:(NSString *)key

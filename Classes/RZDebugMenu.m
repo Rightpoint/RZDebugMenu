@@ -15,6 +15,10 @@
 
 #import "RZDebugMenuSettingsObserverManager.h"
 
+#ifdef DEBUG
+#define RZDebugMenuLogDebug_log( s, ... ) NSLog( @"[%@] Warning -- %@ is not a predefined key from the plist", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], key)
+#endif
+
 static NSString * const kRZSettingsFileExtension = @"plist";
 
 @interface RZDebugMenu ()
@@ -54,9 +58,15 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key
 {
-    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
-                                                                     selector:aSelector
-                                                                       forKey:key];
+    if ( ![[self privateSharedInstance] keyExistsInMenu:key] ) {
+        RZDebugMenuLogDebug_log(key);
+    }
+    else {
+        [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
+                                                                selector:aSelector
+                                                                  forKey:key];
+
+    }
 }
 
 + (void)removeObserver:(id)observer forKey:(NSString *)key
@@ -139,6 +149,14 @@ static NSString * const kRZSettingsFileExtension = @"plist";
             self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
         }
     }
+}
+
+- (BOOL) keyExistsInMenu:(NSString *)key
+{
+    if ( [self.interface.settingsKeys containsObject:key] ) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - RZDebugMenuClearViewController delegate method
