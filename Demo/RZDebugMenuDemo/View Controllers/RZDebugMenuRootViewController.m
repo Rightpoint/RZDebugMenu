@@ -28,7 +28,6 @@
     
     [self.view addSubview:self.tester];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBackground) name:@"reset_toggle" object:nil];
     [RZDebugMenu addObserver:self selector:@selector(changeBackground) forKey:@"reset_toggle"];
 }
 

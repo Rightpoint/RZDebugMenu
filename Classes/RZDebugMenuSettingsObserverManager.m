@@ -65,17 +65,15 @@
 - (void)removeObserver:(id)observer forKey:(NSString *)key
 {
     NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
-    if ( !observers ) {
-        [observers removeObject:observer];
-    }
+    [observers removeObject:observer];
 }
 
 - (void)notifyObserversForKey:(NSString *)key
 {
     NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
-    for (RZDebugMenuObserver *RZObserver in observers) {
-        id target = RZObserver.observer;
-        SEL action = RZObserver.aSelector;
+    for (RZDebugMenuObserver *observer in observers) {
+        id target = observer.target;
+        SEL action = observer.aSelector;
         [target performSelector:action];
     }
 }
