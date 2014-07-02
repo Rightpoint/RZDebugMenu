@@ -74,6 +74,16 @@ RZSliderTableViewCellDelegate>
                                                                   action:@selector(closeView)];
     
     self.navigationItem.rightBarButtonItem = doneButton;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidAppearOrHide:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidAppearOrHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -82,6 +92,28 @@ RZSliderTableViewCellDelegate>
     if ( selectedIndexPath ) {
         [self.optionsTableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
     }
+}
+
+- (void)keyboardDidAppearOrHide:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSTimeInterval duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardFrameForTableView = [self.optionsTableView.superview convertRect:keyboardFrame fromView:nil];
+    
+    CGRect newTableViewFrame = self.optionsTableView.frame;
+    newTableViewFrame.origin.y = keyboardFrameForTableView.origin.y - newTableViewFrame.size.height;
+    
+    [UIView animateWithDuration:duration
+                          delay:0
+                        options:UIViewAnimationOptionBeginFromCurrentState | animationCurve
+                     animations:^{
+                         self.optionsTableView.frame = newTableViewFrame;
+                     }
+                     completion:nil];
+    
 }
 
 #pragma mark - nav bar buttons methods
