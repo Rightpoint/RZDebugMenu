@@ -47,6 +47,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 //@property (strong, nonatomic, readwrite) NSMutableArray *settingsCellItemsMetaData;
 @property (strong, nonatomic) NSArray *preferenceSpecifiers;
 @property (strong, nonatomic, readwrite) NSMutableDictionary *groupedSections;
+@property (strong, nonatomic, readwrite) NSMutableArray *sectionGroupTitles;
 
 @end
 
@@ -93,7 +94,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    int sectionCount = [self.groupedSections allKeys].count;
+    int sectionCount = self.sectionGroupTitles.count;
     if ( sectionCount == 0 ) {
         return 1;
     }
@@ -104,13 +105,13 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[self.groupedSections allKeys] objectAtIndex:section];
+    return [self.sectionGroupTitles objectAtIndex:section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *sections = [self.groupedSections allKeys];
-    NSMutableArray *cellItems = [self.groupedSections objectForKey:[sections objectAtIndex:section]];
+//    NSArray *sections = self.sectionGroupTitles;
+    NSMutableArray *cellItems = [self.groupedSections objectForKey:[self.sectionGroupTitles objectAtIndex:section]];
     return cellItems.count;
     
 //    return self.settingsCellItemsMetaData.count;
@@ -118,7 +119,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *currentSection = [[self.groupedSections allKeys] objectAtIndex:indexPath.section];
+    NSString *currentSection = [self.sectionGroupTitles objectAtIndex:indexPath.section];
     NSMutableArray *currentSectionsCells = [self.groupedSections objectForKey:currentSection];
     
     UITableViewCell *cell = nil;
@@ -208,6 +209,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
     NSString *currentSection = [[NSString alloc] init];
     self.groupedSections = [[NSMutableDictionary alloc] init];
+    self.sectionGroupTitles = [[NSMutableArray alloc] init];
     
     for (id settingsItem in preferences) {
         
@@ -299,7 +301,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                 rows = [[NSMutableArray alloc] init];
                 [self.groupedSections setObject:rows forKey:cellTitle];
             }
-//            [self.groupedSectionsArray addObject:cellTitle];
+            [self.sectionGroupTitles addObject:cellTitle];
 //            [_settingsCellItemsMetaData addObject:groupSectionItem];
         }
     }
@@ -329,7 +331,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *currentSection = [[self.groupedSections allKeys] objectAtIndex:indexPath.section];
+    NSString *currentSection = [self.sectionGroupTitles objectAtIndex:indexPath.section];
     NSMutableArray *cellItemsMetaData = [self.groupedSections objectForKey:currentSection];
     NSUInteger numberOfItems = cellItemsMetaData.count;
     if ( indexPath.row >= numberOfItems ) {
@@ -351,13 +353,21 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
 - (NSString *)getKeyIdentifierForIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger groupCount = [self.groupedSections allKeys].count;
+//    NSInteger groupCount = self.sectionGroupTitles.count;
     id setting;
+    
     if ( indexPath.section == 0 ) {
-        setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row+groupCount];
+        // plus 1 to the index path because the 'group' item takes up a spot on the array
+        setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row+1];
     }
     else {
-        setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row+indexPath.section+groupCount)];
+        
+        int numberOfPreviousCells = 0;
+        for (int i = 0; i < indexPath.section; i++) {
+            numberOfPreviousCells = numberOfPreviousCells + [self.settingsOptionsTableView numberOfRowsInSection:i];
+        }
+        
+        setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row+numberOfPreviousCells+indexPath.section+1)];
     }
     
     if ( [setting isKindOfClass:[NSDictionary class]] ) {

@@ -21,6 +21,28 @@
 			<string>PSToggleSwitchSpecifier</string>
 		</dict>
 		<dict>
+			<key>DefaultValue</key>
+			<string>25</string>
+			<key>MaximumValue</key>
+			<string>100</string>
+			<key>MinimumValue</key>
+			<string>0</string>
+			<key>Key</key>
+			<string>slider_preference_2</string>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>reset_toggle_3</string>
+			<key>Title</key>
+			<string>Something Else</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
 			<key>Title</key>
 			<string>Group 2</string>
 			<key>Type</key>
@@ -81,6 +103,22 @@
 			<string>Apply on Reset</string>
 			<key>Key</key>
 			<string>reset_toggle</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Group 3</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Another</string>
+			<key>Key</key>
+			<string>reset_toggle_x</string>
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
