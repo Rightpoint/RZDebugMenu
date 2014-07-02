@@ -17,6 +17,7 @@
         CGFloat width = CGRectGetWidth(self.bounds);
         CGFloat height = CGRectGetHeight(self.bounds);
         _cellSlider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+        _cellSlider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [_cellSlider addTarget:self action:@selector(changedSlider) forControlEvents:UIControlEventValueChanged];
         [self addSubview:_cellSlider];
     }
