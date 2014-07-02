@@ -55,7 +55,7 @@
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
     
     if ( !observers ) {
-        NSLog(@"Warning! Not using a predefined key from the plist");
+        NSLog(@"[RZDebugMenuSettingsObserverManager] Warning -- Not using a predefined key from the plist");
     }
     else {
         [observers addObject:newObserver];
