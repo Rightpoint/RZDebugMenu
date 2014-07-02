@@ -11,7 +11,7 @@
 
 @interface RZDebugMenuSettingsObserverManager ()
 
-@property (strong, nonatomic, readwrite) NSMapTable *observerKeyMap;
+@property (strong, nonatomic, readwrite) NSMutableDictionary *observerKeyMap;
 
 @end
 
@@ -31,7 +31,7 @@
 {
     self = [super init];
     if ( self ) {
-        _observerKeyMap = [[NSMapTable alloc] init];
+        _observerKeyMap = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
