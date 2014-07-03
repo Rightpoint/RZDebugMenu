@@ -62,13 +62,17 @@
     [observers removeObject:observer];
 }
 
-- (void)notifyObserversForKey:(NSString *)key
+- (void)notifyObserversWithValue:(id)value forKey:(NSString *)key
 {
-    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
+    
+    NSSet *observers = [self.observerKeyMap objectForKey:key];
     for (RZDebugMenuObserver *observer in observers) {
         id target = observer.target;
         SEL action = observer.aSelector;
-        [target performSelector:action];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [target performSelector:action withObject:value];
+#pragma clang diagnostic pop
     }
 }
 
@@ -76,7 +80,8 @@
 {
     NSDictionary *userInfo = [notification userInfo];
     NSString *key = [userInfo allKeys][0];
-    [self notifyObserversForKey:key];
+    id value = [userInfo objectForKey:key];
+    [self notifyObserversWithValue:value forKey:key];
 }
 
 @end
