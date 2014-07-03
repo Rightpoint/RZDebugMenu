@@ -101,16 +101,17 @@ RZSliderTableViewCellDelegate>
     UIViewAnimationCurve animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
     
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGRect keyboardFrameForTableView = [self.optionsTableView.superview convertRect:keyboardFrame fromView:nil];
     
-    CGRect newTableViewFrame = self.optionsTableView.frame;
-    newTableViewFrame.origin.y = keyboardFrameForTableView.origin.y - newTableViewFrame.size.height;
+    UIEdgeInsets newTableViewEdgeInsets = self.optionsTableView.contentInset;
+    UIEdgeInsets newEdgeInset = UIEdgeInsetsMake(0, 0, keyboardFrame.size.height, 0);
+    
+    newTableViewEdgeInsets.bottom = newEdgeInset.bottom - newTableViewEdgeInsets.bottom;
     
     [UIView animateWithDuration:duration
                           delay:0
                         options:UIViewAnimationOptionBeginFromCurrentState | animationCurve
                      animations:^{
-                         self.optionsTableView.frame = newTableViewFrame;
+                         self.optionsTableView.contentInset = newTableViewEdgeInsets;
                      }
                      completion:nil];
     
