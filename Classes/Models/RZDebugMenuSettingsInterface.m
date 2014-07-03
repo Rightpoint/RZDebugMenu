@@ -41,6 +41,7 @@ static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZTextFieldReuseIdentifier = @"text_field";
 static NSString * const kRZSliderReuseIdentifier = @"slider";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
+static NSString * const kRZVersionGroupTitle = @"Version Info";
 static NSString * const kRZEmptyString = @"";
 
 @interface RZDebugMenuSettingsInterface ()
@@ -304,6 +305,9 @@ static NSString * const kRZEmptyString = @"";
 {
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
     RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
+    NSArray *versionItemArray = @[versionItem];
+    [self.groupedSections setObject:versionItemArray forKey:kRZVersionGroupTitle];
+    [self.sectionGroupTitles addObject:kRZVersionGroupTitle];
 }
 
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
@@ -348,7 +352,7 @@ static NSString * const kRZEmptyString = @"";
             
             numberOfPreviousCells = numberOfPreviousCells + [self.settingsOptionsTableView numberOfRowsInSection:i];
         }
-        
+        // gets the correct index in the array of settings by taking into account the number of group items and cells before the one that is changing
         setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row+numberOfPreviousCells+indexPath.section+1)];
     }
     
