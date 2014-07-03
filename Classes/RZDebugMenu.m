@@ -7,7 +7,7 @@
 //
 
 #import "RZDebugMenu.h"
-#import "RZLoggingMacros.h"
+#import "RZDebugLogMenuDefines.h"
 
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenuSettingsInterface.h"
