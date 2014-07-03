@@ -38,14 +38,22 @@
 
 - (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
 {
-    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(notifyObserversForNotification:)
                                                  name:key
                                                object:nil];
-    [observers addObject:newObserver];
+    
+    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
+    if ( observers == NULL ) {
+        observers = [[NSMutableSet alloc] init];
+        [observers addObject:newObserver];
+        [self.observerKeyMap setObject:observers forKey:key];
+    }
+    else {
+        [observers addObject:newObserver];
+    }
 }
 
 - (void)removeObserver:(id)observer forKey:(NSString *)key

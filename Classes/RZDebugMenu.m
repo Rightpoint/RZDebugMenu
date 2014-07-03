@@ -62,6 +62,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
         RZDebugMenuLogDebug_log(key);
     }
     else {
+        NSLog(@"adding");
         [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
                                                                 selector:aSelector
                                                                   forKey:key];
