@@ -71,6 +71,7 @@
         SEL action = observer.aSelector;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        NSLog(@"%@", value);
         [target performSelector:action withObject:value];
 #pragma clang diagnostic pop
     }

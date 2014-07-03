@@ -28,7 +28,7 @@
     
     [self.view addSubview:self.tester];
     
-    [RZDebugMenu addObserver:self selector:@selector(changeBackground) forKey:@"reset_toggle"];
+    [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle"];
 }
 
 - (void)goToNext
@@ -37,9 +37,14 @@
     [self.navigationController pushViewController:testerController animated:YES];
 }
 
-- (void)changeBackground
+- (void)changeBackground:(NSNumber *)toggleValue
 {
-    self.view.backgroundColor = [UIColor purpleColor];
+    if ( [toggleValue boolValue] ) {
+        self.view.backgroundColor = [UIColor purpleColor];
+    }
+    else {
+        self.view.backgroundColor = [UIColor blueColor];
+    }
 }
 
 @end
