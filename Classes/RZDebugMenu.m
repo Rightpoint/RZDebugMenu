@@ -7,6 +7,7 @@
 //
 
 #import "RZDebugMenu.h"
+#import "RZLoggingMacros.h"
 
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenuSettingsInterface.h"
@@ -14,10 +15,6 @@
 #import "RZDebugMenuModalViewController.h"
 
 #import "RZDebugMenuSettingsObserverManager.h"
-
-#ifdef DEBUG
-#define RZDebugMenuLogDebug_log( s, ... ) NSLog( @"[%@] Warning -- %@ is not a predefined key from the plist", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], key)
-#endif
 
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 static NSString * const kRZSettingsFileExtension = @"plist";
@@ -61,7 +58,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     RZDebugMenu *sharedInstance = [self privateSharedInstance];
     if ( ![sharedInstance.interface.settingsKeys containsObject:key] ) {
-        RZDebugMenuLogDebug_log(key);
+        RZDebugMenuLogDebug_log("Warning! Key not in plist");
     }
     else {
         [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
