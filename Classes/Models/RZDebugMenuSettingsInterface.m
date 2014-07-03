@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuSettingsInterface.h"
 
+#import "RZDebugMenu.h"
 #import "RZDebugMenuSettingsItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
@@ -142,7 +143,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             else {
                 userInfo = @{key: value};
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:key
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRZDebugMenuSettingChangedNotification
                                                                 object:nil
                                                               userInfo:userInfo];
             
@@ -197,8 +198,6 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
         }
     }
-    
-//    [[RZDebugMenuSettingsObserverManager sharedInstance] setKeysWithArray:self.settingsKeys];
     return userSettings;
 }
 

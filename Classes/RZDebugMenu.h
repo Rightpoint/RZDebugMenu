@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "RZDebugMenuClearViewController.h"
 
+OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
+
 @interface RZDebugMenu : NSObject <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
 
 + (void)enableWithSettingsPlist:(NSString *)fileName;

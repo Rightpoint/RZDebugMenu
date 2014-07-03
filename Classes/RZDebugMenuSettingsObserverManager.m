@@ -7,6 +7,7 @@
 //
 
 #import "RZDebugMenuSettingsObserverManager.h"
+#import "RZDebugMenu.h"
 #import "RZDebugMenuObserver.h"
 
 @interface RZDebugMenuSettingsObserverManager ()
@@ -32,6 +33,10 @@
     self = [super init];
     if ( self ) {
         _observerKeyMap = [[NSMutableDictionary alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(notifyObserversForNotification:)
+                                                     name:kRZDebugMenuSettingChangedNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -39,11 +44,6 @@
 - (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
 {
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(notifyObserversForNotification:)
-                                                 name:key
-                                               object:nil];
     
     NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
     if ( observers == NULL ) {
