@@ -103,9 +103,8 @@ RZSliderTableViewCellDelegate>
     CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     UIEdgeInsets newTableViewEdgeInsets = self.optionsTableView.contentInset;
-    UIEdgeInsets newEdgeInset = UIEdgeInsetsMake(0, 0, keyboardFrame.size.height, 0);
-    
-    newTableViewEdgeInsets.bottom = newEdgeInset.bottom - newTableViewEdgeInsets.bottom;
+    CGFloat keyboardHeight = keyboardFrame.size.height;
+    newTableViewEdgeInsets.bottom = keyboardHeight - newTableViewEdgeInsets.bottom;
     
     [UIView animateWithDuration:duration
                           delay:0
