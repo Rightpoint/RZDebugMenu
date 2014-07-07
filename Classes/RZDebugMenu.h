@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "RZDebugMenuClearViewController.h"
 
+/**
+ Observer notification name constant. Notification with this name
+ sent on a change in the Debug Menu
+ */
 OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
 
 @interface RZDebugMenu : NSObject <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>

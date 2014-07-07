@@ -137,7 +137,7 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
             
             NSDictionary *userInfo;
             
-            if ( [userDefaults objectForKey:userDefaultsKey] == nil ) {
+            if ( value == nil ) {
                 userInfo = @{key: [NSNull null]};
             }
             else {

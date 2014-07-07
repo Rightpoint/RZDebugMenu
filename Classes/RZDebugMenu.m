@@ -58,7 +58,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     RZDebugMenu *sharedInstance = [self privateSharedInstance];
     if ( ![sharedInstance.interface.settingsKeys containsObject:key] ) {
-        RZDebugMenuLogDebug_log("Warning! Key not in plist");
+        RZDebugMenuLogDebug("Warning! Key not in plist");
     }
     else {
         [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer

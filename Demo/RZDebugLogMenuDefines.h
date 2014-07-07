@@ -10,9 +10,9 @@
 #define RZDebugMenuDemo_RZDebugLogMenuDefines_h
 
 #if DEBUG
-#define RZDebugMenuLogDebug_log( s, ... ) NSLog((@"[RZDebugMenu]: DEBUG --  s"), ##__VA_ARGS__)
+#define RZDebugMenuLogDebug( s, ... ) NSLog((@"[RZDebugMenu]: DEBUG --  s"), ##__VA_ARGS__)
 #endif
 
-#define RZDebugMenuErrorLog( s, ... ) NSLog((@"[RZDebugMenu]: ERROR -- s"). ##__VA_ARGS__)
+#define RZDebugMenuLogError( s, ... ) NSLog((@"[RZDebugMenu]: ERROR -- s"). ##__VA_ARGS__)
 
 #endif
