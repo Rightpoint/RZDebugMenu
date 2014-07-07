@@ -154,8 +154,11 @@ static NSString * const kRZEmptyString = @"";
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         textFieldCell.stringTextField.text = textFieldDefaultValue;
         cell = textFieldCell;
+        
+        
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuSliderItem class]] ) {
+        
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZSliderReuseIdentifier forIndexPath:indexPath];
         RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
         
@@ -172,6 +175,7 @@ static NSString * const kRZEmptyString = @"";
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         cell.detailTextLabel.text = ((RZDebugMenuVersionItem *)currentMetaDataObject).versionNumber;
     }
+    
     return cell;
 }
 
@@ -194,24 +198,22 @@ static NSString * const kRZEmptyString = @"";
     self.groupedSections = [[NSMutableDictionary alloc] init];
     self.sectionGroupTitles = [[NSMutableArray alloc] init];
     
-    // check if there are specified groups
-    for (id item in preferences) {
-        
-        if ( ![[item objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] ) {
-            
-            NSMutableArray *rows = [[NSMutableArray alloc] init];
-            [self.groupedSections setObject:rows forKey:kRZEmptyString];
-            currentSection = kRZEmptyString;
-        }
-    }
-    
+    NSUInteger currentObjectIndex = 0;
     for (id settingsItem in preferences) {
         
         NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
         NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
         NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
         
-        if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
+        if ( ![[settingsItem objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] && currentObjectIndex == 0 ) {
+            
+            NSMutableArray *rows = [[NSMutableArray alloc] init];
+            [self.groupedSections setObject:rows forKey:kRZEmptyString];
+            currentSection = kRZEmptyString;
+            [self.sectionGroupTitles addObject:currentSection];
+        }
+        
+        else if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
             
             NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
             NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
@@ -283,6 +285,7 @@ static NSString * const kRZEmptyString = @"";
             }
             [self.sectionGroupTitles addObject:cellTitle];
         }
+        currentObjectIndex += 1;
     }
     return userSettings;
 }
