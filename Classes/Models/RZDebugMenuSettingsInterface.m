@@ -111,12 +111,8 @@ static NSString * const kRZEmptyString = @"";
     NSString *currentSection = [self.sectionGroupTitles objectAtIndex:indexPath.section];
     NSArray *currentSectionsCells = [self.groupedSections objectForKey:currentSection];
     
-    NSLog(@"%@", currentSectionsCells);
-    
     UITableViewCell *cell = nil;
     RZDebugMenuSettingsItem *currentMetaDataObject = [currentSectionsCells objectAtIndex:indexPath.row];
-    
-//    NSLog(@"Section %@, cell %@", currentSection, currentMetaDataObject);
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
@@ -154,7 +150,6 @@ static NSString * const kRZEmptyString = @"";
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSString *textFieldSettingsKey = [self generateSettingsKey:settingsDefaultKey];
-        NSLog(@"%@", textFieldSettingsKey);
         NSString *textFieldDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:textFieldSettingsKey];
         
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
@@ -352,7 +347,7 @@ static NSString * const kRZEmptyString = @"";
     }
     
     if ( indexPath.section == 0 ) {
-        // plus 1 to the index path because the 'group' item takes up a spot on the array
+        // plus 1 to the index path if the 'group' item takes up the first spot on the array
         setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row+firstGroupExists];
     }
     else {
