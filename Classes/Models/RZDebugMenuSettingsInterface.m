@@ -111,8 +111,12 @@ static NSString * const kRZEmptyString = @"";
     NSString *currentSection = [self.sectionGroupTitles objectAtIndex:indexPath.section];
     NSArray *currentSectionsCells = [self.groupedSections objectForKey:currentSection];
     
+    NSLog(@"%@", currentSectionsCells);
+    
     UITableViewCell *cell = nil;
     RZDebugMenuSettingsItem *currentMetaDataObject = [currentSectionsCells objectAtIndex:indexPath.row];
+    
+//    NSLog(@"Section %@, cell %@", currentSection, currentMetaDataObject);
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
@@ -133,7 +137,7 @@ static NSString * const kRZEmptyString = @"";
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
-        RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *) cell;
+        RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSString *toggleSettingsKey = [self generateSettingsKey:settingsDefaultKey];
@@ -144,18 +148,18 @@ static NSString * const kRZEmptyString = @"";
         cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuTextFieldItem class]] ) {
+        
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZTextFieldReuseIdentifier forIndexPath:indexPath];
         RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSString *textFieldSettingsKey = [self generateSettingsKey:settingsDefaultKey];
+        NSLog(@"%@", textFieldSettingsKey);
         NSString *textFieldDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:textFieldSettingsKey];
         
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         textFieldCell.stringTextField.text = textFieldDefaultValue;
         cell = textFieldCell;
-        
-        
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuSliderItem class]] ) {
         
@@ -198,22 +202,21 @@ static NSString * const kRZEmptyString = @"";
     self.groupedSections = [[NSMutableDictionary alloc] init];
     self.sectionGroupTitles = [[NSMutableArray alloc] init];
     
-    NSUInteger currentObjectIndex = 0;
+    id item = [preferences objectAtIndex:0];
+    if ( ![[item objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] ) {
+        NSMutableArray *rows = [[NSMutableArray alloc] init];
+        [self.groupedSections setObject:rows forKey:kRZEmptyString];
+        currentSection = kRZEmptyString;
+        [self.sectionGroupTitles addObject:kRZEmptyString];
+    }
+    
     for (id settingsItem in preferences) {
         
         NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
         NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
         NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
         
-        if ( ![[settingsItem objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] && currentObjectIndex == 0 ) {
-            
-            NSMutableArray *rows = [[NSMutableArray alloc] init];
-            [self.groupedSections setObject:rows forKey:kRZEmptyString];
-            currentSection = kRZEmptyString;
-            [self.sectionGroupTitles addObject:currentSection];
-        }
-        
-        else if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
+        if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
             
             NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
             NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
@@ -285,7 +288,6 @@ static NSString * const kRZEmptyString = @"";
             }
             [self.sectionGroupTitles addObject:cellTitle];
         }
-        currentObjectIndex += 1;
     }
     return userSettings;
 }
@@ -343,10 +345,15 @@ static NSString * const kRZEmptyString = @"";
 - (NSString *)getKeyIdentifierForIndexPath:(NSIndexPath *)indexPath
 {
     id setting;
+    NSInteger firstGroupExists = 1;
+    
+    if ( [[self.sectionGroupTitles objectAtIndex:0] isEqualToString:kRZEmptyString] ) {
+        firstGroupExists = 0;
+    }
     
     if ( indexPath.section == 0 ) {
         // plus 1 to the index path because the 'group' item takes up a spot on the array
-        setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row+1];
+        setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row+firstGroupExists];
     }
     else {
         
@@ -356,7 +363,7 @@ static NSString * const kRZEmptyString = @"";
             numberOfPreviousCells = numberOfPreviousCells + [self.settingsOptionsTableView numberOfRowsInSection:i];
         }
         // gets the correct index in the array of settings by taking into account the number of group items and cells before the one that is changing
-        setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row+numberOfPreviousCells+indexPath.section+1)];
+        setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row+numberOfPreviousCells+indexPath.section+firstGroupExists)];
     }
     
     if ( [setting isKindOfClass:[NSDictionary class]] ) {
