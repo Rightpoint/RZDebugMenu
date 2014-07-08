@@ -10,9 +10,6 @@
 
 @interface RZDebugMenuSettingsObserverManager : NSObject
 
-/**
- Observer Manager handles an object and the setting its observing for a change
- */
 + (instancetype)sharedInstance;
 
 - (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
