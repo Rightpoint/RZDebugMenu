@@ -36,6 +36,7 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  Sets an object to observe changes for a particular setting
  @param observer Object to observe changes
  @param aSelector A selector to perform when a setting that an object is observing changes
+ @note If the selector accepts an id parameter, it will be passed the new value for the key that changed
  @param key The key whose value a change will be observed for
  */
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
