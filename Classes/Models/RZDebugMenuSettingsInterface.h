@@ -14,6 +14,7 @@
 @interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
 
 @property (weak, nonatomic) UITableView *settingsOptionsTableView;
+@property (strong, nonatomic, readonly) NSMutableArray *settingsKeys;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;

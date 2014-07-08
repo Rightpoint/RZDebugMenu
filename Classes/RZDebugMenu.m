@@ -7,12 +7,16 @@
 //
 
 #import "RZDebugMenu.h"
+#import "RZDebugLogMenuDefines.h"
 
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenuSettingsInterface.h"
 
 #import "RZDebugMenuModalViewController.h"
 
+#import "RZDebugMenuSettingsObserverManager.h"
+
+NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 static NSString * const kRZSettingsFileExtension = @"plist";
 
 @interface RZDebugMenu ()
@@ -48,6 +52,24 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     RZDebugMenu *menu = [self privateSharedInstance];
     return [menu.interface valueForDebugSettingsKey:key];
+}
+
++ (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key
+{
+    RZDebugMenu *sharedInstance = [self privateSharedInstance];
+    if ( ![sharedInstance.interface.settingsKeys containsObject:key] ) {
+        RZDebugMenuLogDebug("Warning! Key not in plist");
+    }
+    else {
+        [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
+                                                                selector:aSelector
+                                                                  forKey:key];
+    }
+}
+
++ (void)removeObserver:(id)observer forKey:(NSString *)key
+{
+    [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:observer forKey:key];
 }
 
 - (id)init
