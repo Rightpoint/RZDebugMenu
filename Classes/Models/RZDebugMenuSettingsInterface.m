@@ -197,7 +197,7 @@ static NSString * const kRZEmptyString = @"";
     self.groupedSections = [[NSMutableDictionary alloc] init];
     self.sectionGroupTitles = [[NSMutableArray alloc] init];
     
-    id item = [preferences objectAtIndex:0];
+    NSDictionary *item = [preferences objectAtIndex:0];
     if ( ![[item objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] ) {
         NSMutableArray *rows = [[NSMutableArray alloc] init];
         [self.groupedSections setObject:rows forKey:kRZEmptyString];
