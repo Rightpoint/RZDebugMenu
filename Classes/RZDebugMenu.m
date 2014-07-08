@@ -19,7 +19,7 @@
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 static NSString * const kRZSettingsFileExtension = @"plist";
 
-@interface RZDebugMenu ()
+@interface RZDebugMenu () <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *interface;
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
