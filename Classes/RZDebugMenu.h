@@ -16,6 +16,7 @@
 OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
 
 @interface RZDebugMenu : NSObject
+/** @name RZDebugMenu Interface */
 
 /**
  Enables the debug menu with a specified settings plist
