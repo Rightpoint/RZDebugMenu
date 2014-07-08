@@ -100,11 +100,11 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Apply on Reset</string>
+			<string>Purple Background</string>
 			<key>Key</key>
 			<string>reset_toggle</string>
 			<key>DefaultValue</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Title</key>

@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuSettingsInterface.h"
 
+#import "RZDebugMenu.h"
 #import "RZDebugMenuSettingsItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
@@ -20,6 +21,8 @@
 #import "RZVersionInfoTableViewCell.h"
 #import "RZTextFieldTableViewCell.h"
 #import "RZSliderTableViewCell.h"
+
+#import "RZDebugMenuSettingsObserverManager.h"
 
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
@@ -60,6 +63,7 @@ static NSString * const kRZEmptyString = @"";
     self = [super init];
     if ( self ) {
         _preferenceSpecifiers = [plistData objectForKey:kRZPreferenceSpecifiersKey];
+        _settingsKeys = [[NSMutableArray alloc] init];
         
         NSMutableDictionary *userSettings = [self createMetaDataObjectsAndGenerateUserDefaults:_preferenceSpecifiers];
         
@@ -185,6 +189,19 @@ static NSString * const kRZEmptyString = @"";
         NSString *userDefaultsKey = [self generateSettingsKey:key];
         
         if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
+            
+            NSDictionary *userInfo;
+            
+            if ( value == nil ) {
+                userInfo = @{key: [NSNull null]};
+            }
+            else {
+                userInfo = @{key: value};
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRZDebugMenuSettingChangedNotification
+                                                                object:nil
+                                                              userInfo:userInfo];
+            
             [userDefaults setObject:value forKey:userDefaultsKey];
         }
     }
@@ -210,6 +227,10 @@ static NSString * const kRZEmptyString = @"";
         NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
         NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
         NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
+        
+        if ( plistItemIdentifier != nil ) {
+            [self.settingsKeys addObject:plistItemIdentifier];
+        }
         
         if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
             

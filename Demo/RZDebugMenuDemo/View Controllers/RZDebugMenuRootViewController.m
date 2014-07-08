@@ -9,6 +9,8 @@
 #import "RZDebugMenuRootViewController.h"
 #import "RZTestViewController.h"
 
+#import "RZDebugMenu.h"
+
 @interface RZDebugMenuRootViewController ()
 
 @end
@@ -25,12 +27,24 @@
     [self.tester addTarget:self action:@selector(goToNext) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.tester];
+    
+    [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle"];
 }
 
 - (void)goToNext
 {
     RZTestViewController *testerController = [[RZTestViewController alloc] init];
     [self.navigationController pushViewController:testerController animated:YES];
+}
+
+- (void)changeBackground:(NSNumber *)toggleValue
+{
+    if ( [toggleValue boolValue] ) {
+        self.view.backgroundColor = [UIColor purpleColor];
+    }
+    else {
+        self.view.backgroundColor = [UIColor blueColor];
+    }
 }
 
 @end

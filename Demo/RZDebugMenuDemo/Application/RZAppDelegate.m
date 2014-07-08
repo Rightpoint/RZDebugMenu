@@ -15,6 +15,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+#if (DEBUG)
+    [RZDebugMenu enableWithSettingsPlist:@"Settings.plist"];
+#endif
+    
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
     UINavigationController *rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     
@@ -22,10 +27,6 @@
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootNavigationController;
     [self.window makeKeyAndVisible];
-    
-#if (DEBUG)
-    [RZDebugMenu enableWithSettingsPlist:@"Settings.plist"];
-#endif
     
     return YES;
 }
