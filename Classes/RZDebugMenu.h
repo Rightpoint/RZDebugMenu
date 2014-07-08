@@ -15,7 +15,7 @@
  */
 OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
 
-@interface RZDebugMenu : NSObject <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
+@interface RZDebugMenu : NSObject
 
 + (void)enableWithSettingsPlist:(NSString *)fileName;
 + (id)debugSettingForKey:(NSString *)key;
