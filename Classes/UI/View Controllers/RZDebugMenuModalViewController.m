@@ -13,8 +13,13 @@
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZMultiValueSelectionItem.h"
+#import "RZDebugMenuTextFieldItem.h"
+#import "RZDebugMenuSliderItem.h"
+
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
+#import "RZTextFieldTableViewCell.h"
+#import "RZSliderTableViewCell.h"
 
 static NSString * const kRZNavigationBarTitle = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
@@ -22,7 +27,11 @@ static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
 
-@interface RZDebugMenuModalViewController () <RZDebugMenuMultiItemListViewControllerDelegate, RZToggleTableViewCellDelegate>
+@interface RZDebugMenuModalViewController ()
+<RZDebugMenuMultiItemListViewControllerDelegate,
+RZTextFieldTableViewCellDelegate,
+RZToggleTableViewCellDelegate,
+RZSliderTableViewCellDelegate>
 
 @property (strong, nonatomic) RZDebugMenuSettingsInterface *debugSettingsInterface;
 @property (strong, nonatomic) UITableView *optionsTableView;
@@ -65,6 +74,16 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
                                                                   action:@selector(closeView)];
     
     self.navigationItem.rightBarButtonItem = doneButton;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidAppearOrHide:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidAppearOrHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -73,6 +92,28 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     if ( selectedIndexPath ) {
         [self.optionsTableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
     }
+}
+
+- (void)keyboardDidAppearOrHide:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSTimeInterval duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    CGRect keyboardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    UIEdgeInsets newTableViewEdgeInsets = self.optionsTableView.contentInset;
+    CGFloat keyboardHeight = keyboardFrame.size.height;
+    newTableViewEdgeInsets.bottom = keyboardHeight - newTableViewEdgeInsets.bottom;
+    
+    [UIView animateWithDuration:duration
+                          delay:0
+                        options:UIViewAnimationOptionBeginFromCurrentState | animationCurve
+                     animations:^{
+                         self.optionsTableView.contentInset = newTableViewEdgeInsets;
+                     }
+                     completion:nil];
+    
 }
 
 #pragma mark - nav bar buttons methods
@@ -91,6 +132,16 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
         toggleCell.delegate = self;
         cell = toggleCell;
+    }
+    else if ( [cell isKindOfClass:[RZTextFieldTableViewCell class]] ) {
+        RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
+        textFieldCell.delegate = self;
+        cell = textFieldCell;
+    }
+    else if ( [cell isKindOfClass:[RZSliderTableViewCell class]] ) {
+        RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
+        sliderCell.delegate = self;
+        cell = sliderCell;
     }
 }
 
@@ -122,6 +173,25 @@ static NSString * const kRZVersionInfoReuseIdentifier = @"version";
     NSIndexPath *toggleCellIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuToggleItem *toggleItem = (RZDebugMenuToggleItem *)[self.debugSettingsInterface settingsItemAtIndexPath:toggleCellIndexPath];
     [self.debugSettingsInterface setValue:[NSNumber numberWithBool:cell.applySettingsSwitch.on] forDebugSettingsKey:toggleItem.settingsKey];
+}
+
+- (void)didEditTextLabelOfCell:(RZTextFieldTableViewCell *)cell
+{
+    NSIndexPath *textFieldIndexPath = [self.optionsTableView indexPathForCell:cell];
+    RZDebugMenuTextFieldItem *textFieldItem = (RZDebugMenuTextFieldItem *)[self.debugSettingsInterface settingsItemAtIndexPath:textFieldIndexPath];
+    [self.debugSettingsInterface setValue:cell.stringTextField.text forDebugSettingsKey:textFieldItem.settingsKey];
+}
+
+- (void)didChangeSliderPosition:(RZSliderTableViewCell *)cell
+{
+    NSIndexPath *sliderIndexPath = [self.optionsTableView indexPathForCell:cell];
+    RZDebugMenuSliderItem *sliderItem = (RZDebugMenuSliderItem *)[self.debugSettingsInterface settingsItemAtIndexPath:sliderIndexPath];
+    [self.debugSettingsInterface setValue:[NSNumber numberWithFloat:cell.cellSlider.value] forDebugSettingsKey:sliderItem.settingsKey];
+}
+
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
 }
 
 @end
