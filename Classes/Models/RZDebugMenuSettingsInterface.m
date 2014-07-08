@@ -312,6 +312,10 @@ static NSString * const kRZEmptyString = @"";
 
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ( indexPath.section >= self.sectionGroupTitles.count ) {
+        return nil;
+    }
+    
     NSString *currentSection = [self.sectionGroupTitles objectAtIndex:indexPath.section];
     NSMutableArray *cellItemsMetaData = [self.groupedSections objectForKey:currentSection];
     
