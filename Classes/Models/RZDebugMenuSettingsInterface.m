@@ -40,10 +40,10 @@ static NSString * const kRZKeyEnvironmentsTitles = @"Titles";
 static NSString * const kRZKeyEnvironmentsValues = @"Values";
 static NSString * const kRZVersionCellTitle = @"Version";
 static NSString * const kRZDisclosureReuseIdentifier = @"RZSettingsDisclosureCell";
-static NSString * const kRZToggleReuseIdentifier = @"RZToggleSwitchCell";
-static NSString * const kRZTextFieldReuseIdentifier = @"RZTextFieldCell";
-static NSString * const kRZSliderReuseIdentifier = @"RZSliderCell";
-static NSString * const kRZVersionInfoReuseIdentifier = @"RZVersionCell";
+static NSString * const kRZToggleReuseIdentifier = @"RZSettingsToggleSwitchCell";
+static NSString * const kRZTextFieldReuseIdentifier = @"RZSettingsTextFieldCell";
+static NSString * const kRZSliderReuseIdentifier = @"RZSettingsSliderCell";
+static NSString * const kRZVersionInfoReuseIdentifier = @"RZSettingsVersionCell";
 static NSString * const kRZVersionGroupTitle = @"Version Info";
 static NSString * const kRZEmptyString = @"";
 
