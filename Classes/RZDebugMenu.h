@@ -10,8 +10,7 @@
 #import "RZDebugMenuClearViewController.h"
 
 /**
- Observer notification name constant. Notification with this name
- sent on a change in the Debug Menu
+ *  Observer notification name constant. Notification with this name sent on a change in the Debug Menu
  */
 OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
 
@@ -27,25 +26,30 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
 + (void)enableWithSettingsPlist:(NSString *)fileName;
 
 /**
- Returns the setting value for a specified setting key defined in the plist
- @param key Key as defined in the plist under the 'Key' field
- @return An object that is the value of the indexed setting
+ *  Returns the setting value for a specified setting key defined in the plist
+ *
+ *  @param key Key as defined in the plist under the 'Key' field
+ *
+ *  @return An object that is the value of the indexed setting
  */
 + (id)debugSettingForKey:(NSString *)key;
 
 /**
- Sets an object to observe changes for a particular setting
- @param observer Object to observe changes
- @param aSelector A selector to perform when a setting that an object is observing changes
- @note If the selector accepts an id parameter, it will be passed the new value for the key that changed
- @param key The key whose value a change will be observed for
+ *  Sets an object to observe changes for a particular setting
+ *
+ *  @param observer  Object to observe changes
+ *  @param aSelector A selector to perform when a setting that an object is observing changes
+ *  @param key       The key whose value a change will be observed for
+ *
+ *  @note If the selector accepts an id parameter, it will be passed the new value for the key that changed
  */
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
 
 /**
- Removes an object currently observing for a settings change
- @param observer Object you wish to remove from the observer pool
- @param key The key the observer was observing a change on
+ *  Removes an object currently observing for a settings change
+ *
+ *  @param observer Object you wish to remove from the observer pool
+ *  @param key      The key the observer was observing a change on
  */
 + (void)removeObserver:(id)observer forKey:(NSString *)key;
 
