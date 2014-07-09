@@ -156,6 +156,8 @@ RZSliderTableViewCellDelegate>
     }
 }
 
+#pragma mark - table view cell delegate methods
+
 - (void)multiItemListDidMakeNewSelectionAtIndexPath:(RZMultiValueSelectionItem *)selectedItem
 {
     NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
@@ -184,11 +186,6 @@ RZSliderTableViewCellDelegate>
     NSIndexPath *sliderIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuSliderItem *sliderItem = (RZDebugMenuSliderItem *)[self.debugSettingsInterface settingsItemAtIndexPath:sliderIndexPath];
     [self.debugSettingsInterface setValue:[NSNumber numberWithFloat:cell.cellSlider.value] forDebugSettingsKey:sliderItem.settingsKey];
-}
-
-- (BOOL)disablesAutomaticKeyboardDismissal
-{
-    return NO;
 }
 
 @end
