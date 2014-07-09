@@ -131,17 +131,14 @@ RZSliderTableViewCellDelegate>
     if ( [cell isKindOfClass:[RZToggleTableViewCell class]] ) {
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
         toggleCell.delegate = self;
-        cell = toggleCell;
     }
     else if ( [cell isKindOfClass:[RZTextFieldTableViewCell class]] ) {
         RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
         textFieldCell.delegate = self;
-        cell = textFieldCell;
     }
     else if ( [cell isKindOfClass:[RZSliderTableViewCell class]] ) {
         RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
         sliderCell.delegate = self;
-        cell = sliderCell;
     }
 }
 
