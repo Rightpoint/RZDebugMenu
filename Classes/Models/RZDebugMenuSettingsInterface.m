@@ -214,7 +214,7 @@ static NSString * const kRZEmptyString = @"";
     self.groupedSections = [[NSMutableDictionary alloc] init];
     self.sectionGroupTitles = [[NSMutableArray alloc] init];
     
-    NSDictionary *item = [preferences objectAtIndex:0];
+    NSDictionary *item = [preferences firstObject];
     if ( ![[item objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] ) {
         NSMutableArray *rows = [[NSMutableArray alloc] init];
         [self.groupedSections setObject:rows forKey:kRZEmptyString];
@@ -367,7 +367,7 @@ static NSString * const kRZEmptyString = @"";
     id setting;
     NSInteger firstGroupExists = 1;
     
-    if ( [[self.sectionGroupTitles objectAtIndex:0] isEqualToString:kRZEmptyString] ) {
+    if ( [[self.sectionGroupTitles firstObject] isEqualToString:kRZEmptyString] ) {
         firstGroupExists = 0;
     }
     
