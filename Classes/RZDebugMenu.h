@@ -19,10 +19,11 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
 /** @name RZDebugMenu Interface */
 
 /**
- Enables the debug menu with a specified settings plist
- @warning Can not call 'init' on this class, otherwise app will throw exception
- @param fileName Name of the plist which have the settings definitions as NSString
- */
+*  Enables the debug menu with a specified settings plist
+*
+*  @param fileName Name of the plist which have the settings definitions as NSString
+*  @warning Can not call 'init' on this class, otherwise app will throw exception
+*/
 + (void)enableWithSettingsPlist:(NSString *)fileName;
 
 /**

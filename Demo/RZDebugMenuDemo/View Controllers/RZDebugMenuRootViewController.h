@@ -14,4 +14,5 @@
 @property (strong, nonatomic) UIButton *tester;
 
 - (void)goToNext;
+
 @end
