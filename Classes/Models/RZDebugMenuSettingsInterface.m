@@ -129,7 +129,6 @@ static NSString * const kRZEmptyString = @"";
             NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
             [objectsInSection addObject:disclosureTableViewCellMetaData];
             
-            
             NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
             [userSettings setObject:cellDefaultValue forKey:multiValueSettingsKey];
         }
