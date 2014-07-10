@@ -74,8 +74,6 @@ static NSString * const kRZEmptyString = @"";
     return self;
 }
 
-#pragma mark - Overridden setters/getters
-
 - (void)setSettingsOptionsTableView:(UITableView *)settingsOptionsTableView
 {
     _settingsOptionsTableView = settingsOptionsTableView;
@@ -84,6 +82,131 @@ static NSString * const kRZEmptyString = @"";
     [_settingsOptionsTableView registerClass:[RZVersionInfoTableViewCell class] forCellReuseIdentifier:kRZVersionInfoReuseIdentifier];
     [_settingsOptionsTableView registerClass:[RZTextFieldTableViewCell class] forCellReuseIdentifier:kRZTextFieldReuseIdentifier];
     [_settingsOptionsTableView registerClass:[RZSliderTableViewCell class] forCellReuseIdentifier:kRZSliderReuseIdentifier];
+}
+
+#pragma mark - Model generation methods
+
+- (NSMutableDictionary *)createMetaDataObjectsAndGenerateUserDefaults:(NSArray *)preferences
+{
+    NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
+    NSString *currentSection = [[NSString alloc] init];
+    self.groupedSections = [[NSMutableDictionary alloc] init];
+    self.sectionGroupTitles = [[NSMutableArray alloc] init];
+    
+    NSDictionary *item = [preferences firstObject];
+    if ( ![[item objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] ) {
+        NSMutableArray *rows = [[NSMutableArray alloc] init];
+        [self.groupedSections setObject:rows forKey:kRZEmptyString];
+        currentSection = kRZEmptyString;
+        [self.sectionGroupTitles addObject:kRZEmptyString];
+    }
+    
+    for (id settingsItem in preferences) {
+        
+        NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
+        NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
+        NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
+        
+        if ( plistItemIdentifier != nil ) {
+            [self.settingsKeys addObject:plistItemIdentifier];
+        }
+        
+        if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
+            
+            NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
+            NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
+            
+            NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"The disclosure selection arrays must be of non-zero length and equal length. Check to see in the Plist under your MultiValue item that your Titles and Values items are equal in length and are not 0");
+            
+            NSMutableArray *selectionItems = [self generateMultiValueOptionsArray:optionTitles withValues:optionValues];
+            
+            RZDebugMenuMultiValueItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithValue:cellDefaultValue
+                                                                                                                   forKey:plistItemIdentifier
+                                                                                                                withTitle:cellTitle
+                                                                                                        andSelectionItems:selectionItems];
+            
+            NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
+            [objectsInSection addObject:disclosureTableViewCellMetaData];
+            
+            NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
+            [userSettings setObject:cellDefaultValue forKey:multiValueSettingsKey];
+        }
+        else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
+            
+            NSNumber *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            
+            RZDebugMenuToggleItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue
+                                                                                                       forKey:plistItemIdentifier
+                                                                                                    withTitle:cellTitle];
+            
+            NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
+            [objectsInSection addObject:toggleTableViewCellMetaData];
+            
+            NSString *toggleKey = [self generateSettingsKey:plistItemIdentifier];
+            [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
+        }
+        else if ( [currentSettingsItemType isEqualToString:kRZTextFieldSpecifier] ) {
+            
+            NSString *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            RZDebugMenuTextFieldItem *textFieldTableViewCellMetaData = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue
+                                                                                                                forKey:plistItemIdentifier
+                                                                                                             withTitle:cellTitle];
+            
+            NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
+            [objectsInSection addObject:textFieldTableViewCellMetaData];
+            
+            NSString *textFieldSettingsKey = [self generateSettingsKey:plistItemIdentifier];
+            [userSettings setObject:defaultValue forKey:textFieldSettingsKey];
+        }
+        else if ( [currentSettingsItemType isEqualToString:kRZSliderSpecifier] ) {
+            
+            NSNumber *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
+            RZDebugMenuSliderItem *sliderTableViewCellMetaData = [[RZDebugMenuSliderItem alloc] initWithValue:defaultValue
+                                                                                                       forKey:plistItemIdentifier
+                                                                                                    withTitle:cellTitle];
+            
+            NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
+            [objectsInSection addObject:sliderTableViewCellMetaData];
+            
+            NSString *sliderSettingsKey = [self generateSettingsKey:plistItemIdentifier];
+            [userSettings setObject:defaultValue forKey:sliderSettingsKey];
+        }
+        else if ( [currentSettingsItemType isEqualToString:kRZGroupSpecifer] ) {
+            
+            currentSection = cellTitle;
+            NSMutableArray *rows = [self.groupedSections objectForKey:cellTitle];
+            if ( !rows ) {
+                rows = [[NSMutableArray alloc] init];
+                [self.groupedSections setObject:rows forKey:cellTitle];
+            }
+            [self.sectionGroupTitles addObject:cellTitle];
+        }
+    }
+    return userSettings;
+}
+
+- (NSMutableArray *)generateMultiValueOptionsArray:(NSArray *)optionTitles withValues:(NSArray *)optionValues
+{
+    NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < optionTitles.count; i++) {
+        
+        NSString *title = [optionTitles objectAtIndex:i];
+        NSNumber *value = [optionValues objectAtIndex:i];
+        RZMultiValueSelectionItem *selectionItemMetaData = [[RZMultiValueSelectionItem alloc] initWithTitle:title defaultValue:value];
+        [selectionItems addObject:selectionItemMetaData];
+    }
+    return selectionItems;
+}
+
+- (void)setUpVersionCellMetaData
+{
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
+    RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
+    NSArray *versionItemArray = @[versionItem];
+    [self.groupedSections setObject:versionItemArray forKey:kRZVersionGroupTitle];
+    [self.sectionGroupTitles addObject:kRZVersionGroupTitle];
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -182,153 +305,36 @@ static NSString * const kRZEmptyString = @"";
     return cell;
 }
 
-- (void)setValue:(id)value forDebugSettingsKey:(NSString *)key
-{
-    if ( key != nil && value != nil ) {
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *userDefaultsKey = [self generateSettingsKey:key];
-        
-        if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
-            
-            NSDictionary *userInfo;
-            
-            if ( value == nil ) {
-                userInfo = @{key: [NSNull null]};
-            }
-            else {
-                userInfo = @{key: value};
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRZDebugMenuSettingChangedNotification
-                                                                object:nil
-                                                              userInfo:userInfo];
-            
-            [userDefaults setObject:value forKey:userDefaultsKey];
-        }
-    }
-}
+#pragma mark - Settings getter methods
 
-- (NSMutableDictionary *)createMetaDataObjectsAndGenerateUserDefaults:(NSArray *)preferences
+- (NSString *)getKeyIdentifierForIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableDictionary *userSettings = [[NSMutableDictionary alloc] init];
-    NSString *currentSection = [[NSString alloc] init];
-    self.groupedSections = [[NSMutableDictionary alloc] init];
-    self.sectionGroupTitles = [[NSMutableArray alloc] init];
+    id setting;
+    NSInteger firstGroupExists = 1;
     
-    NSDictionary *item = [preferences objectAtIndex:0];
-    if ( ![[item objectForKey:kRZKeyType] isEqualToString:kRZGroupSpecifer] ) {
-        NSMutableArray *rows = [[NSMutableArray alloc] init];
-        [self.groupedSections setObject:rows forKey:kRZEmptyString];
-        currentSection = kRZEmptyString;
-        [self.sectionGroupTitles addObject:kRZEmptyString];
+    if ( [[self.sectionGroupTitles firstObject] isEqualToString:kRZEmptyString] ) {
+        firstGroupExists = 0;
     }
     
-    for (id settingsItem in preferences) {
-        
-        NSString *cellTitle = [settingsItem objectForKey:kRZKeyTitle];
-        NSString *currentSettingsItemType = [settingsItem objectForKey:kRZKeyType];
-        NSString *plistItemIdentifier = [settingsItem objectForKey:kRZKeyItemIdentifier];
-        
-        if ( plistItemIdentifier != nil ) {
-            [self.settingsKeys addObject:plistItemIdentifier];
-        }
-        
-        if ( [currentSettingsItemType isEqualToString:kRZMultiValueSpecifier] ) {
-            
-            NSNumber *cellDefaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
-            NSArray *optionTitles = [settingsItem objectForKey:kRZKeyEnvironmentsTitles];
-            NSArray *optionValues = [settingsItem objectForKey:kRZKeyEnvironmentsValues];
-            
-            NSAssert((optionTitles.count == optionValues.count && (optionTitles.count > 0 && optionValues.count > 0)), @"The disclosure selection arrays must be of non-zero length and equal length. Check to see in the Plist under your MultiValue item that your Titles and Values items are equal in length and are not 0");
-            
-            NSMutableArray *selectionItems = [self generateMultiValueOptionsArray:optionTitles withValues:optionValues];
-            
-            RZDebugMenuMultiValueItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithValue:cellDefaultValue
-                                                                                                                   forKey:plistItemIdentifier
-                                                                                                                withTitle:cellTitle
-                                                                                                        andSelectionItems:selectionItems];
-            
-            NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
-            [objectsInSection addObject:disclosureTableViewCellMetaData];
-            
-            
-            NSString *multiValueSettingsKey = [self generateSettingsKey:plistItemIdentifier];
-            [userSettings setObject:cellDefaultValue forKey:multiValueSettingsKey];
-        }
-        else if ( [currentSettingsItemType isEqualToString:kRZToggleSwitchSpecifier] ) {
-            
-            NSNumber *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
-            
-            RZDebugMenuToggleItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue
-                                                                                                       forKey:plistItemIdentifier
-                                                                                                    withTitle:cellTitle];
-            
-            NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
-            [objectsInSection addObject:toggleTableViewCellMetaData];
-            
-            NSString *toggleKey = [self generateSettingsKey:plistItemIdentifier];
-            [userSettings setObject:[settingsItem objectForKey:kRZKeyDefaultValue] forKey:toggleKey];
-        }
-        else if ( [currentSettingsItemType isEqualToString:kRZTextFieldSpecifier] ) {
-            
-            NSString *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
-            RZDebugMenuTextFieldItem *textFieldTableViewCellMetaData = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue
-                                                                                                                forKey:plistItemIdentifier
-                                                                                                             withTitle:cellTitle];
-            
-            NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
-            [objectsInSection addObject:textFieldTableViewCellMetaData];
-            
-            NSString *textFieldSettingsKey = [self generateSettingsKey:plistItemIdentifier];
-            [userSettings setObject:defaultValue forKey:textFieldSettingsKey];
-        }
-        else if ( [currentSettingsItemType isEqualToString:kRZSliderSpecifier] ) {
-           
-            NSNumber *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
-            RZDebugMenuSliderItem *sliderTableViewCellMetaData = [[RZDebugMenuSliderItem alloc] initWithValue:defaultValue
-                                                                                                       forKey:plistItemIdentifier
-                                                                                                    withTitle:cellTitle];
-            
-            NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
-            [objectsInSection addObject:sliderTableViewCellMetaData];
-            
-            NSString *sliderSettingsKey = [self generateSettingsKey:plistItemIdentifier];
-            [userSettings setObject:defaultValue forKey:sliderSettingsKey];
-        }
-        else if ( [currentSettingsItemType isEqualToString:kRZGroupSpecifer] ) {
-            
-            currentSection = cellTitle;
-            NSMutableArray *rows = [self.groupedSections objectForKey:cellTitle];
-            if ( !rows ) {
-                rows = [[NSMutableArray alloc] init];
-                [self.groupedSections setObject:rows forKey:cellTitle];
-            }
-            [self.sectionGroupTitles addObject:cellTitle];
-        }
+    if ( indexPath.section == 0 ) {
+        // plus 1 to the index path if the 'group' item takes up the first spot on the array
+        setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row+firstGroupExists];
     }
-    return userSettings;
-}
-
-- (NSMutableArray *)generateMultiValueOptionsArray:(NSArray *)optionTitles withValues:(NSArray *)optionValues
-{
-    NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
+    else {
+        
+        unsigned long numberOfPreviousCells = 0;
+        for (unsigned long i = 0; i < indexPath.section; i++) {
+            
+            numberOfPreviousCells = numberOfPreviousCells + [self.settingsOptionsTableView numberOfRowsInSection:i];
+        }
+        // gets the correct index in the array of settings by taking into account the number of group items and cells before the one that is changing
+        setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row+numberOfPreviousCells+indexPath.section+firstGroupExists)];
+    }
     
-    for (int i = 0; i < optionTitles.count; i++) {
-        
-        NSString *title = [optionTitles objectAtIndex:i];
-        NSNumber *value = [optionValues objectAtIndex:i];
-        RZMultiValueSelectionItem *selectionItemMetaData = [[RZMultiValueSelectionItem alloc] initWithTitle:title defaultValue:value];
-        [selectionItems addObject:selectionItemMetaData];
+    if ( [setting isKindOfClass:[NSDictionary class]] ) {
+        return [setting objectForKey:kRZKeyItemIdentifier];
     }
-    return selectionItems;
-}
-
-- (void)setUpVersionCellMetaData
-{
-    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
-    RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
-    NSArray *versionItemArray = @[versionItem];
-    [self.groupedSections setObject:versionItemArray forKey:kRZVersionGroupTitle];
-    [self.sectionGroupTitles addObject:kRZVersionGroupTitle];
+    return nil;
 }
 
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
@@ -357,39 +363,38 @@ static NSString * const kRZEmptyString = @"";
     return [[NSUserDefaults standardUserDefaults] objectForKey:settingKey];
 }
 
+#pragma mark - Setting setter method
+
+- (void)setValue:(id)value forDebugSettingsKey:(NSString *)key
+{
+    if ( key != nil && value != nil ) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *userDefaultsKey = [self generateSettingsKey:key];
+        
+        if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
+            
+            NSDictionary *userInfo;
+            
+            if ( value == nil ) {
+                userInfo = @{key: [NSNull null]};
+            }
+            else {
+                userInfo = @{key: value};
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRZDebugMenuSettingChangedNotification
+                                                                object:nil
+                                                              userInfo:userInfo];
+            
+            [userDefaults setObject:value forKey:userDefaultsKey];
+        }
+    }
+}
+
+#pragma mark - Preprocessing methods
+
 - (NSString *)generateSettingsKey:(NSString *)identifier
 {
     return [NSString stringWithFormat:@"%@%@", kRZUserSettingsDebugPrefix, identifier];
-}
-
-- (NSString *)getKeyIdentifierForIndexPath:(NSIndexPath *)indexPath
-{
-    id setting;
-    NSInteger firstGroupExists = 1;
-    
-    if ( [[self.sectionGroupTitles objectAtIndex:0] isEqualToString:kRZEmptyString] ) {
-        firstGroupExists = 0;
-    }
-    
-    if ( indexPath.section == 0 ) {
-        // plus 1 to the index path if the 'group' item takes up the first spot on the array
-        setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row+firstGroupExists];
-    }
-    else {
-        
-        unsigned long numberOfPreviousCells = 0;
-        for (unsigned long i = 0; i < indexPath.section; i++) {
-            
-            numberOfPreviousCells = numberOfPreviousCells + [self.settingsOptionsTableView numberOfRowsInSection:i];
-        }
-        // gets the correct index in the array of settings by taking into account the number of group items and cells before the one that is changing
-        setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row+numberOfPreviousCells+indexPath.section+firstGroupExists)];
-    }
-    
-    if ( [setting isKindOfClass:[NSDictionary class]] ) {
-        return [setting objectForKey:kRZKeyItemIdentifier];
-    }
-    return nil;
 }
 
 @end

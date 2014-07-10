@@ -131,17 +131,14 @@ RZSliderTableViewCellDelegate>
     if ( [cell isKindOfClass:[RZToggleTableViewCell class]] ) {
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
         toggleCell.delegate = self;
-        cell = toggleCell;
     }
     else if ( [cell isKindOfClass:[RZTextFieldTableViewCell class]] ) {
         RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
         textFieldCell.delegate = self;
-        cell = textFieldCell;
     }
     else if ( [cell isKindOfClass:[RZSliderTableViewCell class]] ) {
         RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
         sliderCell.delegate = self;
-        cell = sliderCell;
     }
 }
 
@@ -158,6 +155,8 @@ RZSliderTableViewCellDelegate>
         [self.navigationController pushViewController:environmentsViewController animated:YES];
     }
 }
+
+#pragma mark - table view cell delegate methods
 
 - (void)multiItemListDidMakeNewSelectionAtIndexPath:(RZMultiValueSelectionItem *)selectedItem
 {
@@ -187,11 +186,6 @@ RZSliderTableViewCellDelegate>
     NSIndexPath *sliderIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuSliderItem *sliderItem = (RZDebugMenuSliderItem *)[self.debugSettingsInterface settingsItemAtIndexPath:sliderIndexPath];
     [self.debugSettingsInterface setValue:[NSNumber numberWithFloat:cell.cellSlider.value] forDebugSettingsKey:sliderItem.settingsKey];
-}
-
-- (BOOL)disablesAutomaticKeyboardDismissal
-{
-    return NO;
 }
 
 @end
