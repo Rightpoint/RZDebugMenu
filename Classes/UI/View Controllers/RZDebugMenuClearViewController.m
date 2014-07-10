@@ -67,7 +67,7 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
 {
     CGFloat const topBoundaryInset = 20.0f;
     CGFloat const bounceOffset = 15.f;
-    CGFloat const buttonWidth = self.displayDebugMenuButton.bounds.size.width;
+    CGFloat const buttonWidth = CGRectGetWidth(self.displayDebugMenuButton.bounds);
     CGPoint translation = [panGesture translationInView:self.view];
     CGPoint velocity = [panGesture velocityInView:self.view];
     UIView *draggedButton = panGesture.view;
@@ -83,10 +83,10 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
         if ( newButtonFrame.origin.x <= 0 ) {
             newButtonFrame.origin.x = 0;
         }
-        if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+        if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth ) {
             newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth;
         }
-        if ( newButtonFrame.origin.y <= topBoundaryInset) {
+        if ( newButtonFrame.origin.y <= topBoundaryInset ) {
             newButtonFrame.origin.y = topBoundaryInset;
         }
         
@@ -110,10 +110,10 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
                              if ( newButtonFrame.origin.x <= 0 ) {
                                  newButtonFrame.origin.x = -bounceOffset;
                              }
-                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth ) {
                                  newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth + bounceOffset;
                              }
-                             if ( newButtonFrame.origin.y <= topBoundaryInset) {
+                             if ( newButtonFrame.origin.y <= topBoundaryInset ) {
                                  newButtonFrame.origin.y = topBoundaryInset - bounceOffset;
                              }
                              
@@ -129,10 +129,10 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
                              if ( newButtonFrame.origin.x <= 0 ) {
                                  newButtonFrame.origin.x = 0;
                              }
-                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth) {
+                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth ) {
                                  newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth;
                              }
-                             if ( newButtonFrame.origin.y <= topBoundaryInset) {
+                             if ( newButtonFrame.origin.y <= topBoundaryInset ) {
                                  newButtonFrame.origin.y = topBoundaryInset;
                              }
                              
