@@ -11,6 +11,7 @@
 
 #import "RZDebugMenuWindow.h"
 #import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuSettingsDataSource.h"
 
 #import "RZDebugMenuModalViewController.h"
 
@@ -21,7 +22,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 @interface RZDebugMenu () <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
 
-@property (strong, nonatomic) RZDebugMenuSettingsInterface *interface;
+@property (strong, nonatomic) RZDebugMenuSettingsDataSource *dataSource;
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
 @property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
@@ -50,14 +51,13 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 + (id)debugSettingForKey:(NSString *)key
 {
-    RZDebugMenu *menu = [self privateSharedInstance];
-    return [menu.interface valueForDebugSettingsKey:key];
+    return [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
 }
 
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key
 {
     RZDebugMenu *sharedInstance = [self privateSharedInstance];
-    if ( ![sharedInstance.interface.settingsKeys containsObject:key] ) {
+    if ( ![sharedInstance.dataSource.settingsKeys containsObject:key] ) {
         RZDebugMenuLogDebug("Warning! Key not in plist");
     }
     else {
@@ -121,7 +121,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 
 - (void)displayDebugMenu
 {
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithInterface:self.interface];
+    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithDataSource:self.dataSource];
     UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
     [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
 }
@@ -178,7 +178,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
     
     NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    _interface = [[RZDebugMenuSettingsInterface alloc] initWithDictionary:plistData];
+    _dataSource = [[RZDebugMenuSettingsDataSource alloc] initWithDictionary:plistData];
 }
 
 @end
