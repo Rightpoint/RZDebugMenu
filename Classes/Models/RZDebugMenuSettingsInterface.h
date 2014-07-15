@@ -20,5 +20,6 @@
 //- (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
 + (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;
 + (id)valueForDebugSettingsKey:(NSString *)key;
++ (NSString *)generateSettingsKey:(NSString *)identifier;
 
 @end

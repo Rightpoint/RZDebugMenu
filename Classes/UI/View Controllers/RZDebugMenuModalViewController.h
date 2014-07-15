@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuSettingsDataSource.h"
 
 @interface RZDebugMenuModalViewController : UIViewController <UITableViewDelegate>
 
-- (id)initWithInterface:(RZDebugMenuSettingsInterface *)interface;
+- (id)initWithInterface:(RZDebugMenuSettingsDataSource *)dataSource;
 
 @end
