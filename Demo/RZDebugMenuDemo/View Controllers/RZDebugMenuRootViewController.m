@@ -28,7 +28,13 @@
     
     [self.view addSubview:self.tester];
     
+    self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 100, 50)];
+    self.testTextField.text = @"0";
+    self.testTextField.textColor = [UIColor whiteColor];
+    [self.view addSubview:self.testTextField];
+    
     [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle"];
+    [RZDebugMenu addObserver:self selector:@selector(changeValue:) forKey:@"slider_preference_2"];
 }
 
 - (void)goToNext
@@ -45,6 +51,11 @@
     else {
         self.view.backgroundColor = [UIColor blueColor];
     }
+}
+
+- (void)changeValue:(NSNumber *)sliderValue
+{
+    self.testTextField.text = [sliderValue stringValue];
 }
 
 @end
