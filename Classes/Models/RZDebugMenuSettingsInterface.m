@@ -14,7 +14,7 @@ static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 
 @implementation RZDebugMenuSettingsInterface
 
-#pragma mark - Settings getter methods
+#pragma mark - User default getter method
 
 + (id)valueForDebugSettingsKey:(NSString *)key
 {
@@ -22,7 +22,7 @@ static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
     return [[NSUserDefaults standardUserDefaults] objectForKey:settingKey];
 }
 
-#pragma mark - Setting setter method
+#pragma mark - User default setter method
 
 + (void)setValue:(id)value forDebugSettingsKey:(NSString *)key
 {
