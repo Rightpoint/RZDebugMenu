@@ -11,6 +11,8 @@
 
 #import "RZDebugMenu.h"
 
+static NSString * const kRZDefaultNavTitle = @"Deafult Title";
+
 @interface RZDebugMenuRootViewController ()
 
 @end
@@ -21,6 +23,8 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blueColor];
+    
+    self.title = kRZDefaultNavTitle;
     
     self.tester = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 200, 100)];
     self.tester.backgroundColor = [UIColor redColor];
@@ -35,6 +39,7 @@
     
     [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle"];
     [RZDebugMenu addObserver:self selector:@selector(changeValue:) forKey:@"slider_preference_2"];
+    [RZDebugMenu addObserver:self selector:@selector(changeNavTitle:) forKey:@"name_preference"];
 }
 
 - (void)goToNext
@@ -56,6 +61,16 @@
 - (void)changeValue:(NSNumber *)sliderValue
 {
     self.testTextField.text = [sliderValue stringValue];
+}
+
+-(void)changeNavTitle:(NSString *)newTitle
+{
+    if ( newTitle ) {
+        self.title = newTitle;
+    }
+    else {
+        self.title = kRZDefaultNavTitle;
+    }
 }
 
 @end
