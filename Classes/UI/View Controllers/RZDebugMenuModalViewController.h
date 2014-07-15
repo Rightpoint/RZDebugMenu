@@ -11,6 +11,6 @@
 
 @interface RZDebugMenuModalViewController : UIViewController <UITableViewDelegate>
 
-- (id)initWithInterface:(RZDebugMenuSettingsDataSource *)dataSource;
+- (id)initWithDataSource:(RZDebugMenuSettingsDataSource *)dataSource;
 
 @end

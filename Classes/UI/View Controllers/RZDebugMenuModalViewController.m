@@ -42,7 +42,7 @@ RZSliderTableViewCellDelegate>
 
 @implementation RZDebugMenuModalViewController
 
-- (id)initWithInterface:(RZDebugMenuSettingsDataSource *)dataSource
+- (id)initWithDataSource:(RZDebugMenuSettingsDataSource *)dataSource
 {
     self = [super init];
     if ( self ) {
