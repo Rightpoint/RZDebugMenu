@@ -11,14 +11,14 @@
 #import "RZMultiValueSelectionItem.h"
 #import "RZToggleTableViewCell.h"
 
-@interface RZDebugMenuSettingsInterface : NSObject <UITableViewDataSource>
+@interface RZDebugMenuSettingsInterface : NSObject
 
-@property (weak, nonatomic) UITableView *settingsOptionsTableView;
-@property (strong, nonatomic, readonly) NSMutableArray *settingsKeys;
+//@property (weak, nonatomic) UITableView *settingsOptionsTableView;
+//@property (strong, nonatomic, readonly) NSMutableArray *settingsKeys;
 
-- (id)initWithDictionary:(NSDictionary *)plistData;
-- (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
-- (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;
-- (id)valueForDebugSettingsKey:(NSString *)key;
+//- (id)initWithDictionary:(NSDictionary *)plistData;
+//- (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
++ (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;
++ (id)valueForDebugSettingsKey:(NSString *)key;
 
 @end
