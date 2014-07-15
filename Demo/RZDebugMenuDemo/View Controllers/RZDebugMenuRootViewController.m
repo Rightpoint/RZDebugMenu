@@ -32,6 +32,8 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     
     [self.view addSubview:self.tester];
     
+    self.circle = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 100, 100)];
+    
     self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 100, 50)];
     self.testTextField.text = @"0";
     self.testTextField.textColor = [UIColor whiteColor];
@@ -40,6 +42,7 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle"];
     [RZDebugMenu addObserver:self selector:@selector(changeValue:) forKey:@"slider_preference_2"];
     [RZDebugMenu addObserver:self selector:@selector(changeNavTitle:) forKey:@"name_preference"];
+    [RZDebugMenu addObserver:self selector:@selector(changeMultiValue:) forKey:@"environment_choice"];
 }
 
 - (void)goToNext
@@ -70,6 +73,18 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     }
     else {
         self.title = kRZDefaultNavTitle;
+    }
+}
+
+- (void)changeMultiValue:(NSNumber *)newValue
+{
+    if ( [newValue intValue] == 1 ) {
+        self.circle.layer.cornerRadius = 50;
+        self.circle.backgroundColor = [UIColor greenColor];
+        [self.view addSubview:self.circle];
+    }
+    else {
+        [self.circle removeFromSuperview];
     }
 }
 
