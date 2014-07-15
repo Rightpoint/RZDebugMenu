@@ -11,6 +11,7 @@
 #import "RZDebugMenu.h"
 #import "RZDebugMenuSettingsItem.h"
 #import "RZDebugMenuMultiValueItem.h"
+#import "RZMultiValueSelectionItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
@@ -18,6 +19,7 @@
 #import "RZDebugMenuGroupItem.h"
 
 #import "RZDisclosureTableViewCell.h"
+#import "RZToggleTableViewCell.h"
 #import "RZVersionInfoTableViewCell.h"
 #import "RZTextFieldTableViewCell.h"
 #import "RZSliderTableViewCell.h"
@@ -25,7 +27,6 @@
 #import "RZDebugMenuSettingsObserverManager.h"
 #import "RZDebugMenuSettingsInterface.h"
 
-static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
 static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";

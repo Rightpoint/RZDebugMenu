@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "RZDebugMenuSettingsItem.h"
-#import "RZMultiValueSelectionItem.h"
-#import "RZToggleTableViewCell.h"
 
 @interface RZDebugMenuSettingsDataSource : NSObject <UITableViewDataSource>
 
