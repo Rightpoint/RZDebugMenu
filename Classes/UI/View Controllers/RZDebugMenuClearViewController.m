@@ -94,7 +94,9 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
         [panGesture setTranslation:CGPointZero inView:self.view];
         
     }
-    else if ( panGesture.state == UIGestureRecognizerStateEnded )
+    else if ( panGesture.state == UIGestureRecognizerStateEnded &&
+             (newButtonFrame.origin.x + velocity.x >= CGRectGetWidth(self.view.bounds) || newButtonFrame.origin.x + velocity.x <= 0 ||
+              newButtonFrame.origin.y + velocity.y >= CGRectGetHeight(self.view.bounds) || newButtonFrame.origin.y + velocity.y <= 0) )
     {
         [UIView animateWithDuration:0.3
                               delay:0.0
