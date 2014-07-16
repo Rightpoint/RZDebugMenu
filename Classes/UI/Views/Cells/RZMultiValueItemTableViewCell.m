@@ -25,13 +25,22 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    
+    if ( selected ) {
+        [UIView animateWithDuration:0.2
+                              delay:0.1
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.backgroundView.backgroundColor = [UIColor whiteColor];
+                         }
+                         completion:NULL
+         ];
+    }
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
     if ( highlighted ) {
-        [UIView animateWithDuration:0.1 animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.500 alpha:0.500];
         }];
     }
