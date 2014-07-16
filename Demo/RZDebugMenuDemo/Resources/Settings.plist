@@ -12,11 +12,11 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>25</string>
+			<integer>25</integer>
 			<key>MaximumValue</key>
-			<string>100</string>
+			<integer>100</integer>
 			<key>MinimumValue</key>
-			<string>0</string>
+			<integer>0</integer>
 			<key>Key</key>
 			<string>slider_preference</string>
 			<key>Type</key>
