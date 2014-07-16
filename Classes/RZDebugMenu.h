@@ -44,6 +44,7 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  *  @param observer  Object to observe changes
  *  @param aSelector A selector to perform when a setting that an object is observing changes
  *  @param key       The key whose value a change will be observed for
+ *  @param update    Boolean value that determines if settings should be applied on load or not
  *
  *  @note If the selector accepts a parameter, it will be passed the new value for the key that changed
  */
