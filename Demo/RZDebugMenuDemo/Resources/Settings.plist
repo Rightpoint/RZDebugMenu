@@ -42,7 +42,7 @@
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
-			<string>Green Circle</string>
+			<string>Circle</string>
 			<key>Key</key>
 			<string>circle_choice</string>
 			<key>DefaultValue</key>
@@ -50,12 +50,16 @@
 			<key>Titles</key>
 			<array>
 				<string>Destroy</string>
-				<string>Create</string>
+				<string>Green Circle</string>
+				<string>Blue Circle</string>
+				<string>Red Circle</string>
 			</array>
 			<key>Values</key>
 			<array>
 				<string>0</string>
 				<string>1</string>
+				<string>2</string>
+				<string>3</string>
 			</array>
 		</dict>
 		<dict>

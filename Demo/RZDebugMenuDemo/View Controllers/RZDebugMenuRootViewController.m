@@ -78,13 +78,30 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
 
 - (void)changeMultiValue:(NSNumber *)newValue
 {
-    if ( [newValue intValue] == 1 ) {
-        self.circle.layer.cornerRadius = 50;
-        self.circle.backgroundColor = [UIColor greenColor];
-        [self.view addSubview:self.circle];
-    }
-    else {
-        [self.circle removeFromSuperview];
+    self.circle.layer.cornerRadius = 50;
+    
+    switch ( [newValue intValue] ) {
+        case 1: {
+            self.circle.backgroundColor = [UIColor greenColor];
+            [self.view addSubview:self.circle];
+            break;
+        }
+            
+        case 2: {
+            self.circle.backgroundColor = [UIColor blueColor];
+            [self.view addSubview:self.circle];
+            break;
+        }
+            
+        case 3: {
+            self.circle.backgroundColor = [UIColor redColor];
+            [self.view addSubview:self.circle];
+            break;
+        }
+            
+        default:
+            [self.circle removeFromSuperview];
+            break;
     }
 }
 
