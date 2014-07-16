@@ -14,9 +14,25 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UIView *selectedView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
+        selectedView.backgroundColor = [UIColor whiteColor];
+        self.backgroundView = selectedView;
     }
     return self;
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    if ( highlighted ) {
+        self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.500 alpha:0.500];
+    }
 }
 
 @end
