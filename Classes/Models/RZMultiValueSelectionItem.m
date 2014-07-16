@@ -11,13 +11,13 @@
 @interface RZMultiValueSelectionItem ()
 
 @property (strong, nonatomic, readwrite) NSString *selectionTitle;
-@property (strong, nonatomic, readwrite) NSNumber *selectionValue;
+@property (strong, nonatomic, readwrite) id selectionValue;
 
 @end
 
 @implementation RZMultiValueSelectionItem
 
-- (id)initWithTitle:(NSString *)title defaultValue:(NSNumber *)value
+- (id)initWithTitle:(NSString *)title defaultValue:(id)value
 {
     self = [super init];
     if ( self ) {
