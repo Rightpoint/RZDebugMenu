@@ -154,7 +154,6 @@ RZSliderTableViewCellDelegate>
         
         NSString *multiValueKey = disclosureCellOptions.settingsKey;
         NSString *currentSelection = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:multiValueKey];
-//        NSIndexPath *selectedIndexPath = [[NSIndexPath alloc] initWithIndex:[currentSelection integerValue]];
         
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
         RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems delegate:self andSelectedRow:[currentSelection integerValue]];

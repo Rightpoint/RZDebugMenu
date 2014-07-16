@@ -87,8 +87,6 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
-    UITableViewCell *selectedCell = [self.selectionsTableView cellForRowAtIndexPath:indexPath];
-    selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
     [self.delegate multiItemListDidMakeNewSelectionAtIndexPath:currentSelectionItem];
 }
 
