@@ -256,8 +256,7 @@ static NSString * const kRZEmptyString = @"";
         RZDisclosureTableViewCell *disclosureCell = (RZDisclosureTableViewCell *)cell;
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
-        NSString *multiValueSettingsKey = [RZDebugMenuSettingsInterface generateSettingsKey:settingsDefaultKey];
-        NSNumber *selectionDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:multiValueSettingsKey];
+        NSNumber *selectionDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         NSInteger defaultValue = [selectionDefaultValue integerValue];
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:defaultValue];
@@ -272,8 +271,7 @@ static NSString * const kRZEmptyString = @"";
         RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
-        NSString *toggleSettingsKey = [RZDebugMenuSettingsInterface generateSettingsKey:settingsDefaultKey];
-        NSNumber *toggleSwitchDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:toggleSettingsKey];
+        NSNumber *toggleSwitchDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
@@ -285,9 +283,7 @@ static NSString * const kRZEmptyString = @"";
         RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
-        NSString *textFieldSettingsKey = [RZDebugMenuSettingsInterface generateSettingsKey:settingsDefaultKey];
-        NSString *textFieldDefaultValue = [[NSUserDefaults standardUserDefaults] objectForKey:textFieldSettingsKey];
-        
+        NSString *textFieldDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         textFieldCell.stringTextField.text = textFieldDefaultValue;
         cell = textFieldCell;
