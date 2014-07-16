@@ -16,6 +16,7 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 @property (strong, nonatomic) UITableView *selectionsTableView;
 @property (strong, nonatomic) NSArray *cellItems;
+@property (strong, nonatomic) NSIndexPath *lastSelection;
 @property (weak, nonatomic) id<RZDebugMenuMultiItemListViewControllerDelegate>delegate;
 
 @end
@@ -69,6 +70,10 @@ static NSString * const kRZNavigationBarTitle = @"Options";
         RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
+    
+    if ( [indexPath compare:self.lastSelection] == NSOrderedSame ) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     return cell;
 }
 
@@ -77,6 +82,9 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
+    UITableViewCell *selectedCell = [self.selectionsTableView cellForRowAtIndexPath:indexPath];
+    selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+    self.lastSelection = indexPath;
     [self.delegate multiItemListDidMakeNewSelectionAtIndexPath:currentSelectionItem];
 }
 
