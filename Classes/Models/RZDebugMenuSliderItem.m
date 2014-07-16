@@ -23,7 +23,6 @@
     self = [super initWithValue:value forKey:key withTitle:title];
     if ( self ) {
         _sliderCellDefaultValue = self.settingsValue;
-        
         _max = max ?: @(1);
         _min = min ?: @(0);
     }
