@@ -27,7 +27,7 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     
     self.circle = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 100, 100)];
     
-    self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 400, 100, 50)];
+    self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 100, 100, 50)];
     self.testTextField.text = @"0";
     self.testTextField.textColor = [UIColor whiteColor];
     self.testTextField.enabled = NO;
