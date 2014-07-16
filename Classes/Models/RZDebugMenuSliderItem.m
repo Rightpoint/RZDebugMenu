@@ -23,8 +23,20 @@
     self = [super initWithValue:value forKey:key withTitle:title];
     if ( self ) {
         _sliderCellDefaultValue = self.settingsValue;
-        _max = max;
-        _min = min;
+        
+        if ( max == nil ) {
+            _max = [NSNumber numberWithInt:1];
+        }
+        else {
+            _max = max;
+        }
+        
+        if ( min == nil ) {
+            _min = [NSNumber numberWithInt:0];
+        }
+        else {
+            _min = min;
+        }
     }
     return self;
 }
