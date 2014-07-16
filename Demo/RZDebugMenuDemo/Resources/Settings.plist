@@ -49,7 +49,7 @@
 			<integer>0</integer>
 			<key>Titles</key>
 			<array>
-				<string>Destroy</string>
+				<string>None</string>
 				<string>Green Circle</string>
 				<string>Blue Circle</string>
 				<string>Red Circle</string>

@@ -60,10 +60,7 @@
     if ( update ) {
         
         id defaultsValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [observer performSelector:aSelector withObject:defaultsValue];
-#pragma clang diagnostic pop
+        [self performSelector:aSelector onObserver:observer withValue:defaultsValue];
     }
 }
 
@@ -80,10 +77,7 @@
     for (RZDebugMenuObserver *observer in observers) {
         id target = observer.target;
         SEL action = observer.aSelector;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [target performSelector:action withObject:value];
-#pragma clang diagnostic pop
+        [self performSelector:action onObserver:target withValue:value];
     }
 }
 
@@ -93,6 +87,15 @@
     NSString *key = [userInfo allKeys][0];
     id value = [userInfo objectForKey:key];
     [self notifyObserversWithValue:value forKey:key];
+}
+
+
+- (void)performSelector:(SEL)action onObserver:(id)observer withValue:(id)value
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [observer performSelector:action withObject:value];
+#pragma clang diagnostic pop
 }
 
 @end
