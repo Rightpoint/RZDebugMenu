@@ -54,7 +54,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     return [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
 }
 
-+ (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key
++ (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
     RZDebugMenu *sharedInstance = [self privateSharedInstance];
     if ( ![sharedInstance.dataSource.settingsKeys containsObject:key] ) {
@@ -63,7 +63,8 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     else {
         [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
                                                                 selector:aSelector
-                                                                  forKey:key];
+                                                                  forKey:key
+                                                       updateImmediately:update];
     }
 }
 

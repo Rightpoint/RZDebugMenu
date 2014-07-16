@@ -39,10 +39,10 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     self.testTextField.textColor = [UIColor whiteColor];
     [self.view addSubview:self.testTextField];
     
-    [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle"];
-    [RZDebugMenu addObserver:self selector:@selector(changeValue:) forKey:@"slider_preference_2"];
-    [RZDebugMenu addObserver:self selector:@selector(changeNavTitle:) forKey:@"name_preference"];
-    [RZDebugMenu addObserver:self selector:@selector(changeMultiValue:) forKey:@"environment_choice"];
+    [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle" updateImmediately:YES];
+    [RZDebugMenu addObserver:self selector:@selector(changeValue:) forKey:@"slider_preference_2" updateImmediately:YES];
+    [RZDebugMenu addObserver:self selector:@selector(changeNavTitle:) forKey:@"name_preference" updateImmediately:YES];
+    [RZDebugMenu addObserver:self selector:@selector(changeMultiValue:) forKey:@"environment_choice" updateImmediately:YES];
 }
 
 - (void)goToNext

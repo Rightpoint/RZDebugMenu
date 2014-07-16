@@ -12,7 +12,7 @@
 
 + (instancetype)sharedInstance;
 
-- (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
+- (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update;
 - (void)removeObserver:(id)observer forKey:(NSString *)key;
 
 @end
