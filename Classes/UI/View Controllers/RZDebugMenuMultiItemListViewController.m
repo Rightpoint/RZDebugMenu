@@ -71,6 +71,10 @@ static NSString * const kRZNavigationBarTitle = @"Options";
         RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
+    
+    if ( [indexPath compare:self.lastSelection] == NSOrderedSame ) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     return cell;
 }
 
