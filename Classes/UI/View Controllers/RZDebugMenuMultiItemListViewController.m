@@ -29,6 +29,7 @@ static NSString * const kRZNavigationBarTitle = @"Options";
     if ( self ) {
         _delegate = delegate;
         _cellItems = [[NSArray alloc] initWithArray:selectionItems];
+        _lastSelection = [[NSIndexPath alloc] initWithIndex:2];
         self.title = kRZNavigationBarTitle;
     }
     return self;
@@ -70,10 +71,6 @@ static NSString * const kRZNavigationBarTitle = @"Options";
         RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
-    
-    if ( [indexPath compare:self.lastSelection] == NSOrderedSame ) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
     return cell;
 }
 
@@ -84,7 +81,6 @@ static NSString * const kRZNavigationBarTitle = @"Options";
     RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
     UITableViewCell *selectedCell = [self.selectionsTableView cellForRowAtIndexPath:indexPath];
     selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-    self.lastSelection = indexPath;
     [self.delegate multiItemListDidMakeNewSelectionAtIndexPath:currentSelectionItem];
 }
 
