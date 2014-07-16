@@ -151,9 +151,13 @@ RZSliderTableViewCellDelegate>
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
         RZDebugMenuMultiValueItem *disclosureCellOptions = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
-        NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
         
-        RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems andDelegate:self];
+        NSString *multiValueKey = disclosureCellOptions.settingsKey;
+        NSString *currentSelection = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:multiValueKey];
+//        NSIndexPath *selectedIndexPath = [[NSIndexPath alloc] initWithIndex:[currentSelection integerValue]];
+        
+        NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
+        RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems delegate:self andSelectedRow:[currentSelection integerValue]];
         [self.navigationController pushViewController:environmentsViewController animated:YES];
     }
 }

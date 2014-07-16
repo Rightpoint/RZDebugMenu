@@ -16,20 +16,20 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 @property (strong, nonatomic) UITableView *selectionsTableView;
 @property (strong, nonatomic) NSArray *cellItems;
-@property (strong, nonatomic) NSIndexPath *lastSelection;
+@property (assign, nonatomic) NSInteger lastSelected;
 @property (weak, nonatomic) id<RZDebugMenuMultiItemListViewControllerDelegate>delegate;
 
 @end
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems andDelegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate
+- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate andSelectedRow:(NSInteger)selectedRow
 {
     self = [super init];
     if ( self ) {
         _delegate = delegate;
         _cellItems = [[NSArray alloc] initWithArray:selectionItems];
-        _lastSelection = [[NSIndexPath alloc] initWithIndex:2];
+        _lastSelected = selectedRow;
         self.title = kRZNavigationBarTitle;
     }
     return self;
@@ -72,9 +72,13 @@ static NSString * const kRZNavigationBarTitle = @"Options";
         cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
     
-    if ( [indexPath compare:self.lastSelection] == NSOrderedSame ) {
+    if ( indexPath.row == self.lastSelected ) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
     return cell;
 }
 
