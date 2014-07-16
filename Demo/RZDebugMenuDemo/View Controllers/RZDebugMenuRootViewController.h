@@ -11,8 +11,7 @@
 
 @interface RZDebugMenuRootViewController : UIViewController
 
-@property (strong, nonatomic) UIButton *tester;
-
-- (void)goToNext;
+@property (strong, nonatomic) UIView *circle;
+@property (strong, nonatomic) UITextField *testTextField;
 
 @end

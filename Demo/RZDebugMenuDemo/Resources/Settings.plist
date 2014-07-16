@@ -6,19 +6,9 @@
 	<array>
 		<dict>
 			<key>Title</key>
-			<string>All the groups!</string>
+			<string>Text Field Value Magnitude</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<false/>
-			<key>Key</key>
-			<string>reset_toggle_2</string>
-			<key>Title</key>
-			<string>Something</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
@@ -28,37 +18,15 @@
 			<key>MinimumValue</key>
 			<string>0</string>
 			<key>Key</key>
-			<string>slider_preference_2</string>
+			<string>slider_preference</string>
 			<key>Type</key>
 			<string>PSSliderSpecifier</string>
 		</dict>
 		<dict>
-			<key>DefaultValue</key>
-			<true/>
-			<key>Key</key>
-			<string>reset_toggle_3</string>
 			<key>Title</key>
-			<string>Something Else</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>Title</key>
-			<string>Group 2</string>
+			<string>View Settings</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<real>0.5</real>
-			<key>Key</key>
-			<string>slider_preference</string>
-			<key>MaximumValue</key>
-			<string>1</string>
-			<key>MinimumValue</key>
-			<string>0</string>
-			<key>Type</key>
-			<string>PSSliderSpecifier</string>
 		</dict>
 		<dict>
 			<key>AutocapitalizationType</key>
@@ -72,7 +40,7 @@
 			<key>Key</key>
 			<string>name_preference</string>
 			<key>Title</key>
-			<string>Name</string>
+			<string>Nav Title</string>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 		</dict>
@@ -80,20 +48,24 @@
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>Title</key>
-			<string>Environments</string>
+			<string>Circle</string>
 			<key>Key</key>
-			<string>environment_choice</string>
+			<string>circle_choice</string>
 			<key>DefaultValue</key>
 			<integer>0</integer>
 			<key>Titles</key>
 			<array>
-				<string>Staging</string>
-				<string>Production</string>
+				<string>None</string>
+				<string>Green Circle</string>
+				<string>Blue Circle</string>
+				<string>Red Circle</string>
 			</array>
 			<key>Values</key>
 			<array>
 				<string>0</string>
 				<string>1</string>
+				<string>2</string>
+				<string>3</string>
 			</array>
 		</dict>
 		<dict>
@@ -105,22 +77,6 @@
 			<string>reset_toggle</string>
 			<key>DefaultValue</key>
 			<false/>
-		</dict>
-		<dict>
-			<key>Title</key>
-			<string>Group 3</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Another</string>
-			<key>Key</key>
-			<string>reset_toggle_x</string>
-			<key>DefaultValue</key>
-			<true/>
 		</dict>
 	</array>
 </dict>

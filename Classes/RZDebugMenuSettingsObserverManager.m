@@ -7,8 +7,10 @@
 //
 
 #import "RZDebugMenuSettingsObserverManager.h"
-#import "RZDebugMenu.h"
 #import "RZDebugMenuObserver.h"
+
+#import "RZDebugMenu.h"
+#import "RZDebugMenuSettingsInterface.h"
 
 @interface RZDebugMenuSettingsObserverManager ()
 
@@ -41,7 +43,7 @@
     return self;
 }
 
-- (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
+- (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
     
@@ -53,6 +55,12 @@
     }
     else {
         [observers addObject:newObserver];
+    }
+    
+    if ( update ) {
+        
+        id defaultsValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
+        [self performSelector:aSelector onObserver:observer withValue:defaultsValue];
     }
 }
 
@@ -69,10 +77,7 @@
     for (RZDebugMenuObserver *observer in observers) {
         id target = observer.target;
         SEL action = observer.aSelector;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [target performSelector:action withObject:value];
-#pragma clang diagnostic pop
+        [self performSelector:action onObserver:target withValue:value];
     }
 }
 
@@ -82,6 +87,15 @@
     NSString *key = [userInfo allKeys][0];
     id value = [userInfo objectForKey:key];
     [self notifyObserversWithValue:value forKey:key];
+}
+
+
+- (void)performSelector:(SEL)action onObserver:(id)observer withValue:(id)value
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [observer performSelector:action withObject:value];
+#pragma clang diagnostic pop
 }
 
 @end

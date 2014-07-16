@@ -19,6 +19,7 @@ static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 + (id)valueForDebugSettingsKey:(NSString *)key
 {
     NSString *settingKey = [self generateSettingsKey:key];
+    
     return [[NSUserDefaults standardUserDefaults] objectForKey:settingKey];
 }
 
