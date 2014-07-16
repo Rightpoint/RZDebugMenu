@@ -24,19 +24,8 @@
     if ( self ) {
         _sliderCellDefaultValue = self.settingsValue;
         
-        if ( max == nil ) {
-            _max = [NSNumber numberWithInt:1];
-        }
-        else {
-            _max = max;
-        }
-        
-        if ( min == nil ) {
-            _min = [NSNumber numberWithInt:0];
-        }
-        else {
-            _min = min;
-        }
+        _max = max ?: @(1);
+        _min = min ?: @(0);
     }
     return self;
 }
