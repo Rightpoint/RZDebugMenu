@@ -73,12 +73,12 @@ static NSString * const kRZNavigationBarTitle = @"Options";
         cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
     
-    if ( indexPath.row == self.lastSelected ) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+//    if ( indexPath.row == self.lastSelected ) {
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+//    }
+//    else {
+//        cell.accessoryType = UITableViewCellAccessoryNone;
+//    }
     
     return cell;
 }
@@ -89,8 +89,6 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 {
     NSIndexPath *selectedPath = [self.selectionsTableView indexPathForSelectedRow];
     self.lastSelected = selectedPath.row;
-    UITableViewCell *previousSelectedCell = [self.selectionsTableView cellForRowAtIndexPath:selectedPath];
-    previousSelectedCell.accessoryType = UITableViewCellAccessoryNone;
     return indexPath;
 }
 

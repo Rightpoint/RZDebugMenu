@@ -36,6 +36,9 @@
                          completion:NULL
          ];
     }
+    else {
+        self.accessoryType = UITableViewCellAccessoryNone;
+    }
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
