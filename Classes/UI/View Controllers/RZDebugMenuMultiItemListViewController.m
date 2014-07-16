@@ -89,6 +89,8 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 {
     NSIndexPath *selectedPath = [self.selectionsTableView indexPathForSelectedRow];
     self.lastSelected = selectedPath.row;
+    UITableViewCell *previousSelectedCell = [self.selectionsTableView cellForRowAtIndexPath:selectedPath];
+    previousSelectedCell.accessoryType = UITableViewCellAccessoryNone;
     return indexPath;
 }
 

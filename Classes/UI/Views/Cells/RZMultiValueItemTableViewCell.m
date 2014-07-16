@@ -26,6 +26,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     if ( selected ) {
+        self.accessoryType = UITableViewCellAccessoryCheckmark;
         [UIView animateWithDuration:0.2
                               delay:0.1
                             options:UIViewAnimationOptionCurveEaseOut
