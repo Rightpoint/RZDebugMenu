@@ -37,6 +37,7 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 100, 50)];
     self.testTextField.text = @"0";
     self.testTextField.textColor = [UIColor whiteColor];
+    self.testTextField.enabled = NO;
     [self.view addSubview:self.testTextField];
     
     [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle" updateImmediately:YES];
