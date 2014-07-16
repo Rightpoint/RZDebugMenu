@@ -7,7 +7,6 @@
 //
 
 #import "RZDebugMenuRootViewController.h"
-#import "RZTestViewController.h"
 
 #import "RZDebugMenu.h"
 
@@ -26,15 +25,9 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     
     self.title = kRZDefaultNavTitle;
     
-    self.tester = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 200, 100)];
-    self.tester.backgroundColor = [UIColor redColor];
-    [self.tester addTarget:self action:@selector(goToNext) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:self.tester];
-    
     self.circle = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 100, 100)];
     
-    self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, 100, 50)];
+    self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 400, 100, 50)];
     self.testTextField.text = @"0";
     self.testTextField.textColor = [UIColor whiteColor];
     self.testTextField.enabled = NO;
@@ -44,12 +37,6 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     [RZDebugMenu addObserver:self selector:@selector(changeValue:) forKey:@"slider_preference" updateImmediately:YES];
     [RZDebugMenu addObserver:self selector:@selector(changeNavTitle:) forKey:@"name_preference" updateImmediately:YES];
     [RZDebugMenu addObserver:self selector:@selector(changeMultiValue:) forKey:@"circle_choice" updateImmediately:YES];
-}
-
-- (void)goToNext
-{
-    RZTestViewController *testerController = [[RZTestViewController alloc] init];
-    [self.navigationController pushViewController:testerController animated:YES];
 }
 
 - (void)changeBackground:(NSNumber *)toggleValue
