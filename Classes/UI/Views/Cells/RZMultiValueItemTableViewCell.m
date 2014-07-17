@@ -44,7 +44,7 @@
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
     if ( highlighted ) {
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:0.1 animations:^{
             self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.500 alpha:0.500];
         }];
     }
