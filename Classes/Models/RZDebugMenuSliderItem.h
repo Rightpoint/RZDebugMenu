@@ -11,4 +11,9 @@
 
 @interface RZDebugMenuSliderItem : RZDebugMenuSettingsItem
 
+@property (strong, nonatomic, readonly) NSNumber *max;
+@property (strong, nonatomic, readonly) NSNumber *min;
+
+- (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title maxValue:(NSNumber *)max minValue:(NSNumber *)min;
+
 @end

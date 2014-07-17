@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuMultiItemListViewController.h"
 #import "RZMultiValueSelectionItem.h"
+#import "RZMultiValueItemTableViewCell.h"
 
 static NSString * const kRZCellReuseIdentifier = @"Cell";
 static NSString * const kRZNavigationBarTitle = @"Options";
@@ -16,18 +17,20 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 @property (strong, nonatomic) UITableView *selectionsTableView;
 @property (strong, nonatomic) NSArray *cellItems;
+@property (assign, nonatomic) NSInteger lastSelected;
 @property (weak, nonatomic) id<RZDebugMenuMultiItemListViewControllerDelegate>delegate;
 
 @end
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems andDelegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate
+- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate andSelectedRow:(NSInteger)selectedRow
 {
     self = [super init];
     if ( self ) {
         _delegate = delegate;
         _cellItems = [[NSArray alloc] initWithArray:selectionItems];
+        _lastSelected = selectedRow;
         self.title = kRZNavigationBarTitle;
     }
     return self;
@@ -41,13 +44,16 @@ static NSString * const kRZNavigationBarTitle = @"Options";
     CGFloat height = CGRectGetHeight(self.view.bounds);
     
     self.selectionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
-    [self.selectionsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kRZCellReuseIdentifier];
+    [self.selectionsTableView registerClass:[RZMultiValueItemTableViewCell class] forCellReuseIdentifier:kRZCellReuseIdentifier];
     self.selectionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:self.selectionsTableView];
     
     self.selectionsTableView.delegate = self;
     self.selectionsTableView.dataSource = self;
+    
+    NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:self.lastSelected inSection:0];
+    [self.selectionsTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:0];
 }
 
 #pragma mark - table view datasource methods
@@ -64,11 +70,12 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
+    RZMultiValueItemTableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
     if ( cell ) {
         RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
+    
     return cell;
 }
 
@@ -77,6 +84,7 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
+    self.lastSelected = indexPath.row;
     [self.delegate multiItemListDidMakeNewSelectionAtIndexPath:currentSelectionItem];
 }
 

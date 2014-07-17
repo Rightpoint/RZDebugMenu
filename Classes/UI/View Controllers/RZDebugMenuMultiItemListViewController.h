@@ -18,6 +18,6 @@
 
 @interface RZDebugMenuMultiItemListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems andDelegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate;
+- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate andSelectedRow:(NSInteger)selectedRow;
 
 @end
