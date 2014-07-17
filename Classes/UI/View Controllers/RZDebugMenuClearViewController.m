@@ -66,10 +66,13 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
 - (void)dragButton:(UIPanGestureRecognizer *)panGesture
 {
     CGFloat const topBoundaryInset = 20.0f;
-    CGFloat const bounceOffset = 15.f;
+    CGFloat const edgeStickMargin = 50.f;
     CGFloat const buttonWidth = CGRectGetWidth(self.displayDebugMenuButton.bounds);
+    
+    CGFloat const viewWidth = CGRectGetWidth(self.view.bounds);
+    CGFloat const viewHeight = CGRectGetHeight(self.view.bounds);
+    
     CGPoint translation = [panGesture translationInView:self.view];
-    CGPoint velocity = [panGesture velocityInView:self.view];
     UIView *draggedButton = panGesture.view;
     CGRect newButtonFrame = draggedButton.frame;
     
@@ -77,14 +80,14 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
         newButtonFrame.origin.x += translation.x;
         newButtonFrame.origin.y += translation.y;
         
-        if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
-            newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth;
+        if ( newButtonFrame.origin.x >= viewWidth - buttonWidth ) {
+            newButtonFrame.origin.x = viewWidth - buttonWidth;
         }
         if ( newButtonFrame.origin.x <= 0 ) {
             newButtonFrame.origin.x = 0;
         }
-        if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth ) {
-            newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth;
+        if ( newButtonFrame.origin.y >= viewHeight - buttonWidth ) {
+            newButtonFrame.origin.y = viewHeight - buttonWidth;
         }
         if ( newButtonFrame.origin.y <= topBoundaryInset ) {
             newButtonFrame.origin.y = topBoundaryInset;
@@ -94,55 +97,26 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
         [panGesture setTranslation:CGPointZero inView:self.view];
         
     }
-    else if ( panGesture.state == UIGestureRecognizerStateEnded &&
-             (newButtonFrame.origin.x + velocity.x >= CGRectGetWidth(self.view.bounds) || newButtonFrame.origin.x + velocity.x <= 0 ||
-              newButtonFrame.origin.y + velocity.y >= CGRectGetHeight(self.view.bounds) || newButtonFrame.origin.y + velocity.y <= 0) )
-    {
-        [UIView animateWithDuration:0.3
-                              delay:0.0
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^{
-                             CGRect newButtonFrame = draggedButton.frame;
-                             newButtonFrame.origin.x += velocity.x;
-                             newButtonFrame.origin.y += velocity.y;
-                             
-                             if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
-                                 newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth + bounceOffset;
-                             }
-                             if ( newButtonFrame.origin.x <= 0 ) {
-                                 newButtonFrame.origin.x = -bounceOffset;
-                             }
-                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth ) {
-                                 newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth + bounceOffset;
-                             }
-                             if ( newButtonFrame.origin.y <= topBoundaryInset ) {
-                                 newButtonFrame.origin.y = topBoundaryInset - bounceOffset;
-                             }
-                             
-                             draggedButton.frame = newButtonFrame;
-                         }
-                         completion:^(BOOL completed) {
-                             
-                             // Bounce back animation
-                             CGRect newButtonFrame = draggedButton.frame;
-                             if ( newButtonFrame.origin.x >= CGRectGetWidth(self.view.bounds) - buttonWidth ) {
-                                 newButtonFrame.origin.x = CGRectGetWidth(self.view.bounds) - buttonWidth;
-                             }
-                             if ( newButtonFrame.origin.x <= 0 ) {
-                                 newButtonFrame.origin.x = 0;
-                             }
-                             if ( newButtonFrame.origin.y >= CGRectGetHeight(self.view.bounds) - buttonWidth ) {
-                                 newButtonFrame.origin.y = CGRectGetHeight(self.view.bounds) - buttonWidth;
-                             }
-                             if ( newButtonFrame.origin.y <= topBoundaryInset ) {
-                                 newButtonFrame.origin.y = topBoundaryInset;
-                             }
-                             
-                             [UIView animateWithDuration:0.25 animations:^{
-                                 draggedButton.frame = newButtonFrame;
-                                 [panGesture setTranslation:CGPointZero inView:self.view];
-                             }];
-                         }];
+    else if ( panGesture.state == UIGestureRecognizerStateEnded ) {
+        
+        CGRect newButtonFrame = draggedButton.frame;
+        if ( newButtonFrame.origin.x >= viewWidth - buttonWidth - edgeStickMargin ) {
+            newButtonFrame.origin.x = viewWidth - buttonWidth;
+        }
+        if ( newButtonFrame.origin.x <= edgeStickMargin ) {
+            newButtonFrame.origin.x = 0;
+        }
+        if ( newButtonFrame.origin.y >= viewHeight - buttonWidth - edgeStickMargin ) {
+            newButtonFrame.origin.y = viewHeight - buttonWidth;
+        }
+        if ( newButtonFrame.origin.y <= topBoundaryInset + edgeStickMargin ) {
+            newButtonFrame.origin.y = topBoundaryInset;
+        }
+
+        [UIView animateWithDuration:0.25 animations:^{
+            draggedButton.frame = newButtonFrame;
+            [panGesture setTranslation:CGPointZero inView:self.view];
+        }];
     }
 }
 
