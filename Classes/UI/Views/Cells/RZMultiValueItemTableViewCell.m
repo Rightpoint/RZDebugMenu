@@ -27,8 +27,14 @@
 {
     [super setSelected:selected animated:animated];
     if ( selected ) {
+        
+        CGFloat animationDuration = 0.f;
+        if ( animated ) {
+            animationDuration = 0.2;
+        }
+        
         self.accessoryType = UITableViewCellAccessoryCheckmark;
-        [UIView animateWithDuration:0.2
+        [UIView animateWithDuration:animationDuration
                               delay:0.1
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
@@ -46,7 +52,13 @@
 {
     [super setHighlighted:highlighted animated:animated];
     if ( highlighted ) {
-        [UIView animateWithDuration:0.1 animations:^{
+        
+        CGFloat animationDuration = 0.f;
+        if ( animated ) {
+            animationDuration = 0.1;
+        }
+        
+        [UIView animateWithDuration:animationDuration animations:^{
             self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.500 alpha:0.500];
         }];
     }
