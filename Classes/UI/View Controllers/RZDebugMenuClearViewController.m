@@ -65,7 +65,7 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
 
 - (void)dragButton:(UIPanGestureRecognizer *)panGesture
 {
-    CGFloat const topBoundaryInset = 20.0f;
+    CGFloat const topBoundaryInset = 20.f;
     CGFloat const edgeStickMargin = 50.f;
     CGFloat const buttonWidth = CGRectGetWidth(self.displayDebugMenuButton.bounds);
     
