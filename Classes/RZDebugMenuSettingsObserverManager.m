@@ -7,9 +7,9 @@
 //
 
 #import "RZDebugMenuSettingsObserverManager.h"
-#import "RZDebugMenuObserver.h"
 
 #import "RZDebugMenu.h"
+#import "RZDebugMenuObserver.h"
 #import "RZDebugMenuSettingsInterface.h"
 
 @interface RZDebugMenuSettingsObserverManager ()
@@ -33,6 +33,7 @@
 - (id)init_private
 {
     self = [super init];
+    
     if ( self ) {
         _observerKeyMap = [[NSMutableDictionary alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -43,17 +44,21 @@
     return self;
 }
 
+#pragma mark - observer editing methods
+
 - (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
     
     NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
+    
     if ( observers == NULL ) {
         observers = [[NSMutableSet alloc] init];
         [observers addObject:newObserver];
         [self.observerKeyMap setObject:observers forKey:key];
     }
     else {
+        
         [observers addObject:newObserver];
     }
     
@@ -70,9 +75,18 @@
     [observers removeObject:observer];
 }
 
+#pragma mark - notification methods
+
+- (void)notifyObserversForNotification:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *key = [[userInfo allKeys] firstObject];
+    id value = [userInfo objectForKey:key];
+    [self notifyObserversWithValue:value forKey:key];
+}
+
 - (void)notifyObserversWithValue:(id)value forKey:(NSString *)key
 {
-    
     NSSet *observers = [self.observerKeyMap objectForKey:key];
     for (RZDebugMenuObserver *observer in observers) {
         id target = observer.target;
@@ -81,14 +95,7 @@
     }
 }
 
-- (void)notifyObserversForNotification:(NSNotification *)notification
-{
-    NSDictionary *userInfo = [notification userInfo];
-    NSString *key = [userInfo allKeys][0];
-    id value = [userInfo objectForKey:key];
-    [self notifyObserversWithValue:value forKey:key];
-}
-
+#pragma mark - observer caller method
 
 - (void)performSelector:(SEL)action onObserver:(id)observer withValue:(id)value
 {
