@@ -51,6 +51,9 @@ static NSString * const kRZNavigationBarTitle = @"Options";
     
     self.selectionsTableView.delegate = self;
     self.selectionsTableView.dataSource = self;
+    
+    NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:self.lastSelected inSection:0];
+    [self.selectionsTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:0];
 }
 
 #pragma mark - table view datasource methods
@@ -78,16 +81,10 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 
 #pragma mark - table view delegate methods
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSIndexPath *selectedPath = [self.selectionsTableView indexPathForSelectedRow];
-    self.lastSelected = selectedPath.row;
-    return indexPath;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
+    self.lastSelected = indexPath.row;
     [self.delegate multiItemListDidMakeNewSelectionAtIndexPath:currentSelectionItem];
 }
 
