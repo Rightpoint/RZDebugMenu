@@ -51,6 +51,7 @@
         }];
     }
     else {
+        
         [UIView animateWithDuration:animationDuration
                               delay:0.15
                             options:UIViewAnimationOptionCurveEaseOut
