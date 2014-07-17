@@ -104,28 +104,37 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     if ( self.enabled ) {
         
-        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
-        
-        UIScreen *mainScreen = [UIScreen mainScreen];
-        self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
-        self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.f;
-        self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.topWindow.rootViewController = self.clearRootViewController;
-        self.topWindow.hidden = NO;
-        
-        UIApplication *application = [UIApplication sharedApplication];
-        self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
-        self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        self.swipeUpGesture.numberOfTouchesRequired = 3;
-        self.swipeUpGesture.delegate = self;
-        UIWindow *applicationWindow = application.keyWindow;
-        [applicationWindow addGestureRecognizer:self.swipeUpGesture];
+        [self createTopWindow];
+        [self createSwipeGesture];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeOrientation)
                                                      name:UIApplicationDidChangeStatusBarOrientationNotification
                                                    object:nil];
     }
+}
+
+- (void)createTopWindow
+{
+    self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+    
+    UIScreen *mainScreen = [UIScreen mainScreen];
+    self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
+    self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.f;
+    self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.topWindow.rootViewController = self.clearRootViewController;
+    self.topWindow.hidden = NO;
+}
+
+- (void)createSwipeGesture
+{
+    UIApplication *application = [UIApplication sharedApplication];
+    self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
+    self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
+    self.swipeUpGesture.numberOfTouchesRequired = 3;
+    self.swipeUpGesture.delegate = self;
+    UIWindow *applicationWindow = application.keyWindow;
+    [applicationWindow addGestureRecognizer:self.swipeUpGesture];
 }
 
 #pragma mark - state change methods
