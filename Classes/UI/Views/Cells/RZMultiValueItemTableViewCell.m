@@ -41,7 +41,7 @@
     
     CGFloat animationDuration = 0.f;
     if ( animated ) {
-        animationDuration = 0.1;
+        animationDuration = 0.15;
     }
     
     if ( highlighted ) {
