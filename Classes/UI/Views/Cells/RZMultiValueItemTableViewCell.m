@@ -26,22 +26,9 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+    
     if ( selected ) {
-        
-        CGFloat animationDuration = 0.f;
-        if ( animated ) {
-            animationDuration = 0.2;
-        }
-        
         self.accessoryType = UITableViewCellAccessoryCheckmark;
-        [UIView animateWithDuration:animationDuration
-                              delay:0.1
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             self.backgroundView.backgroundColor = [UIColor whiteColor];
-                         }
-                         completion:NULL
-         ];
     }
     else {
         self.accessoryType = UITableViewCellAccessoryNone;
@@ -51,16 +38,27 @@
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
     [super setHighlighted:highlighted animated:animated];
+    
+    CGFloat animationDuration = 0.f;
+    if ( animated ) {
+        animationDuration = 0.1;
+    }
+    
     if ( highlighted ) {
-        
-        CGFloat animationDuration = 0.f;
-        if ( animated ) {
-            animationDuration = 0.1;
-        }
         
         [UIView animateWithDuration:animationDuration animations:^{
             self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.500 alpha:0.500];
         }];
+    }
+    else {
+        [UIView animateWithDuration:animationDuration
+                              delay:0.15
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.backgroundView.backgroundColor = [UIColor whiteColor];
+                         }
+                         completion:NULL
+         ];
     }
 }
 
