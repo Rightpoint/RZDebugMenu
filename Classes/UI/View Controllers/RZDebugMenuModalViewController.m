@@ -9,15 +9,14 @@
 #import "RZDebugMenuModalViewController.h"
 
 #import "RZDebugMenuSettingsInterface.h"
-
 #import "RZDebugMenuSettingsItem.h"
-#import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZMultiValueSelectionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
 #import "RZDebugMenuSliderItem.h"
 
+#import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
 #import "RZTextFieldTableViewCell.h"
@@ -74,7 +73,6 @@ RZSliderTableViewCellDelegate>
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(closeView)];
-    
     self.navigationItem.rightBarButtonItem = doneButton;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -157,7 +155,7 @@ RZSliderTableViewCellDelegate>
         
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
         
-        NSInteger indexOfCurrentValue;
+        NSInteger indexOfCurrentValue = 0;
         for (int i = 0; i < disclosureCellSelectableItems.count; i++) {
             RZMultiValueSelectionItem *item = [disclosureCellSelectableItems objectAtIndex:i];
             if ( [currentSelection isEqual:item.selectionValue] ) {

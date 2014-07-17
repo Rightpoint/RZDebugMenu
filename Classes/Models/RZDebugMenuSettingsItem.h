@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic, readonly) NSString *tableViewCellTitle;
 @property (strong, nonatomic, readonly) NSString *settingsKey;
-@property (strong, nonatomic) id settingsValue;
+@property (strong, nonatomic, readonly) id settingsValue;
 
 - (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title;
 
