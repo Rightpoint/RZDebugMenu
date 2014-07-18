@@ -252,38 +252,36 @@ static NSString * const kRZEmptyString = @"";
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
-        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
-        RZDisclosureTableViewCell *disclosureCell = (RZDisclosureTableViewCell *)cell;
-        
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSNumber *selectionDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         NSInteger defaultValue = [selectionDefaultValue integerValue];
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:defaultValue];
         
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
+        RZDisclosureTableViewCell *disclosureCell = (RZDisclosureTableViewCell *)cell;
         disclosureCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         disclosureCell.detailTextLabel.text = currentSelection.selectionTitle;
         cell = disclosureCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
         
-        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
-        RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
-        
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSNumber *toggleSwitchDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
         cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuTextFieldItem class]] ) {
         
-        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZTextFieldReuseIdentifier forIndexPath:indexPath];
-        RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
-        
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSString *textFieldDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
+        
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZTextFieldReuseIdentifier forIndexPath:indexPath];
+        RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
         textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
         textFieldCell.stringTextField.text = textFieldDefaultValue;
         cell = textFieldCell;
@@ -291,12 +289,11 @@ static NSString * const kRZEmptyString = @"";
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuSliderItem class]] ) {
         
         RZDebugMenuSliderItem *sliderMetaDataObject = (RZDebugMenuSliderItem *)currentMetaDataObject;
-        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZSliderReuseIdentifier forIndexPath:indexPath];
-        RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
-        
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSNumber *sliderDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZSliderReuseIdentifier forIndexPath:indexPath];
+        RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
         sliderCell.cellSlider.maximumValue = [sliderMetaDataObject.max floatValue];
         sliderCell.cellSlider.minimumValue = [sliderMetaDataObject.min floatValue];
         [sliderCell.cellSlider setValue:[sliderDefaultValue floatValue]];
@@ -311,6 +308,8 @@ static NSString * const kRZEmptyString = @"";
     
     return cell;
 }
+
+#pragma mark - meta data getter methods
 
 - (NSString *)getKeyIdentifierForIndexPath:(NSIndexPath *)indexPath
 {
