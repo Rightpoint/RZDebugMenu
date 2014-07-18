@@ -27,26 +27,29 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
     self = [super init];
     if ( self ) {
         _delegate = delegate;
-        
         _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
-        
-        _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(70, 225, 35, 35)];
-        _displayDebugMenuButton.alpha = 0.80;
-        _displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
-        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
-        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateHighlighted];
-        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateSelected];
-        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-        [_displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
-        _displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-        [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
-        _displayDebugMenuButton.clipsToBounds = YES;
-        _displayDebugMenuButton.layer.cornerRadius = 8;
-        _displayDebugMenuButton.layer.borderWidth = 1.5f;
+        [self createDebugButton];
     }
     return self;
+}
+
+- (void)createDebugButton
+{
+    _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(70, 225, 35, 35)];
+    _displayDebugMenuButton.alpha = 0.80;
+    _displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
+    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
+    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateHighlighted];
+    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateSelected];
+    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    [_displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
+    _displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+    [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
+    _displayDebugMenuButton.clipsToBounds = YES;
+    _displayDebugMenuButton.layer.cornerRadius = 8;
+    _displayDebugMenuButton.layer.borderWidth = 1.5f;
 }
 
 - (void)viewDidLoad
