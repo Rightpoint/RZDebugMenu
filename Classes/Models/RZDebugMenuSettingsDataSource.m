@@ -70,9 +70,9 @@ static NSString * const kRZEmptyString = @"";
         _settingsKeys = [[NSMutableArray alloc] init];
         
         NSMutableDictionary *userSettings = [self createMetaDataObjectsAndGenerateUserDefaults:_preferenceSpecifiers];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
         
         [self setUpVersionCellMetaData];
-        [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
     }
     
     return self;
