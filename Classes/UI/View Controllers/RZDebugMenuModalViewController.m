@@ -46,6 +46,7 @@ RZSliderTableViewCellDelegate>
     self = [super init];
     if ( self ) {
         self.title = kRZNavigationBarTitle;
+        
         _debugSettingsDataSource = dataSource;
     }
     return self;
@@ -59,15 +60,11 @@ RZSliderTableViewCellDelegate>
     CGFloat height = CGRectGetHeight(self.view.bounds);
     
     self.optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStyleGrouped];
-    
     self.optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
-    [self.view addSubview:self.optionsTableView];
-
     self.debugSettingsDataSource.settingsOptionsTableView = self.optionsTableView;
-
     self.optionsTableView.delegate = self;
     self.optionsTableView.dataSource = self.debugSettingsDataSource;
+    [self.view addSubview:self.optionsTableView];
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:kRZNavigationBarDoneButtonTitle
                                                                    style:UIBarButtonItemStylePlain
@@ -171,7 +168,7 @@ RZSliderTableViewCellDelegate>
 
 #pragma mark - table view cell delegate methods
 
-- (void)multiItemListDidMakeNewSelectionAtIndexPath:(RZMultiValueSelectionItem *)selectedItem
+- (void)multiItemListDidSelectNewItem:(RZMultiValueSelectionItem *)selectedItem
 {
     NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
     RZDebugMenuMultiValueItem *disclosureMultiValueItem = (RZDebugMenuMultiValueItem *)[self.debugSettingsDataSource settingsItemAtIndexPath:selectedIndexPath];
