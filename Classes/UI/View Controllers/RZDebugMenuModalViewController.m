@@ -134,7 +134,9 @@ RZSliderTableViewCellDelegate>
 
 - (void)resetSettings
 {
-    
+//    TODO: Reset all settings to default
+//    TODO: Notify observers
+//    TODO: Reload the table
 }
 
 #pragma mark - table view delegate methods

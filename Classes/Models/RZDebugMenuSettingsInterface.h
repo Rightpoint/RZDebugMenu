@@ -12,6 +12,7 @@
 
 + (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;
 + (id)valueForDebugSettingsKey:(NSString *)key;
++ (void)resetSettings;
 + (NSString *)generateSettingsKey:(NSString *)identifier;
 
 @end

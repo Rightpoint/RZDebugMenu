@@ -50,6 +50,13 @@ static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
     }
 }
 
+#pragma mark - reset setting method
+
++ (void)resetDefaultsForSettings:(NSDictionary *)settingsItems
+{
+    
+}
+
 #pragma mark - Preprocessing methods
 
 + (NSString *)generateSettingsKey:(NSString *)identifier
