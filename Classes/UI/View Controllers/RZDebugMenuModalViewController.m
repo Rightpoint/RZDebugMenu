@@ -134,10 +134,7 @@ RZSliderTableViewCellDelegate>
 
 - (void)resetSettings
 {
-//    TODO: Reset all settings to default
     [self.debugSettingsDataSource resetTableDefaults];
-//    TODO: Notify observers
-//    TODO: Reload the table
     [self.optionsTableView reloadData];
 }
 

@@ -61,8 +61,7 @@ static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
         NSArray *sectionSettings = [settingsItems objectForKey:section];
         
         for ( RZDebugMenuSettingsItem *settingItem in sectionSettings ) {
-            NSString *userDefaultsKey = [self generateSettingsKey:settingItem.settingsKey];
-            [self setValue:settingItem.settingsValue forDebugSettingsKey:userDefaultsKey];
+            [self setValue:settingItem.settingsValue forDebugSettingsKey:settingItem.settingsKey];
         }
     }
 }
