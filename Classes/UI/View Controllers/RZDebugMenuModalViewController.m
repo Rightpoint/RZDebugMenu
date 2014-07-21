@@ -22,11 +22,11 @@
 #import "RZTextFieldTableViewCell.h"
 #import "RZSliderTableViewCell.h"
 
-static NSString * const kRZNavigationBarTitle = @"Settings";
+static NSString * const kRZNavigationBarTitle           = @"Settings";
 static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
-static NSString * const kRZDisclosureReuseIdentifier = @"environments";
-static NSString * const kRZToggleReuseIdentifier = @"toggle";
-static NSString * const kRZVersionInfoReuseIdentifier = @"version";
+static NSString * const kRZDisclosureReuseIdentifier    = @"environments";
+static NSString * const kRZToggleReuseIdentifier        = @"toggle";
+static NSString * const kRZVersionInfoReuseIdentifier   = @"version";
 
 @interface RZDebugMenuModalViewController ()
 <RZDebugMenuMultiItemListViewControllerDelegate,

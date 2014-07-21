@@ -27,29 +27,29 @@
 #import "RZDebugMenuSettingsObserverManager.h"
 #import "RZDebugMenuSettingsInterface.h"
 
-static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
-static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
-static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
-static NSString * const kRZTextFieldSpecifier = @"PSTextFieldSpecifier";
-static NSString * const kRZSliderSpecifier = @"PSSliderSpecifier";
-static NSString * const kRZGroupSpecifer = @"PSGroupSpecifier";
-static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
-static NSString * const kRZKeyItemIdentifier = @"Key";
-static NSString * const kRZKeyTitle = @"Title";
-static NSString * const kRZKeyType = @"Type";
-static NSString * const kRZKeyDefaultValue = @"DefaultValue";
-static NSString * const kRZKeyEnvironmentsTitles = @"Titles";
-static NSString * const kRZKeyEnvironmentsValues = @"Values";
-static NSString * const kRZKeyMaximumValue = @"MaximumValue";
-static NSString * const kRZKeyMinimumValue = @"MinimumValue";
-static NSString * const kRZVersionCellTitle = @"Version";
-static NSString * const kRZDisclosureReuseIdentifier = @"RZSettingsDisclosureCell";
-static NSString * const kRZToggleReuseIdentifier = @"RZSettingsToggleSwitchCell";
-static NSString * const kRZTextFieldReuseIdentifier = @"RZSettingsTextFieldCell";
-static NSString * const kRZSliderReuseIdentifier = @"RZSettingsSliderCell";
+static NSString * const kRZPreferenceSpecifiersKey    = @"PreferenceSpecifiers";
+static NSString * const kRZMultiValueSpecifier        = @"PSMultiValueSpecifier";
+static NSString * const kRZToggleSwitchSpecifier      = @"PSToggleSwitchSpecifier";
+static NSString * const kRZTextFieldSpecifier         = @"PSTextFieldSpecifier";
+static NSString * const kRZSliderSpecifier            = @"PSSliderSpecifier";
+static NSString * const kRZGroupSpecifer              = @"PSGroupSpecifier";
+static NSString * const kRZKeyBundleVersionString     = @"CFBundleShortVersionString";
+static NSString * const kRZKeyItemIdentifier          = @"Key";
+static NSString * const kRZKeyTitle                   = @"Title";
+static NSString * const kRZKeyType                    = @"Type";
+static NSString * const kRZKeyDefaultValue            = @"DefaultValue";
+static NSString * const kRZKeyEnvironmentsTitles      = @"Titles";
+static NSString * const kRZKeyEnvironmentsValues      = @"Values";
+static NSString * const kRZKeyMaximumValue            = @"MaximumValue";
+static NSString * const kRZKeyMinimumValue            = @"MinimumValue";
+static NSString * const kRZVersionCellTitle           = @"Version";
+static NSString * const kRZDisclosureReuseIdentifier  = @"RZSettingsDisclosureCell";
+static NSString * const kRZToggleReuseIdentifier      = @"RZSettingsToggleSwitchCell";
+static NSString * const kRZTextFieldReuseIdentifier   = @"RZSettingsTextFieldCell";
+static NSString * const kRZSliderReuseIdentifier      = @"RZSettingsSliderCell";
 static NSString * const kRZVersionInfoReuseIdentifier = @"RZSettingsVersionCell";
-static NSString * const kRZVersionGroupTitle = @"Version Info";
-static NSString * const kRZEmptyString = @"";
+static NSString * const kRZVersionGroupTitle          = @"Version Info";
+static NSString * const kRZEmptyString                = @"";
 
 @interface RZDebugMenuSettingsDataSource ()
 

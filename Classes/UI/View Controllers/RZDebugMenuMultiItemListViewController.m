@@ -13,7 +13,7 @@
 #import "RZMultiValueItemTableViewCell.h"
 
 static NSString * const kRZCellReuseIdentifier = @"Cell";
-static NSString * const kRZNavigationBarTitle = @"Options";
+static NSString * const kRZNavigationBarTitle  = @"Options";
 
 @interface RZDebugMenuMultiItemListViewController ()
 

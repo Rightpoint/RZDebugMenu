@@ -18,7 +18,7 @@
 #import "RZDebugLogMenuDefines.h"
 
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
-static NSString * const kRZSettingsFileExtension = @"plist";
+static NSString * const kRZSettingsFileExtension       = @"plist";
 
 @interface RZDebugMenu () <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
 
