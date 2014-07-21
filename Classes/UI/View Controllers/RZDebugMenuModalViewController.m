@@ -28,6 +28,7 @@ static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
 static NSString * const kRZDisclosureReuseIdentifier = @"environments";
 static NSString * const kRZToggleReuseIdentifier = @"toggle";
 static NSString * const kRZVersionInfoReuseIdentifier = @"version";
+static NSString * const kRZResetButtonTitle = @"Reset";
 
 @interface RZDebugMenuModalViewController ()
 <RZDebugMenuMultiItemListViewControllerDelegate,
@@ -58,6 +59,11 @@ RZSliderTableViewCellDelegate>
     
     CGFloat width = CGRectGetWidth(self.view.bounds);
     CGFloat height = CGRectGetHeight(self.view.bounds);
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:kRZResetButtonTitle
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(resetSettings)];
     
     self.optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStyleGrouped];
     
@@ -124,6 +130,12 @@ RZSliderTableViewCellDelegate>
 {
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)resetSettings
+{
+    [self.debugSettingsDataSource resetTableDefaults];
+    [self.optionsTableView reloadData];
 }
 
 #pragma mark - table view delegate methods

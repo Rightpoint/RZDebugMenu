@@ -9,6 +9,7 @@
 #import "RZDebugMenuSettingsInterface.h"
 
 #import "RZDebugMenu.h"
+#import "RZDebugMenuSettingsItem.h"
 
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 
@@ -46,6 +47,21 @@ static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
                                                               userInfo:userInfo];
             
             [userDefaults setObject:value forKey:userDefaultsKey];
+        }
+    }
+}
+
+#pragma mark - reset setting method
+
++ (void)resetDefaultsForSettings:(NSDictionary *)settingsItems
+{
+    // settingsItems is dictionary registered with user defaults. Still holds original default values
+    NSArray *sections = [settingsItems allKeys];
+    for ( NSString *section in sections ) {
+        NSArray *sectionSettings = [settingsItems objectForKey:section];
+        
+        for ( RZDebugMenuSettingsItem *settingItem in sectionSettings ) {
+            [self setValue:settingItem.settingsValue forDebugSettingsKey:settingItem.settingsKey];
         }
     }
 }

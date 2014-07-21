@@ -362,4 +362,11 @@ static NSString * const kRZEmptyString = @"";
     return [cellItemsMetaData objectAtIndex:indexPath.row];
 }
 
+#pragma mark - reset settings method
+
+- (void)resetTableDefaults
+{
+    [RZDebugMenuSettingsInterface resetDefaultsForSettings:self.groupedSections];
+}
+
 @end
