@@ -41,6 +41,7 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
         [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         [_displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
         _displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+        [_displayDebugMenuButton addTarget:self action:@selector(scaleButtonDown) forControlEvents:UIControlEventTouchDown];
         [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
         _displayDebugMenuButton.clipsToBounds = YES;
         _displayDebugMenuButton.layer.cornerRadius = 8;
@@ -58,13 +59,32 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
     [self.view addSubview:self.displayDebugMenuButton];
 }
 
+- (void)scaleButtonDown
+{
+    CGRect const buttonShrinkFrame = CGRectInset(self.displayDebugMenuButton.frame, 1, 1);
+    [self.displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:29.5]];
+    self.displayDebugMenuButton.frame = buttonShrinkFrame;
+}
+
 - (void)displayDebugMenu
 {
+    [self scaleButtonUp];
     [self.delegate clearViewControllerDebugMenuButtonPressed:self];
+}
+
+- (void)scaleButtonUp
+{
+    CGRect const enlargeFrame = CGRectMake(0, 0, 35, 35);
+    CGPoint oldCenter = self.displayDebugMenuButton.center;
+    [self.displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
+    self.displayDebugMenuButton.frame = enlargeFrame;
+    self.displayDebugMenuButton.center = oldCenter;
 }
 
 - (void)dragButton:(UIPanGestureRecognizer *)panGesture
 {
+    [self scaleButtonUp];
+    
     CGFloat const topBoundaryInset = 20.f;
     CGFloat const edgeStickMargin = 50.f;
     CGFloat const buttonWidth = CGRectGetWidth(self.displayDebugMenuButton.bounds);
