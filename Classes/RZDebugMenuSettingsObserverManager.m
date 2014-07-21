@@ -72,7 +72,6 @@
 
 - (void)notifyObserversWithValue:(id)value forKey:(NSString *)key
 {
-    
     NSSet *observers = [self.observerKeyMap objectForKey:key];
     for (RZDebugMenuObserver *observer in observers) {
         id target = observer.target;

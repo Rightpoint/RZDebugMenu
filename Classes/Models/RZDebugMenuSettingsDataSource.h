@@ -16,5 +16,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
 - (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)resetTableDefaults;
 
 @end

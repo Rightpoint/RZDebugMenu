@@ -9,6 +9,7 @@
 #import "RZDebugMenuSettingsInterface.h"
 
 #import "RZDebugMenu.h"
+#import "RZDebugMenuSettingsItem.h"
 
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 
@@ -54,7 +55,16 @@ static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 
 + (void)resetDefaultsForSettings:(NSDictionary *)settingsItems
 {
-    
+    // settingsItems is dictionary registered with user defaults. Still holds original default values
+    NSArray *sections = [settingsItems allKeys];
+    for ( NSString *section in sections ) {
+        NSArray *sectionSettings = [settingsItems objectForKey:section];
+        
+        for ( RZDebugMenuSettingsItem *settingItem in sectionSettings ) {
+            NSString *userDefaultsKey = [self generateSettingsKey:settingItem.settingsKey];
+            [self setValue:settingItem.settingsValue forDebugSettingsKey:userDefaultsKey];
+        }
+    }
 }
 
 #pragma mark - Preprocessing methods
