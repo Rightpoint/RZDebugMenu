@@ -1,18 +1,19 @@
 //
-//  RZDebugMenuDemoTests.m
-//  RZDebugMenuDemoTests
+//  RZSettingsObserverManagerTests.m
+//  RZDebugMenuDemo
 //
-//  Created by Clayton Rieck on 6/2/14.
+//  Created by Clayton Rieck on 7/22/14.
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
+#import "RZDebugMenuSettingsObserverManager.h"
 
-@interface RZDebugMenuDemoTests : XCTestCase
+@interface RZSettingsObserverManagerTests : XCTestCase
 
 @end
 
-@implementation RZDebugMenuDemoTests
+@implementation RZSettingsObserverManagerTests
 
 - (void)setUp
 {
@@ -26,9 +27,9 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testRemovalOfObserverForKey
 {
-//    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    
 }
 
 @end
