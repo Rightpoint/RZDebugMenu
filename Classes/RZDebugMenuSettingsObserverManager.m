@@ -49,6 +49,7 @@
     
     NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
     if ( observers == NULL ) {
+        
         observers = [[NSMutableSet alloc] init];
         [observers addObject:newObserver];
         [self.observerKeyMap setObject:observers forKey:key];

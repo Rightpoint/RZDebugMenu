@@ -27,8 +27,14 @@
     [super tearDown];
 }
 
+- (void)testInitializationOfSharedInstance
+{
+    XCTAssertNotNil([RZDebugMenuSettingsObserverManager sharedInstance], @"Should have created a shared instance");
+}
+
 - (void)testRemovalOfObserverForKey
 {
+    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:self selector:nil forKey:@"key_1" updateImmediately:NO];
     
 }
 
