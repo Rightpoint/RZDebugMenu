@@ -32,9 +32,14 @@
     XCTAssertNotNil([RZDebugMenuSettingsObserverManager sharedInstance], @"Should have created a shared instance");
 }
 
+- (void)testSingletonReturnsSameType
+{
+    id s1 = [RZDebugMenuSettingsObserverManager sharedInstance];
+    XCTAssertTrue([s1 isKindOfClass:[RZDebugMenuSettingsObserverManager class]], @"Initialization should return same instance type");
+}
+
 - (void)testRemovalOfObserverForKey
 {
-    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:self selector:nil forKey:@"key_1" updateImmediately:NO];
     
 }
 
