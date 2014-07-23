@@ -157,7 +157,7 @@ RZSliderTableViewCellDelegate>
         
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
         
-        NSInteger indexOfCurrentValue;
+        NSInteger indexOfCurrentValue = 0;
         for (int i = 0; i < disclosureCellSelectableItems.count; i++) {
             RZMultiValueSelectionItem *item = [disclosureCellSelectableItems objectAtIndex:i];
             if ( [currentSelection isEqual:item.selectionValue] ) {
