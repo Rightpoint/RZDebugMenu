@@ -16,19 +16,14 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RZDebugMenu"
-  s.version      = "0.0.1"
-  s.summary      = "A short description of RZDebugMenu."
+  s.version      = "0.1.0"
+  s.summary      = "In-app settings bundle using the plist API in XCode"
 
   s.description  = <<-DESC
-                   A longer description of RZDebugMenu in Markdown format.
-
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
+                   RZDebugMenu mimics the behavior of a Settings.bundle, but is globally available within your app so you can change whatever setting you'd like at any point.
                    DESC
 
-  s.homepage     = "http://EXAMPLE/RZDebugMenu"
+  s.homepage     = "https://github.com/Raizlabs/RZDebugMenu"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -39,8 +34,8 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = "MIT (example)"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  # s.license      = "MIT (example)"
+  s.license      = { :type => "MIT" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -53,7 +48,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
   
-  s.author             = { "Clayton R" => "cjrieck123@gmail.com" }
+  s.author             = { "Clayton Rieck" => "cjrieck123@gmail.com" }
   # Or just: s.author    = "Clayton R"
   # s.authors            = { "Clayton R" => "cjrieck123@gmail.com" }
   # s.social_media_url   = "http://twitter.com/Clayton R"
@@ -65,7 +60,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  # s.platform     = :ios, "5.0"
+  s.platform     = :ios, "7.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -78,7 +73,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://EXAMPLE/RZDebugMenu.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/Raizlabs/RZDebugMenu.git", :tag => "0.1.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
