@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C00B6E5197E9B60005FF52F /* RZSettingsObserverManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00B6E4197E9B60005FF52F /* RZSettingsObserverManagerTests.m */; };
+		0C00B6E7198031E1005FF52F /* RZDebugMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C00B6E6198031E1005FF52F /* RZDebugMenuTests.m */; };
 		0C22DAC3193CCDA30042938F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC2193CCDA30042938F /* Foundation.framework */; };
 		0C22DAC5193CCDA30042938F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC4193CCDA30042938F /* CoreGraphics.framework */; };
 		0C22DAC7193CCDA30042938F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC6193CCDA30042938F /* UIKit.framework */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		0C00B6E4197E9B60005FF52F /* RZSettingsObserverManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZSettingsObserverManagerTests.m; sourceTree = "<group>"; };
+		0C00B6E6198031E1005FF52F /* RZDebugMenuTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuTests.m; sourceTree = "<group>"; };
 		0C22DABF193CCDA30042938F /* RZDebugMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RZDebugMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C22DAC2193CCDA30042938F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0C22DAC4193CCDA30042938F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -210,6 +212,7 @@
 			children = (
 				0C22DAE7193CCDA30042938F /* RZDebugMenuDemoTests.m */,
 				0C00B6E4197E9B60005FF52F /* RZSettingsObserverManagerTests.m */,
+				0C00B6E6198031E1005FF52F /* RZDebugMenuTests.m */,
 				0C22DAE2193CCDA30042938F /* Supporting Files */,
 			);
 			path = RZDebugMenuDemoTests;
@@ -483,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C00B6E7198031E1005FF52F /* RZDebugMenuTests.m in Sources */,
 				0C00B6E5197E9B60005FF52F /* RZSettingsObserverManagerTests.m in Sources */,
 				0C22DAE8193CCDA30042938F /* RZDebugMenuDemoTests.m in Sources */,
 			);
