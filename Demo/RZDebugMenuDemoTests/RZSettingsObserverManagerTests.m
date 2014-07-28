@@ -40,10 +40,10 @@
 
 - (void)testAdditionOfObservers
 {
-    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:self selector:nil forKey:@"key_1" updateImmediately:NO];
-    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:self selector:nil forKey:@"key_2" updateImmediately:NO];
+    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:self selector:@selector(selectorForAdditionTest) forKey:@"key_1" updateImmediately:NO];
+    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:self selector:@selector(selectorForAdditionTest) forKey:@"key_2" updateImmediately:NO];
 
-    // TODO: test if key length is 2
+    
 }
 
 - (void)testRemovalOfObservers
