@@ -38,9 +38,20 @@
     XCTAssertTrue([s1 isKindOfClass:[RZDebugMenuSettingsObserverManager class]], @"Initialization should return same instance type");
 }
 
-- (void)testRemovalOfObserverForKey
+- (void)testAdditionOfObservers
 {
+    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:self selector:nil forKey:@"key_1" updateImmediately:NO];
+    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:self selector:nil forKey:@"key_2" updateImmediately:NO];
+
+    // TODO: test if key length is 2
+}
+
+- (void)testRemovalOfObservers
+{
+    [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:self forKey:@"key_1"];
+    [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:self forKey:@"key_2"];
     
+    // TODO: test if key length is 0
 }
 
 @end
