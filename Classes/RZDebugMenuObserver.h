@@ -6,13 +6,11 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface RZDebugMenuObserver : NSObject
 
 @property (weak, nonatomic, readonly) id target;
-@property (assign, nonatomic, readonly) SEL aSelector;
+@property (assign, nonatomic, readonly) SEL selector;
 
-- (id)initWithObserver:(id)observer selector:(SEL)aSelector;
+- (id)initWithObserver:(id)observer selector:(SEL)selector NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -54,7 +54,7 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     self.testTextField.text = [sliderValue stringValue];
 }
 
--(void)changeNavTitle:(NSString *)newTitle
+- (void)changeNavTitle:(NSString *)newTitle
 {
     if ( newTitle ) {
         self.title = newTitle;

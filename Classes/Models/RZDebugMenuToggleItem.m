@@ -17,12 +17,13 @@
 
 @implementation RZDebugMenuToggleItem
 
-- (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title
+- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
 {
-    self = [super initWithValue:value forKey:key withTitle:title];
+    self = [super initWithValue:value key:key title:title];
     if ( self ) {
-        _toggleCellDefaultValue = self.settingsValue;
+        _toggleCellDefaultValue = self.value;
     }
+    
     return self;
 }
 

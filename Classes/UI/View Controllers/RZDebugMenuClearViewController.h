@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @class RZDebugMenuClearViewController;
+
 @protocol RZDebugMenuClearViewControllerDelegate <NSObject>
 
 - (void)clearViewControllerDebugMenuButtonPressed:(RZDebugMenuClearViewController *)clearViewController;

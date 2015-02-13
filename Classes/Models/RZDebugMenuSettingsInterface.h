@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface RZDebugMenuSettingsInterface : NSObject
 
 + (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;

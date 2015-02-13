@@ -27,29 +27,34 @@
 #import "RZDebugMenuSettingsObserverManager.h"
 #import "RZDebugMenuSettingsInterface.h"
 
-static NSString * const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
-static NSString * const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
-static NSString * const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
-static NSString * const kRZTextFieldSpecifier = @"PSTextFieldSpecifier";
-static NSString * const kRZSliderSpecifier = @"PSSliderSpecifier";
-static NSString * const kRZGroupSpecifer = @"PSGroupSpecifier";
-static NSString * const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
-static NSString * const kRZKeyItemIdentifier = @"Key";
-static NSString * const kRZKeyTitle = @"Title";
-static NSString * const kRZKeyType = @"Type";
-static NSString * const kRZKeyDefaultValue = @"DefaultValue";
-static NSString * const kRZKeyEnvironmentsTitles = @"Titles";
-static NSString * const kRZKeyEnvironmentsValues = @"Values";
-static NSString * const kRZKeyMaximumValue = @"MaximumValue";
-static NSString * const kRZKeyMinimumValue = @"MinimumValue";
-static NSString * const kRZVersionCellTitle = @"Version";
-static NSString * const kRZDisclosureReuseIdentifier = @"RZSettingsDisclosureCell";
-static NSString * const kRZToggleReuseIdentifier = @"RZSettingsToggleSwitchCell";
-static NSString * const kRZTextFieldReuseIdentifier = @"RZSettingsTextFieldCell";
-static NSString * const kRZSliderReuseIdentifier = @"RZSettingsSliderCell";
-static NSString * const kRZVersionInfoReuseIdentifier = @"RZSettingsVersionCell";
-static NSString * const kRZVersionGroupTitle = @"Version Info";
-static NSString * const kRZEmptyString = @"";
+static NSString* const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
+static NSString* const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
+static NSString* const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
+static NSString* const kRZTextFieldSpecifier = @"PSTextFieldSpecifier";
+static NSString* const kRZSliderSpecifier = @"PSSliderSpecifier";
+static NSString* const kRZGroupSpecifer = @"PSGroupSpecifier";
+
+static NSString* const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
+
+static NSString* const kRZKeyItemIdentifier = @"Key";
+static NSString* const kRZKeyTitle = @"Title";
+static NSString* const kRZKeyType = @"Type";
+static NSString* const kRZKeyDefaultValue = @"DefaultValue";
+static NSString* const kRZKeyEnvironmentsTitles = @"Titles";
+static NSString* const kRZKeyEnvironmentsValues = @"Values";
+static NSString* const kRZKeyMaximumValue = @"MaximumValue";
+static NSString* const kRZKeyMinimumValue = @"MinimumValue";
+
+static NSString* const kRZVersionCellTitle = @"Version";
+static NSString* const kRZVersionGroupTitle = @"Version Info";
+
+static NSString* const kRZDisclosureReuseIdentifier = @"RZSettingsDisclosureCell";
+static NSString* const kRZToggleReuseIdentifier = @"RZSettingsToggleSwitchCell";
+static NSString* const kRZTextFieldReuseIdentifier = @"RZSettingsTextFieldCell";
+static NSString* const kRZSliderReuseIdentifier = @"RZSettingsSliderCell";
+static NSString* const kRZVersionInfoReuseIdentifier = @"RZSettingsVersionCell";
+
+static NSString* const kRZEmptyString = @"";
 
 @interface RZDebugMenuSettingsDataSource ()
 
@@ -126,9 +131,9 @@ static NSString * const kRZEmptyString = @"";
             NSMutableArray *selectionItems = [self generateMultiValueOptionsArray:optionTitles withValues:optionValues];
             
             RZDebugMenuMultiValueItem *disclosureTableViewCellMetaData = [[RZDebugMenuMultiValueItem alloc] initWithValue:cellDefaultValue
-                                                                                                                   forKey:plistItemIdentifier
-                                                                                                                withTitle:cellTitle
-                                                                                                        andSelectionItems:selectionItems];
+                                                                                                                   key:plistItemIdentifier
+                                                                                                                title:cellTitle
+                                                                                                        selectionItems:selectionItems];
             
             NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
             [objectsInSection addObject:disclosureTableViewCellMetaData];
@@ -141,8 +146,8 @@ static NSString * const kRZEmptyString = @"";
             NSNumber *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
             
             RZDebugMenuToggleItem *toggleTableViewCellMetaData = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue
-                                                                                                       forKey:plistItemIdentifier
-                                                                                                    withTitle:cellTitle];
+                                                                                                       key:plistItemIdentifier
+                                                                                                    title:cellTitle];
             
             NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
             [objectsInSection addObject:toggleTableViewCellMetaData];
@@ -154,8 +159,8 @@ static NSString * const kRZEmptyString = @"";
             
             NSString *defaultValue = [settingsItem objectForKey:kRZKeyDefaultValue];
             RZDebugMenuTextFieldItem *textFieldTableViewCellMetaData = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue
-                                                                                                                forKey:plistItemIdentifier
-                                                                                                             withTitle:cellTitle];
+                                                                                                                key:plistItemIdentifier
+                                                                                                             title:cellTitle];
             
             NSMutableArray *objectsInSection = [self.groupedSections objectForKey:currentSection];
             [objectsInSection addObject:textFieldTableViewCellMetaData];
@@ -212,7 +217,7 @@ static NSString * const kRZEmptyString = @"";
 - (void)setUpVersionCellMetaData
 {
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
-    RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle andVersionNumber:version];
+    RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle vrsionr:version];
     NSArray *versionItemArray = @[versionItem];
     [self.groupedSections setObject:versionItemArray forKey:kRZVersionGroupTitle];
     [self.sectionGroupTitles addObject:kRZVersionGroupTitle];
@@ -261,7 +266,7 @@ static NSString * const kRZEmptyString = @"";
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:defaultValue];
         
-        disclosureCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        disclosureCell.textLabel.text = currentMetaDataObject.title;
         disclosureCell.detailTextLabel.text = currentSelection.selectionTitle;
         cell = disclosureCell;
     }
@@ -273,7 +278,7 @@ static NSString * const kRZEmptyString = @"";
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSNumber *toggleSwitchDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         
-        cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        cell.textLabel.text = currentMetaDataObject.title;
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
         cell = toggleCell;
     }
@@ -284,7 +289,7 @@ static NSString * const kRZEmptyString = @"";
         
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSString *textFieldDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
-        textFieldCell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        textFieldCell.textLabel.text = currentMetaDataObject.title;
         textFieldCell.stringTextField.text = textFieldDefaultValue;
         cell = textFieldCell;
     }
@@ -305,7 +310,7 @@ static NSString * const kRZEmptyString = @"";
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuVersionItem class]] ){
         
         cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZVersionInfoReuseIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = currentMetaDataObject.tableViewCellTitle;
+        cell.textLabel.text = currentMetaDataObject.title;
         cell.detailTextLabel.text = ((RZDebugMenuVersionItem *)currentMetaDataObject).versionNumber;
     }
     

@@ -14,7 +14,7 @@
 
 @interface RZDebugMenuSettingsObserverManager ()
 
-@property (strong, nonatomic, readwrite) NSMutableDictionary *observerKeyMap;
+@property (strong, nonatomic, readwrite) NSMutableDictionary *observersByKey;
 
 @end
 
@@ -27,14 +27,16 @@
     dispatch_once(&onceToken, ^{
         observerManager = [[RZDebugMenuSettingsObserverManager alloc] init_private];
     });
+
     return observerManager;
 }
 
 - (id)init_private
 {
     self = [super init];
+
     if ( self ) {
-        _observerKeyMap = [[NSMutableDictionary alloc] init];
+        _observersByKey = [[NSMutableDictionary alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(notifyObserversForNotification:)
                                                      name:kRZDebugMenuSettingChangedNotification
@@ -43,40 +45,39 @@
     return self;
 }
 
-- (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
+- (void)addObserver:(id)observer selector:(SEL)selector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
-    RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
+    RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:selector];
     
-    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
-    if ( observers == NULL ) {
+    NSMutableSet *observers = [self.observersByKey objectForKey:key];
+    if ( observers == nil ) {
         observers = [[NSMutableSet alloc] init];
         [observers addObject:newObserver];
-        [self.observerKeyMap setObject:observers forKey:key];
+        [self.observersByKey setObject:observers forKey:key];
     }
     else {
         [observers addObject:newObserver];
     }
     
     if ( update ) {
-        
         id defaultsValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
-        [self performSelector:aSelector onObserver:observer withValue:defaultsValue];
+        [self performSelector:selector onObserver:observer withValue:defaultsValue];
     }
 }
 
 - (void)removeObserver:(id)observer forKey:(NSString *)key
 {
-    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
+    NSMutableSet *observers = [self.observersByKey objectForKey:key];
     [observers removeObject:observer];
 }
 
 - (void)notifyObserversWithValue:(id)value forKey:(NSString *)key
 {
-    
-    NSSet *observers = [self.observerKeyMap objectForKey:key];
+    NSSet *observers = [self.observersByKey objectForKey:key];
+
     for (RZDebugMenuObserver *observer in observers) {
         id target = observer.target;
-        SEL action = observer.aSelector;
+        SEL action = observer.selector;
         [self performSelector:action onObserver:target withValue:value];
     }
 }
@@ -84,11 +85,12 @@
 - (void)notifyObserversForNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];
+
     NSString *key = [userInfo allKeys][0];
     id value = [userInfo objectForKey:key];
+
     [self notifyObserversWithValue:value forKey:key];
 }
-
 
 - (void)performSelector:(SEL)action onObserver:(id)observer withValue:(id)value
 {
