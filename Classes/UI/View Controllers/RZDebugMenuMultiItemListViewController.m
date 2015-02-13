@@ -7,30 +7,35 @@
 //
 
 #import "RZDebugMenuMultiItemListViewController.h"
+
 #import "RZMultiValueSelectionItem.h"
+
 #import "RZMultiValueItemTableViewCell.h"
 
 static NSString * const kRZCellReuseIdentifier = @"Cell";
-static NSString * const kRZNavigationBarTitle = @"Options";
+static NSString * const kRZNavigationBarTitle  = @"Options";
 
 @interface RZDebugMenuMultiItemListViewController ()
 
 @property (strong, nonatomic) UITableView *selectionsTableView;
 @property (strong, nonatomic) NSArray *cellItems;
 @property (assign, nonatomic) NSInteger lastSelected;
-@property (weak, nonatomic) id<RZDebugMenuMultiItemListViewControllerDelegate>delegate;
+
+@property (weak, nonatomic) id <RZDebugMenuMultiItemListViewControllerDelegate> delegate;
 
 @end
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate andSelectedRow:(NSInteger)selectedRow
+- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id <RZDebugMenuMultiItemListViewControllerDelegate>)delegate selectedRow:(NSInteger)selectedRow
 {
     self = [super init];
     if ( self ) {
         _delegate = delegate;
+
         _cellItems = [[NSArray alloc] initWithArray:selectionItems];
         _lastSelected = selectedRow;
+        
         self.title = kRZNavigationBarTitle;
     }
     return self;
@@ -71,6 +76,7 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZMultiValueItemTableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
+    
     if ( cell ) {
         RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = currentSelectionItem.selectionTitle;
@@ -85,7 +91,7 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 {
     RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
     self.lastSelected = indexPath.row;
-    [self.delegate multiItemListDidMakeNewSelectionAtIndexPath:currentSelectionItem];
+    [self.delegate multiItemListDidSelectNewItem:currentSelectionItem];
 }
 
 @end

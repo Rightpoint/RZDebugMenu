@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "RZDebugMenuClearViewController.h"
 
 /**
@@ -48,7 +47,7 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  *
  *  @note If the selector accepts a parameter, it will be passed the new value for the key that changed
  */
-+ (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update;
++ (void)addObserver:(id)observer selector:(SEL)selector forKey:(NSString *)key updateImmediately:(BOOL)update;
 
 /**
  *  Removes an object currently observing for a settings change

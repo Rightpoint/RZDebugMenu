@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "RZDebugMenuSettingsItem.h"
 
 @interface RZDebugMenuMultiValueItem : RZDebugMenuSettingsItem
 
 @property (strong, nonatomic, readonly) NSArray *selectionItems;
 
-- (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title andSelectionItems:(NSArray *)selectionItems;
+- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title selectionItems:(NSArray *)selectionItems;
 
 @end

@@ -12,9 +12,18 @@
 
 static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
 
+// Button Theme
+static const CGRect kRZButtonFrame = { .origin = { .x = 70.0f, .y = 225.0f }, .size = { .width = 35.0f, .height = 35.0f } };
+static const CGFloat kRZButtonGlyphFontSize = 30.0f;
+static const CGFloat kRZBorderWidth = 1.5f;
+
+// Button Animations
+static const CGFloat kRZBoundaryInset = 20.0f;
+static const CGFloat kRZMargin = 50.0f;
+
 @interface RZDebugMenuClearViewController ()
 
-@property (weak, nonatomic) id<RZDebugMenuClearViewControllerDelegate> delegate;
+@property (weak, nonatomic) id <RZDebugMenuClearViewControllerDelegate> delegate;
 @property (strong, nonatomic) UIButton *displayDebugMenuButton;
 @property (strong, nonatomic) UIPanGestureRecognizer *dragGesture;
 
@@ -27,27 +36,35 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
     self = [super init];
     if ( self ) {
         _delegate = delegate;
-        
         _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
-        
-        _displayDebugMenuButton = [[UIButton alloc] initWithFrame:CGRectMake(70, 225, 35, 35)];
-        _displayDebugMenuButton.alpha = 0.80;
-        _displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
-        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
-        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateHighlighted];
-        [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateSelected];
-        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-        [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-        [_displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:30]];
-        _displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-        [_displayDebugMenuButton addTarget:self action:@selector(scaleButtonDown) forControlEvents:UIControlEventTouchDown];
-        [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
-        _displayDebugMenuButton.clipsToBounds = YES;
-        _displayDebugMenuButton.layer.cornerRadius = 8;
-        _displayDebugMenuButton.layer.borderWidth = 1.5f;
+
+        [self createDebugButton];
     }
+
     return self;
+}
+
+- (void)createDebugButton
+{
+    _displayDebugMenuButton = [[UIButton alloc] initWithFrame:kRZButtonFrame];
+    _displayDebugMenuButton.alpha = 0.80;
+    _displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
+
+    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
+    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateHighlighted];
+    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateSelected];
+
+    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+
+    [_displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:kRZButtonGlyphFontSize]];
+
+    _displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+    [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
+    _displayDebugMenuButton.clipsToBounds = YES;
+    _displayDebugMenuButton.layer.cornerRadius = 8;
+    _displayDebugMenuButton.layer.borderWidth = kRZBorderWidth;
 }
 
 - (void)viewDidLoad
@@ -85,13 +102,13 @@ static NSString * const kRZDebugMenuButtonTitle = @"\u2699";
 {
     [self scaleButtonUp];
     
-    CGFloat const topBoundaryInset = 20.f;
-    CGFloat const edgeStickMargin = 50.f;
+    CGFloat const topBoundaryInset = kRZBoundaryInset;
+    CGFloat const edgeStickMargin = kRZMargin;
     CGFloat const buttonWidth = CGRectGetWidth(self.displayDebugMenuButton.bounds);
     
     CGFloat const viewWidth = CGRectGetWidth(self.view.bounds);
     CGFloat const viewHeight = CGRectGetHeight(self.view.bounds);
-    
+
     CGPoint translation = [panGesture translationInView:self.view];
     UIView *draggedButton = panGesture.view;
     CGRect newButtonFrame = draggedButton.frame;

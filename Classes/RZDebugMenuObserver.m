@@ -10,13 +10,14 @@
 
 @implementation RZDebugMenuObserver
 
-- (id)initWithObserver:(id)observer selector:(SEL)aSelector
+- (id)initWithObserver:(id)observer selector:(SEL)selector
 {
     self = [super init];
     if ( self ) {
         _target = observer;
-        _aSelector = aSelector;
+        _selector = selector;
     }
+
     return self;
 }
 

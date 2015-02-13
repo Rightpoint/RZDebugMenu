@@ -6,14 +6,12 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface RZDebugMenuSettingsItem : NSObject
 
-@property (strong, nonatomic, readonly) NSString *tableViewCellTitle;
-@property (strong, nonatomic, readonly) NSString *settingsKey;
-@property (strong, nonatomic) id settingsValue;
+@property (strong, nonatomic, readonly) NSString *title;
+@property (strong, nonatomic, readonly) NSString *key;
+@property (strong, nonatomic) id value;
 
-- (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title;
+- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title NS_DESIGNATED_INITIALIZER;
 
 @end
