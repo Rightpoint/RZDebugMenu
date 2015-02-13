@@ -7,9 +7,9 @@
 //
 
 #import "RZDebugMenuSettingsObserverManager.h"
-#import "RZDebugMenuObserver.h"
 
 #import "RZDebugMenu.h"
+#import "RZDebugMenuObserver.h"
 #import "RZDebugMenuSettingsInterface.h"
 
 @interface RZDebugMenuSettingsObserverManager ()
@@ -48,7 +48,7 @@
 - (void)addObserver:(id)observer selector:(SEL)selector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
     RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:selector];
-    
+
     NSMutableSet *observers = [self.observersByKey objectForKey:key];
     if ( observers == nil ) {
         observers = [[NSMutableSet alloc] init];
@@ -56,6 +56,7 @@
         [self.observersByKey setObject:observers forKey:key];
     }
     else {
+        
         [observers addObject:newObserver];
     }
     
@@ -71,6 +72,16 @@
     [observers removeObject:observer];
 }
 
+#pragma mark - notification methods
+
+- (void)notifyObserversForNotification:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSString *key = [[userInfo allKeys] firstObject];
+    id value = [userInfo objectForKey:key];
+    [self notifyObserversWithValue:value forKey:key];
+}
+
 - (void)notifyObserversWithValue:(id)value forKey:(NSString *)key
 {
     NSSet *observers = [self.observersByKey objectForKey:key];
@@ -80,16 +91,6 @@
         SEL action = observer.selector;
         [self performSelector:action onObserver:target withValue:value];
     }
-}
-
-- (void)notifyObserversForNotification:(NSNotification *)notification
-{
-    NSDictionary *userInfo = [notification userInfo];
-
-    NSString *key = [userInfo allKeys][0];
-    id value = [userInfo objectForKey:key];
-
-    [self notifyObserversWithValue:value forKey:key];
 }
 
 - (void)performSelector:(SEL)action onObserver:(id)observer withValue:(id)value

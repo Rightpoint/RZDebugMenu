@@ -75,9 +75,9 @@ static NSString* const kRZEmptyString = @"";
         _settingsKeys = [[NSMutableArray alloc] init];
         
         NSMutableDictionary *userSettings = [self createMetaDataObjectsAndGenerateUserDefaults:_preferenceSpecifiers];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
         
         [self setUpVersionCellMetaData];
-        [[NSUserDefaults standardUserDefaults] registerDefaults:userSettings];
     }
     
     return self;
@@ -219,6 +219,7 @@ static NSString* const kRZEmptyString = @"";
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
     RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle vrsionr:version];
     NSArray *versionItemArray = @[versionItem];
+    
     [self.groupedSections setObject:versionItemArray forKey:kRZVersionGroupTitle];
     [self.sectionGroupTitles addObject:kRZVersionGroupTitle];
 }
@@ -257,51 +258,51 @@ static NSString* const kRZEmptyString = @"";
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
-        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
-        RZDisclosureTableViewCell *disclosureCell = (RZDisclosureTableViewCell *)cell;
-        
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSNumber *selectionDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         NSInteger defaultValue = [selectionDefaultValue integerValue];
         RZDebugMenuMultiValueItem *currentMultiValueItem = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         RZMultiValueSelectionItem *currentSelection = [currentMultiValueItem.selectionItems objectAtIndex:defaultValue];
         
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZDisclosureReuseIdentifier forIndexPath:indexPath];
+        RZDisclosureTableViewCell *disclosureCell = (RZDisclosureTableViewCell *)cell;
         disclosureCell.textLabel.text = currentMetaDataObject.title;
+
         disclosureCell.detailTextLabel.text = currentSelection.selectionTitle;
         cell = disclosureCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuToggleItem class]] ) {
         
-        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
-        RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
-        
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSNumber *toggleSwitchDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZToggleReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = currentMetaDataObject.title;
+        RZToggleTableViewCell *toggleCell = (RZToggleTableViewCell *)cell;
+
         toggleCell.applySettingsSwitch.on = [toggleSwitchDefaultValue boolValue];
         cell = toggleCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuTextFieldItem class]] ) {
         
-        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZTextFieldReuseIdentifier forIndexPath:indexPath];
-        RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
-        
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSString *textFieldDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
+
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZTextFieldReuseIdentifier forIndexPath:indexPath];
+        RZTextFieldTableViewCell *textFieldCell = (RZTextFieldTableViewCell *)cell;
         textFieldCell.textLabel.text = currentMetaDataObject.title;
+
         textFieldCell.stringTextField.text = textFieldDefaultValue;
         cell = textFieldCell;
     }
     else if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuSliderItem class]] ) {
         
         RZDebugMenuSliderItem *sliderMetaDataObject = (RZDebugMenuSliderItem *)currentMetaDataObject;
-        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZSliderReuseIdentifier forIndexPath:indexPath];
-        RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
-        
         NSString *settingsDefaultKey = [self getKeyIdentifierForIndexPath:indexPath];
         NSNumber *sliderDefaultValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:settingsDefaultKey];
         
+        cell = [self.settingsOptionsTableView dequeueReusableCellWithIdentifier:kRZSliderReuseIdentifier forIndexPath:indexPath];
+        RZSliderTableViewCell *sliderCell = (RZSliderTableViewCell *)cell;
         sliderCell.cellSlider.maximumValue = [sliderMetaDataObject.max floatValue];
         sliderCell.cellSlider.minimumValue = [sliderMetaDataObject.min floatValue];
         [sliderCell.cellSlider setValue:[sliderDefaultValue floatValue]];
@@ -317,6 +318,8 @@ static NSString* const kRZEmptyString = @"";
     return cell;
 }
 
+#pragma mark - meta data getter methods
+
 - (NSString *)getKeyIdentifierForIndexPath:(NSIndexPath *)indexPath
 {
     id setting;
@@ -328,7 +331,7 @@ static NSString* const kRZEmptyString = @"";
     
     if ( indexPath.section == 0 ) {
         // plus 1 to the index path if the 'group' item takes up the first spot on the array
-        setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row+firstGroupExists];
+        setting = [self.preferenceSpecifiers objectAtIndex:indexPath.row + firstGroupExists];
     }
     else {
         
@@ -338,7 +341,7 @@ static NSString* const kRZEmptyString = @"";
             numberOfPreviousCells = numberOfPreviousCells + [self.settingsOptionsTableView numberOfRowsInSection:i];
         }
         // gets the correct index in the array of settings by taking into account the number of group items and cells before the one that is changing
-        setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row+numberOfPreviousCells+indexPath.section+firstGroupExists)];
+        setting = [self.preferenceSpecifiers objectAtIndex:(indexPath.row + numberOfPreviousCells + indexPath.section + firstGroupExists)];
     }
     
     if ( [setting isKindOfClass:[NSDictionary class]] ) {

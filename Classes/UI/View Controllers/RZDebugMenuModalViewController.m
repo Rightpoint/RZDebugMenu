@@ -9,25 +9,25 @@
 #import "RZDebugMenuModalViewController.h"
 
 #import "RZDebugMenuSettingsInterface.h"
-
 #import "RZDebugMenuSettingsItem.h"
-#import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZMultiValueSelectionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
 #import "RZDebugMenuSliderItem.h"
 
+#import "RZDebugMenuMultiItemListViewController.h"
 #import "RZDisclosureTableViewCell.h"
 #import "RZToggleTableViewCell.h"
 #import "RZTextFieldTableViewCell.h"
 #import "RZSliderTableViewCell.h"
 
-static NSString* const kRZNavigationBarTitle = @"Settings";
-static NSString* const kRZNavigationBarDoneButtonTitle = @"Done";
-static NSString* const kRZDisclosureReuseIdentifier = @"environments";
-static NSString* const kRZToggleReuseIdentifier = @"toggle";
-static NSString* const kRZVersionInfoReuseIdentifier = @"version";
+
+static NSString *const kRZNavigationBarTitle           = @"Settings";
+static NSString *const kRZNavigationBarDoneButtonTitle = @"Done";
+static NSString *const kRZDisclosureReuseIdentifier    = @"environments";
+static NSString *const kRZToggleReuseIdentifier        = @"toggle";
+static NSString *const kRZVersionInfoReuseIdentifier   = @"version";
 
 @interface RZDebugMenuModalViewController ()
 <RZDebugMenuMultiItemListViewControllerDelegate,
@@ -47,6 +47,7 @@ RZSliderTableViewCellDelegate>
     self = [super init];
     if ( self ) {
         self.title = kRZNavigationBarTitle;
+        
         _debugSettingsDataSource = dataSource;
     }
     return self;
@@ -60,21 +61,16 @@ RZSliderTableViewCellDelegate>
     CGFloat height = CGRectGetHeight(self.view.bounds);
     
     self.optionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStyleGrouped];
-    
     self.optionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
-    [self.view addSubview:self.optionsTableView];
-
     self.debugSettingsDataSource.settingsOptionsTableView = self.optionsTableView;
-
     self.optionsTableView.delegate = self;
     self.optionsTableView.dataSource = self.debugSettingsDataSource;
+    [self.view addSubview:self.optionsTableView];
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:kRZNavigationBarDoneButtonTitle
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(closeView)];
-    
     self.navigationItem.rightBarButtonItem = doneButton;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -173,7 +169,7 @@ RZSliderTableViewCellDelegate>
 
 #pragma mark - table view cell delegate methods
 
-- (void)multiItemListDidMakeNewSelectionAtIndexPath:(RZMultiValueSelectionItem *)selectedItem
+- (void)multiItemListDidSelectNewItem:(RZMultiValueSelectionItem *)selectedItem
 {
     NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
     RZDebugMenuMultiValueItem *disclosureMultiValueItem = (RZDebugMenuMultiValueItem *)[self.debugSettingsDataSource settingsItemAtIndexPath:selectedIndexPath];
