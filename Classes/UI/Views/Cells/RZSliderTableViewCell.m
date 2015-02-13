@@ -18,7 +18,6 @@ static const CGFloat kHEYSliderMargin = 25.0f;
     if (self) {
         CGFloat width = CGRectGetWidth(self.bounds);
         CGFloat height = CGRectGetHeight(self.bounds);
-
         _cellSlider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, width - kHEYSliderMargin, height)];
         _cellSlider.center = CGPointMake(CGRectGetMidX(self.contentView.bounds), CGRectGetMidY(self.contentView.bounds));
         _cellSlider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
