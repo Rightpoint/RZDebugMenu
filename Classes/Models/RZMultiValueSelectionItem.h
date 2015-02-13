@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface RZMultiValueSelectionItem : NSObject
 
 @property (strong, nonatomic, readonly) NSString *selectionTitle;

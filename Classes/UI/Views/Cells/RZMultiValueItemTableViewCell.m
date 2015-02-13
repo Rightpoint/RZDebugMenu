@@ -8,6 +8,9 @@
 
 #import "RZMultiValueItemTableViewCell.h"
 
+static const NSTimeInterval kHEYAnimationDuration = 0.15;
+static const NSTimeInterval kHEYAnimationDelay = 0.15;
+
 @implementation RZMultiValueItemTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -41,7 +44,7 @@
     
     CGFloat animationDuration = 0.f;
     if ( animated ) {
-        animationDuration = 0.15;
+        animationDuration = kHEYAnimationDuration;
     }
     
     if ( highlighted ) {
@@ -53,7 +56,7 @@
     else {
         
         [UIView animateWithDuration:animationDuration
-                              delay:0.15
+                              delay:kHEYAnimationDelay
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              self.backgroundView.backgroundColor = [UIColor whiteColor];

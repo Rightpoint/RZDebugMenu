@@ -10,6 +10,8 @@
 
 static NSString * const textFieldPlaceHolder = @"Enter name here";
 
+static const CGFloat kHEYWidthRatio = 1.5f;
+
 @implementation RZTextFieldTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -20,11 +22,14 @@ static NSString * const textFieldPlaceHolder = @"Enter name here";
         
         CGFloat width = CGRectGetWidth(self.bounds);
         CGFloat height = CGRectGetHeight(self.bounds);
-        _stringTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, width/1.5, height)];
+
+        _stringTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, width/kHEYWidthRatio, height)];
         _stringTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _stringTextField.textAlignment = NSTextAlignmentRight;
         _stringTextField.placeholder = textFieldPlaceHolder;
+
         [_stringTextField setReturnKeyType:UIReturnKeyDone];
+
         _stringTextField.delegate = self;
         
         self.accessoryView = [[UIView alloc] initWithFrame:_stringTextField.frame];
@@ -38,6 +43,7 @@ static NSString * const textFieldPlaceHolder = @"Enter name here";
 {
     [textField resignFirstResponder];
     [self changeText];
+
     return NO;
 }
 

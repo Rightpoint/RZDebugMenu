@@ -23,11 +23,11 @@
 #import "RZTextFieldTableViewCell.h"
 #import "RZSliderTableViewCell.h"
 
-static NSString * const kRZNavigationBarTitle = @"Settings";
-static NSString * const kRZNavigationBarDoneButtonTitle = @"Done";
-static NSString * const kRZDisclosureReuseIdentifier = @"environments";
-static NSString * const kRZToggleReuseIdentifier = @"toggle";
-static NSString * const kRZVersionInfoReuseIdentifier = @"version";
+static NSString* const kRZNavigationBarTitle = @"Settings";
+static NSString* const kRZNavigationBarDoneButtonTitle = @"Done";
+static NSString* const kRZDisclosureReuseIdentifier = @"environments";
+static NSString* const kRZToggleReuseIdentifier = @"toggle";
+static NSString* const kRZVersionInfoReuseIdentifier = @"version";
 
 @interface RZDebugMenuModalViewController ()
 <RZDebugMenuMultiItemListViewControllerDelegate,
@@ -144,7 +144,7 @@ RZSliderTableViewCellDelegate>
     }
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZDebugMenuSettingsItem *currentMetaDataObject = [self.debugSettingsDataSource settingsItemAtIndexPath:indexPath];
     
@@ -152,7 +152,7 @@ RZSliderTableViewCellDelegate>
         
         RZDebugMenuMultiValueItem *disclosureCellOptions = (RZDebugMenuMultiValueItem *)currentMetaDataObject;
         
-        NSString *multiValueKey = disclosureCellOptions.settingsKey;
+        NSString *multiValueKey = disclosureCellOptions.key;
         id currentSelection = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:multiValueKey];
         
         NSArray *disclosureCellSelectableItems = disclosureCellOptions.selectionItems;
@@ -166,7 +166,7 @@ RZSliderTableViewCellDelegate>
             }
         }
         
-        RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems delegate:self andSelectedRow:indexOfCurrentValue];
+        RZDebugMenuMultiItemListViewController *environmentsViewController = [[RZDebugMenuMultiItemListViewController alloc] initWithSelectionItems:disclosureCellSelectableItems delegate:self selectedRow:indexOfCurrentValue];
         [self.navigationController pushViewController:environmentsViewController animated:YES];
     }
 }
@@ -177,7 +177,7 @@ RZSliderTableViewCellDelegate>
 {
     NSIndexPath *selectedIndexPath = [self.optionsTableView indexPathForSelectedRow];
     RZDebugMenuMultiValueItem *disclosureMultiValueItem = (RZDebugMenuMultiValueItem *)[self.debugSettingsDataSource settingsItemAtIndexPath:selectedIndexPath];
-    [RZDebugMenuSettingsInterface setValue:selectedItem.selectionValue forDebugSettingsKey:disclosureMultiValueItem.settingsKey];
+    [RZDebugMenuSettingsInterface setValue:selectedItem.selectionValue forDebugSettingsKey:disclosureMultiValueItem.key];
     RZDisclosureTableViewCell *selectedCell = (RZDisclosureTableViewCell *)[self.optionsTableView cellForRowAtIndexPath:selectedIndexPath];
     selectedCell.detailTextLabel.text = selectedItem.selectionTitle;
 }
@@ -186,21 +186,21 @@ RZSliderTableViewCellDelegate>
 {
     NSIndexPath *toggleCellIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuToggleItem *toggleItem = (RZDebugMenuToggleItem *)[self.debugSettingsDataSource settingsItemAtIndexPath:toggleCellIndexPath];
-    [RZDebugMenuSettingsInterface setValue:[NSNumber numberWithBool:cell.applySettingsSwitch.on] forDebugSettingsKey:toggleItem.settingsKey];
+    [RZDebugMenuSettingsInterface setValue:[NSNumber numberWithBool:cell.applySettingsSwitch.on] forDebugSettingsKey:toggleItem.key];
 }
 
 - (void)didEditTextLabelOfCell:(RZTextFieldTableViewCell *)cell
 {
     NSIndexPath *textFieldIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuTextFieldItem *textFieldItem = (RZDebugMenuTextFieldItem *)[self.debugSettingsDataSource settingsItemAtIndexPath:textFieldIndexPath];
-    [RZDebugMenuSettingsInterface setValue:cell.stringTextField.text forDebugSettingsKey:textFieldItem.settingsKey];
+    [RZDebugMenuSettingsInterface setValue:cell.stringTextField.text forDebugSettingsKey:textFieldItem.key];
 }
 
 - (void)didChangeSliderPosition:(RZSliderTableViewCell *)cell
 {
     NSIndexPath *sliderIndexPath = [self.optionsTableView indexPathForCell:cell];
     RZDebugMenuSliderItem *sliderItem = (RZDebugMenuSliderItem *)[self.debugSettingsDataSource settingsItemAtIndexPath:sliderIndexPath];
-    [RZDebugMenuSettingsInterface setValue:[NSNumber numberWithFloat:cell.cellSlider.value] forDebugSettingsKey:sliderItem.settingsKey];
+    [RZDebugMenuSettingsInterface setValue:[NSNumber numberWithFloat:cell.cellSlider.value] forDebugSettingsKey:sliderItem.key];
 }
 
 @end

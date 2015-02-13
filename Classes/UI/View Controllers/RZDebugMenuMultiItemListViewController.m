@@ -18,19 +18,22 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 @property (strong, nonatomic) UITableView *selectionsTableView;
 @property (strong, nonatomic) NSArray *cellItems;
 @property (assign, nonatomic) NSInteger lastSelected;
-@property (weak, nonatomic) id<RZDebugMenuMultiItemListViewControllerDelegate>delegate;
+
+@property (weak, nonatomic) id <RZDebugMenuMultiItemListViewControllerDelegate> delegate;
 
 @end
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate andSelectedRow:(NSInteger)selectedRow
+- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id <RZDebugMenuMultiItemListViewControllerDelegate>)delegate selectedRow:(NSInteger)selectedRow
 {
     self = [super init];
     if ( self ) {
         _delegate = delegate;
+
         _cellItems = [[NSArray alloc] initWithArray:selectionItems];
         _lastSelected = selectedRow;
+
         self.title = kRZNavigationBarTitle;
     }
     return self;

@@ -40,6 +40,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     dispatch_once(&onceToken, ^{
         s_sharedInstance = [[RZDebugMenu alloc] init_internal];
     });
+
     return s_sharedInstance;
 }
 
@@ -57,6 +58,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
     RZDebugMenu *sharedInstance = [self privateSharedInstance];
+
     if ( ![sharedInstance.dataSource.settingsKeys containsObject:key] ) {
         RZDebugMenuLogDebug("Warning! Key not in plist");
     }
@@ -84,12 +86,12 @@ static NSString * const kRZSettingsFileExtension = @"plist";
 {
     self = [super init];
     if ( self ) {
-        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(createWindowAndGesture:)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
     }
+
     return self;
 }
 
@@ -133,6 +135,7 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     NSString *systemVersionString = [[UIDevice currentDevice] systemVersion];
     systemVersionString = [systemVersionString substringToIndex:3];
     CGFloat systemVersion = [systemVersionString floatValue];
+
     if ( systemVersion < iOSOrientationDepricationVersion ) {
         UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
@@ -150,26 +153,27 @@ static NSString * const kRZSettingsFileExtension = @"plist";
     }
 }
 
-#pragma mark - RZDebugMenuClearViewController delegate method
+#pragma mark - RZDebugMenuClearViewControllerDelegate
 
 - (void)clearViewControllerDebugMenuButtonPressed:(RZDebugMenuClearViewController *)clearViewController
 {
     [self displayDebugMenu];
 }
 
-#pragma mark - gesture recognizer delegate
+#pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     return YES;
 }
 
-#pragma mark - setter override
+#pragma mark - Accessors
 
 - (void)setSettingsFileName:(NSString *)settingsFileName
 {
     _settingsFileName = settingsFileName;
     _settingsFileName = [_settingsFileName stringByDeletingPathExtension];
+
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:_settingsFileName ofType:kRZSettingsFileExtension];
     if ( !plistPath ) {
         NSString *exceptionName = [_settingsFileName stringByAppendingString:@".plist doesn't exist"];

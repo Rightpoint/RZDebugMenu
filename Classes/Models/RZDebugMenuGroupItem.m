@@ -12,7 +12,7 @@
 
 - (id)initWithTitle:(NSString *)title
 {
-    self = [super initWithValue:nil forKey:nil withTitle:title];
+    self = [super initWithValue:nil key:nil title:title];
     return self;
 }
 

@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "RZMultiValueSelectionItem.h"
 
 @class RZDebugMenuMultiItemListViewController;
@@ -18,6 +17,6 @@
 
 @interface RZDebugMenuMultiItemListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate andSelectedRow:(NSInteger)selectedRow;
+- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate selectedRow:(NSInteger)selectedRow;
 
 @end
