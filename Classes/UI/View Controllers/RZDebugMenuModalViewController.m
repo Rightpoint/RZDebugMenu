@@ -9,7 +9,7 @@
 #import "RZDebugMenuModalViewController.h"
 
 #import "RZDebugMenuSettingsInterface.h"
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZMultiValueSelectionItem.h"
@@ -142,7 +142,7 @@ RZSliderTableViewCellDelegate>
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RZDebugMenuSettingsItem *currentMetaDataObject = [self.debugSettingsDataSource settingsItemAtIndexPath:indexPath];
+    RZDebugMenuItem *currentMetaDataObject = [self.debugSettingsDataSource settingsItemAtIndexPath:indexPath];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         

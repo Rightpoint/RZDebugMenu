@@ -9,7 +9,7 @@
 #import "RZDebugMenuSettingsDataSource.h"
 
 #import "RZDebugMenu.h"
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZMultiValueSelectionItem.h"
 #import "RZDebugMenuToggleItem.h"
@@ -175,8 +175,8 @@ static NSString* const kRZEmptyString = @"";
             NSNumber *minimum = [settingsItem objectForKey:kRZKeyMinimumValue];
             
             RZDebugMenuSliderItem *sliderTableViewCellMetaData = [[RZDebugMenuSliderItem alloc] initWithValue:defaultValue
-                                                                                                       forKey:plistItemIdentifier
-                                                                                                    withTitle:cellTitle
+                                                                                                       key:plistItemIdentifier
+                                                                                                    title:cellTitle
                                                                                                      maxValue:maximum
                                                                                                      minValue:minimum];
             
@@ -217,7 +217,7 @@ static NSString* const kRZEmptyString = @"";
 - (void)setUpVersionCellMetaData
 {
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:kRZKeyBundleVersionString];
-    RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle vrsionr:version];
+    RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] initWithTitle:kRZVersionCellTitle version:version];
     NSArray *versionItemArray = @[versionItem];
     
     [self.groupedSections setObject:versionItemArray forKey:kRZVersionGroupTitle];
@@ -254,7 +254,7 @@ static NSString* const kRZEmptyString = @"";
     NSArray *currentSectionsCells = [self.groupedSections objectForKey:currentSection];
     
     UITableViewCell *cell = nil;
-    RZDebugMenuSettingsItem *currentMetaDataObject = [currentSectionsCells objectAtIndex:indexPath.row];
+    RZDebugMenuItem *currentMetaDataObject = [currentSectionsCells objectAtIndex:indexPath.row];
     
     if ( [currentMetaDataObject isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
         
@@ -350,7 +350,7 @@ static NSString* const kRZEmptyString = @"";
     return nil;
 }
 
-- (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
+- (RZDebugMenuItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ( indexPath.section >= self.sectionGroupTitles.count ) {
         return nil;

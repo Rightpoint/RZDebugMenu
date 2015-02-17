@@ -6,17 +6,15 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuItem.h"
 
-@implementation RZDebugMenuSettingsItem
+@implementation RZDebugMenuItem
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (id)initWithTitle:(NSString *)title
 {
     self = [super init];
     if ( self ) {
         _title = title;
-        _key = key;
-        _value = value;
     }
 
     return self;

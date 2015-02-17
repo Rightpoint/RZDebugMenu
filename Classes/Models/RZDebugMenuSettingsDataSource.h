@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuItem.h"
 
 @interface RZDebugMenuSettingsDataSource : NSObject <UITableViewDataSource>
 
@@ -14,6 +14,6 @@
 @property (strong, nonatomic, readonly) NSMutableArray *settingsKeys;
 
 - (id)initWithDictionary:(NSDictionary *)plistData;
-- (RZDebugMenuSettingsItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
+- (RZDebugMenuItem *)settingsItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

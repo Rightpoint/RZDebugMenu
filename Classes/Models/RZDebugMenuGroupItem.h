@@ -6,10 +6,8 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuItem.h"
 
-@interface RZDebugMenuGroupItem : RZDebugMenuSettingsItem
-
-- (id)initWithTitle:(NSString *)title;
+@interface RZDebugMenuGroupItem : RZDebugMenuItem
 
 @end
