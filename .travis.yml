@@ -1,3 +1,14 @@
 language: objective-c
-before_install: rake install
-script: rake build
+before_install: 
+    - export LANG=en_US.UTF-8
+    - rake install
+script: 
+    - rake clean:demo
+    - rake test
+    - rake analyze
+notifications:
+    email:
+        recipients:
+         - michael.gorbach@raizlabs.com
+        on_success: change
+        on_failure: always
