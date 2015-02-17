@@ -11,6 +11,8 @@
 
 #if DEBUG
 #define RZDebugMenuLogDebug( s, ... ) NSLog((@"[RZDebugMenu]: DEBUG --  s"), ##__VA_ARGS__)
+#else
+#define RZDebugMenuLogDebug( s, ... )
 #endif
 
 #define RZDebugMenuLogError( s, ... ) NSLog((@"[RZDebugMenu]: ERROR -- s"). ##__VA_ARGS__)
