@@ -18,4 +18,5 @@ Pod::Spec.new do |s|
   s.exclude_files = "Classes/Exclude"
   
   s.requires_arc = true
+  s.dependency 'FXForms', '~>1.2'
 end
