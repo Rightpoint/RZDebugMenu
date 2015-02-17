@@ -6,11 +6,10 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "RZDebugMenuSettingsItem.h"
 
 @interface RZDebugMenuToggleItem : RZDebugMenuSettingsItem
 
-- (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title;
+- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title;
 
 @end

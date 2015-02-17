@@ -7,12 +7,14 @@
 //
 
 #import "RZDebugMenuSettingsObserverManager.h"
+
 #import "RZDebugMenu.h"
 #import "RZDebugMenuObserver.h"
+#import "RZDebugMenuSettingsInterface.h"
 
 @interface RZDebugMenuSettingsObserverManager ()
 
-@property (strong, nonatomic, readwrite) NSMutableDictionary *observerKeyMap;
+@property (strong, nonatomic, readwrite) NSMutableDictionary *observersByKey;
 
 @end
 
@@ -25,14 +27,16 @@
     dispatch_once(&onceToken, ^{
         observerManager = [[RZDebugMenuSettingsObserverManager alloc] init_private];
     });
+
     return observerManager;
 }
 
 - (id)init_private
 {
     self = [super init];
+
     if ( self ) {
-        _observerKeyMap = [[NSMutableDictionary alloc] init];
+        _observersByKey = [[NSMutableDictionary alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(notifyObserversForNotification:)
                                                      name:kRZDebugMenuSettingChangedNotification
@@ -41,47 +45,60 @@
     return self;
 }
 
-- (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
+- (void)addObserver:(id)observer selector:(SEL)selector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
-    RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:aSelector];
-    
-    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
-    if ( observers == NULL ) {
+    RZDebugMenuObserver *newObserver = [[RZDebugMenuObserver alloc] initWithObserver:observer selector:selector];
+
+    NSMutableSet *observers = [self.observersByKey objectForKey:key];
+    if ( observers == nil ) {
         observers = [[NSMutableSet alloc] init];
         [observers addObject:newObserver];
-        [self.observerKeyMap setObject:observers forKey:key];
+        [self.observersByKey setObject:observers forKey:key];
     }
     else {
+        
         [observers addObject:newObserver];
+    }
+    
+    if ( update ) {
+        id defaultsValue = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
+        [self performSelector:selector onObserver:observer withValue:defaultsValue];
     }
 }
 
 - (void)removeObserver:(id)observer forKey:(NSString *)key
 {
-    NSMutableSet *observers = [self.observerKeyMap objectForKey:key];
+    NSMutableSet *observers = [self.observersByKey objectForKey:key];
     [observers removeObject:observer];
 }
 
-- (void)notifyObserversWithValue:(id)value forKey:(NSString *)key
-{
-    
-    NSSet *observers = [self.observerKeyMap objectForKey:key];
-    for (RZDebugMenuObserver *observer in observers) {
-        id target = observer.target;
-        SEL action = observer.aSelector;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [target performSelector:action withObject:value];
-#pragma clang diagnostic pop
-    }
-}
+#pragma mark - notification methods
 
 - (void)notifyObserversForNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];
-    NSString *key = [userInfo allKeys][0];
+    NSString *key = [[userInfo allKeys] firstObject];
     id value = [userInfo objectForKey:key];
     [self notifyObserversWithValue:value forKey:key];
+}
+
+- (void)notifyObserversWithValue:(id)value forKey:(NSString *)key
+{
+    NSSet *observers = [self.observersByKey objectForKey:key];
+
+    for (RZDebugMenuObserver *observer in observers) {
+        id target = observer.target;
+        SEL action = observer.selector;
+        [self performSelector:action onObserver:target withValue:value];
+    }
+}
+
+- (void)performSelector:(SEL)action onObserver:(id)observer withValue:(id)value
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [observer performSelector:action withObject:value];
+#pragma clang diagnostic pop
 }
 
 @end

@@ -6,13 +6,11 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface RZDebugMenuSettingsObserverManager : NSObject
 
 + (instancetype)sharedInstance;
 
-- (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key;
+- (void)addObserver:(id)observer selector:(SEL)selector forKey:(NSString *)key updateImmediately:(BOOL)update;
 - (void)removeObserver:(id)observer forKey:(NSString *)key;
 
 @end

@@ -7,27 +7,33 @@
 //
 
 #import "RZDebugMenuMultiItemListViewController.h"
+
 #import "RZMultiValueSelectionItem.h"
 
 static NSString * const kRZCellReuseIdentifier = @"Cell";
-static NSString * const kRZNavigationBarTitle = @"Options";
+static NSString * const kRZNavigationBarTitle  = @"Options";
 
 @interface RZDebugMenuMultiItemListViewController ()
 
 @property (strong, nonatomic) UITableView *selectionsTableView;
 @property (strong, nonatomic) NSArray *cellItems;
-@property (weak, nonatomic) id<RZDebugMenuMultiItemListViewControllerDelegate>delegate;
+@property (assign, nonatomic) NSInteger lastSelected;
+
+@property (weak, nonatomic) id <RZDebugMenuMultiItemListViewControllerDelegate> delegate;
 
 @end
 
 @implementation RZDebugMenuMultiItemListViewController
 
-- (id)initWithSelectionItems:(NSArray *)selectionItems andDelegate:(id<RZDebugMenuMultiItemListViewControllerDelegate>)delegate
+- (id)initWithSelectionItems:(NSArray *)selectionItems delegate:(id <RZDebugMenuMultiItemListViewControllerDelegate>)delegate selectedRow:(NSInteger)selectedRow
 {
     self = [super init];
     if ( self ) {
         _delegate = delegate;
+
         _cellItems = [[NSArray alloc] initWithArray:selectionItems];
+        _lastSelected = selectedRow;
+        
         self.title = kRZNavigationBarTitle;
     }
     return self;
@@ -48,6 +54,9 @@ static NSString * const kRZNavigationBarTitle = @"Options";
     
     self.selectionsTableView.delegate = self;
     self.selectionsTableView.dataSource = self;
+    
+    NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:self.lastSelected inSection:0];
+    [self.selectionsTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:0];
 }
 
 #pragma mark - table view datasource methods
@@ -77,7 +86,8 @@ static NSString * const kRZNavigationBarTitle = @"Options";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
-    [self.delegate multiItemListDidMakeNewSelectionAtIndexPath:currentSelectionItem];
+    self.lastSelected = indexPath.row;
+    [self.delegate multiItemListDidSelectNewItem:currentSelectionItem];
 }
 
 @end
