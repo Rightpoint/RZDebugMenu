@@ -1,0 +1,558 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D43C89601A93E11E0057AF66 /* libRZDebugMenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89551A93E11E0057AF66 /* libRZDebugMenu.a */; };
+		D43C89711A93E1460057AF66 /* RZDebugMenuSettingsInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C896E1A93E1460057AF66 /* RZDebugMenuSettingsInterface.m */; };
+		D43C89811A93E1680057AF66 /* RZDisclosureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89761A93E1680057AF66 /* RZDisclosureTableViewCell.m */; };
+		D43C89821A93E1680057AF66 /* RZMultiValueItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89781A93E1680057AF66 /* RZMultiValueItemTableViewCell.m */; };
+		D43C89831A93E1680057AF66 /* RZSliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C897A1A93E1680057AF66 /* RZSliderTableViewCell.m */; };
+		D43C89841A93E1680057AF66 /* RZTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C897C1A93E1680057AF66 /* RZTextFieldTableViewCell.m */; };
+		D43C89851A93E1680057AF66 /* RZToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C897E1A93E1680057AF66 /* RZToggleTableViewCell.m */; };
+		D43C89861A93E1680057AF66 /* RZVersionInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89801A93E1680057AF66 /* RZVersionInfoTableViewCell.m */; };
+		D43C898C1A93E1780057AF66 /* RZDebugMenuClearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89891A93E1780057AF66 /* RZDebugMenuClearViewController.m */; };
+		D43C898D1A93E1780057AF66 /* RZDebugMenuMultiItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C898B1A93E1780057AF66 /* RZDebugMenuMultiItemListViewController.m */; };
+		D43C89901A93E18C0057AF66 /* RZDebugMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C898F1A93E18C0057AF66 /* RZDebugMenu.m */; };
+		D43C89931A93E24B0057AF66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89921A93E24B0057AF66 /* Foundation.framework */; };
+		D43C89951A93E24E0057AF66 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89941A93E24E0057AF66 /* UIKit.framework */; };
+		D43C899A1A93E38E0057AF66 /* RZMultiValueSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89991A93E38E0057AF66 /* RZMultiValueSelectionItem.m */; };
+		D43C899E1A93E3C20057AF66 /* RZDebugMenuWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C899D1A93E3C20057AF66 /* RZDebugMenuWindow.m */; };
+		D43C89A11A93E3D30057AF66 /* RZDebugMenuModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89A01A93E3D30057AF66 /* RZDebugMenuModalViewController.m */; };
+		D43C89A41A93E3EB0057AF66 /* RZDebugMenuMultiValueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89A31A93E3EB0057AF66 /* RZDebugMenuMultiValueItem.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D43C89611A93E11E0057AF66 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D43C890A1A93DF9E0057AF66 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D43C89541A93E11E0057AF66;
+			remoteInfo = RZDebugMenu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D43C89531A93E11E0057AF66 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D43C893F1A93E0E20057AF66 /* RZDebugMenuGroupItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuGroupItem.h; path = ../Classes/Models/RZDebugMenuGroupItem.h; sourceTree = "<group>"; };
+		D43C89401A93E0E20057AF66 /* RZDebugMenuGroupItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuGroupItem.m; path = ../Classes/Models/RZDebugMenuGroupItem.m; sourceTree = "<group>"; };
+		D43C89411A93E0E20057AF66 /* RZDebugMenuItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuItem.h; path = ../Classes/Models/RZDebugMenuItem.h; sourceTree = "<group>"; };
+		D43C89421A93E0E20057AF66 /* RZDebugMenuItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuItem.m; path = ../Classes/Models/RZDebugMenuItem.m; sourceTree = "<group>"; };
+		D43C89431A93E0F00057AF66 /* RZDebugMenuSettingsDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettingsDataSource.h; path = ../Classes/Models/RZDebugMenuSettingsDataSource.h; sourceTree = "<group>"; };
+		D43C89441A93E0F00057AF66 /* RZDebugMenuSettingsDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettingsDataSource.m; path = ../Classes/Models/RZDebugMenuSettingsDataSource.m; sourceTree = "<group>"; };
+		D43C89471A93E0F00057AF66 /* RZDebugMenuSettingsObserverManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettingsObserverManager.h; path = ../Classes/RZDebugMenuSettingsObserverManager.h; sourceTree = "<group>"; };
+		D43C89481A93E0F00057AF66 /* RZDebugMenuSettingsObserverManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettingsObserverManager.m; path = ../Classes/RZDebugMenuSettingsObserverManager.m; sourceTree = "<group>"; };
+		D43C89491A93E0F00057AF66 /* RZDebugMenuSliderItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSliderItem.h; path = ../Classes/Models/RZDebugMenuSliderItem.h; sourceTree = "<group>"; };
+		D43C894A1A93E0F00057AF66 /* RZDebugMenuSliderItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSliderItem.m; path = ../Classes/Models/RZDebugMenuSliderItem.m; sourceTree = "<group>"; };
+		D43C894B1A93E0F00057AF66 /* RZDebugMenuTextFieldItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuTextFieldItem.h; path = ../Classes/Models/RZDebugMenuTextFieldItem.h; sourceTree = "<group>"; };
+		D43C894C1A93E0F00057AF66 /* RZDebugMenuTextFieldItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuTextFieldItem.m; path = ../Classes/Models/RZDebugMenuTextFieldItem.m; sourceTree = "<group>"; };
+		D43C894D1A93E0F00057AF66 /* RZDebugMenuToggleItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuToggleItem.h; path = ../Classes/Models/RZDebugMenuToggleItem.h; sourceTree = "<group>"; };
+		D43C894E1A93E0F00057AF66 /* RZDebugMenuToggleItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuToggleItem.m; path = ../Classes/Models/RZDebugMenuToggleItem.m; sourceTree = "<group>"; };
+		D43C894F1A93E0F00057AF66 /* RZDebugMenuVersionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuVersionItem.h; path = ../Classes/Models/RZDebugMenuVersionItem.h; sourceTree = "<group>"; };
+		D43C89501A93E0F00057AF66 /* RZDebugMenuVersionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuVersionItem.m; path = ../Classes/Models/RZDebugMenuVersionItem.m; sourceTree = "<group>"; };
+		D43C89551A93E11E0057AF66 /* libRZDebugMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRZDebugMenu.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D43C895F1A93E11E0057AF66 /* RZDebugMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RZDebugMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D43C89651A93E11E0057AF66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D43C896D1A93E1460057AF66 /* RZDebugMenuSettingsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettingsInterface.h; path = ../Classes/Models/RZDebugMenuSettingsInterface.h; sourceTree = "<group>"; };
+		D43C896E1A93E1460057AF66 /* RZDebugMenuSettingsInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettingsInterface.m; path = ../Classes/Models/RZDebugMenuSettingsInterface.m; sourceTree = "<group>"; };
+		D43C89751A93E1680057AF66 /* RZDisclosureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDisclosureTableViewCell.h; path = ../Classes/UI/Views/Cells/RZDisclosureTableViewCell.h; sourceTree = "<group>"; };
+		D43C89761A93E1680057AF66 /* RZDisclosureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDisclosureTableViewCell.m; path = ../Classes/UI/Views/Cells/RZDisclosureTableViewCell.m; sourceTree = "<group>"; };
+		D43C89771A93E1680057AF66 /* RZMultiValueItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZMultiValueItemTableViewCell.h; path = ../Classes/UI/Views/Cells/RZMultiValueItemTableViewCell.h; sourceTree = "<group>"; };
+		D43C89781A93E1680057AF66 /* RZMultiValueItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZMultiValueItemTableViewCell.m; path = ../Classes/UI/Views/Cells/RZMultiValueItemTableViewCell.m; sourceTree = "<group>"; };
+		D43C89791A93E1680057AF66 /* RZSliderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZSliderTableViewCell.h; path = ../Classes/UI/Views/Cells/RZSliderTableViewCell.h; sourceTree = "<group>"; };
+		D43C897A1A93E1680057AF66 /* RZSliderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZSliderTableViewCell.m; path = ../Classes/UI/Views/Cells/RZSliderTableViewCell.m; sourceTree = "<group>"; };
+		D43C897B1A93E1680057AF66 /* RZTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZTextFieldTableViewCell.h; path = ../Classes/UI/Views/Cells/RZTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		D43C897C1A93E1680057AF66 /* RZTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZTextFieldTableViewCell.m; path = ../Classes/UI/Views/Cells/RZTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		D43C897D1A93E1680057AF66 /* RZToggleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZToggleTableViewCell.h; path = ../Classes/UI/Views/Cells/RZToggleTableViewCell.h; sourceTree = "<group>"; };
+		D43C897E1A93E1680057AF66 /* RZToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZToggleTableViewCell.m; path = ../Classes/UI/Views/Cells/RZToggleTableViewCell.m; sourceTree = "<group>"; };
+		D43C897F1A93E1680057AF66 /* RZVersionInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZVersionInfoTableViewCell.h; path = ../Classes/UI/Views/Cells/RZVersionInfoTableViewCell.h; sourceTree = "<group>"; };
+		D43C89801A93E1680057AF66 /* RZVersionInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZVersionInfoTableViewCell.m; path = ../Classes/UI/Views/Cells/RZVersionInfoTableViewCell.m; sourceTree = "<group>"; };
+		D43C89881A93E1780057AF66 /* RZDebugMenuClearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuClearViewController.h; path = "../Classes/UI/View Controllers/RZDebugMenuClearViewController.h"; sourceTree = "<group>"; };
+		D43C89891A93E1780057AF66 /* RZDebugMenuClearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuClearViewController.m; path = "../Classes/UI/View Controllers/RZDebugMenuClearViewController.m"; sourceTree = "<group>"; };
+		D43C898A1A93E1780057AF66 /* RZDebugMenuMultiItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuMultiItemListViewController.h; path = "../Classes/UI/View Controllers/RZDebugMenuMultiItemListViewController.h"; sourceTree = "<group>"; };
+		D43C898B1A93E1780057AF66 /* RZDebugMenuMultiItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuMultiItemListViewController.m; path = "../Classes/UI/View Controllers/RZDebugMenuMultiItemListViewController.m"; sourceTree = "<group>"; };
+		D43C898E1A93E18C0057AF66 /* RZDebugMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenu.h; path = ../../Classes/RZDebugMenu.h; sourceTree = "<group>"; };
+		D43C898F1A93E18C0057AF66 /* RZDebugMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenu.m; path = ../../Classes/RZDebugMenu.m; sourceTree = "<group>"; };
+		D43C89921A93E24B0057AF66 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D43C89941A93E24E0057AF66 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D43C89971A93E2EE0057AF66 /* RZDebugMenu-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZDebugMenu-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		D43C89981A93E38E0057AF66 /* RZMultiValueSelectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZMultiValueSelectionItem.h; path = ../Classes/Models/RZMultiValueSelectionItem.h; sourceTree = "<group>"; };
+		D43C89991A93E38E0057AF66 /* RZMultiValueSelectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZMultiValueSelectionItem.m; path = ../Classes/Models/RZMultiValueSelectionItem.m; sourceTree = "<group>"; };
+		D43C899C1A93E3C20057AF66 /* RZDebugMenuWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuWindow.h; path = ../Classes/UI/Views/RZDebugMenuWindow.h; sourceTree = "<group>"; };
+		D43C899D1A93E3C20057AF66 /* RZDebugMenuWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuWindow.m; path = ../Classes/UI/Views/RZDebugMenuWindow.m; sourceTree = "<group>"; };
+		D43C899F1A93E3D30057AF66 /* RZDebugMenuModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuModalViewController.h; path = "../Classes/UI/View Controllers/RZDebugMenuModalViewController.h"; sourceTree = "<group>"; };
+		D43C89A01A93E3D30057AF66 /* RZDebugMenuModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuModalViewController.m; path = "../Classes/UI/View Controllers/RZDebugMenuModalViewController.m"; sourceTree = "<group>"; };
+		D43C89A21A93E3EB0057AF66 /* RZDebugMenuMultiValueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuMultiValueItem.h; path = ../Classes/Models/RZDebugMenuMultiValueItem.h; sourceTree = "<group>"; };
+		D43C89A31A93E3EB0057AF66 /* RZDebugMenuMultiValueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuMultiValueItem.m; path = ../Classes/Models/RZDebugMenuMultiValueItem.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D43C89521A93E11E0057AF66 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D43C89951A93E24E0057AF66 /* UIKit.framework in Frameworks */,
+				D43C89931A93E24B0057AF66 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D43C895C1A93E11E0057AF66 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D43C89601A93E11E0057AF66 /* libRZDebugMenu.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D43C89091A93DF9E0057AF66 = {
+			isa = PBXGroup;
+			children = (
+				D43C89561A93E11E0057AF66 /* RZDebugMenu */,
+				D43C89631A93E11E0057AF66 /* RZDebugMenuTests */,
+				D43C89961A93E26B0057AF66 /* Frameworks */,
+				D43C89131A93DF9E0057AF66 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D43C89131A93DF9E0057AF66 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D43C89551A93E11E0057AF66 /* libRZDebugMenu.a */,
+				D43C895F1A93E11E0057AF66 /* RZDebugMenuTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D43C893E1A93E0CB0057AF66 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D43C89981A93E38E0057AF66 /* RZMultiValueSelectionItem.h */,
+				D43C89991A93E38E0057AF66 /* RZMultiValueSelectionItem.m */,
+				D43C89491A93E0F00057AF66 /* RZDebugMenuSliderItem.h */,
+				D43C894A1A93E0F00057AF66 /* RZDebugMenuSliderItem.m */,
+				D43C894B1A93E0F00057AF66 /* RZDebugMenuTextFieldItem.h */,
+				D43C894C1A93E0F00057AF66 /* RZDebugMenuTextFieldItem.m */,
+				D43C894D1A93E0F00057AF66 /* RZDebugMenuToggleItem.h */,
+				D43C894E1A93E0F00057AF66 /* RZDebugMenuToggleItem.m */,
+				D43C894F1A93E0F00057AF66 /* RZDebugMenuVersionItem.h */,
+				D43C89501A93E0F00057AF66 /* RZDebugMenuVersionItem.m */,
+				D43C893F1A93E0E20057AF66 /* RZDebugMenuGroupItem.h */,
+				D43C89401A93E0E20057AF66 /* RZDebugMenuGroupItem.m */,
+				D43C89411A93E0E20057AF66 /* RZDebugMenuItem.h */,
+				D43C89421A93E0E20057AF66 /* RZDebugMenuItem.m */,
+				D43C89A21A93E3EB0057AF66 /* RZDebugMenuMultiValueItem.h */,
+				D43C89A31A93E3EB0057AF66 /* RZDebugMenuMultiValueItem.m */,
+			);
+			name = Model;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D43C89561A93E11E0057AF66 /* RZDebugMenu */ = {
+			isa = PBXGroup;
+			children = (
+				D43C898E1A93E18C0057AF66 /* RZDebugMenu.h */,
+				D43C898F1A93E18C0057AF66 /* RZDebugMenu.m */,
+				D43C89731A93E1490057AF66 /* UX */,
+				D43C89741A93E1550057AF66 /* Cells */,
+				D43C896C1A93E1290057AF66 /* Settings */,
+				D43C893E1A93E0CB0057AF66 /* Model */,
+				D43C89971A93E2EE0057AF66 /* RZDebugMenu-Prefix.pch */,
+			);
+			path = RZDebugMenu;
+			sourceTree = "<group>";
+		};
+		D43C89631A93E11E0057AF66 /* RZDebugMenuTests */ = {
+			isa = PBXGroup;
+			children = (
+				D43C89641A93E11E0057AF66 /* Supporting Files */,
+			);
+			path = RZDebugMenuTests;
+			sourceTree = "<group>";
+		};
+		D43C89641A93E11E0057AF66 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D43C89651A93E11E0057AF66 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D43C896C1A93E1290057AF66 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D43C896D1A93E1460057AF66 /* RZDebugMenuSettingsInterface.h */,
+				D43C896E1A93E1460057AF66 /* RZDebugMenuSettingsInterface.m */,
+				D43C89471A93E0F00057AF66 /* RZDebugMenuSettingsObserverManager.h */,
+				D43C89481A93E0F00057AF66 /* RZDebugMenuSettingsObserverManager.m */,
+			);
+			name = Settings;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D43C89731A93E1490057AF66 /* UX */ = {
+			isa = PBXGroup;
+			children = (
+				D43C899B1A93E3AC0057AF66 /* Windows */,
+				D43C89431A93E0F00057AF66 /* RZDebugMenuSettingsDataSource.h */,
+				D43C89441A93E0F00057AF66 /* RZDebugMenuSettingsDataSource.m */,
+				D43C89871A93E16C0057AF66 /* View Controllers */,
+			);
+			name = UX;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D43C89741A93E1550057AF66 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D43C89751A93E1680057AF66 /* RZDisclosureTableViewCell.h */,
+				D43C89761A93E1680057AF66 /* RZDisclosureTableViewCell.m */,
+				D43C89771A93E1680057AF66 /* RZMultiValueItemTableViewCell.h */,
+				D43C89781A93E1680057AF66 /* RZMultiValueItemTableViewCell.m */,
+				D43C89791A93E1680057AF66 /* RZSliderTableViewCell.h */,
+				D43C897A1A93E1680057AF66 /* RZSliderTableViewCell.m */,
+				D43C897B1A93E1680057AF66 /* RZTextFieldTableViewCell.h */,
+				D43C897C1A93E1680057AF66 /* RZTextFieldTableViewCell.m */,
+				D43C897D1A93E1680057AF66 /* RZToggleTableViewCell.h */,
+				D43C897E1A93E1680057AF66 /* RZToggleTableViewCell.m */,
+				D43C897F1A93E1680057AF66 /* RZVersionInfoTableViewCell.h */,
+				D43C89801A93E1680057AF66 /* RZVersionInfoTableViewCell.m */,
+			);
+			name = Cells;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D43C89871A93E16C0057AF66 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D43C89881A93E1780057AF66 /* RZDebugMenuClearViewController.h */,
+				D43C89891A93E1780057AF66 /* RZDebugMenuClearViewController.m */,
+				D43C898A1A93E1780057AF66 /* RZDebugMenuMultiItemListViewController.h */,
+				D43C898B1A93E1780057AF66 /* RZDebugMenuMultiItemListViewController.m */,
+				D43C899F1A93E3D30057AF66 /* RZDebugMenuModalViewController.h */,
+				D43C89A01A93E3D30057AF66 /* RZDebugMenuModalViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D43C89961A93E26B0057AF66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D43C89941A93E24E0057AF66 /* UIKit.framework */,
+				D43C89921A93E24B0057AF66 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			path = RZDebugMenu;
+			sourceTree = "<group>";
+		};
+		D43C899B1A93E3AC0057AF66 /* Windows */ = {
+			isa = PBXGroup;
+			children = (
+				D43C899C1A93E3C20057AF66 /* RZDebugMenuWindow.h */,
+				D43C899D1A93E3C20057AF66 /* RZDebugMenuWindow.m */,
+			);
+			name = Windows;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D43C89541A93E11E0057AF66 /* RZDebugMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D43C89661A93E11E0057AF66 /* Build configuration list for PBXNativeTarget "RZDebugMenu" */;
+			buildPhases = (
+				D43C89511A93E11E0057AF66 /* Sources */,
+				D43C89521A93E11E0057AF66 /* Frameworks */,
+				D43C89531A93E11E0057AF66 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RZDebugMenu;
+			productName = RZDebugMenu;
+			productReference = D43C89551A93E11E0057AF66 /* libRZDebugMenu.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D43C895E1A93E11E0057AF66 /* RZDebugMenuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D43C89691A93E11E0057AF66 /* Build configuration list for PBXNativeTarget "RZDebugMenuTests" */;
+			buildPhases = (
+				D43C895B1A93E11E0057AF66 /* Sources */,
+				D43C895C1A93E11E0057AF66 /* Frameworks */,
+				D43C895D1A93E11E0057AF66 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D43C89621A93E11E0057AF66 /* PBXTargetDependency */,
+			);
+			name = RZDebugMenuTests;
+			productName = RZDebugMenuTests;
+			productReference = D43C895F1A93E11E0057AF66 /* RZDebugMenuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D43C890A1A93DF9E0057AF66 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Raizlabs;
+				TargetAttributes = {
+					D43C89541A93E11E0057AF66 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					D43C895E1A93E11E0057AF66 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = D43C890D1A93DF9E0057AF66 /* Build configuration list for PBXProject "RZDebugMenu" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D43C89091A93DF9E0057AF66;
+			productRefGroup = D43C89131A93DF9E0057AF66 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D43C89541A93E11E0057AF66 /* RZDebugMenu */,
+				D43C895E1A93E11E0057AF66 /* RZDebugMenuTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D43C895D1A93E11E0057AF66 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D43C89511A93E11E0057AF66 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D43C89841A93E1680057AF66 /* RZTextFieldTableViewCell.m in Sources */,
+				D43C89851A93E1680057AF66 /* RZToggleTableViewCell.m in Sources */,
+				D43C899A1A93E38E0057AF66 /* RZMultiValueSelectionItem.m in Sources */,
+				D43C89A41A93E3EB0057AF66 /* RZDebugMenuMultiValueItem.m in Sources */,
+				D43C89901A93E18C0057AF66 /* RZDebugMenu.m in Sources */,
+				D43C898C1A93E1780057AF66 /* RZDebugMenuClearViewController.m in Sources */,
+				D43C89831A93E1680057AF66 /* RZSliderTableViewCell.m in Sources */,
+				D43C89811A93E1680057AF66 /* RZDisclosureTableViewCell.m in Sources */,
+				D43C89711A93E1460057AF66 /* RZDebugMenuSettingsInterface.m in Sources */,
+				D43C89A11A93E3D30057AF66 /* RZDebugMenuModalViewController.m in Sources */,
+				D43C89821A93E1680057AF66 /* RZMultiValueItemTableViewCell.m in Sources */,
+				D43C898D1A93E1780057AF66 /* RZDebugMenuMultiItemListViewController.m in Sources */,
+				D43C899E1A93E3C20057AF66 /* RZDebugMenuWindow.m in Sources */,
+				D43C89861A93E1680057AF66 /* RZVersionInfoTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D43C895B1A93E11E0057AF66 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D43C89621A93E11E0057AF66 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D43C89541A93E11E0057AF66 /* RZDebugMenu */;
+			targetProxy = D43C89611A93E11E0057AF66 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D43C89241A93DF9E0057AF66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D43C89251A93DF9E0057AF66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D43C89671A93E11E0057AF66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "RZDebugMenu-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D43C89681A93E11E0057AF66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "RZDebugMenu-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D43C896A1A93E11E0057AF66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RZDebugMenuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D43C896B1A93E11E0057AF66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RZDebugMenuTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D43C890D1A93DF9E0057AF66 /* Build configuration list for PBXProject "RZDebugMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D43C89241A93DF9E0057AF66 /* Debug */,
+				D43C89251A93DF9E0057AF66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D43C89661A93E11E0057AF66 /* Build configuration list for PBXNativeTarget "RZDebugMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D43C89671A93E11E0057AF66 /* Debug */,
+				D43C89681A93E11E0057AF66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D43C89691A93E11E0057AF66 /* Build configuration list for PBXNativeTarget "RZDebugMenuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D43C896A1A93E11E0057AF66 /* Debug */,
+				D43C896B1A93E11E0057AF66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D43C890A1A93DF9E0057AF66 /* Project object */;
+}
