@@ -1,10 +1,10 @@
 language: objective-c
 before_install: 
     - export LANG=en_US.UTF-8
+    - rake clean
     - rake install
 script: 
-    - rake clean:demo
-	- rake build
+    - rake build
 notifications:
     email:
         recipients:
