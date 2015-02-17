@@ -10,8 +10,6 @@
 
 #import "RZMultiValueSelectionItem.h"
 
-#import "RZMultiValueItemTableViewCell.h"
-
 static NSString * const kRZCellReuseIdentifier = @"Cell";
 static NSString * const kRZNavigationBarTitle  = @"Options";
 
@@ -49,7 +47,7 @@ static NSString * const kRZNavigationBarTitle  = @"Options";
     CGFloat height = CGRectGetHeight(self.view.bounds);
     
     self.selectionsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, width, height) style:UITableViewStylePlain];
-    [self.selectionsTableView registerClass:[RZMultiValueItemTableViewCell class] forCellReuseIdentifier:kRZCellReuseIdentifier];
+    [self.selectionsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kRZCellReuseIdentifier];
     self.selectionsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:self.selectionsTableView];
@@ -75,13 +73,11 @@ static NSString * const kRZNavigationBarTitle  = @"Options";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RZMultiValueItemTableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
-    
+    UITableViewCell *cell = [self.selectionsTableView dequeueReusableCellWithIdentifier:kRZCellReuseIdentifier];
     if ( cell ) {
         RZMultiValueSelectionItem *currentSelectionItem = [self.cellItems objectAtIndex:indexPath.row];
         cell.textLabel.text = currentSelectionItem.selectionTitle;
     }
-    
     return cell;
 }
 

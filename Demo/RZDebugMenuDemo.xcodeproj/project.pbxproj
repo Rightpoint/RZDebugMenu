@@ -19,31 +19,9 @@
 		0C22DADE193CCDA30042938F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C22DAC6193CCDA30042938F /* UIKit.framework */; };
 		0C22DAE6193CCDA30042938F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0C22DAE4193CCDA30042938F /* InfoPlist.strings */; };
 		0C22DAE8193CCDA30042938F /* RZDebugMenuDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22DAE7193CCDA30042938F /* RZDebugMenuDemoTests.m */; };
-		0C92F36A197815E500CC858A /* RZDebugMenuGroupItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F338197815E500CC858A /* RZDebugMenuGroupItem.m */; };
-		0C92F36B197815E500CC858A /* RZDebugMenuMultiValueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F33A197815E500CC858A /* RZDebugMenuMultiValueItem.m */; };
-		0C92F36C197815E500CC858A /* RZDebugMenuSettingsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F33C197815E500CC858A /* RZDebugMenuSettingsDataSource.m */; };
-		0C92F36D197815E500CC858A /* RZDebugMenuSettingsInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F33E197815E500CC858A /* RZDebugMenuSettingsInterface.m */; };
-		0C92F36E197815E500CC858A /* RZDebugMenuSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F340197815E500CC858A /* RZDebugMenuSettingsItem.m */; };
-		0C92F36F197815E500CC858A /* RZDebugMenuSliderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F342197815E500CC858A /* RZDebugMenuSliderItem.m */; };
-		0C92F370197815E500CC858A /* RZDebugMenuTextFieldItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F344197815E500CC858A /* RZDebugMenuTextFieldItem.m */; };
-		0C92F371197815E500CC858A /* RZDebugMenuToggleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F346197815E500CC858A /* RZDebugMenuToggleItem.m */; };
-		0C92F372197815E500CC858A /* RZDebugMenuVersionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F348197815E500CC858A /* RZDebugMenuVersionItem.m */; };
-		0C92F373197815E500CC858A /* RZMultiValueSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F34A197815E500CC858A /* RZMultiValueSelectionItem.m */; };
-		0C92F374197815E500CC858A /* RZDebugMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F34D197815E500CC858A /* RZDebugMenu.m */; };
-		0C92F375197815E500CC858A /* RZDebugMenuObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F34F197815E500CC858A /* RZDebugMenuObserver.m */; };
-		0C92F376197815E500CC858A /* RZDebugMenuSettingsObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F351197815E500CC858A /* RZDebugMenuSettingsObserverManager.m */; };
-		0C92F377197815E500CC858A /* RZDebugMenuClearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F355197815E500CC858A /* RZDebugMenuClearViewController.m */; };
-		0C92F378197815E500CC858A /* RZDebugMenuModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F357197815E500CC858A /* RZDebugMenuModalViewController.m */; };
-		0C92F379197815E500CC858A /* RZDebugMenuMultiItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F359197815E500CC858A /* RZDebugMenuMultiItemListViewController.m */; };
-		0C92F37A197815E500CC858A /* RZDisclosureTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F35D197815E500CC858A /* RZDisclosureTableViewCell.m */; };
-		0C92F37B197815E500CC858A /* RZMultiValueItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F35F197815E500CC858A /* RZMultiValueItemTableViewCell.m */; };
-		0C92F37C197815E500CC858A /* RZSliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F361197815E500CC858A /* RZSliderTableViewCell.m */; };
-		0C92F37D197815E500CC858A /* RZTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F363197815E500CC858A /* RZTextFieldTableViewCell.m */; };
-		0C92F37E197815E500CC858A /* RZToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F365197815E500CC858A /* RZToggleTableViewCell.m */; };
-		0C92F37F197815E500CC858A /* RZVersionInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F367197815E500CC858A /* RZVersionInfoTableViewCell.m */; };
-		0C92F380197815E500CC858A /* RZDebugMenuWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C92F369197815E500CC858A /* RZDebugMenuWindow.m */; };
 		0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C972B02193E0CBB00EA84FF /* Settings.plist */; };
 		0C972B0D193E1A9900EA84FF /* RZDebugMenuRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C972B0A193E1A9900EA84FF /* RZDebugMenuRootViewController.m */; };
+		718E8B87771CE7ACCB66B07B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA75CF690541A4B5CA70054A /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,56 +51,12 @@
 		0C22DAE3193CCDA30042938F /* RZDebugMenuDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RZDebugMenuDemoTests-Info.plist"; sourceTree = "<group>"; };
 		0C22DAE5193CCDA30042938F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0C22DAE7193CCDA30042938F /* RZDebugMenuDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuDemoTests.m; sourceTree = "<group>"; };
-		0C92F337197815E500CC858A /* RZDebugMenuGroupItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuGroupItem.h; sourceTree = "<group>"; };
-		0C92F338197815E500CC858A /* RZDebugMenuGroupItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuGroupItem.m; sourceTree = "<group>"; };
-		0C92F339197815E500CC858A /* RZDebugMenuMultiValueItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuMultiValueItem.h; sourceTree = "<group>"; };
-		0C92F33A197815E500CC858A /* RZDebugMenuMultiValueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuMultiValueItem.m; sourceTree = "<group>"; };
-		0C92F33B197815E500CC858A /* RZDebugMenuSettingsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingsDataSource.h; sourceTree = "<group>"; };
-		0C92F33C197815E500CC858A /* RZDebugMenuSettingsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettingsDataSource.m; sourceTree = "<group>"; };
-		0C92F33D197815E500CC858A /* RZDebugMenuSettingsInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettingsInterface.h; path = Models/RZDebugMenuSettingsInterface.h; sourceTree = "<group>"; };
-		0C92F33E197815E500CC858A /* RZDebugMenuSettingsInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettingsInterface.m; path = Models/RZDebugMenuSettingsInterface.m; sourceTree = "<group>"; };
-		0C92F33F197815E500CC858A /* RZDebugMenuSettingsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingsItem.h; sourceTree = "<group>"; };
-		0C92F340197815E500CC858A /* RZDebugMenuSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettingsItem.m; sourceTree = "<group>"; };
-		0C92F341197815E500CC858A /* RZDebugMenuSliderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSliderItem.h; sourceTree = "<group>"; };
-		0C92F342197815E500CC858A /* RZDebugMenuSliderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSliderItem.m; sourceTree = "<group>"; };
-		0C92F343197815E500CC858A /* RZDebugMenuTextFieldItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuTextFieldItem.h; sourceTree = "<group>"; };
-		0C92F344197815E500CC858A /* RZDebugMenuTextFieldItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuTextFieldItem.m; sourceTree = "<group>"; };
-		0C92F345197815E500CC858A /* RZDebugMenuToggleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuToggleItem.h; sourceTree = "<group>"; };
-		0C92F346197815E500CC858A /* RZDebugMenuToggleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuToggleItem.m; sourceTree = "<group>"; };
-		0C92F347197815E500CC858A /* RZDebugMenuVersionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuVersionItem.h; sourceTree = "<group>"; };
-		0C92F348197815E500CC858A /* RZDebugMenuVersionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuVersionItem.m; sourceTree = "<group>"; };
-		0C92F349197815E500CC858A /* RZMultiValueSelectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZMultiValueSelectionItem.h; sourceTree = "<group>"; };
-		0C92F34A197815E500CC858A /* RZMultiValueSelectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZMultiValueSelectionItem.m; sourceTree = "<group>"; };
-		0C92F34B197815E500CC858A /* RZDebugLogMenuDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugLogMenuDefines.h; sourceTree = "<group>"; };
-		0C92F34C197815E500CC858A /* RZDebugMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenu.h; sourceTree = "<group>"; };
-		0C92F34D197815E500CC858A /* RZDebugMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenu.m; sourceTree = "<group>"; };
-		0C92F34E197815E500CC858A /* RZDebugMenuObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuObserver.h; sourceTree = "<group>"; };
-		0C92F34F197815E500CC858A /* RZDebugMenuObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuObserver.m; sourceTree = "<group>"; };
-		0C92F350197815E500CC858A /* RZDebugMenuSettingsObserverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingsObserverManager.h; sourceTree = "<group>"; };
-		0C92F351197815E500CC858A /* RZDebugMenuSettingsObserverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettingsObserverManager.m; sourceTree = "<group>"; };
-		0C92F354197815E500CC858A /* RZDebugMenuClearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuClearViewController.h; sourceTree = "<group>"; };
-		0C92F355197815E500CC858A /* RZDebugMenuClearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuClearViewController.m; sourceTree = "<group>"; };
-		0C92F356197815E500CC858A /* RZDebugMenuModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuModalViewController.h; sourceTree = "<group>"; };
-		0C92F357197815E500CC858A /* RZDebugMenuModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuModalViewController.m; sourceTree = "<group>"; };
-		0C92F358197815E500CC858A /* RZDebugMenuMultiItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuMultiItemListViewController.h; sourceTree = "<group>"; };
-		0C92F359197815E500CC858A /* RZDebugMenuMultiItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuMultiItemListViewController.m; sourceTree = "<group>"; };
-		0C92F35C197815E500CC858A /* RZDisclosureTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDisclosureTableViewCell.h; sourceTree = "<group>"; };
-		0C92F35D197815E500CC858A /* RZDisclosureTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDisclosureTableViewCell.m; sourceTree = "<group>"; };
-		0C92F35E197815E500CC858A /* RZMultiValueItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZMultiValueItemTableViewCell.h; sourceTree = "<group>"; };
-		0C92F35F197815E500CC858A /* RZMultiValueItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZMultiValueItemTableViewCell.m; sourceTree = "<group>"; };
-		0C92F360197815E500CC858A /* RZSliderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZSliderTableViewCell.h; sourceTree = "<group>"; };
-		0C92F361197815E500CC858A /* RZSliderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZSliderTableViewCell.m; sourceTree = "<group>"; };
-		0C92F362197815E500CC858A /* RZTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZTextFieldTableViewCell.h; sourceTree = "<group>"; };
-		0C92F363197815E500CC858A /* RZTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZTextFieldTableViewCell.m; sourceTree = "<group>"; };
-		0C92F364197815E500CC858A /* RZToggleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZToggleTableViewCell.h; sourceTree = "<group>"; };
-		0C92F365197815E500CC858A /* RZToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZToggleTableViewCell.m; sourceTree = "<group>"; };
-		0C92F366197815E500CC858A /* RZVersionInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZVersionInfoTableViewCell.h; sourceTree = "<group>"; };
-		0C92F367197815E500CC858A /* RZVersionInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZVersionInfoTableViewCell.m; sourceTree = "<group>"; };
-		0C92F368197815E500CC858A /* RZDebugMenuWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuWindow.h; sourceTree = "<group>"; };
-		0C92F369197815E500CC858A /* RZDebugMenuWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuWindow.m; sourceTree = "<group>"; };
 		0C972B02193E0CBB00EA84FF /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		0C972B09193E1A9900EA84FF /* RZDebugMenuRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuRootViewController.h; sourceTree = "<group>"; };
 		0C972B0A193E1A9900EA84FF /* RZDebugMenuRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuRootViewController.m; sourceTree = "<group>"; };
+		35E576648AB0A16778F404BC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AA75CF690541A4B5CA70054A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C679C2B5BBB49FF44D0AAC55 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +67,7 @@
 				0C22DAC5193CCDA30042938F /* CoreGraphics.framework in Frameworks */,
 				0C22DAC7193CCDA30042938F /* UIKit.framework in Frameworks */,
 				0C22DAC3193CCDA30042938F /* Foundation.framework in Frameworks */,
+				718E8B87771CE7ACCB66B07B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +91,7 @@
 				0C22DAE1193CCDA30042938F /* RZDebugMenuDemoTests */,
 				0C22DAC1193CCDA30042938F /* Frameworks */,
 				0C22DAC0193CCDA30042938F /* Products */,
-				0C92F335197815E500CC858A /* Classes */,
+				54A43BACB04A60C10640B341 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +111,7 @@
 				0C22DAC4193CCDA30042938F /* CoreGraphics.framework */,
 				0C22DAC6193CCDA30042938F /* UIKit.framework */,
 				0C22DADB193CCDA30042938F /* XCTest.framework */,
+				AA75CF690541A4B5CA70054A /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -228,80 +164,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0C92F335197815E500CC858A /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				0C92F34B197815E500CC858A /* RZDebugLogMenuDefines.h */,
-				0C92F34C197815E500CC858A /* RZDebugMenu.h */,
-				0C92F34D197815E500CC858A /* RZDebugMenu.m */,
-				D4D47AE01A8D3D4D00973C21 /* Settings */,
-				0C92F336197815E500CC858A /* Models */,
-				0C92F352197815E500CC858A /* UI */,
-			);
-			name = Classes;
-			path = ../Classes;
-			sourceTree = "<group>";
-		};
-		0C92F336197815E500CC858A /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				D4D47AE21A8D3F5F00973C21 /* Data Source */,
-				D4D47AE11A8D3F4D00973C21 /* Items */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		0C92F352197815E500CC858A /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				0C92F353197815E500CC858A /* View Controllers */,
-				0C92F35A197815E500CC858A /* Views */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		0C92F353197815E500CC858A /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				0C92F354197815E500CC858A /* RZDebugMenuClearViewController.h */,
-				0C92F355197815E500CC858A /* RZDebugMenuClearViewController.m */,
-				0C92F356197815E500CC858A /* RZDebugMenuModalViewController.h */,
-				0C92F357197815E500CC858A /* RZDebugMenuModalViewController.m */,
-				0C92F358197815E500CC858A /* RZDebugMenuMultiItemListViewController.h */,
-				0C92F359197815E500CC858A /* RZDebugMenuMultiItemListViewController.m */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		0C92F35A197815E500CC858A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0C92F35B197815E500CC858A /* Cells */,
-				0C92F368197815E500CC858A /* RZDebugMenuWindow.h */,
-				0C92F369197815E500CC858A /* RZDebugMenuWindow.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		0C92F35B197815E500CC858A /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				0C92F35C197815E500CC858A /* RZDisclosureTableViewCell.h */,
-				0C92F35D197815E500CC858A /* RZDisclosureTableViewCell.m */,
-				0C92F35E197815E500CC858A /* RZMultiValueItemTableViewCell.h */,
-				0C92F35F197815E500CC858A /* RZMultiValueItemTableViewCell.m */,
-				0C92F360197815E500CC858A /* RZSliderTableViewCell.h */,
-				0C92F361197815E500CC858A /* RZSliderTableViewCell.m */,
-				0C92F362197815E500CC858A /* RZTextFieldTableViewCell.h */,
-				0C92F363197815E500CC858A /* RZTextFieldTableViewCell.m */,
-				0C92F364197815E500CC858A /* RZToggleTableViewCell.h */,
-				0C92F365197815E500CC858A /* RZToggleTableViewCell.m */,
-				0C92F366197815E500CC858A /* RZVersionInfoTableViewCell.h */,
-				0C92F367197815E500CC858A /* RZVersionInfoTableViewCell.m */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		0C972B04193E1A9900EA84FF /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,49 +191,13 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		D4D47AE01A8D3D4D00973C21 /* Settings */ = {
+		54A43BACB04A60C10640B341 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0C92F34E197815E500CC858A /* RZDebugMenuObserver.h */,
-				0C92F34F197815E500CC858A /* RZDebugMenuObserver.m */,
-				0C92F350197815E500CC858A /* RZDebugMenuSettingsObserverManager.h */,
-				0C92F351197815E500CC858A /* RZDebugMenuSettingsObserverManager.m */,
-				0C92F33D197815E500CC858A /* RZDebugMenuSettingsInterface.h */,
-				0C92F33E197815E500CC858A /* RZDebugMenuSettingsInterface.m */,
+				35E576648AB0A16778F404BC /* Pods.debug.xcconfig */,
+				C679C2B5BBB49FF44D0AAC55 /* Pods.release.xcconfig */,
 			);
-			name = Settings;
-			sourceTree = "<group>";
-		};
-		D4D47AE11A8D3F4D00973C21 /* Items */ = {
-			isa = PBXGroup;
-			children = (
-				0C92F33F197815E500CC858A /* RZDebugMenuSettingsItem.h */,
-				0C92F340197815E500CC858A /* RZDebugMenuSettingsItem.m */,
-				0C92F337197815E500CC858A /* RZDebugMenuGroupItem.h */,
-				0C92F338197815E500CC858A /* RZDebugMenuGroupItem.m */,
-				0C92F339197815E500CC858A /* RZDebugMenuMultiValueItem.h */,
-				0C92F33A197815E500CC858A /* RZDebugMenuMultiValueItem.m */,
-				0C92F341197815E500CC858A /* RZDebugMenuSliderItem.h */,
-				0C92F342197815E500CC858A /* RZDebugMenuSliderItem.m */,
-				0C92F343197815E500CC858A /* RZDebugMenuTextFieldItem.h */,
-				0C92F344197815E500CC858A /* RZDebugMenuTextFieldItem.m */,
-				0C92F345197815E500CC858A /* RZDebugMenuToggleItem.h */,
-				0C92F346197815E500CC858A /* RZDebugMenuToggleItem.m */,
-				0C92F347197815E500CC858A /* RZDebugMenuVersionItem.h */,
-				0C92F348197815E500CC858A /* RZDebugMenuVersionItem.m */,
-				0C92F349197815E500CC858A /* RZMultiValueSelectionItem.h */,
-				0C92F34A197815E500CC858A /* RZMultiValueSelectionItem.m */,
-			);
-			name = Items;
-			sourceTree = "<group>";
-		};
-		D4D47AE21A8D3F5F00973C21 /* Data Source */ = {
-			isa = PBXGroup;
-			children = (
-				0C92F33B197815E500CC858A /* RZDebugMenuSettingsDataSource.h */,
-				0C92F33C197815E500CC858A /* RZDebugMenuSettingsDataSource.m */,
-			);
-			name = "Data Source";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,9 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0C22DAEB193CCDA30042938F /* Build configuration list for PBXNativeTarget "RZDebugMenuDemo" */;
 			buildPhases = (
+				5565FF07B3A9DE9BABCCA236 /* Check Pods Manifest.lock */,
 				0C22DABB193CCDA30042938F /* Sources */,
 				0C22DABC193CCDA30042938F /* Frameworks */,
 				0C22DABD193CCDA30042938F /* Resources */,
+				6AB572FCE4279374589A97EF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -466,37 +294,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5565FF07B3A9DE9BABCCA236 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6AB572FCE4279374589A97EF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0C22DABB193CCDA30042938F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C92F37D197815E500CC858A /* RZTextFieldTableViewCell.m in Sources */,
-				0C92F36B197815E500CC858A /* RZDebugMenuMultiValueItem.m in Sources */,
-				0C92F37B197815E500CC858A /* RZMultiValueItemTableViewCell.m in Sources */,
-				0C92F37C197815E500CC858A /* RZSliderTableViewCell.m in Sources */,
-				0C92F37F197815E500CC858A /* RZVersionInfoTableViewCell.m in Sources */,
-				0C92F377197815E500CC858A /* RZDebugMenuClearViewController.m in Sources */,
-				0C92F375197815E500CC858A /* RZDebugMenuObserver.m in Sources */,
-				0C92F371197815E500CC858A /* RZDebugMenuToggleItem.m in Sources */,
 				0C22DAD3193CCDA30042938F /* RZAppDelegate.m in Sources */,
-				0C92F36C197815E500CC858A /* RZDebugMenuSettingsDataSource.m in Sources */,
-				0C92F36A197815E500CC858A /* RZDebugMenuGroupItem.m in Sources */,
-				0C92F36F197815E500CC858A /* RZDebugMenuSliderItem.m in Sources */,
-				0C92F37E197815E500CC858A /* RZToggleTableViewCell.m in Sources */,
-				0C92F379197815E500CC858A /* RZDebugMenuMultiItemListViewController.m in Sources */,
-				0C92F380197815E500CC858A /* RZDebugMenuWindow.m in Sources */,
-				0C92F36E197815E500CC858A /* RZDebugMenuSettingsItem.m in Sources */,
 				0C972B0D193E1A9900EA84FF /* RZDebugMenuRootViewController.m in Sources */,
-				0C92F378197815E500CC858A /* RZDebugMenuModalViewController.m in Sources */,
-				0C92F373197815E500CC858A /* RZMultiValueSelectionItem.m in Sources */,
-				0C92F372197815E500CC858A /* RZDebugMenuVersionItem.m in Sources */,
-				0C92F37A197815E500CC858A /* RZDisclosureTableViewCell.m in Sources */,
-				0C92F376197815E500CC858A /* RZDebugMenuSettingsObserverManager.m in Sources */,
-				0C92F374197815E500CC858A /* RZDebugMenu.m in Sources */,
-				0C92F370197815E500CC858A /* RZDebugMenuTextFieldItem.m in Sources */,
 				0C22DACF193CCDA30042938F /* main.m in Sources */,
-				0C92F36D197815E500CC858A /* RZDebugMenuSettingsInterface.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,6 +450,7 @@
 		};
 		0C22DAEC193CCDA30042938F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35E576648AB0A16778F404BC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -625,6 +464,7 @@
 		};
 		0C22DAED193CCDA30042938F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C679C2B5BBB49FF44D0AAC55 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
