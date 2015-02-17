@@ -1,0 +1,14 @@
+PODS:
+  - RZDebugMenu (0.1.0)
+
+DEPENDENCIES:
+  - RZDebugMenu (from `../`)
+
+EXTERNAL SOURCES:
+  RZDebugMenu:
+    :path: ../
+
+SPEC CHECKSUMS:
+  RZDebugMenu: 4e02c0d2ac60d34e4d11da3feec5a04607e198d7
+
+COCOAPODS: 0.35.0
