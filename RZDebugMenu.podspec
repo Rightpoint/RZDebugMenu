@@ -48,7 +48,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
   
-  s.author             = { "Clayton Rieck" => "cjrieck123@gmail.com" }
+  s.author             = { "Clayton Rieck" => "cjrieck123@gmail.com", "Nick Donalodson" => "ndonald2@gmail.com", "Michael Gorbach" => "michael.gorbach@raizlabs.com" }
   # Or just: s.author    = "Clayton R"
   # s.authors            = { "Clayton R" => "cjrieck123@gmail.com" }
   # s.social_media_url   = "http://twitter.com/Clayton R"
@@ -60,7 +60,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "8.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -73,7 +73,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/Raizlabs/RZDebugMenu.git", :tag => "0.1.0" }
+  s.source       = { :git => "https://github.com/Raizlabs/RZDebugMenu.git", :tag => s.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
