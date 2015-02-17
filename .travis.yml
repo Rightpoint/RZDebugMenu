@@ -4,8 +4,7 @@ before_install:
     - rake install
 script: 
     - rake clean:demo
-    - rake test
-    - rake analyze
+	- rake build
 notifications:
     email:
         recipients:

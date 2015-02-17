@@ -1,5 +1,5 @@
-
 PROJ_PATH="Demo/RZDebugMenuDemo.xcodeproj"
+WORKSPACE_PATH="Demo/RZDebugMenuDemo.xcworkspace"
 BUILD_SCHEME="RZDebugMenuDemo"
 
 namespace :install do
@@ -20,6 +20,15 @@ task :install do
   Rake::Task['install:pods'].invoke
 end
 
+
+#
+# Build
+#
+
+task :build do		
+  sh("xctool -workspace '#{WORKSPACE_PATH}' -scheme '#{BUILD_SCHEME}' -sdk iphonesimulator clean build") rescue nil
+end
+
 #
 # Clean
 #
@@ -33,7 +42,7 @@ namespace :clean do
   
   task :demo do
     sh("xctool -project '#{PROJ_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator clean") rescue nil
-  end  
+  end
 end
 
 task :clean do
@@ -50,7 +59,6 @@ task :usage do
   puts "  rake install       -- install all dependencies (xctool, cocoapods)"
   puts "  rake install:pods  -- install cocoapods for tests/demo"
   puts "  rake install:tools -- install build tool dependencies"
-  puts "  rake test          -- run unit tests"
   puts "  rake clean         -- clean everything"
   puts "  rake clean:demo    -- clean the demo project build artifacts"
   puts "  rake clean:pods    -- clean up cocoapods artifacts"
