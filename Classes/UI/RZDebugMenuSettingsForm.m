@@ -71,9 +71,46 @@
             NSString *sliderMaximumValueKey = [sliderMaximumKeyComponents componentsJoinedByString:@"."];
             mutableFieldDictionary[sliderMaximumValueKey] = ((RZDebugMenuSliderItem *)item).max;
         }
+        else if ( [item isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
+
+            NSArray *selectionItems = ((RZDebugMenuMultiValueItem *)item).selectionItems;
+            NSArray *titles = [selectionItems valueForKey:NSStringFromSelector(@selector(selectionTitle))];
+            NSArray *values = [selectionItems valueForKey:NSStringFromSelector(@selector(selectionValue))];
+
+            mutableFieldDictionary[FXFormFieldOptions] = values;
+
+            mutableFieldDictionary[FXFormFieldValueTransformer] = ^(id input) {
+                NSString *valueToReturn = @"";
+
+                if ( input != nil ) {
+                    NSUInteger index = [values indexOfObject:input];
+
+                    // The input from above that was a string can get converted to a number here, so we compare the description as well.
+                    if ( index == NSNotFound ) {
+                        index = [values indexOfObject:[input description]];
+                    }
+
+                    NSAssert(index < NSNotFound && index >= 0, @"");
+                    valueToReturn = titles[index];
+                }
+
+                return valueToReturn;
+            };
+
+            formFieldType = FXFormFieldTypeDefault;
+        }
 
         if ( formFieldType ) {
             mutableFieldDictionary[FXFormFieldType] = formFieldType;
+        }
+
+        id defaultValue = nil;
+        if ( [item isKindOfClass:[RZDebugMenuSettingItem class]] ) {
+            defaultValue = ((RZDebugMenuSettingItem *)item).value;
+        }
+
+        if ( defaultValue ) {
+            mutableFieldDictionary[FXFormFieldDefaultValue] = defaultValue;
         }
 
         if ( mutableFields == nil ) {
