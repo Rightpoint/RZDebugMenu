@@ -26,7 +26,7 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  *
  *  @param fileName Name of the plist which defines the debug settings to be used. The plist should conform to the standard Settings Bundle plist format.
  */
-+ (void)enableWithSettingsPlist:(NSString *)fileName;
++ (void)enableMenuWithSettingsPlistName:(NSString *)plistName;
 
 /**
  *  Returns the setting value for a specified setting key defined in the plist

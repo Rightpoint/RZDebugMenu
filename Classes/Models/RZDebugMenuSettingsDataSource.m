@@ -204,7 +204,7 @@ static NSString* const kRZEmptyString = @"";
 {
     NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < optionTitles.count; i++) {
+    for (NSInteger i = 0; i < optionTitles.count; i++) {
         
         NSString *title = [optionTitles objectAtIndex:i];
         NSNumber *value = [optionValues objectAtIndex:i];

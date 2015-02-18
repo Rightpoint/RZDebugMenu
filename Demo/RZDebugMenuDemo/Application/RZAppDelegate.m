@@ -11,13 +11,15 @@
 #import "RZDebugMenu.h"
 #import "RZDebugMenuRootViewController.h"
 
+static NSString *const kSettingsPlistName = @"Settings.plist";
+
 @implementation RZAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
 #if (DEBUG)
-    [RZDebugMenu enableWithSettingsPlist:@"Settings.plist"];
+    [RZDebugMenu enableMenuWithSettingsPlistName:kSettingsPlistName];
 #endif
     
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];

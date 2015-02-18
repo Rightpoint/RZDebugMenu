@@ -14,8 +14,12 @@
 #import "RZDebugMenuSettingsInterface.h"
 #import "RZDebugMenuSettingsDataSource.h"
 #import "RZDebugMenuSettingsObserverManager.h"
+#import "RZDebugMenuSettingsForm.h"
+#import "RZDebugMenuSettingsParser.h"
 
 #import "RZDebugLogMenuDefines.h"
+
+#import <FXForms/FXForms.h>
 
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 static NSString * const kRZSettingsFileExtension       = @"plist";
@@ -25,9 +29,9 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
 @property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
-@property (strong, nonatomic) RZDebugMenuSettingsDataSource *settingsTableViewDataSource;
-@property (copy, nonatomic) NSString *settingsFileName;
 @property (assign, nonatomic) BOOL enabled;
+
+@property (strong, nonatomic, readwrite) NSArray *settingsModels;
 
 @end
 
@@ -35,7 +39,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
 #pragma mark - class methods
 
-+ (instancetype)privateSharedInstance
++ (instancetype)sharedDebugMenu
 {
     static RZDebugMenu *s_sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -46,10 +50,10 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     return s_sharedInstance;
 }
 
-+ (void)enableWithSettingsPlist:(NSString *)fileName
++ (void)enableMenuWithSettingsPlistName:(NSString *)plistName
 {
-    [[self privateSharedInstance] setSettingsFileName:fileName];
-    [[self privateSharedInstance] setEnabled:YES];
+    [[self sharedDebugMenu] loadSettingsMenuFromPlistName:plistName];
+    [[self sharedDebugMenu] setEnabled:YES];
 }
 
 + (id)debugSettingForKey:(NSString *)key
@@ -59,18 +63,10 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
-    RZDebugMenu *sharedInstance = [self privateSharedInstance];
-
-    if ( ![sharedInstance.settingsTableViewDataSource.settingsKeys containsObject:key] ) {
-        RZDebugMenuLogDebug("Warning! Key not in plist");
-    }
-    else {
-        
-        [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
-                                                                selector:aSelector
-                                                                  forKey:key
-                                                       updateImmediately:update];
-    }
+    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
+                                                            selector:aSelector
+                                                              forKey:key
+                                                   updateImmediately:update];
 }
 
 + (void)removeObserver:(id)observer forKey:(NSString *)key
@@ -141,9 +137,15 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
 - (void)displayDebugMenu
 {
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithDataSource:self.settingsTableViewDataSource];
-    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
-    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
+    if ( self.settingsModels.count > 0 ) {
+        RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsModels:self.settingsModels];
+
+        FXFormViewController *settingsMenuViewController = [[FXFormViewController alloc] init];
+        settingsMenuViewController.formController.form = settingsForm;
+
+        UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenuViewController];
+        [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
+    }
 }
 
 - (void)changeOrientation
@@ -187,23 +189,47 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
 #pragma mark - Accessors
 
-- (void)setSettingsFileName:(NSString *)settingsFileName
++ (NSArray *)settingsModelsFromPlistName:(NSString *)plistName error:(NSError * __autoreleasing *)outError
 {
-    _settingsFileName = settingsFileName;
-    _settingsFileName = [_settingsFileName stringByDeletingPathExtension];
+    plistName = [plistName stringByDeletingPathExtension];
 
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:_settingsFileName ofType:kRZSettingsFileExtension];
-    
-    if ( !plistPath ) {
-        
-        NSString *exceptionName = [_settingsFileName stringByAppendingString:@".plist doesn't exist"];
+    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:plistName withExtension:kRZSettingsFileExtension];
+    if ( !plistURL ) {
+        NSString *exceptionName = [plistName stringByAppendingString:@".plist doesn't exist"];
         @throw [NSException exceptionWithName:exceptionName
                                        reason:@"Make sure you have a settings plist file in the Resources directory of your application"
                                      userInfo:nil];
     }
-    
-    NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    _settingsTableViewDataSource = [[RZDebugMenuSettingsDataSource alloc] initWithDictionary:plistData];
+
+    NSArray *settingsModels = nil;
+
+    NSError *dataReadingError = nil;
+    NSData *plistData = [NSData dataWithContentsOfURL:plistURL options:0 error:&dataReadingError];
+    if ( plistData ) {
+        NSError *dataParsingError = nil;
+        NSDictionary *propertyListDictionary = [NSPropertyListSerialization propertyListWithData:plistData options:0 format:NULL error:&dataParsingError];
+        if ( propertyListDictionary ) {
+            NSAssert([propertyListDictionary isKindOfClass:[NSDictionary class]], @"");
+
+            NSError *modelParsingError = nil;
+            settingsModels = [RZDebugMenuSettingsParser modelsFromSettingsDictionary:propertyListDictionary error:&modelParsingError];
+        }
+    }
+
+    return settingsModels;
+}
+
+- (void)loadSettingsMenuFromPlistName:(NSString *)plistName
+{
+    NSError *settingsParsingError = nil;
+    NSArray *settingsModels = [[self class] settingsModelsFromPlistName:plistName error:&settingsParsingError];
+    if ( settingsModels ) {
+    }
+    else {
+        NSLog(@"Failed to parse settings from plist %@: %@.", plistName, settingsParsingError);
+    }
+
+    self.settingsModels = settingsModels;
 }
 
 @end
