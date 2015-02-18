@@ -10,4 +10,8 @@
 
 @interface RZDebugMenuGroupItem : RZDebugMenuItem
 
+- (instancetype)initWithTitle:(NSString *)title children:(NSArray *)children NS_DESIGNATED_INITIALIZER;
+
+@property (copy, nonatomic, readonly) NSArray *children;
+
 @end

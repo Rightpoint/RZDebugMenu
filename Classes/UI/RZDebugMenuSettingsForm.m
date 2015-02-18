@@ -38,17 +38,44 @@
     return self;
 }
 
++ (NSArray *)settingsModelsByFlatteningGroups:(NSArray *)settingsModels
+{
+    NSMutableArray *mutableSettingsModels = [NSMutableArray array];
+
+    for ( RZDebugMenuItem *menuItem in settingsModels ) {
+        [mutableSettingsModels addObject:menuItem];
+
+        if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
+            NSArray *children = ((RZDebugMenuGroupItem *)menuItem).children;
+            if ( children.count > 0 ) {
+                [mutableSettingsModels addObjectsFromArray:children];
+            }
+        }
+    }
+
+    return [mutableSettingsModels copy];
+}
+
 - (NSArray *)uncachedFields
 {
     NSMutableArray *mutableFields = nil;
 
-    for ( RZDebugMenuItem *item in self.settingsModels ) {
+    NSArray *flattenedSettingsModels = [[self class] settingsModelsByFlatteningGroups:self.settingsModels];
+
+    RZDebugMenuGroupItem *groupToStart = nil;
+
+    for ( RZDebugMenuItem *item in flattenedSettingsModels ) {
         NSMutableDictionary *mutableFieldDictionary = [NSMutableDictionary dictionary];
 
         NSString *title = item.title;
 
         if ( title.length > 0 ) {
             mutableFieldDictionary[FXFormFieldTitle] = title;
+        }
+
+        if ( groupToStart ) {
+            mutableFieldDictionary[FXFormFieldHeader] = groupToStart.title;
+            groupToStart = nil;
         }
 
         NSString *formFieldType = nil;
@@ -99,9 +126,8 @@
 
             formFieldType = FXFormFieldTypeDefault;
         }
-
-        if ( formFieldType ) {
-            mutableFieldDictionary[FXFormFieldType] = formFieldType;
+        else if ( [item isKindOfClass:[RZDebugMenuGroupItem class]] ) {
+            groupToStart = (RZDebugMenuGroupItem *)item;
         }
 
         id defaultValue = nil;
@@ -113,11 +139,15 @@
             mutableFieldDictionary[FXFormFieldDefaultValue] = defaultValue;
         }
 
-        if ( mutableFields == nil ) {
-            mutableFields = [NSMutableArray array];
-        }
+        if ( formFieldType ) {
+            mutableFieldDictionary[FXFormFieldType] = formFieldType;
 
-        [mutableFields addObject:[mutableFieldDictionary copy]];
+            if ( mutableFields == nil ) {
+                mutableFields = [NSMutableArray array];
+            }
+
+            [mutableFields addObject:[mutableFieldDictionary copy]];
+        }
     }
 
     return [mutableFields copy];

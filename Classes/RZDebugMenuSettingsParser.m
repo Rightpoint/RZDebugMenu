@@ -55,13 +55,16 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
 + (NSArray *)modelsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError
 {
-    NSMutableArray *mutableModelsToReturn = nil;
+    NSMutableArray *mutableModelsToReturn = [NSMutableArray array];
     NSError *errorToReturn = nil;
 
     NSArray *preferencesSpecifiers = [settingsDictionary objectForKey:kRZPreferenceSpecifiersKey];
     if ( preferencesSpecifiers ) {
         NSAssert([preferencesSpecifiers isKindOfClass:[NSArray class]], @"");
-        if ( preferencesSpecifiers.count > 0 ){
+        if ( preferencesSpecifiers.count > 0 ) {
+            NSDictionary *currentGroupSpecifier = nil;
+            NSMutableArray *currentGroupChildren = nil;
+
             for ( NSDictionary *preferenceSpecifierDictionary in preferencesSpecifiers ) {
                 NSString *title = [preferenceSpecifierDictionary objectForKey:kRZKeyTitle];
                 NSString *itemType = [preferenceSpecifierDictionary objectForKey:kRZKeyType];
@@ -96,19 +99,49 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                                                                           title:title
                                                                  selectionItems:selectionItems];
                 }
+                else if ( [itemType isEqualToString:kRZGroupSpecifer] ) {
+                    if ( currentGroupSpecifier != nil ) {
+
+                        NSString *title = [currentGroupSpecifier objectForKey:kRZKeyTitle];
+                        RZDebugMenuItem *groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:title children:currentGroupChildren];
+
+                        [mutableModelsToReturn addObject:groupItem];
+
+                        currentGroupChildren = nil;
+                    }
+
+                    currentGroupSpecifier = preferenceSpecifierDictionary;
+                }
                 else {
                     // NSAssert(NO, @"");
                 }
 
                 if ( menuItem ) {
-                    if ( mutableModelsToReturn == nil ) {
-                        mutableModelsToReturn = [NSMutableArray array];
-                    }
+                    if ( currentGroupSpecifier ) {
+                        if ( currentGroupChildren == nil ) {
+                            currentGroupChildren = [NSMutableArray array];
+                        }
 
-                    [mutableModelsToReturn addObject:menuItem];
+                        [currentGroupChildren addObject:menuItem];
+                    }
+                    else {
+                        [mutableModelsToReturn addObject:menuItem];
+                    }
                 }
             }
+
+
+            if ( currentGroupSpecifier ) {
+                NSString *title = [currentGroupSpecifier objectForKey:kRZKeyTitle];
+                RZDebugMenuItem *groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:title children:currentGroupChildren];
+
+                [mutableModelsToReturn addObject:groupItem];
+            }
         }
+    }
+
+    if ( errorToReturn ) {
+        mutableModelsToReturn = nil;
     }
 
     if ( outError ) {
