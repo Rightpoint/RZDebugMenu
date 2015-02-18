@@ -9,10 +9,8 @@
 #import "RZDebugMenu.h"
 
 #import "RZDebugMenuWindow.h"
-#import "RZDebugMenuModalViewController.h"
 
 #import "RZDebugMenuSettingsInterface.h"
-#import "RZDebugMenuSettingsDataSource.h"
 #import "RZDebugMenuSettingsObserverManager.h"
 #import "RZDebugMenuSettingsForm.h"
 #import "RZDebugMenuSettingsParser.h"
