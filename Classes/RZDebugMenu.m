@@ -17,6 +17,7 @@
 #import "RZDebugMenuChildPaneItem.h"
 #import "RZDebugMenuLoadedChildPaneItem.h"
 #import "RZDebugMenuGroupItem.h"
+#import "RZDebugMenuFormViewController.h"
 
 #import "RZDebugLogMenuDefines.h"
 
@@ -141,7 +142,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     if ( self.settingsModels.count > 0 ) {
         RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsModels:self.settingsModels];
 
-        FXFormViewController *settingsMenuViewController = [[FXFormViewController alloc] init];
+        FXFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
         settingsMenuViewController.formController.form = settingsForm;
 
         UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenuViewController];

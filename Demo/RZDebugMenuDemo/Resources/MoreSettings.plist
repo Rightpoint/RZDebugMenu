@@ -19,6 +19,8 @@
 			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
+			<key>Title</key>
+			<string>Slider of Cool</string>
 			<key>DefaultValue</key>
 			<integer>25</integer>
 			<key>MaximumValue</key>

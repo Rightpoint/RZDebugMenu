@@ -19,6 +19,7 @@
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuLoadedChildPaneItem.h"
 #import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuFormViewController.h"
 
 @interface RZDebugMenuSettingsForm ()
 
@@ -71,14 +72,24 @@
         NSMutableDictionary *mutableFieldDictionary = [NSMutableDictionary dictionary];
 
         NSString *title = item.title;
-
-        if ( title.length > 0 ) {
-            mutableFieldDictionary[FXFormFieldTitle] = title;
+        if ( title.length == 0 ) {
+            title = @"";
         }
+        mutableFieldDictionary[FXFormFieldTitle] = title;
 
         if ( groupToStart ) {
             mutableFieldDictionary[FXFormFieldHeader] = groupToStart.title;
             groupToStart = nil;
+        }
+
+
+        NSString *key = nil;
+        if ( [item isKindOfClass:[RZDebugMenuSettingItem class]] ) {
+            key = ((RZDebugMenuSettingItem *)item).key;
+        }
+
+        if ( key ) {
+            mutableFieldDictionary[FXFormFieldKey] = key;   
         }
 
         NSString *formFieldType = nil;
@@ -139,6 +150,7 @@
             defaultValue = childSettingsForm;
 
             mutableFieldDictionary[FXFormFieldClass] = [RZDebugMenuSettingsForm class];
+            mutableFieldDictionary[FXFormFieldViewController] = [[RZDebugMenuFormViewController alloc] init];
         }
 
         if ( [item isKindOfClass:[RZDebugMenuSettingItem class]] ) {
@@ -204,6 +216,21 @@
 - (RZDebugMenuSettingItem *)settingsMenuItemForKey:(NSString *)key
 {
     return [[self class] settingsMenuItemForKey:key inMenuItems:self.settingsModels];
+}
+
+- (id)valueForKey:(NSString *)key
+{
+    id valueToReturn = nil;
+
+    RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
+    if ( settingsItem ) {
+        valueToReturn = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
+    }
+    else {
+        valueToReturn = [super valueForKey:key];
+    }
+
+    return valueToReturn;
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key
