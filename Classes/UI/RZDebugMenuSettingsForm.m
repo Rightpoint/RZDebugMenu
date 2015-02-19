@@ -17,6 +17,7 @@
 #import "RZDebugMenuTextFieldItem.h"
 #import "RZDebugMenuSliderItem.h"
 #import "RZDebugMenuGroupItem.h"
+#import "RZDebugMenuLoadedChildPaneItem.h"
 
 @interface RZDebugMenuSettingsForm ()
 
@@ -63,6 +64,7 @@
     NSArray *flattenedSettingsModels = [[self class] settingsModelsByFlatteningGroups:self.settingsModels];
 
     RZDebugMenuGroupItem *groupToStart = nil;
+    id defaultValue = nil;
 
     for ( RZDebugMenuItem *item in flattenedSettingsModels ) {
         NSMutableDictionary *mutableFieldDictionary = [NSMutableDictionary dictionary];
@@ -129,8 +131,16 @@
         else if ( [item isKindOfClass:[RZDebugMenuGroupItem class]] ) {
             groupToStart = (RZDebugMenuGroupItem *)item;
         }
+        else if ( [item isKindOfClass:[RZDebugMenuLoadedChildPaneItem class]] ) {
+            formFieldType = FXFormFieldTypeDefault;
 
-        id defaultValue = nil;
+            NSArray *settingsModels = ((RZDebugMenuLoadedChildPaneItem *)item).settingsModels;
+            RZDebugMenuSettingsForm *childSettingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsModels:settingsModels];
+            defaultValue = childSettingsForm;
+
+            mutableFieldDictionary[FXFormFieldClass] = [RZDebugMenuSettingsForm class];
+        }
+
         if ( [item isKindOfClass:[RZDebugMenuSettingItem class]] ) {
             defaultValue = ((RZDebugMenuSettingItem *)item).value;
         }

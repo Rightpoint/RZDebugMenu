@@ -14,6 +14,9 @@
 #import "RZDebugMenuSettingsObserverManager.h"
 #import "RZDebugMenuSettingsForm.h"
 #import "RZDebugMenuSettingsParser.h"
+#import "RZDebugMenuChildPaneItem.h"
+#import "RZDebugMenuLoadedChildPaneItem.h"
+#import "RZDebugMenuGroupItem.h"
 
 #import "RZDebugLogMenuDefines.h"
 
@@ -187,6 +190,57 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
 #pragma mark - Accessors
 
++ (NSArray *)settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:(NSArray *)settingsModels error:(NSError * __autoreleasing *)outError
+{
+    NSError *errorToReturn = nil;
+    NSMutableArray *mutableSettingsModelsToReturn = [settingsModels mutableCopy];
+
+    for ( RZDebugMenuItem *menuItem in settingsModels ) {
+        if ( [menuItem isKindOfClass:[RZDebugMenuChildPaneItem class]] ) {
+            NSString *plistName = ((RZDebugMenuChildPaneItem *)menuItem).plistName;
+
+            NSError *childPaneParsingError = nil;
+            NSArray *childPaneSettignsModels = [[self class] settingsModelsFromPlistName:plistName error:&childPaneParsingError];
+            if ( childPaneSettignsModels ) {
+                RZDebugMenuLoadedChildPaneItem *loadedChildPaneItem = [[RZDebugMenuLoadedChildPaneItem alloc] initWithTitle:menuItem.title plistName:plistName settingsModels:childPaneSettignsModels];
+                NSUInteger index = [mutableSettingsModelsToReturn indexOfObject:menuItem];
+                [mutableSettingsModelsToReturn replaceObjectAtIndex:index withObject:loadedChildPaneItem];
+            }
+            else {
+                errorToReturn = childPaneParsingError;
+                break;
+            }
+        }
+        else if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
+            RZDebugMenuGroupItem *groupItem = (RZDebugMenuGroupItem *)menuItem;
+            NSArray *childSettingsModels = groupItem.children;
+
+            NSError *recursiveLoadingError = nil;
+            childSettingsModels = [self settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:childSettingsModels error:&recursiveLoadingError];
+
+            if ( childSettingsModels ) {
+                groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:groupItem.title children:childSettingsModels];
+                NSUInteger index = [mutableSettingsModelsToReturn indexOfObject:menuItem];
+                [mutableSettingsModelsToReturn replaceObjectAtIndex:index withObject:groupItem];
+            }
+            else {
+                errorToReturn = recursiveLoadingError;
+                break;
+            }
+        }
+    }
+
+    if ( errorToReturn ) {
+        mutableSettingsModelsToReturn = nil;
+    }
+
+    if ( outError ) {
+        *outError = errorToReturn;
+    }
+
+    return [mutableSettingsModelsToReturn copy];
+}
+
 + (NSArray *)settingsModelsFromPlistName:(NSString *)plistName error:(NSError * __autoreleasing *)outError
 {
     plistName = [plistName stringByDeletingPathExtension];
@@ -200,6 +254,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     }
 
     NSArray *settingsModels = nil;
+    NSError *errorToReturn = nil;
 
     NSError *dataReadingError = nil;
     NSData *plistData = [NSData dataWithContentsOfURL:plistURL options:0 error:&dataReadingError];
@@ -211,7 +266,31 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
             NSError *modelParsingError = nil;
             settingsModels = [RZDebugMenuSettingsParser modelsFromSettingsDictionary:propertyListDictionary error:&modelParsingError];
+            if ( settingsModels ) {
+                NSError *recursiveLoadingError = nil;
+                settingsModels = [self settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:settingsModels error:&recursiveLoadingError];
+                if ( settingsModels == nil ) {
+                    errorToReturn = recursiveLoadingError;
+                }
+            }
+            else {
+                errorToReturn = modelParsingError;
+            }
         }
+        else {
+            errorToReturn = dataParsingError;
+        }
+    }
+    else {
+        errorToReturn = dataReadingError;
+    }
+
+    if ( errorToReturn ) {
+        settingsModels = nil;
+    }
+
+    if ( outError ) {
+        *outError = errorToReturn;
     }
 
     return settingsModels;
@@ -222,6 +301,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     NSError *settingsParsingError = nil;
     NSArray *settingsModels = [[self class] settingsModelsFromPlistName:plistName error:&settingsParsingError];
     if ( settingsModels ) {
+        // Nothing to do here.
     }
     else {
         NSLog(@"Failed to parse settings from plist %@: %@.", plistName, settingsParsingError);

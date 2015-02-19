@@ -17,6 +17,7 @@
 #import "RZDebugMenuTextFieldItem.h"
 #import "RZDebugMenuSliderItem.h"
 #import "RZDebugMenuGroupItem.h"
+#import "RZDebugMenuChildPaneItem.h"
 
 static NSString* const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString* const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
@@ -24,12 +25,14 @@ static NSString* const kRZToggleSwitchSpecifier = @"PSToggleSwitchSpecifier";
 static NSString* const kRZTextFieldSpecifier = @"PSTextFieldSpecifier";
 static NSString* const kRZSliderSpecifier = @"PSSliderSpecifier";
 static NSString* const kRZGroupSpecifer = @"PSGroupSpecifier";
+static NSString* const kRZChildPaneSpecifer = @"PSChildPaneSpecifier";
 
 static NSString* const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
 
 static NSString* const kRZKeyItemIdentifier = @"Key";
 static NSString* const kRZKeyTitle = @"Title";
 static NSString* const kRZKeyType = @"Type";
+static NSString* const kRZKeyFile = @"File";
 static NSString* const kRZKeyDefaultValue = @"DefaultValue";
 static NSString* const kRZKeyEnvironmentsTitles = @"Titles";
 static NSString* const kRZKeyEnvironmentsValues = @"Values";
@@ -112,6 +115,10 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
                     currentGroupSpecifier = preferenceSpecifierDictionary;
                 }
+                else if ( [itemType isEqualToString:kRZChildPaneSpecifer] ) {
+                    NSString *plistName = [preferenceSpecifierDictionary objectForKey:kRZKeyFile];
+                    menuItem = [[RZDebugMenuChildPaneItem alloc] initWithTitle:title plistName:plistName];
+                }
                 else {
                     // NSAssert(NO, @"");
                 }
@@ -129,7 +136,6 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                     }
                 }
             }
-
 
             if ( currentGroupSpecifier ) {
                 NSString *title = [currentGroupSpecifier objectForKey:kRZKeyTitle];
