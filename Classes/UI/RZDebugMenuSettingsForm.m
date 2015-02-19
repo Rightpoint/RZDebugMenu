@@ -18,6 +18,7 @@
 #import "RZDebugMenuSliderItem.h"
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuLoadedChildPaneItem.h"
+#import "RZDebugMenuSettingsInterface.h"
 
 @interface RZDebugMenuSettingsForm ()
 
@@ -101,7 +102,6 @@
             mutableFieldDictionary[sliderMaximumValueKey] = ((RZDebugMenuSliderItem *)item).max;
         }
         else if ( [item isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
-
             NSArray *selectionItems = ((RZDebugMenuMultiValueItem *)item).selectionItems;
             NSArray *titles = [selectionItems valueForKey:NSStringFromSelector(@selector(selectionTitle))];
             NSArray *values = [selectionItems valueForKey:NSStringFromSelector(@selector(selectionValue))];
@@ -173,6 +173,48 @@
     }
 
     return cachedFields;
+}
+
++ (RZDebugMenuSettingItem *)settingsMenuItemForKey:(NSString *)key inMenuItems:(NSArray *)menuItems
+{
+    RZDebugMenuSettingItem *settingsMenuItem = nil;
+
+    for ( RZDebugMenuItem *menuItem in menuItems ) {
+        if ( [menuItem isKindOfClass:[RZDebugMenuSettingItem class]] ) {
+            if ( [((RZDebugMenuSettingItem *)menuItem).key isEqualToString:key] ) {
+                settingsMenuItem = (RZDebugMenuSettingItem *)menuItem;
+                break;
+            }
+        }
+        else {
+            if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
+                NSArray *childMenuItems = ((RZDebugMenuGroupItem *)menuItem).children;
+                settingsMenuItem = [[self class] settingsMenuItemForKey:key inMenuItems:childMenuItems];
+            }
+            else if ( [menuItem isKindOfClass:[RZDebugMenuLoadedChildPaneItem class]] ) {
+                NSArray *childMenuItems = ((RZDebugMenuLoadedChildPaneItem *)menuItem).settingsModels;
+                settingsMenuItem = [[self class] settingsMenuItemForKey:key inMenuItems:childMenuItems];
+            }
+        }
+    }
+
+    return settingsMenuItem;
+}
+
+- (RZDebugMenuSettingItem *)settingsMenuItemForKey:(NSString *)key
+{
+    return [[self class] settingsMenuItemForKey:key inMenuItems:self.settingsModels];
+}
+
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+    RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
+    if ( settingsItem ) {
+        [RZDebugMenuSettingsInterface setValue:value forDebugSettingsKey:key];
+    }
+    else {
+        [super setValue:value forKey:key];
+    }
 }
 
 @end
