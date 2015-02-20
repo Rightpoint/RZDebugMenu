@@ -17,13 +17,18 @@
 
 @implementation RZDebugMenuVersionItem
 
-- (id)initWithTitle:(NSString *)title vrsionr:(NSString *)version
+- (id)initWithTitle:(NSString *)title version:(NSString *)version
 {
-    self = [super initWithValue:nil key:nil title:title];
+    self = [super initWithTitle:title];
     if ( self ) {
         _versionNumber = version;
     }
     return self;
+}
+
+- (id)initWithTitle:(NSString *)title
+{
+    return [self initWithTitle:title version:nil];
 }
 
 @end

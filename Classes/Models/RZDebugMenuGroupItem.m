@@ -8,12 +8,27 @@
 
 #import "RZDebugMenuGroupItem.h"
 
+@interface RZDebugMenuGroupItem ()
+
+@property (copy, nonatomic, readwrite) NSArray *children;
+
+@end
+
 @implementation RZDebugMenuGroupItem
+
+- (id)initWithTitle:(NSString *)title children:(NSArray *)children
+{
+    self = [super initWithTitle:title];
+    if ( self ) {
+        self.children = children;
+    }
+    
+    return self;
+}
 
 - (id)initWithTitle:(NSString *)title
 {
-    self = [super initWithValue:nil key:nil title:title];
-    return self;
+    return [self initWithTitle:title children:nil];
 }
 
 @end

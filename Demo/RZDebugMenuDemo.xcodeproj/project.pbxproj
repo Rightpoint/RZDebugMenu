@@ -22,6 +22,8 @@
 		0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C972B02193E0CBB00EA84FF /* Settings.plist */; };
 		0C972B0D193E1A9900EA84FF /* RZDebugMenuRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C972B0A193E1A9900EA84FF /* RZDebugMenuRootViewController.m */; };
 		718E8B87771CE7ACCB66B07B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA75CF690541A4B5CA70054A /* libPods.a */; };
+		D43C8A051A96494B0057AF66 /* MoreSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = D43C8A041A96494B0057AF66 /* MoreSettings.plist */; };
+		D43C8A071A964E370057AF66 /* EvenMoreSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = D43C8A061A964E370057AF66 /* EvenMoreSettings.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		35E576648AB0A16778F404BC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AA75CF690541A4B5CA70054A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C679C2B5BBB49FF44D0AAC55 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D43C8A041A96494B0057AF66 /* MoreSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MoreSettings.plist; sourceTree = "<group>"; };
+		D43C8A061A964E370057AF66 /* EvenMoreSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EvenMoreSettings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +182,8 @@
 			children = (
 				0C22DAD4193CCDA30042938F /* Images.xcassets */,
 				0C972B02193E0CBB00EA84FF /* Settings.plist */,
+				D43C8A041A96494B0057AF66 /* MoreSettings.plist */,
+				D43C8A061A964E370057AF66 /* EvenMoreSettings.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -278,6 +284,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D43C8A051A96494B0057AF66 /* MoreSettings.plist in Resources */,
+				D43C8A071A964E370057AF66 /* EvenMoreSettings.plist in Resources */,
 				0C22DACD193CCDA30042938F /* InfoPlist.strings in Resources */,
 				0C22DAD5193CCDA30042938F /* Images.xcassets in Resources */,
 				0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */,

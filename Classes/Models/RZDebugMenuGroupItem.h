@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuItem.h"
 
-@interface RZDebugMenuGroupItem : RZDebugMenuSettingsItem
+@interface RZDebugMenuGroupItem : RZDebugMenuItem
 
-- (id)initWithTitle:(NSString *)title;
+- (instancetype)initWithTitle:(NSString *)title children:(NSArray *)children NS_DESIGNATED_INITIALIZER;
+
+@property (copy, nonatomic, readonly) NSArray *children;
 
 @end
