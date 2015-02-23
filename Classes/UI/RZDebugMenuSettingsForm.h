@@ -10,6 +10,6 @@
 
 @interface RZDebugMenuSettingsForm : NSObject <FXForm>
 
-- (instancetype)initWithSettingsModels:(NSArray *)settingsModels NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithSettingsMenuItems:(NSArray *)settingsMenuItems NS_DESIGNATED_INITIALIZER;
 
 @end

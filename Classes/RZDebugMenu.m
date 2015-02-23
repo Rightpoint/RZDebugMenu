@@ -32,7 +32,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 @property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
 @property (assign, nonatomic) BOOL enabled;
 
-@property (strong, nonatomic, readwrite) NSArray *settingsModels;
+@property (strong, nonatomic, readwrite) NSArray *settingsMenuItems;
 
 @end
 
@@ -117,8 +117,8 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
 - (void)displayDebugMenu
 {
-    if ( self.settingsModels.count > 0 ) {
-        RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsModels:self.settingsModels];
+    if ( self.settingsMenuItems.count > 0 ) {
+        RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsMenuItems:self.settingsMenuItems];
 
         FXFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
         settingsMenuViewController.formController.form = settingsForm;
@@ -144,21 +144,21 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
 #pragma mark - Settings Menu
 
-+ (NSArray *)settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:(NSArray *)settingsModels error:(NSError * __autoreleasing *)outError
++ (NSArray *)settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:(NSArray *)settingsMenuItems error:(NSError * __autoreleasing *)outError
 {
     NSError *errorToReturn = nil;
-    NSMutableArray *mutableSettingsModelsToReturn = [settingsModels mutableCopy];
+    NSMutableArray *mutableSettingsMenuItemsToReturn = [settingsMenuItems mutableCopy];
 
-    for ( RZDebugMenuItem *menuItem in settingsModels ) {
+    for ( RZDebugMenuItem *menuItem in settingsMenuItems ) {
         if ( [menuItem isKindOfClass:[RZDebugMenuChildPaneItem class]] ) {
             NSString *plistName = ((RZDebugMenuChildPaneItem *)menuItem).plistName;
 
             NSError *childPaneParsingError = nil;
-            NSArray *childPaneSettignsModels = [[self class] settingsModelsFromPlistName:plistName error:&childPaneParsingError];
-            if ( childPaneSettignsModels ) {
-                RZDebugMenuLoadedChildPaneItem *loadedChildPaneItem = [[RZDebugMenuLoadedChildPaneItem alloc] initWithTitle:menuItem.title plistName:plistName settingsModels:childPaneSettignsModels];
-                NSUInteger index = [mutableSettingsModelsToReturn indexOfObject:menuItem];
-                [mutableSettingsModelsToReturn replaceObjectAtIndex:index withObject:loadedChildPaneItem];
+            NSArray *childPaneSettingsMenuItems = [[self class] settingsMenuItemsFromPlistName:plistName error:&childPaneParsingError];
+            if ( childPaneSettingsMenuItems ) {
+                RZDebugMenuLoadedChildPaneItem *loadedChildPaneItem = [[RZDebugMenuLoadedChildPaneItem alloc] initWithTitle:menuItem.title plistName:plistName settingsMenuItems:childPaneSettingsMenuItems];
+                NSUInteger index = [mutableSettingsMenuItemsToReturn indexOfObject:menuItem];
+                [mutableSettingsMenuItemsToReturn replaceObjectAtIndex:index withObject:loadedChildPaneItem];
             }
             else {
                 errorToReturn = childPaneParsingError;
@@ -167,15 +167,15 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
         }
         else if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
             RZDebugMenuGroupItem *groupItem = (RZDebugMenuGroupItem *)menuItem;
-            NSArray *childSettingsModels = groupItem.children;
+            NSArray *childSettingsMenuItems = groupItem.children;
 
             NSError *recursiveLoadingError = nil;
-            childSettingsModels = [self settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:childSettingsModels error:&recursiveLoadingError];
+            childSettingsMenuItems = [self settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:childSettingsMenuItems error:&recursiveLoadingError];
 
-            if ( childSettingsModels ) {
-                groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:groupItem.title children:childSettingsModels];
-                NSUInteger index = [mutableSettingsModelsToReturn indexOfObject:menuItem];
-                [mutableSettingsModelsToReturn replaceObjectAtIndex:index withObject:groupItem];
+            if ( childSettingsMenuItems ) {
+                groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:groupItem.title children:childSettingsMenuItems];
+                NSUInteger index = [mutableSettingsMenuItemsToReturn indexOfObject:menuItem];
+                [mutableSettingsMenuItemsToReturn replaceObjectAtIndex:index withObject:groupItem];
             }
             else {
                 errorToReturn = recursiveLoadingError;
@@ -185,17 +185,17 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     }
 
     if ( errorToReturn ) {
-        mutableSettingsModelsToReturn = nil;
+        mutableSettingsMenuItemsToReturn = nil;
     }
 
     if ( outError ) {
         *outError = errorToReturn;
     }
 
-    return [mutableSettingsModelsToReturn copy];
+    return [mutableSettingsMenuItemsToReturn copy];
 }
 
-+ (NSArray *)settingsModelsFromPlistName:(NSString *)plistName error:(NSError * __autoreleasing *)outError
++ (NSArray *)settingsMenuItemsFromPlistName:(NSString *)plistName error:(NSError * __autoreleasing *)outError
 {
     plistName = [plistName stringByDeletingPathExtension];
 
@@ -207,7 +207,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
                                      userInfo:nil];
     }
 
-    NSArray *settingsModels = nil;
+    NSArray *settingsMenuItems = nil;
     NSError *errorToReturn = nil;
 
     NSError *dataReadingError = nil;
@@ -218,17 +218,17 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
         if ( propertyListDictionary ) {
             NSAssert([propertyListDictionary isKindOfClass:[NSDictionary class]], @"");
 
-            NSError *modelParsingError = nil;
-            settingsModels = [RZDebugMenuSettingsParser modelsFromSettingsDictionary:propertyListDictionary error:&modelParsingError];
-            if ( settingsModels ) {
+            NSError *settingsMenuItemsParsingError = nil;
+            settingsMenuItems = [RZDebugMenuSettingsParser settingsMenuItemsFromSettingsDictionary:propertyListDictionary error:&settingsMenuItemsParsingError];
+            if ( settingsMenuItems ) {
                 NSError *recursiveLoadingError = nil;
-                settingsModels = [self settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:settingsModels error:&recursiveLoadingError];
-                if ( settingsModels == nil ) {
+                settingsMenuItems = [self settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:settingsMenuItems error:&recursiveLoadingError];
+                if ( settingsMenuItems == nil ) {
                     errorToReturn = recursiveLoadingError;
                 }
             }
             else {
-                errorToReturn = modelParsingError;
+                errorToReturn = settingsMenuItemsParsingError;
             }
         }
         else {
@@ -240,28 +240,28 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     }
 
     if ( errorToReturn ) {
-        settingsModels = nil;
+        settingsMenuItems = nil;
     }
 
     if ( outError ) {
         *outError = errorToReturn;
     }
 
-    return settingsModels;
+    return settingsMenuItems;
 }
 
 - (void)loadSettingsMenuFromPlistName:(NSString *)plistName
 {
     NSError *settingsParsingError = nil;
-    NSArray *settingsModels = [[self class] settingsModelsFromPlistName:plistName error:&settingsParsingError];
-    if ( settingsModels ) {
+    NSArray *settingsMenuItems = [[self class] settingsMenuItemsFromPlistName:plistName error:&settingsParsingError];
+    if ( settingsMenuItems ) {
         // Nothing to do here.
     }
     else {
         NSLog(@"Failed to parse settings from plist %@: %@.", plistName, settingsParsingError);
     }
 
-    self.settingsModels = settingsModels;
+    self.settingsMenuItems = settingsMenuItems;
 }
 
 @end

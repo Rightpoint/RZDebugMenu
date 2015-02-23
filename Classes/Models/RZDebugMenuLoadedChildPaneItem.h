@@ -10,8 +10,8 @@
 
 @interface RZDebugMenuLoadedChildPaneItem : RZDebugMenuChildPaneItem
 
-- (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName settingsModels:(NSArray *)settingsModels NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName settingsMenuItems:(NSArray *)settingsMenuItems NS_DESIGNATED_INITIALIZER;
 
-@property (copy, nonatomic, readonly) NSArray *settingsModels;
+@property (copy, nonatomic, readonly) NSArray *settingsMenuItems;
 
 @end

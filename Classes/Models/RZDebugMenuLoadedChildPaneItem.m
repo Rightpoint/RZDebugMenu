@@ -10,17 +10,17 @@
 
 @interface RZDebugMenuLoadedChildPaneItem ()
 
-@property (copy, nonatomic, readwrite) NSArray *settingsModels;
+@property (copy, nonatomic, readwrite) NSArray *settingsMenuItems;
 
 @end
 
 @implementation RZDebugMenuLoadedChildPaneItem
 
-- (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName settingsModels:(NSArray *)settingsModels
+- (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName settingsMenuItems:(NSArray *)settingsMenuItems
 {
     self = [super initWithTitle:title plistName:plistName];
     if ( self ) {
-        self.settingsModels = settingsModels;
+        self.settingsMenuItems = settingsMenuItems;
     }
 
     return self;
@@ -28,7 +28,7 @@
 
 - (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName
 {
-    return [self initWithTitle:title plistName:plistName settingsModels:nil];
+    return [self initWithTitle:title plistName:plistName settingsMenuItems:nil];
 }
 
 @end

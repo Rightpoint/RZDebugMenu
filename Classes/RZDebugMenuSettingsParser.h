@@ -8,6 +8,6 @@
 
 @interface RZDebugMenuSettingsParser : NSObject
 
-+ (NSArray *)modelsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError;
++ (NSArray *)settingsMenuItemsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError;
 
 @end

@@ -56,9 +56,9 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
     return [selectionItems copy];
 }
 
-+ (NSArray *)modelsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError
++ (NSArray *)settingsMenuItemsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError
 {
-    NSMutableArray *mutableModelsToReturn = [NSMutableArray array];
+    NSMutableArray *mutableSettingsMenuItemsToReturn = [NSMutableArray array];
     NSError *errorToReturn = nil;
 
     NSArray *preferencesSpecifiers = [settingsDictionary objectForKey:kRZPreferenceSpecifiersKey];
@@ -108,7 +108,7 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                         NSString *title = [currentGroupSpecifier objectForKey:kRZKeyTitle];
                         RZDebugMenuItem *groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:title children:currentGroupChildren];
 
-                        [mutableModelsToReturn addObject:groupItem];
+                        [mutableSettingsMenuItemsToReturn addObject:groupItem];
 
                         currentGroupChildren = nil;
                     }
@@ -132,7 +132,7 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                         [currentGroupChildren addObject:menuItem];
                     }
                     else {
-                        [mutableModelsToReturn addObject:menuItem];
+                        [mutableSettingsMenuItemsToReturn addObject:menuItem];
                     }
                 }
             }
@@ -141,20 +141,20 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                 NSString *title = [currentGroupSpecifier objectForKey:kRZKeyTitle];
                 RZDebugMenuItem *groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:title children:currentGroupChildren];
 
-                [mutableModelsToReturn addObject:groupItem];
+                [mutableSettingsMenuItemsToReturn addObject:groupItem];
             }
         }
     }
 
     if ( errorToReturn ) {
-        mutableModelsToReturn = nil;
+        mutableSettingsMenuItemsToReturn = nil;
     }
 
     if ( outError ) {
         *outError = errorToReturn;
     }
 
-    return [mutableModelsToReturn copy];
+    return [mutableSettingsMenuItemsToReturn copy];
 }
 
 @end
