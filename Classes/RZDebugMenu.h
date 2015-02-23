@@ -41,7 +41,7 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  *  Sets an object to observe changes for a particular setting
  *
  *  @param observer  Object to observe changes
- *  @param aSelector A selector to perform when a setting that an object is observing changes
+ *  @param selector  A selector to perform when a setting that an object is observing changes
  *  @param key       The key whose value a change will be observed for
  *  @param update    Boolean value that determines if settings should be applied on load or not
  *
@@ -56,5 +56,22 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  *  @param key      The key the observer was observing a change on
  */
 + (void)removeObserver:(id)observer forKey:(NSString *)key;
+
+/**
+ *  Access the shared debug menu.
+ *
+ *  @return If yopu have called enableMenuWithSettingsPlistName:, this will return the shared debug debug.
+ */
++ (instancetype)sharedDebugMenu;
+
+/**
+ *  Configure automatic show / hide of the debug menu button with a 5-tap gesture on the selected window.
+
+ *  @param window   The window to set up for automatic show / hide of the debug menu button.
+ */
+- (void)configureAutomaticShowHideOnWindow:(UIWindow *)window;
+
+@property (assign, nonatomic) BOOL enabled;
+@property (assign, nonatomic, readwrite) BOOL showDebugMenuButton;
 
 @end

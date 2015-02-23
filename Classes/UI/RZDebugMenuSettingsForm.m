@@ -9,7 +9,6 @@
 #import "RZDebugMenuSettingsForm.h"
 
 #import "RZDebugMenuItem.h"
-#import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZMultiValueSelectionItem.h"
 #import "RZDebugMenuToggleItem.h"
@@ -23,7 +22,7 @@
 
 @interface RZDebugMenuSettingsForm ()
 
-@property (strong, nonatomic, readwrite) NSArray *settingsModels;
+@property (strong, nonatomic, readwrite) NSArray *settingsMenuItems;
 
 @property (strong, nonatomic, readwrite) NSArray *cachedFields;
 
@@ -31,44 +30,44 @@
 
 @implementation RZDebugMenuSettingsForm
 
-- (instancetype)initWithSettingsModels:(NSArray *)settingsModels
+- (instancetype)initWithSettingsMenuItems:(NSArray *)settingsMenuItems
 {
     self = [super init];
     if ( self ) {
-        self.settingsModels = settingsModels;
+        self.settingsMenuItems = settingsMenuItems;
     }
 
     return self;
 }
 
-+ (NSArray *)settingsModelsByFlatteningGroups:(NSArray *)settingsModels
++ (NSArray *)settingsMenuItemsByFlatteningGroupsFromSettingsMenuItems:(NSArray *)settingsMenuItems
 {
-    NSMutableArray *mutableSettingsModels = [NSMutableArray array];
+    NSMutableArray *mutableSettingsMenuItems = [NSMutableArray array];
 
-    for ( RZDebugMenuItem *menuItem in settingsModels ) {
-        [mutableSettingsModels addObject:menuItem];
+    for ( RZDebugMenuItem *menuItem in settingsMenuItems ) {
+        [mutableSettingsMenuItems addObject:menuItem];
 
         if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
             NSArray *children = ((RZDebugMenuGroupItem *)menuItem).children;
             if ( children.count > 0 ) {
-                [mutableSettingsModels addObjectsFromArray:children];
+                [mutableSettingsMenuItems addObjectsFromArray:children];
             }
         }
     }
 
-    return [mutableSettingsModels copy];
+    return [mutableSettingsMenuItems copy];
 }
 
 - (NSArray *)uncachedFields
 {
     NSMutableArray *mutableFields = nil;
 
-    NSArray *flattenedSettingsModels = [[self class] settingsModelsByFlatteningGroups:self.settingsModels];
+    NSArray *flattenedSettingsMenuItems = [[self class] settingsMenuItemsByFlatteningGroupsFromSettingsMenuItems:self.settingsMenuItems];
 
     RZDebugMenuGroupItem *groupToStart = nil;
     id defaultValue = nil;
 
-    for ( RZDebugMenuItem *item in flattenedSettingsModels ) {
+    for ( RZDebugMenuItem *item in flattenedSettingsMenuItems ) {
         NSMutableDictionary *mutableFieldDictionary = [NSMutableDictionary dictionary];
 
         NSString *title = item.title;
@@ -145,8 +144,8 @@
         else if ( [item isKindOfClass:[RZDebugMenuLoadedChildPaneItem class]] ) {
             formFieldType = FXFormFieldTypeDefault;
 
-            NSArray *settingsModels = ((RZDebugMenuLoadedChildPaneItem *)item).settingsModels;
-            RZDebugMenuSettingsForm *childSettingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsModels:settingsModels];
+            NSArray *settingsMenuItems = ((RZDebugMenuLoadedChildPaneItem *)item).settingsMenuItems;
+            RZDebugMenuSettingsForm *childSettingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsMenuItems:settingsMenuItems];
             defaultValue = childSettingsForm;
 
             mutableFieldDictionary[FXFormFieldClass] = [RZDebugMenuSettingsForm class];
@@ -204,7 +203,7 @@
                 settingsMenuItem = [[self class] settingsMenuItemForKey:key inMenuItems:childMenuItems];
             }
             else if ( [menuItem isKindOfClass:[RZDebugMenuLoadedChildPaneItem class]] ) {
-                NSArray *childMenuItems = ((RZDebugMenuLoadedChildPaneItem *)menuItem).settingsModels;
+                NSArray *childMenuItems = ((RZDebugMenuLoadedChildPaneItem *)menuItem).settingsMenuItems;
                 settingsMenuItem = [[self class] settingsMenuItemForKey:key inMenuItems:childMenuItems];
             }
         }
@@ -215,7 +214,7 @@
 
 - (RZDebugMenuSettingItem *)settingsMenuItemForKey:(NSString *)key
 {
-    return [[self class] settingsMenuItemForKey:key inMenuItems:self.settingsModels];
+    return [[self class] settingsMenuItemForKey:key inMenuItems:self.settingsMenuItems];
 }
 
 - (id)valueForKey:(NSString *)key

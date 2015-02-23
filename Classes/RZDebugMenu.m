@@ -24,22 +24,21 @@
 #import <FXForms/FXForms.h>
 
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
-static NSString * const kRZSettingsFileExtension       = @"plist";
 
-@interface RZDebugMenu () <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
+static NSUInteger kRZNumberOfTapsToHide = 5;
+
+@interface RZDebugMenu () <RZDebugMenuClearViewControllerDelegate>
 
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
-@property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
 @property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
-@property (assign, nonatomic) BOOL enabled;
 
-@property (strong, nonatomic, readwrite) NSArray *settingsModels;
+@property (strong, nonatomic, readwrite) NSArray *settingsMenuItems;
 
 @end
 
 @implementation RZDebugMenu
 
-#pragma mark - class methods
+#pragma mark - Public API
 
 + (instancetype)sharedDebugMenu
 {
@@ -57,6 +56,8 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     [[self sharedDebugMenu] loadSettingsMenuFromPlistName:plistName];
     [[self sharedDebugMenu] setEnabled:YES];
 }
+
+# pragma mark - Settings
 
 + (id)debugSettingForKey:(NSString *)key
 {
@@ -76,7 +77,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:observer forKey:key];
 }
 
-#pragma mark - initialize methods
+# pragma mark - Lifecycle
 
 - (id)init
 {
@@ -90,29 +91,19 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     self = [super init];
     if ( self ) {
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(createWindowAndGesture:)
+                                                 selector:@selector(applicationDidFinishLaunching:)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
+
+        self.showDebugMenuButton = NO;
     }
 
     return self;
 }
 
-- (void)createWindowAndGesture:(NSNotification *)message
-{
-    if ( self.enabled ) {
-        
-        [self createTopWindow];
-        [self createSwipeGesture];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeOrientation)
-                                                     name:UIApplicationDidChangeStatusBarOrientationNotification
-                                                   object:nil];
-    }
-}
+# pragma mark - Configuration
 
-- (void)createTopWindow
+- (void)configureTopWindow
 {
     self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
     
@@ -124,53 +115,18 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     self.topWindow.hidden = NO;
 }
 
-- (void)createSwipeGesture
-{
-    UIApplication *application = [UIApplication sharedApplication];
-    self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
-    self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    self.swipeUpGesture.numberOfTouchesRequired = 3;
-    self.swipeUpGesture.delegate = self;
-    UIWindow *applicationWindow = application.keyWindow;
-    [applicationWindow addGestureRecognizer:self.swipeUpGesture];
-}
-
-#pragma mark - state change methods
+#pragma mark - UX
 
 - (void)displayDebugMenu
 {
-    if ( self.settingsModels.count > 0 ) {
-        RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsModels:self.settingsModels];
+    if ( self.settingsMenuItems.count > 0 ) {
+        RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsMenuItems:self.settingsMenuItems];
 
         FXFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
         settingsMenuViewController.formController.form = settingsForm;
 
         UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenuViewController];
         [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
-    }
-}
-
-- (void)changeOrientation
-{
-    CGFloat const iOSOrientationDepricationVersion = 8.0;
-    NSString *systemVersionString = [[[UIDevice currentDevice] systemVersion] substringToIndex:3];
-    CGFloat systemVersion = [systemVersionString floatValue];
-
-    if ( systemVersion < iOSOrientationDepricationVersion ) {
-        
-        UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-        if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
-        }
-        else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-        }
-        else if ( statusBarOrientation == UIDeviceOrientationPortraitUpsideDown ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionDown;
-        }
-        else {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        }
     }
 }
 
@@ -181,134 +137,64 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     [self displayDebugMenu];
 }
 
+#pragma mark - Notifications
 
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+- (void)applicationDidFinishLaunching:(NSNotification *)note
 {
-    return YES;
+    [self configureTopWindow];
 }
 
-#pragma mark - Accessors
-
-+ (NSArray *)settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:(NSArray *)settingsModels error:(NSError * __autoreleasing *)outError
-{
-    NSError *errorToReturn = nil;
-    NSMutableArray *mutableSettingsModelsToReturn = [settingsModels mutableCopy];
-
-    for ( RZDebugMenuItem *menuItem in settingsModels ) {
-        if ( [menuItem isKindOfClass:[RZDebugMenuChildPaneItem class]] ) {
-            NSString *plistName = ((RZDebugMenuChildPaneItem *)menuItem).plistName;
-
-            NSError *childPaneParsingError = nil;
-            NSArray *childPaneSettignsModels = [[self class] settingsModelsFromPlistName:plistName error:&childPaneParsingError];
-            if ( childPaneSettignsModels ) {
-                RZDebugMenuLoadedChildPaneItem *loadedChildPaneItem = [[RZDebugMenuLoadedChildPaneItem alloc] initWithTitle:menuItem.title plistName:plistName settingsModels:childPaneSettignsModels];
-                NSUInteger index = [mutableSettingsModelsToReturn indexOfObject:menuItem];
-                [mutableSettingsModelsToReturn replaceObjectAtIndex:index withObject:loadedChildPaneItem];
-            }
-            else {
-                errorToReturn = childPaneParsingError;
-                break;
-            }
-        }
-        else if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
-            RZDebugMenuGroupItem *groupItem = (RZDebugMenuGroupItem *)menuItem;
-            NSArray *childSettingsModels = groupItem.children;
-
-            NSError *recursiveLoadingError = nil;
-            childSettingsModels = [self settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:childSettingsModels error:&recursiveLoadingError];
-
-            if ( childSettingsModels ) {
-                groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:groupItem.title children:childSettingsModels];
-                NSUInteger index = [mutableSettingsModelsToReturn indexOfObject:menuItem];
-                [mutableSettingsModelsToReturn replaceObjectAtIndex:index withObject:groupItem];
-            }
-            else {
-                errorToReturn = recursiveLoadingError;
-                break;
-            }
-        }
-    }
-
-    if ( errorToReturn ) {
-        mutableSettingsModelsToReturn = nil;
-    }
-
-    if ( outError ) {
-        *outError = errorToReturn;
-    }
-
-    return [mutableSettingsModelsToReturn copy];
-}
-
-+ (NSArray *)settingsModelsFromPlistName:(NSString *)plistName error:(NSError * __autoreleasing *)outError
-{
-    plistName = [plistName stringByDeletingPathExtension];
-
-    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:plistName withExtension:kRZSettingsFileExtension];
-    if ( !plistURL ) {
-        NSString *exceptionName = [plistName stringByAppendingString:@".plist doesn't exist"];
-        @throw [NSException exceptionWithName:exceptionName
-                                       reason:@"Make sure you have a settings plist file in the Resources directory of your application"
-                                     userInfo:nil];
-    }
-
-    NSArray *settingsModels = nil;
-    NSError *errorToReturn = nil;
-
-    NSError *dataReadingError = nil;
-    NSData *plistData = [NSData dataWithContentsOfURL:plistURL options:0 error:&dataReadingError];
-    if ( plistData ) {
-        NSError *dataParsingError = nil;
-        NSDictionary *propertyListDictionary = [NSPropertyListSerialization propertyListWithData:plistData options:0 format:NULL error:&dataParsingError];
-        if ( propertyListDictionary ) {
-            NSAssert([propertyListDictionary isKindOfClass:[NSDictionary class]], @"");
-
-            NSError *modelParsingError = nil;
-            settingsModels = [RZDebugMenuSettingsParser modelsFromSettingsDictionary:propertyListDictionary error:&modelParsingError];
-            if ( settingsModels ) {
-                NSError *recursiveLoadingError = nil;
-                settingsModels = [self settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:settingsModels error:&recursiveLoadingError];
-                if ( settingsModels == nil ) {
-                    errorToReturn = recursiveLoadingError;
-                }
-            }
-            else {
-                errorToReturn = modelParsingError;
-            }
-        }
-        else {
-            errorToReturn = dataParsingError;
-        }
-    }
-    else {
-        errorToReturn = dataReadingError;
-    }
-
-    if ( errorToReturn ) {
-        settingsModels = nil;
-    }
-
-    if ( outError ) {
-        *outError = errorToReturn;
-    }
-
-    return settingsModels;
-}
+#pragma mark - Settings Menu
 
 - (void)loadSettingsMenuFromPlistName:(NSString *)plistName
 {
     NSError *settingsParsingError = nil;
-    NSArray *settingsModels = [[self class] settingsModelsFromPlistName:plistName error:&settingsParsingError];
-    if ( settingsModels ) {
+    NSArray *settingsMenuItems = [RZDebugMenuSettingsParser settingsMenuItemsFromPlistName:plistName error:&settingsParsingError];
+    if ( settingsMenuItems ) {
         // Nothing to do here.
     }
     else {
         NSLog(@"Failed to parse settings from plist %@: %@.", plistName, settingsParsingError);
     }
 
-    self.settingsModels = settingsModels;
+    self.settingsMenuItems = settingsMenuItems;
+}
+
+# pragma mark - Show / Hide
+
+- (void)configureAutomaticShowHideOnWindow:(UIWindow *)window
+{
+    NSAssert(window != nil, @"");
+
+    UIViewController *rootViewController = window.rootViewController;
+    NSAssert(rootViewController != nil, @"");
+
+    UIView *view = rootViewController.view;
+    NSAssert(view != nil, @"");
+
+    UITapGestureRecognizer *manyTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manyTapGestureRecognizerFired:)];
+    manyTapGestureRecognizer.numberOfTapsRequired = kRZNumberOfTapsToHide;
+
+    [view addGestureRecognizer:manyTapGestureRecognizer];
+}
+
+- (void)manyTapGestureRecognizerFired:(id)sender
+{
+    [self showHideDebugMenuButton];
+}
+
+- (void)showHideDebugMenuButton
+{
+    self.clearRootViewController.showDebugMenuButton = (!self.clearRootViewController.showDebugMenuButton);
+}
+
+- (void)setShowDebugMenuButton:(BOOL)showDebugMenuButton
+{
+    if ( _showDebugMenuButton != showDebugMenuButton ) {
+        _showDebugMenuButton = showDebugMenuButton;
+
+        self.clearRootViewController.showDebugMenuButton = showDebugMenuButton;
+    }
 }
 
 @end

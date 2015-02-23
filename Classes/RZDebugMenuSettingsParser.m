@@ -18,6 +18,9 @@
 #import "RZDebugMenuSliderItem.h"
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuChildPaneItem.h"
+#import "RZDebugMenuLoadedChildPaneItem.h"
+
+static NSString* const kRZSettingsFileExtension = @"plist";
 
 static NSString* const kRZPreferenceSpecifiersKey = @"PreferenceSpecifiers";
 static NSString* const kRZMultiValueSpecifier = @"PSMultiValueSpecifier";
@@ -41,6 +44,8 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
 @implementation RZDebugMenuSettingsParser
 
+# pragma mark - Plist Dictionary Parsing
+
 + (NSArray *)multiValueOptionsArray:(NSArray *)optionTitles withValues:(NSArray *)optionValues
 {
     NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
@@ -56,9 +61,9 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
     return [selectionItems copy];
 }
 
-+ (NSArray *)modelsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError
++ (NSArray *)settingsMenuItemsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError
 {
-    NSMutableArray *mutableModelsToReturn = [NSMutableArray array];
+    NSMutableArray *mutableSettingsMenuItemsToReturn = [NSMutableArray array];
     NSError *errorToReturn = nil;
 
     NSArray *preferencesSpecifiers = [settingsDictionary objectForKey:kRZPreferenceSpecifiersKey];
@@ -108,7 +113,7 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                         NSString *title = [currentGroupSpecifier objectForKey:kRZKeyTitle];
                         RZDebugMenuItem *groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:title children:currentGroupChildren];
 
-                        [mutableModelsToReturn addObject:groupItem];
+                        [mutableSettingsMenuItemsToReturn addObject:groupItem];
 
                         currentGroupChildren = nil;
                     }
@@ -132,7 +137,7 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                         [currentGroupChildren addObject:menuItem];
                     }
                     else {
-                        [mutableModelsToReturn addObject:menuItem];
+                        [mutableSettingsMenuItemsToReturn addObject:menuItem];
                     }
                 }
             }
@@ -141,20 +146,128 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                 NSString *title = [currentGroupSpecifier objectForKey:kRZKeyTitle];
                 RZDebugMenuItem *groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:title children:currentGroupChildren];
 
-                [mutableModelsToReturn addObject:groupItem];
+                [mutableSettingsMenuItemsToReturn addObject:groupItem];
             }
         }
     }
 
     if ( errorToReturn ) {
-        mutableModelsToReturn = nil;
+        mutableSettingsMenuItemsToReturn = nil;
     }
 
     if ( outError ) {
         *outError = errorToReturn;
     }
 
-    return [mutableModelsToReturn copy];
+    return [mutableSettingsMenuItemsToReturn copy];
+}
+
+# pragma mark - Fiel Reading and Outer Parsing
+
++ (NSArray *)settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:(NSArray *)settingsMenuItems error:(NSError * __autoreleasing *)outError
+{
+    NSError *errorToReturn = nil;
+    NSMutableArray *mutableSettingsMenuItemsToReturn = [settingsMenuItems mutableCopy];
+
+    for ( RZDebugMenuItem *menuItem in settingsMenuItems ) {
+        if ( [menuItem isKindOfClass:[RZDebugMenuChildPaneItem class]] ) {
+            NSString *plistName = ((RZDebugMenuChildPaneItem *)menuItem).plistName;
+
+            NSError *childPaneParsingError = nil;
+            NSArray *childPaneSettingsMenuItems = [[self class] settingsMenuItemsFromPlistName:plistName error:&childPaneParsingError];
+            if ( childPaneSettingsMenuItems ) {
+                RZDebugMenuLoadedChildPaneItem *loadedChildPaneItem = [[RZDebugMenuLoadedChildPaneItem alloc] initWithTitle:menuItem.title plistName:plistName settingsMenuItems:childPaneSettingsMenuItems];
+                NSUInteger index = [mutableSettingsMenuItemsToReturn indexOfObject:menuItem];
+                [mutableSettingsMenuItemsToReturn replaceObjectAtIndex:index withObject:loadedChildPaneItem];
+            }
+            else {
+                errorToReturn = childPaneParsingError;
+                break;
+            }
+        }
+        else if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
+            RZDebugMenuGroupItem *groupItem = (RZDebugMenuGroupItem *)menuItem;
+            NSArray *childSettingsMenuItems = groupItem.children;
+
+            NSError *recursiveLoadingError = nil;
+            childSettingsMenuItems = [self settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:childSettingsMenuItems error:&recursiveLoadingError];
+
+            if ( childSettingsMenuItems ) {
+                groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:groupItem.title children:childSettingsMenuItems];
+                NSUInteger index = [mutableSettingsMenuItemsToReturn indexOfObject:menuItem];
+                [mutableSettingsMenuItemsToReturn replaceObjectAtIndex:index withObject:groupItem];
+            }
+            else {
+                errorToReturn = recursiveLoadingError;
+                break;
+            }
+        }
+    }
+
+    if ( errorToReturn ) {
+        mutableSettingsMenuItemsToReturn = nil;
+    }
+
+    if ( outError ) {
+        *outError = errorToReturn;
+    }
+
+    return [mutableSettingsMenuItemsToReturn copy];
+}
+
++ (NSArray *)settingsMenuItemsFromPlistName:(NSString *)plistName error:(NSError * __autoreleasing *)outError
+{
+    plistName = [plistName stringByDeletingPathExtension];
+
+    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:plistName withExtension:kRZSettingsFileExtension];
+    if ( !plistURL ) {
+        NSString *exceptionName = [plistName stringByAppendingString:@".plist doesn't exist"];
+        @throw [NSException exceptionWithName:exceptionName
+                                       reason:@"Make sure you have a settings plist file in the Resources directory of your application"
+                                     userInfo:nil];
+    }
+
+    NSArray *settingsMenuItems = nil;
+    NSError *errorToReturn = nil;
+
+    NSError *dataReadingError = nil;
+    NSData *plistData = [NSData dataWithContentsOfURL:plistURL options:0 error:&dataReadingError];
+    if ( plistData ) {
+        NSError *dataParsingError = nil;
+        NSDictionary *propertyListDictionary = [NSPropertyListSerialization propertyListWithData:plistData options:0 format:NULL error:&dataParsingError];
+        if ( propertyListDictionary ) {
+            NSAssert([propertyListDictionary isKindOfClass:[NSDictionary class]], @"");
+
+            NSError *settingsMenuItemsParsingError = nil;
+            settingsMenuItems = [self settingsMenuItemsFromSettingsDictionary:propertyListDictionary error:&settingsMenuItemsParsingError];
+            if ( settingsMenuItems ) {
+                NSError *recursiveLoadingError = nil;
+                settingsMenuItems = [self settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:settingsMenuItems error:&recursiveLoadingError];
+                if ( settingsMenuItems == nil ) {
+                    errorToReturn = recursiveLoadingError;
+                }
+            }
+            else {
+                errorToReturn = settingsMenuItemsParsingError;
+            }
+        }
+        else {
+            errorToReturn = dataParsingError;
+        }
+    }
+    else {
+        errorToReturn = dataReadingError;
+    }
+
+    if ( errorToReturn ) {
+        settingsMenuItems = nil;
+    }
+
+    if ( outError ) {
+        *outError = errorToReturn;
+    }
+    
+    return settingsMenuItems;
 }
 
 @end
