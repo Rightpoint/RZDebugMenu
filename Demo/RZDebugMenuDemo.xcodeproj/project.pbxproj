@@ -24,6 +24,7 @@
 		718E8B87771CE7ACCB66B07B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA75CF690541A4B5CA70054A /* libPods.a */; };
 		D43C8A051A96494B0057AF66 /* MoreSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = D43C8A041A96494B0057AF66 /* MoreSettings.plist */; };
 		D43C8A071A964E370057AF66 /* EvenMoreSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = D43C8A061A964E370057AF66 /* EvenMoreSettings.plist */; };
+		D43D488D1A9B87D9002B3A55 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D43D488C1A9B87D9002B3A55 /* Launch Screen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		C679C2B5BBB49FF44D0AAC55 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D43C8A041A96494B0057AF66 /* MoreSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MoreSettings.plist; sourceTree = "<group>"; };
 		D43C8A061A964E370057AF66 /* EvenMoreSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EvenMoreSettings.plist; sourceTree = "<group>"; };
+		D43D488C1A9B87D9002B3A55 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "RZDebugMenuDemo/Resources/Launch Screen.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		0C22DAB6193CCDA30042938F = {
 			isa = PBXGroup;
 			children = (
+				D43D488C1A9B87D9002B3A55 /* Launch Screen.xib */,
 				0C22DAC8193CCDA30042938F /* RZDebugMenuDemo */,
 				0C22DAE1193CCDA30042938F /* RZDebugMenuDemoTests */,
 				0C22DAC1193CCDA30042938F /* Frameworks */,
@@ -289,6 +292,7 @@
 				0C22DACD193CCDA30042938F /* InfoPlist.strings in Resources */,
 				0C22DAD5193CCDA30042938F /* Images.xcassets in Resources */,
 				0C972B03193E0CBB00EA84FF /* Settings.plist in Resources */,
+				D43D488D1A9B87D9002B3A55 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,11 +465,12 @@
 			baseConfigurationReference = 35E576648AB0A16778F404BC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch";
 				INFOPLIST_FILE = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -475,11 +480,12 @@
 			baseConfigurationReference = C679C2B5BBB49FF44D0AAC55 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Prefix.pch";
 				INFOPLIST_FILE = "RZDebugMenuDemo/Supporting Files/RZDebugMenuDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
