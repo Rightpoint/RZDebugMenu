@@ -38,13 +38,13 @@ static const CGFloat kRZMargin = 50.0f;
         _delegate = delegate;
         _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
 
-        [self createDebugButton];
+        [self configureDebugMenuButton];
     }
 
     return self;
 }
 
-- (void)createDebugButton
+- (void)configureDebugMenuButton
 {
     _displayDebugMenuButton = [[UIButton alloc] initWithFrame:kRZButtonFrame];
     _displayDebugMenuButton.alpha = 0.80;

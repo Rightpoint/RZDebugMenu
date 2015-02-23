@@ -102,8 +102,8 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 {
     if ( self.enabled ) {
         
-        [self createTopWindow];
-        [self createSwipeGesture];
+        [self configureTopWindow];
+        [self configureSwipeGesture];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeOrientation)
@@ -112,7 +112,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     }
 }
 
-- (void)createTopWindow
+- (void)configureTopWindow
 {
     self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
     
@@ -124,7 +124,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     self.topWindow.hidden = NO;
 }
 
-- (void)createSwipeGesture
+- (void)configureSwipeGesture
 {
     UIApplication *application = [UIApplication sharedApplication];
     self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
