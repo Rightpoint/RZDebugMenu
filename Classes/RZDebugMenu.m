@@ -25,11 +25,12 @@
 
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 
+static NSUInteger kRZNumberOfTapsToHide = 5;
+
 @interface RZDebugMenu () <RZDebugMenuClearViewControllerDelegate>
 
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
 @property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
-@property (assign, nonatomic) BOOL enabled;
 
 @property (strong, nonatomic, readwrite) NSArray *settingsMenuItems;
 
@@ -93,6 +94,8 @@ NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingCha
                                                  selector:@selector(applicationDidFinishLaunching:)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
+
+        self.showDebugMenuButton = NO;
     }
 
     return self;
@@ -155,6 +158,43 @@ NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingCha
     }
 
     self.settingsMenuItems = settingsMenuItems;
+}
+
+# pragma mark - Show / Hide
+
+- (void)configureAutomaticShowHideOnWindow:(UIWindow *)window
+{
+    NSAssert(window != nil, @"");
+
+    UIViewController *rootViewController = window.rootViewController;
+    NSAssert(rootViewController != nil, @"");
+
+    UIView *view = rootViewController.view;
+    NSAssert(view != nil, @"");
+
+    UITapGestureRecognizer *manyTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manyTapGestureRecognizerFired:)];
+    manyTapGestureRecognizer.numberOfTapsRequired = kRZNumberOfTapsToHide;
+
+    [view addGestureRecognizer:manyTapGestureRecognizer];
+}
+
+- (void)manyTapGestureRecognizerFired:(id)sender
+{
+    [self showHideDebugMenuButton];
+}
+
+- (void)showHideDebugMenuButton
+{
+    self.clearRootViewController.showDebugMenuButton = (!self.clearRootViewController.showDebugMenuButton);
+}
+
+- (void)setShowDebugMenuButton:(BOOL)showDebugMenuButton
+{
+    if ( _showDebugMenuButton != showDebugMenuButton ) {
+        _showDebugMenuButton = showDebugMenuButton;
+
+        self.clearRootViewController.showDebugMenuButton = showDebugMenuButton;
+    }
 }
 
 @end

@@ -22,6 +22,7 @@ static const CGFloat kRZButtonAlpha = 0.8f;
 // Button Animations
 static const CGFloat kRZBoundaryInset = 20.0f;
 static const CGFloat kRZMargin = 50.0f;
+static const CGFloat kRZAnimationDuration = 0.35f;
 
 @interface RZDebugMenuClearViewController ()
 
@@ -41,9 +42,6 @@ static const CGFloat kRZMargin = 50.0f;
     self = [super init];
     if ( self ) {
         self.delegate = delegate;
-
-        [self configureGesgtureRecognizers];
-        [self configureDebugMenuButton];
     }
 
     return self;
@@ -54,22 +52,24 @@ static const CGFloat kRZMargin = 50.0f;
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor clearColor];
+    self.showDebugMenuButton = NO;
 
-    [self.displayDebugMenuButton addGestureRecognizer:self.dragGestureRecognizer];
-    [self.view addSubview:self.displayDebugMenuButton];
+    [self configureGesgtureRecognizers];
+    [self configureDebugMenuButton];
 }
 
 # pragma mark - Configuration
 
 - (void)configureGesgtureRecognizers
 {
+    NSAssert(self.dragGestureRecognizer == nil, @"");
     self.dragGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
 }
 
 - (void)configureDebugMenuButton
 {
     UIButton *displayDebugMenuButton = [[UIButton alloc] initWithFrame:kRZButtonFrame];;
-    displayDebugMenuButton.alpha = kRZButtonAlpha;
+    displayDebugMenuButton.alpha = self.showDebugMenuButton ? kRZButtonAlpha : 0.0f;
     displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
 
     [displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
@@ -84,11 +84,18 @@ static const CGFloat kRZMargin = 50.0f;
 
     displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
     [displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
+
     displayDebugMenuButton.clipsToBounds = YES;
     displayDebugMenuButton.layer.cornerRadius = 8;
     displayDebugMenuButton.layer.borderWidth = kRZBorderWidth;
 
+    NSAssert(self.dragGestureRecognizer != nil, @"");
+    [displayDebugMenuButton addGestureRecognizer:self.dragGestureRecognizer];
+
     self.displayDebugMenuButton = displayDebugMenuButton;
+
+    NSAssert(self.view != nil, @"");
+    [self.view addSubview:self.displayDebugMenuButton];
 }
 
 # pragma mark - Display and Scaling
@@ -172,6 +179,17 @@ static const CGFloat kRZMargin = 50.0f;
         [UIView animateWithDuration:0.25 animations:^{
             draggedButton.frame = newButtonFrame;
             [panGesture setTranslation:CGPointZero inView:self.view];
+        }];
+    }
+}
+
+- (void)setShowDebugMenuButton:(BOOL)showDebugMenuButton
+{
+    if ( _showDebugMenuButton != showDebugMenuButton ) {
+        _showDebugMenuButton = showDebugMenuButton;
+
+        [UIView animateWithDuration:kRZAnimationDuration animations:^{
+            self.displayDebugMenuButton.alpha = showDebugMenuButton ? kRZButtonAlpha : 0.0f;
         }];
     }
 }

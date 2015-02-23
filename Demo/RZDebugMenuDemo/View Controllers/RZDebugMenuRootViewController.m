@@ -37,6 +37,19 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     [RZDebugMenu addObserver:self selector:@selector(changeValue:) forKey:@"slider_preference" updateImmediately:YES];
     [RZDebugMenu addObserver:self selector:@selector(changeNavTitle:) forKey:@"name_preference" updateImmediately:YES];
     [RZDebugMenu addObserver:self selector:@selector(changeMultiValue:) forKey:@"circle_choice" updateImmediately:YES];
+
+    UIGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerFired:)];
+    [self.view addGestureRecognizer:panGestureRecognizer];
+}
+
+- (void)panGestureRecognizerFired:(id)sender
+{
+    if ( self.presentedViewController == nil ) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Whoah there ...." message:@"You swiped the backgroud view, didn't you?" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Yep" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 - (void)changeBackground:(NSNumber *)toggleValue

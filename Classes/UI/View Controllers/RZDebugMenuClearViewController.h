@@ -18,4 +18,6 @@
 
 - (id)initWithDelegate:(id)delegate;
 
+@property (assign, nonatomic, readwrite) BOOL showDebugMenuButton;
+
 @end

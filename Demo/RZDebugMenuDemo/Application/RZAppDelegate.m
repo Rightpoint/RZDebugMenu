@@ -29,7 +29,11 @@ static NSString *const kSettingsPlistName = @"Settings.plist";
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = rootNavigationController;
     [self.window makeKeyAndVisible];
-    
+
+#if (DEBUG)
+    [[RZDebugMenu sharedDebugMenu] configureAutomaticShowHideOnWindow:self.window];
+#endif
+
     return YES;
 }
 
