@@ -17,7 +17,7 @@
 #import "RZDebugMenuSliderItem.h"
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuLoadedChildPaneItem.h"
-#import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuSettings.h"
 #import "RZDebugMenuFormViewController.h"
 
 @interface RZDebugMenuSettingsForm ()
@@ -223,7 +223,7 @@
 
     RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
     if ( settingsItem ) {
-        valueToReturn = [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
+        valueToReturn = [RZDebugMenuSettings valueForDebugSettingsKey:key];
     }
     else {
         valueToReturn = [super valueForKey:key];
@@ -236,7 +236,7 @@
 {
     RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
     if ( settingsItem ) {
-        [RZDebugMenuSettingsInterface setValue:value forDebugSettingsKey:key];
+        [RZDebugMenuSettings setValue:value forDebugSettingsKey:key];
     }
     else {
         [super setValue:value forKey:key];

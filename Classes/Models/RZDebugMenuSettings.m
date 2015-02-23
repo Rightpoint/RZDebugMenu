@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettingsInterface.h"
+#import "RZDebugMenuSettings.h"
 
 #import "RZDebugMenu.h"
 
 static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
 
-@implementation RZDebugMenuSettingsInterface
+@implementation RZDebugMenuSettings
 
 #pragma mark - User default getter method
 

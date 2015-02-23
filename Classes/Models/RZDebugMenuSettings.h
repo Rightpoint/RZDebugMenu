@@ -6,10 +6,14 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-@interface RZDebugMenuSettingsInterface : NSObject
+#import "RZDebugMenuSettingsStore.h"
+
+@interface RZDebugMenuSettings : NSObject
 
 + (void)setValue:(id)value forDebugSettingsKey:(NSString *)key;
 + (id)valueForDebugSettingsKey:(NSString *)key;
-+ (NSString *)generateSettingsKey:(NSString *)identifier;
+
++ (void)setSharedDebugSettingsStore:(id <RZDebugMenuSettingsStore>)settingsStore;
++ (id <RZDebugMenuSettingsStore>)sharedDebugSettingsStore;
 
 @end

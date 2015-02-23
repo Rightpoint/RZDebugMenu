@@ -10,8 +10,7 @@
 
 #import "RZDebugMenuWindow.h"
 
-#import "RZDebugMenuSettingsInterface.h"
-#import "RZDebugMenuSettingsObserverManager.h"
+#import "RZDebugMenuSettings.h"
 #import "RZDebugMenuSettingsForm.h"
 #import "RZDebugMenuSettingsParser.h"
 #import "RZDebugMenuChildPaneItem.h"
@@ -61,20 +60,24 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
 
 + (id)debugSettingForKey:(NSString *)key
 {
-    return [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
+    return [RZDebugMenuSettings valueForDebugSettingsKey:key];
 }
 
 + (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
 {
+    /*
     [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
                                                             selector:aSelector
                                                               forKey:key
                                                    updateImmediately:update];
+     */
 }
 
 + (void)removeObserver:(id)observer forKey:(NSString *)key
 {
+    /*
     [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:observer forKey:key];
+     */
 }
 
 # pragma mark - Lifecycle
