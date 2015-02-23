@@ -26,10 +26,9 @@
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 static NSString * const kRZSettingsFileExtension       = @"plist";
 
-@interface RZDebugMenu () <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
+@interface RZDebugMenu () <RZDebugMenuClearViewControllerDelegate>
 
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
-@property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
 @property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
 @property (assign, nonatomic) BOOL enabled;
 
@@ -39,7 +38,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
 
 @implementation RZDebugMenu
 
-#pragma mark - class methods
+#pragma mark - Public API
 
 + (instancetype)sharedDebugMenu
 {
@@ -57,6 +56,8 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     [[self sharedDebugMenu] loadSettingsMenuFromPlistName:plistName];
     [[self sharedDebugMenu] setEnabled:YES];
 }
+
+# pragma mark - Settings
 
 + (id)debugSettingForKey:(NSString *)key
 {
@@ -76,7 +77,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:observer forKey:key];
 }
 
-#pragma mark - initialize methods
+# pragma mark - Lifecycle
 
 - (id)init
 {
@@ -90,7 +91,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     self = [super init];
     if ( self ) {
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(createWindowAndGesture:)
+                                                 selector:@selector(applicationDidFinishLaunching:)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
     }
@@ -98,19 +99,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     return self;
 }
 
-- (void)createWindowAndGesture:(NSNotification *)message
-{
-    if ( self.enabled ) {
-        
-        [self configureTopWindow];
-        [self configureSwipeGesture];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeOrientation)
-                                                     name:UIApplicationDidChangeStatusBarOrientationNotification
-                                                   object:nil];
-    }
-}
+# pragma mark - Configuration
 
 - (void)configureTopWindow
 {
@@ -124,18 +113,7 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     self.topWindow.hidden = NO;
 }
 
-- (void)configureSwipeGesture
-{
-    UIApplication *application = [UIApplication sharedApplication];
-    self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
-    self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    self.swipeUpGesture.numberOfTouchesRequired = 3;
-    self.swipeUpGesture.delegate = self;
-    UIWindow *applicationWindow = application.keyWindow;
-    [applicationWindow addGestureRecognizer:self.swipeUpGesture];
-}
-
-#pragma mark - state change methods
+#pragma mark - UX
 
 - (void)displayDebugMenu
 {
@@ -150,30 +128,6 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     }
 }
 
-- (void)changeOrientation
-{
-    CGFloat const iOSOrientationDepricationVersion = 8.0;
-    NSString *systemVersionString = [[[UIDevice currentDevice] systemVersion] substringToIndex:3];
-    CGFloat systemVersion = [systemVersionString floatValue];
-
-    if ( systemVersion < iOSOrientationDepricationVersion ) {
-        
-        UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-        if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
-        }
-        else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-        }
-        else if ( statusBarOrientation == UIDeviceOrientationPortraitUpsideDown ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionDown;
-        }
-        else {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        }
-    }
-}
-
 #pragma mark - RZDebugMenuClearViewControllerDelegate
 
 - (void)clearViewControllerDebugMenuButtonPressed:(RZDebugMenuClearViewController *)clearViewController
@@ -181,15 +135,14 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     [self displayDebugMenu];
 }
 
+#pragma mark - Notifications
 
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+- (void)applicationDidFinishLaunching:(NSNotification *)note
 {
-    return YES;
+    [self configureTopWindow];
 }
 
-#pragma mark - Accessors
+#pragma mark - Settings Menu
 
 + (NSArray *)settingsModelsByRecursivelyLoadingChildPanesFromSettingsModels:(NSArray *)settingsModels error:(NSError * __autoreleasing *)outError
 {
