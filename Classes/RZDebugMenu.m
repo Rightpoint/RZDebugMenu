@@ -25,7 +25,7 @@
 
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 
-static NSUInteger kRZNumberOfTapsToHide = 5;
+static NSUInteger kRZNumberOfTapsToHide = 4;
 
 @interface RZDebugMenu () <RZDebugMenuClearViewControllerDelegate>
 
