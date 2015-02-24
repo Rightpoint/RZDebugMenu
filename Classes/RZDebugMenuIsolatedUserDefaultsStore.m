@@ -18,8 +18,10 @@ static NSString *const kRZIsolatedUserDefaultsDictionaryKey = @"debugSettings";
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
+    id previousValue = [self valueForKey:key];
+
     id defaultValue = [self defaultValueForKey:key];
-    if ( value && [value isEqual:defaultValue] ) {
+    if ( value && [previousValue isEqual:value] ) {
         // Nothing to do here. Don't even send change notifications.
         return;
     }
@@ -30,7 +32,8 @@ static NSString *const kRZIsolatedUserDefaultsDictionaryKey = @"debugSettings";
 
     NSMutableDictionary *mutableDebugSettingsDictionary = debugSettingsDictionary ? [debugSettingsDictionary mutableCopy] : [NSMutableDictionary dictionary];
 
-    if ( value ) {
+    // For a default value, simply remove the key and it will fall through to our part.
+    if ( value && [value isEqual:defaultValue] == NO ) {
         mutableDebugSettingsDictionary[key] = value;
     }
     else {

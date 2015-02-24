@@ -16,15 +16,18 @@
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
+    id previousValue = [self valueForKey:key];
+
     id defaultValue = [self defaultValueForKey:key];
-    if ( value && [value isEqual:defaultValue] ) {
+    if ( value && [previousValue isEqual:value] ) {
         // Nothing to do here. Don't even send change notifications.
         return;
     }
 
     [self willChangeValueForKey:key];
 
-    if ( value ) {
+    // For a default value, simply remove the key and it will fall through to our part.
+    if ( value && [value isEqual:defaultValue] == NO ) {
         [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
     }
     else {

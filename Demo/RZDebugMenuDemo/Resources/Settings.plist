@@ -36,7 +36,7 @@
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>DefaultValue</key>
-			<string></string>
+			<string>Test title goes here.</string>
 			<key>Key</key>
 			<string>name_preference</string>
 			<key>Title</key>
@@ -60,7 +60,7 @@
 			<key>Key</key>
 			<string>circle_choice</string>
 			<key>DefaultValue</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Titles</key>
 			<array>
 				<string>None</string>
@@ -70,10 +70,10 @@
 			</array>
 			<key>Values</key>
 			<array>
-				<string>0</string>
-				<string>1</string>
-				<string>2</string>
-				<string>3</string>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
 			</array>
 		</dict>
 		<dict>
