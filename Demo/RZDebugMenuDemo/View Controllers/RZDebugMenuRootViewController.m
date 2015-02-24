@@ -8,10 +8,8 @@
 
 #import "RZDebugMenuRootViewController.h"
 
-#import "RZDebugMenu.h"
-#import "RZDebugMenuSettings.h"
-
-static NSString * const kRZDefaultNavTitle = @"Deafult Title";
+#import <RZDebugMenu/RZDebugMenu.h>
+#import <RZDebugMenu/RZDebugMenuSettings.h>
 
 @interface RZDebugMenuRootViewController ()
 
@@ -31,9 +29,7 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blueColor];
-    
-    self.title = kRZDefaultNavTitle;
-    
+
     self.circle = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 100, 100)];
     
     self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 100, 100, 50)];
@@ -78,12 +74,7 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
 
 - (void)changeNavTitle:(NSString *)newTitle
 {
-    if ( newTitle ) {
-        self.title = newTitle;
-    }
-    else {
-        self.title = kRZDefaultNavTitle;
-    }
+    self.title = newTitle;
 }
 
 - (void)changeMultiValue:(NSNumber *)newValue

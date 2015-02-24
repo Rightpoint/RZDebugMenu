@@ -8,8 +8,11 @@
 
 #import "RZAppDelegate.h"
 
-#import "RZDebugMenu.h"
 #import "RZDebugMenuRootViewController.h"
+
+#import <RZDebugMenu/RZDebugMenu.h>
+#import <RZDebugMenu/RZDebugMenuSettings.h>
+#import <RZDebugMenu/RZDebugMenuUserDefaultsStore.h>
 
 static NSString *const kSettingsPlistName = @"Settings.plist";
 
@@ -32,9 +35,12 @@ static NSString *const kSettingsPlistName = @"Settings.plist";
 
 #if (DEBUG)
     [[RZDebugMenu sharedDebugMenu] configureAutomaticShowHideOnWindow:self.window];
-#endif
+
+    // If you want your settings to be stored directly in user defaults, overwriting values used by your app via regular defaults APIs, you can uncomment the line below.
+    // [[RZDebugMenuSettings sharedSettings] setDebugSettingsStoreClass:[RZDebugMenuUserDefaultsStore class]];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kRZDebugMenuSettingChangedNotification object:nil];
+#endif
 
     return YES;
 }
