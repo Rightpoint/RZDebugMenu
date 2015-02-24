@@ -27,7 +27,6 @@
 		D43D48B51A9CE056002B3A55 /* RZDebugMenuLoadedChildPaneItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48A11A9CE056002B3A55 /* RZDebugMenuLoadedChildPaneItem.m */; };
 		D43D48B61A9CE056002B3A55 /* RZDebugMenuMultiValueItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48A31A9CE056002B3A55 /* RZDebugMenuMultiValueItem.m */; };
 		D43D48B71A9CE056002B3A55 /* RZDebugMenuSettingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48A51A9CE056002B3A55 /* RZDebugMenuSettingItem.m */; };
-		D43D48B81A9CE056002B3A55 /* RZDebugMenuSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48A71A9CE056002B3A55 /* RZDebugMenuSettings.m */; };
 		D43D48B91A9CE056002B3A55 /* RZDebugMenuSliderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48A91A9CE056002B3A55 /* RZDebugMenuSliderItem.m */; };
 		D43D48BA1A9CE056002B3A55 /* RZDebugMenuTextFieldItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48AB1A9CE056002B3A55 /* RZDebugMenuTextFieldItem.m */; };
 		D43D48BB1A9CE056002B3A55 /* RZDebugMenuToggleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48AD1A9CE056002B3A55 /* RZDebugMenuToggleItem.m */; };
@@ -100,8 +99,6 @@
 		D43D48A31A9CE056002B3A55 /* RZDebugMenuMultiValueItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuMultiValueItem.m; sourceTree = "<group>"; };
 		D43D48A41A9CE056002B3A55 /* RZDebugMenuSettingItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingItem.h; sourceTree = "<group>"; };
 		D43D48A51A9CE056002B3A55 /* RZDebugMenuSettingItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettingItem.m; sourceTree = "<group>"; };
-		D43D48A61A9CE056002B3A55 /* RZDebugMenuSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettings.h; sourceTree = "<group>"; };
-		D43D48A71A9CE056002B3A55 /* RZDebugMenuSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettings.m; sourceTree = "<group>"; };
 		D43D48A81A9CE056002B3A55 /* RZDebugMenuSliderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSliderItem.h; sourceTree = "<group>"; };
 		D43D48A91A9CE056002B3A55 /* RZDebugMenuSliderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSliderItem.m; sourceTree = "<group>"; };
 		D43D48AA1A9CE056002B3A55 /* RZDebugMenuTextFieldItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuTextFieldItem.h; sourceTree = "<group>"; };
@@ -112,7 +109,7 @@
 		D43D48AF1A9CE056002B3A55 /* RZDebugMenuVersionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuVersionItem.m; sourceTree = "<group>"; };
 		D43D48BE1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuMultiValueSelectionItem.h; sourceTree = "<group>"; };
 		D43D48BF1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuMultiValueSelectionItem.m; sourceTree = "<group>"; };
-		D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettings_Private.h; sourceTree = "<group>"; };
+		D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettings_Private.h; path = ../Classes/Models/RZDebugMenuSettings_Private.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,9 +178,6 @@
 				D43D48A31A9CE056002B3A55 /* RZDebugMenuMultiValueItem.m */,
 				D43D48A41A9CE056002B3A55 /* RZDebugMenuSettingItem.h */,
 				D43D48A51A9CE056002B3A55 /* RZDebugMenuSettingItem.m */,
-				D43D48A61A9CE056002B3A55 /* RZDebugMenuSettings.h */,
-				D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */,
-				D43D48A71A9CE056002B3A55 /* RZDebugMenuSettings.m */,
 				D43D48A81A9CE056002B3A55 /* RZDebugMenuSliderItem.h */,
 				D43D48A91A9CE056002B3A55 /* RZDebugMenuSliderItem.m */,
 				D43D48AA1A9CE056002B3A55 /* RZDebugMenuTextFieldItem.h */,
@@ -236,6 +230,7 @@
 			children = (
 				D43C89C01A94FDF10057AF66 /* RZDebugMenuSettings.h */,
 				D43C89C11A94FDF10057AF66 /* RZDebugMenuSettings.m */,
+				D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */,
 				D43D48C11A9D018C002B3A55 /* Stores */,
 			);
 			name = Settings;
@@ -442,7 +437,6 @@
 				D43D48B21A9CE056002B3A55 /* RZDebugMenuChildPaneItem.m in Sources */,
 				D43C89C41A94FDF10057AF66 /* RZDebugMenuSettings.m in Sources */,
 				D43D48BB1A9CE056002B3A55 /* RZDebugMenuToggleItem.m in Sources */,
-				D43D48B81A9CE056002B3A55 /* RZDebugMenuSettings.m in Sources */,
 				D43D48BA1A9CE056002B3A55 /* RZDebugMenuTextFieldItem.m in Sources */,
 				D43D48B91A9CE056002B3A55 /* RZDebugMenuSliderItem.m in Sources */,
 				D43D48991A9CDF02002B3A55 /* RZDebugMenuIsolatedUserDefaultsStore.m in Sources */,

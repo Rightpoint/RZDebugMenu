@@ -34,7 +34,14 @@ static NSString *const kSettingsPlistName = @"Settings.plist";
     [[RZDebugMenu sharedDebugMenu] configureAutomaticShowHideOnWindow:self.window];
 #endif
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kRZDebugMenuSettingChangedNotification object:nil];
+
     return YES;
+}
+
+- (void)settingsChanged:(NSNotification *)note
+{
+    NSLog(@"Settings changed: %@.", note);
 }
 
 @end

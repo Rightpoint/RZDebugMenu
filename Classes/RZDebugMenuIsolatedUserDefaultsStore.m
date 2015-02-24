@@ -8,6 +8,8 @@
 
 #import "RZDebugMenuIsolatedUserDefaultsStore.h"
 
+#import "RZDebugMenuSettings_Private.h"
+
 static NSString *const kRZIsolatedUserDefaultsDictionaryKey = @"debugSettings";
 
 @interface RZDebugMenuIsolatedUserDefaultsStore ()
@@ -45,13 +47,21 @@ static NSString *const kRZIsolatedUserDefaultsDictionaryKey = @"debugSettings";
     [[NSUserDefaults standardUserDefaults] setObject:debugSettingsDictionary forKey:kRZIsolatedUserDefaultsDictionaryKey];
 
     [self didChangeValueForKey:key];
+
+    [[RZDebugMenuSettings sharedSettings] postChangeNotificationSettingsName:key previousValue:previousValue newValue:value];
 }
 
-- (id)valueForKey:(NSString *)key
+- (id)innerValueForKey:(NSString *)key
 {
     NSDictionary *debugSettingsDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:kRZIsolatedUserDefaultsDictionaryKey];
 
     id objectToReturn = [debugSettingsDictionary objectForKey:key];
+    return objectToReturn;
+}
+
+- (id)valueForKey:(NSString *)key
+{
+    id objectToReturn = [self innerValueForKey:key];
     if ( objectToReturn == nil ) {
         objectToReturn = [super valueForKey:key];
     }
@@ -63,15 +73,34 @@ static NSString *const kRZIsolatedUserDefaultsDictionaryKey = @"debugSettings";
 {
     NSDictionary *debugSettingsDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:kRZIsolatedUserDefaultsDictionaryKey];
 
+    __block NSMutableDictionary *previousValues = nil;
+
     NSArray *keysBeingReset = [[debugSettingsDictionary keyEnumerator] allObjects];
     [keysBeingReset enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+
+        id previousValue = [self innerValueForKey:key];
+        if ( previousValue ) {
+            if ( previousValues == nil ) {
+                previousValues = [NSMutableDictionary dictionary];
+            }
+
+            previousValues[key] = previousValue;
+        }
+
         [self willChangeValueForKey:key];
     }];
 
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRZIsolatedUserDefaultsDictionaryKey];
 
-    [keysBeingReset enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+    [[[keysBeingReset reverseObjectEnumerator] allObjects] enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
         [self didChangeValueForKey:key];
+
+        id defaultValue = [self defaultValueForKey:key];
+        id previousValue = previousValues[key];
+
+        if ( previousValue ) {
+            [[RZDebugMenuSettings sharedSettings] postChangeNotificationSettingsName:key previousValue:previousValue newValue:defaultValue];
+        }
     }];
 }
 

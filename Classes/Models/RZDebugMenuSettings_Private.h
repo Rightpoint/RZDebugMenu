@@ -12,4 +12,6 @@
 
 + (void)initializeWithKeys:(NSArray *)keys defaultValues:(NSDictionary *)defaultvalues;
 
+- (void)postChangeNotificationSettingsName:(NSString *)settingName previousValue:(id)oldValue newValue:(id)newValue;
+
 @end

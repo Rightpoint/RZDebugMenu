@@ -13,6 +13,10 @@
 #import "RZDebugMenuSettings_Private.h"
 #import "RZDebugMenuIsolatedUserDefaultsStore.h"
 
+NSString *const kRZDebugMenuSettingChangedNotificationSettingKey = @"setting";
+NSString *const kRZDebugMenuSettingChangedNotificationSettingPreviousValueKey = @"previousValue";
+NSString *const kRZDebugMenuSettingChangedNotificationSettingNewValueKey = @"newValue";
+
 @interface RZDebugMenuSettings ()
 
 @property (copy, nonatomic, readwrite) NSArray *keys;
@@ -122,6 +126,26 @@ static RZDebugMenuSettings *s_sharedSettings;
 {
     NSAssert(self.settingsStore == nil, @"The settings store class can not be set after initialization of the settings store.");
     _debugSettingsStoreClass = DebugSettingsStoreClass;
+}
+
+// Notifications
+
+- (void)postChangeNotificationSettingsName:(NSString *)settingName previousValue:(id)previousValue newValue:(id)newValue
+{
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    if ( settingName ) {
+        userInfo[kRZDebugMenuSettingChangedNotificationSettingKey] = settingName;
+    }
+
+    if ( previousValue ) {
+        userInfo[kRZDebugMenuSettingChangedNotificationSettingPreviousValueKey] = previousValue;
+    }
+
+    if ( newValue ) {
+        userInfo[kRZDebugMenuSettingChangedNotificationSettingNewValueKey] = newValue;
+    }
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRZDebugMenuSettingChangedNotification object:self userInfo:[userInfo copy]];
 }
 
 @end

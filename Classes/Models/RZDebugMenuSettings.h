@@ -8,17 +8,23 @@
 
 #import "RZDebugMenuSettingsStore.h"
 
+extern NSString *const kRZDebugMenuSettingChangedNotification;
+
+extern NSString *const kRZDebugMenuSettingChangedNotificationSettingKey;
+extern NSString *const kRZDebugMenuSettingChangedNotificationSettingPreviousValueKey;
+extern NSString *const kRZDebugMenuSettingChangedNotificationSettingNewValueKey;
+
 @interface RZDebugMenuSettings : NSObject
 
 + (RZDebugMenuSettings *)sharedSettings;
 
 // Keyed access methods.
-// You can access and settings via [RZDebugMenuSettings sharedSettings][@"my_setting_value"]
+// You can access and settings via [RZDebugMenuSettings sharedSettings][@"my_setting_key"]
 
 - (id)objectForKeyedSubscript:(id <NSCopying>)key;
 - (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key;
 
-// These are all standard KVO methods. Standard KVO is the best way to interaction with this class.
+// These are all just re-declarations of the standard KVO methods. Standard KVO is the best way to interaction with this class.
 
 - (id)valueForKey:(NSString *)key;
 - (void)setValue:(id)value forKey:(NSString *)key;

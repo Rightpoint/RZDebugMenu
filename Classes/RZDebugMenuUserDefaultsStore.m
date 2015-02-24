@@ -8,6 +8,8 @@
 
 #import "RZDebugMenuUserDefaultsStore.h"
 
+#import "RZDebugMenuSettings_Private.h"
+
 @interface RZDebugMenuUserDefaultsStore ()
 
 @end
@@ -35,6 +37,8 @@
     }
 
     [self didChangeValueForKey:key];
+
+    [[RZDebugMenuSettings sharedSettings] postChangeNotificationSettingsName:key previousValue:previousValue newValue:value];
 }
 
 - (id)valueForKey:(NSString *)key
@@ -50,10 +54,14 @@
 - (void)reset
 {
     for ( NSString *key in self.keys ) {
-        if ( [[NSUserDefaults standardUserDefaults] objectForKey:key] != nil ) {
+        id previousValue = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+        if ( previousValue != nil ) {
             [self willChangeValueForKey:key];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
             [self didChangeValueForKey:key];
+
+            id defaultValue = [self defaultValueForKey:key];
+            [[RZDebugMenuSettings sharedSettings] postChangeNotificationSettingsName:key previousValue:previousValue newValue:defaultValue];
         }
     }
 }
