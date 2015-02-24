@@ -8,8 +8,14 @@
 
 @interface RZDebugMenuSettingsParser : NSObject
 
-+ (NSArray *)settingsMenuItemsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError;
++ (NSArray *)settingsMenuItemsFromSettingsDictionary:(NSDictionary *)settingsDictionary
+                                       returningKeys:(NSArray **)outKeys
+                                       defaultValues:(NSDictionary **)outDefaultValues
+                                               error:(NSError * __autoreleasing *)outError;
 
-+ (NSArray *)settingsMenuItemsFromPlistName:(NSString *)plistName error:(NSError * __autoreleasing *)outError;
++ (NSArray *)settingsMenuItemsFromPlistName:(NSString *)plistName
+                              returningKeys:(NSArray **)outKeys
+                              defaultValues:(NSDictionary **)outDefaultValues
+                                      error:(NSError * __autoreleasing *)outError;
 
 @end

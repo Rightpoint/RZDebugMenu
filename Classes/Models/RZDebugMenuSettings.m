@@ -9,52 +9,119 @@
 #import "RZDebugMenuSettings.h"
 
 #import "RZDebugMenu.h"
+#import "RZDebugMenuSettingsStore.h"
+#import "RZDebugMenuSettings_Private.h"
+#import "RZDebugMenuIsolatedUserDefaultsStore.h"
 
-static NSString * const kRZUserSettingsDebugPrefix = @"DEBUG_";
+@interface RZDebugMenuSettings ()
+
+@property (copy, nonatomic, readwrite) NSArray *keys;
+@property (copy, nonatomic, readwrite) NSDictionary *defaultValues;
+
+@property (strong, nonatomic, readwrite) Class debugSettingsStoreClass;
+
+@property (strong, nonatomic, readwrite) id <RZDebugMenuSettingsStore> settingsStore;
+
+@end
 
 @implementation RZDebugMenuSettings
 
-#pragma mark - User default getter method
+@synthesize debugSettingsStoreClass = _debugSettingsStoreClass;
 
-+ (id)valueForDebugSettingsKey:(NSString *)key
+static RZDebugMenuSettings *s_sharedSettings;
+
++ (RZDebugMenuSettings *)sharedSettings
 {
-    NSString *settingKey = [self generateSettingsKey:key];
-    
-    return [[NSUserDefaults standardUserDefaults] objectForKey:settingKey];
+    NSAssert(s_sharedSettings != nil, @"Settings access before initialization!");
+    return s_sharedSettings;
 }
 
-#pragma mark - User default setter method
-
-+ (void)setValue:(id)value forDebugSettingsKey:(NSString *)key
++ (void)initializeWithKeys:(NSArray *)keys defaultValues:(NSDictionary *)defaultvalues
 {
-    if ( key != nil && value != nil ) {
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *userDefaultsKey = [self generateSettingsKey:key];
-        
-        if ( [userDefaults objectForKey:userDefaultsKey] != value ) {
-            
-            NSDictionary *userInfo;
-            
-            if ( value == nil ) {
-                userInfo = @{key: [NSNull null]};
-            }
-            else {
-                userInfo = @{key: value};
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRZDebugMenuSettingChangedNotification
-                                                                object:nil
-                                                              userInfo:userInfo];
-            
-            [userDefaults setObject:value forKey:userDefaultsKey];
-        }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_sharedSettings = [[RZDebugMenuSettings alloc] initWithKeys:keys defaultValues:defaultvalues];
+    });
+}
+
+- (instancetype)initWithKeys:(NSArray *)keys defaultValues:(NSDictionary *)defaultValues
+{
+    self = [super init];
+    if ( self ) {
+        self.keys = keys;
+        self.defaultValues = defaultValues;
     }
+
+    return self;
 }
 
-#pragma mark - Preprocessing methods
-
-+ (NSString *)generateSettingsKey:(NSString *)identifier
+- (id <RZDebugMenuSettingsStore>)settingsStore
 {
-    return [NSString stringWithFormat:@"%@%@", kRZUserSettingsDebugPrefix, identifier];
+    if ( _settingsStore == nil ) {
+        Class DebugSettingsStoreClass = _debugSettingsStoreClass;
+
+        NSAssert(DebugSettingsStoreClass == Nil || [DebugSettingsStoreClass conformsToProtocol:@protocol(RZDebugMenuSettingsStore)], @"");
+
+        if ( DebugSettingsStoreClass == Nil  ) {
+            DebugSettingsStoreClass = [RZDebugMenuIsolatedUserDefaultsStore class];
+        }
+
+        _settingsStore = [[DebugSettingsStoreClass alloc] initWithKeys:self.keys defaultValues:self.defaultValues];
+    }
+
+    return _settingsStore;
+}
+
+- (void)reset
+{
+    [self.settingsStore reset];
+}
+
+// Keyed access pass-through.
+
+- (id)objectForKeyedSubscript:(id <NSCopying>)key
+{
+    return [self.settingsStore objectForKeyedSubscript:key];
+}
+
+- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key
+{
+    [self.settingsStore setObject:obj forKeyedSubscript:key];
+}
+
+// KVO pass-through.
+
+- (id)valueForKey:(NSString *)key
+{
+    return [self.settingsStore valueForKey:key];
+}
+
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+    [self.settingsStore setValue:value forKey:key];
+}
+
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context
+{
+    [self.settingsStore addObserver:observer forKeyPath:keyPath options:options context:context];
+}
+
+- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(void *)context
+{
+    [self.settingsStore removeObserver:observer forKeyPath:keyPath context:context];
+}
+
+- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
+{
+    [self.settingsStore removeObserver:observer forKeyPath:keyPath];
+}
+
+// Store Access
+
+- (void)setDebugSettingsStoreClass:(Class)DebugSettingsStoreClass
+{
+    NSAssert(self.settingsStore == nil, @"The settings store class can not be set after initialization of the settings store.");
+    _debugSettingsStoreClass = DebugSettingsStoreClass;
 }
 
 @end

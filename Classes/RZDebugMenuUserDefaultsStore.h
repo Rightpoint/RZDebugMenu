@@ -8,6 +8,6 @@
 
 #import "RZDebugMenuSettingsStore.h"
 
-@interface RZDebugMenuUserDefaultsStore : NSObject <RZDebugMenuSettingsStore>
+@interface RZDebugMenuUserDefaultsStore : RZDebugMenuSettingsStore
 
 @end

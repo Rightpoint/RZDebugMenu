@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "RZDebugMenuSettingsStore.h"
 
-@interface RZDebugMenuIsolatedUserDefaultsStore : NSObject
+@interface RZDebugMenuIsolatedUserDefaultsStore : RZDebugMenuSettingsStore
 
 @end

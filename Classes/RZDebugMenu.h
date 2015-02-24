@@ -29,35 +29,6 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
 + (void)enableMenuWithSettingsPlistName:(NSString *)plistName;
 
 /**
- *  Returns the setting value for a specified setting key defined in the plist
- *
- *  @param key Key as defined in the plist under the 'Key' field
- *
- *  @return An object that is the value of the indexed setting, or nil if the key is not valid
- */
-+ (id)debugSettingForKey:(NSString *)key;
-
-/**
- *  Sets an object to observe changes for a particular setting
- *
- *  @param observer  Object to observe changes
- *  @param selector  A selector to perform when a setting that an object is observing changes
- *  @param key       The key whose value a change will be observed for
- *  @param update    Boolean value that determines if settings should be applied on load or not
- *
- *  @note If the selector accepts a parameter, it will be passed the new value for the key that changed
- */
-+ (void)addObserver:(id)observer selector:(SEL)selector forKey:(NSString *)key updateImmediately:(BOOL)update;
-
-/**
- *  Removes an object currently observing for a settings change
- *
- *  @param observer Object to remove as an observer
- *  @param key      The key the observer was observing a change on
- */
-+ (void)removeObserver:(id)observer forKey:(NSString *)key;
-
-/**
  *  Access the shared debug menu.
  *
  *  @return If yopu have called enableMenuWithSettingsPlistName:, this will return the shared debug debug.

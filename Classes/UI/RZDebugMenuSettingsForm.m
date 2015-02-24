@@ -205,6 +205,10 @@
                 NSArray *childMenuItems = ((RZDebugMenuLoadedChildPaneItem *)menuItem).settingsMenuItems;
                 settingsMenuItem = [[self class] settingsMenuItemForKey:key inMenuItems:childMenuItems];
             }
+
+            if ( settingsMenuItem ) {
+                break;
+            }
         }
     }
 
@@ -222,7 +226,7 @@
 
     RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
     if ( settingsItem ) {
-        valueToReturn = [RZDebugMenuSettings valueForDebugSettingsKey:key];
+        valueToReturn = [RZDebugMenuSettings sharedSettings][key];
     }
     else {
         valueToReturn = [super valueForKey:key];
@@ -235,7 +239,7 @@
 {
     RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
     if ( settingsItem ) {
-        [RZDebugMenuSettings setValue:value forDebugSettingsKey:key];
+        [RZDebugMenuSettings sharedSettings][key] = value;
     }
     else {
         [super setValue:value forKey:key];

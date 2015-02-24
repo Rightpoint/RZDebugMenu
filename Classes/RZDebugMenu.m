@@ -17,6 +17,7 @@
 #import "RZDebugMenuLoadedChildPaneItem.h"
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuFormViewController.h"
+#import "RZDebugMenuSettings_Private.h"
 
 #import "RZDebugLogMenuDefines.h"
 
@@ -54,30 +55,6 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
 {
     [[self sharedDebugMenu] loadSettingsMenuFromPlistName:plistName];
     [[self sharedDebugMenu] setEnabled:YES];
-}
-
-# pragma mark - Settings
-
-+ (id)debugSettingForKey:(NSString *)key
-{
-    return [RZDebugMenuSettings valueForDebugSettingsKey:key];
-}
-
-+ (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
-{
-    /*
-    [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
-                                                            selector:aSelector
-                                                              forKey:key
-                                                   updateImmediately:update];
-     */
-}
-
-+ (void)removeObserver:(id)observer forKey:(NSString *)key
-{
-    /*
-    [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:observer forKey:key];
-     */
 }
 
 # pragma mark - Lifecycle
@@ -152,9 +129,16 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
 - (void)loadSettingsMenuFromPlistName:(NSString *)plistName
 {
     NSError *settingsParsingError = nil;
-    NSArray *settingsMenuItems = [RZDebugMenuSettingsParser settingsMenuItemsFromPlistName:plistName error:&settingsParsingError];
+    NSArray *keys = nil;
+    NSDictionary *defaultValues = nil;
+
+    NSArray *settingsMenuItems = [RZDebugMenuSettingsParser settingsMenuItemsFromPlistName:plistName
+                                                                             returningKeys:&keys
+                                                                             defaultValues:&defaultValues
+                                                                                     error:&settingsParsingError];
     if ( settingsMenuItems ) {
-        // Nothing to do here.
+        // We've loaded all our settings. Initialize the store.
+        [RZDebugMenuSettings initializeWithKeys:keys defaultValues:defaultValues];
     }
     else {
         NSLog(@"Failed to parse settings from plist %@: %@.", plistName, settingsParsingError);

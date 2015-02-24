@@ -28,7 +28,7 @@
 			<key>MinimumValue</key>
 			<integer>0</integer>
 			<key>Key</key>
-			<string>slider_preference</string>
+			<string>slider_cool_preference</string>
 			<key>Type</key>
 			<string>PSSliderSpecifier</string>
 		</dict>

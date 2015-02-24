@@ -10,26 +10,20 @@
 
 @interface RZDebugMenuUserDefaultsStore ()
 
-@property (copy, nonatomic, readwrite) NSArray *keys;
-
 @end
 
 @implementation RZDebugMenuUserDefaultsStore
 
-- (instancetype)initWithKeys:(NSArray *)keys
-{
-    self = [super init];
-    if ( self ) {
-        self.keys = keys;
-    }
-
-    return self;
-}
-
 - (void)setValue:(id)value forKey:(NSString *)key
 {
+    id defaultValue = [self defaultValueForKey:key];
+    if ( value && [value isEqual:defaultValue] ) {
+        // Nothing to do here. Don't even send change notifications.
+        return;
+    }
+
     [self willChangeValueForKey:key];
-    
+
     if ( value ) {
         [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
     }
@@ -42,14 +36,37 @@
 
 - (id)valueForKey:(NSString *)key
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    id objectToReturn = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    if ( objectToReturn == nil ) {
+        objectToReturn = [super valueForKey:key];
+    }
+
+    return objectToReturn;
 }
 
 - (void)reset
 {
     for ( NSString *key in self.keys ) {
-        [self setValue:nil forKey:key];
+        if ( [[NSUserDefaults standardUserDefaults] objectForKey:key] != nil ) {
+            [self willChangeValueForKey:key];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+            [self didChangeValueForKey:key];
+        }
     }
+}
+
+- (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying, NSObject>)key
+{
+    NSAssert([key isKindOfClass:[NSString class]], @"");
+
+    [self setValue:obj forKey:(NSString *)key];
+}
+
+- (id)objectForKeyedSubscript:(id <NSCopying, NSObject>)key
+{
+    NSAssert([key isKindOfClass:[NSString class]], @"");
+
+    return [self valueForKey:(NSString *)key];
 }
 
 @end

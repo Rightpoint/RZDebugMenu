@@ -61,10 +61,15 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
     return [selectionItems copy];
 }
 
-+ (NSArray *)settingsMenuItemsFromSettingsDictionary:(NSDictionary *)settingsDictionary error:(NSError * __autoreleasing *)outError
++ (NSArray *)settingsMenuItemsFromSettingsDictionary:(NSDictionary *)settingsDictionary
+                                       returningKeys:(NSArray * __autoreleasing *)outKeys
+                                       defaultValues:(NSDictionary * __autoreleasing *)outDefaultValues
+                                               error:(NSError * __autoreleasing *)outError;
 {
     NSMutableArray *mutableSettingsMenuItemsToReturn = [NSMutableArray array];
     NSError *errorToReturn = nil;
+    NSMutableDictionary *mutableDefaultValues = nil;
+    NSMutableArray *mutableKeys = nil;
 
     NSArray *preferencesSpecifiers = [settingsDictionary objectForKey:kRZPreferenceSpecifiersKey];
     if ( preferencesSpecifiers ) {
@@ -77,24 +82,24 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                 NSString *title = [preferenceSpecifierDictionary objectForKey:kRZKeyTitle];
                 NSString *itemType = [preferenceSpecifierDictionary objectForKey:kRZKeyType];
                 NSString *itemIdentifier = [preferenceSpecifierDictionary objectForKey:kRZKeyItemIdentifier];
-                id defaultvalue = [preferenceSpecifierDictionary objectForKey:kRZKeyDefaultValue];
+                id defaultValue = [preferenceSpecifierDictionary objectForKey:kRZKeyDefaultValue];
 
                 RZDebugMenuItem *menuItem = nil;
 
                 if ( [itemType isEqualToString:kRZTextFieldSpecifier] ) {
-                    menuItem = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultvalue key:itemIdentifier title:title];
+                    menuItem = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue key:itemIdentifier title:title];
                 }
                 else if ( [itemType isEqualToString:kRZSliderSpecifier] ) {
                     NSNumber *maximum = [preferenceSpecifierDictionary objectForKey:kRZKeyMaximumValue];
                     NSNumber *minimum = [preferenceSpecifierDictionary objectForKey:kRZKeyMinimumValue];
-                    menuItem = [[RZDebugMenuSliderItem alloc] initWithValue:defaultvalue
+                    menuItem = [[RZDebugMenuSliderItem alloc] initWithValue:defaultValue
                                                                         key:itemIdentifier
                                                                       title:title
                                                                    maxValue:maximum
                                                                    minValue:minimum];
                 }
                 else if ( [itemType isEqualToString:kRZToggleSwitchSpecifier] ) {
-                    menuItem = [[RZDebugMenuToggleItem alloc] initWithValue:defaultvalue key:itemIdentifier title:title];
+                    menuItem = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue key:itemIdentifier title:title];
                 }
                 else if ( [itemType isEqualToString:kRZMultiValueSpecifier] ) {
                     NSArray *optionTitles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsTitles];
@@ -102,7 +107,7 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
                     NSArray *selectionItems = [self multiValueOptionsArray:optionTitles withValues:optionValues];
 
-                    menuItem = [[RZDebugMenuMultiValueItem alloc] initWithValue:defaultvalue
+                    menuItem = [[RZDebugMenuMultiValueItem alloc] initWithValue:defaultValue
                                                                             key:itemIdentifier
                                                                           title:title
                                                                  selectionItems:selectionItems];
@@ -126,6 +131,22 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                 }
                 else {
                     // NSAssert(NO, @"");
+                }
+
+                if ( defaultValue != nil && itemIdentifier.length > 0 ) {
+                    if ( mutableDefaultValues == nil ) {
+                        mutableDefaultValues = [NSMutableDictionary dictionary];
+                    }
+
+                    mutableDefaultValues[itemIdentifier] = defaultValue;
+                }
+
+                if ( itemIdentifier.length > 0 ) {
+                    if ( mutableKeys == nil ) {
+                        mutableKeys = [NSMutableArray array];
+                    }
+
+                    [mutableKeys addObject:itemIdentifier];
                 }
 
                 if ( menuItem ) {
@@ -153,6 +174,16 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
     if ( errorToReturn ) {
         mutableSettingsMenuItemsToReturn = nil;
+        mutableDefaultValues = nil;
+        mutableKeys = nil;
+    }
+
+    if ( outDefaultValues ) {
+        *outDefaultValues = [mutableDefaultValues copy];
+    }
+
+    if ( outKeys ) {
+        *outKeys = [mutableKeys copy];
     }
 
     if ( outError ) {
@@ -164,19 +195,32 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
 # pragma mark - Fiel Reading and Outer Parsing
 
-+ (NSArray *)settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:(NSArray *)settingsMenuItems error:(NSError * __autoreleasing *)outError
++ (NSArray *)settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:(NSArray *)settingsMenuItems
+                                                                    returningKeys:(NSArray * __autoreleasing *)outKeys
+                                                                    defaultValues:(NSDictionary * __autoreleasing *)outDefaultValues
+                                                                            error:(NSError * __autoreleasing *)outError
 {
     NSError *errorToReturn = nil;
     NSMutableArray *mutableSettingsMenuItemsToReturn = [settingsMenuItems mutableCopy];
+    NSMutableArray *mutableKeys = nil;
+    NSMutableDictionary *mutableDefaultValues = nil;
 
     for ( RZDebugMenuItem *menuItem in settingsMenuItems ) {
+        NSArray *keysToAdd = nil;
+        NSDictionary *defaultValuesToAdd = nil;
+
         if ( [menuItem isKindOfClass:[RZDebugMenuChildPaneItem class]] ) {
             NSString *plistName = ((RZDebugMenuChildPaneItem *)menuItem).plistName;
 
             NSError *childPaneParsingError = nil;
-            NSArray *childPaneSettingsMenuItems = [[self class] settingsMenuItemsFromPlistName:plistName error:&childPaneParsingError];
+            NSArray *childPaneSettingsMenuItems = [[self class] settingsMenuItemsFromPlistName:plistName
+                                                                                 returningKeys:&keysToAdd
+                                                                                 defaultValues:&defaultValuesToAdd
+                                                                                         error:&childPaneParsingError];
             if ( childPaneSettingsMenuItems ) {
-                RZDebugMenuLoadedChildPaneItem *loadedChildPaneItem = [[RZDebugMenuLoadedChildPaneItem alloc] initWithTitle:menuItem.title plistName:plistName settingsMenuItems:childPaneSettingsMenuItems];
+                RZDebugMenuLoadedChildPaneItem *loadedChildPaneItem = [[RZDebugMenuLoadedChildPaneItem alloc] initWithTitle:menuItem.title
+                                                                                                                  plistName:plistName
+                                                                                                          settingsMenuItems:childPaneSettingsMenuItems];
                 NSUInteger index = [mutableSettingsMenuItemsToReturn indexOfObject:menuItem];
                 [mutableSettingsMenuItemsToReturn replaceObjectAtIndex:index withObject:loadedChildPaneItem];
             }
@@ -190,7 +234,10 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
             NSArray *childSettingsMenuItems = groupItem.children;
 
             NSError *recursiveLoadingError = nil;
-            childSettingsMenuItems = [self settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:childSettingsMenuItems error:&recursiveLoadingError];
+            childSettingsMenuItems = [self settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:childSettingsMenuItems
+                                                                                                  returningKeys:&keysToAdd
+                                                                                                  defaultValues:&defaultValuesToAdd
+                                                                                                          error:&recursiveLoadingError];
 
             if ( childSettingsMenuItems ) {
                 groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:groupItem.title children:childSettingsMenuItems];
@@ -202,10 +249,36 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                 break;
             }
         }
+
+        if ( keysToAdd ) {
+            if ( mutableKeys == nil ) {
+                mutableKeys = [NSMutableArray array];
+            }
+
+            [mutableKeys addObjectsFromArray:keysToAdd];
+        }
+
+        if ( defaultValuesToAdd ) {
+            if ( mutableDefaultValues == nil ) {
+                mutableDefaultValues = [NSMutableDictionary dictionary];
+            }
+
+            [mutableDefaultValues addEntriesFromDictionary:defaultValuesToAdd];
+        }
     }
 
     if ( errorToReturn ) {
         mutableSettingsMenuItemsToReturn = nil;
+        mutableKeys = nil;
+        mutableDefaultValues = nil;
+    }
+
+    if ( outKeys ) {
+        *outKeys = [mutableKeys copy];
+    }
+
+    if ( outDefaultValues ) {
+        *outDefaultValues = [mutableDefaultValues copy];
     }
 
     if ( outError ) {
@@ -215,7 +288,10 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
     return [mutableSettingsMenuItemsToReturn copy];
 }
 
-+ (NSArray *)settingsMenuItemsFromPlistName:(NSString *)plistName error:(NSError * __autoreleasing *)outError
++ (NSArray *)settingsMenuItemsFromPlistName:(NSString *)plistName
+                              returningKeys:(NSArray * __autoreleasing *)outKeys
+                              defaultValues:(NSDictionary * __autoreleasing *)outDefaultValues
+                                      error:(NSError * __autoreleasing *)outError;
 {
     plistName = [plistName stringByDeletingPathExtension];
 
@@ -229,6 +305,8 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
     NSArray *settingsMenuItems = nil;
     NSError *errorToReturn = nil;
+    NSArray *keys = nil;
+    NSDictionary *defaultValues = nil;
 
     NSError *dataReadingError = nil;
     NSData *plistData = [NSData dataWithContentsOfURL:plistURL options:0 error:&dataReadingError];
@@ -239,10 +317,40 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
             NSAssert([propertyListDictionary isKindOfClass:[NSDictionary class]], @"");
 
             NSError *settingsMenuItemsParsingError = nil;
-            settingsMenuItems = [self settingsMenuItemsFromSettingsDictionary:propertyListDictionary error:&settingsMenuItemsParsingError];
+            settingsMenuItems = [self settingsMenuItemsFromSettingsDictionary:propertyListDictionary
+                                                                returningKeys:&keys
+                                                                defaultValues:&defaultValues
+                                                                        error:&settingsMenuItemsParsingError];
             if ( settingsMenuItems ) {
                 NSError *recursiveLoadingError = nil;
-                settingsMenuItems = [self settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:settingsMenuItems error:&recursiveLoadingError];
+
+                NSArray *childKeys = nil;
+                NSDictionary *childDefaultValues = nil;
+                settingsMenuItems = [self settingsMenuItemsByRecursivelyLoadingChildPanesFromSettingsMenuItems:settingsMenuItems
+                                                                                                 returningKeys:&childKeys
+                                                                                                 defaultValues:&childDefaultValues
+                                                                                                         error:&recursiveLoadingError];
+
+                if ( childKeys ) {
+                    if ( keys ) {
+                        keys = [keys arrayByAddingObjectsFromArray:childKeys];
+                    }
+                    else {
+                        keys = childKeys;
+                    }
+                }
+
+                if ( childDefaultValues ) {
+                    if ( defaultValues ) {
+                        NSMutableDictionary *mutableDefaultValues = [defaultValues mutableCopy];
+                        [mutableDefaultValues addEntriesFromDictionary:childDefaultValues];
+                        defaultValues = [mutableDefaultValues copy];
+                    }
+                    else {
+                        defaultValues = childDefaultValues;
+                    }
+                }
+
                 if ( settingsMenuItems == nil ) {
                     errorToReturn = recursiveLoadingError;
                 }
@@ -261,6 +369,16 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
     if ( errorToReturn ) {
         settingsMenuItems = nil;
+        keys = nil;
+        defaultValues = nil;
+    }
+
+    if ( outKeys ) {
+        *outKeys = keys;
+    }
+
+    if ( outDefaultValues ) {
+        *outDefaultValues = defaultValues;
     }
 
     if ( outError ) {
