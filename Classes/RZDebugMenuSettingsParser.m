@@ -11,7 +11,6 @@
 #import "RZDebugMenu.h"
 #import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueItem.h"
-#import "RZMultiValueSelectionItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
@@ -19,6 +18,7 @@
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuChildPaneItem.h"
 #import "RZDebugMenuLoadedChildPaneItem.h"
+#import "RZDebugMenuMultiValueSelectionItem.h"
 
 static NSString* const kRZSettingsFileExtension = @"plist";
 
@@ -54,7 +54,7 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
 
         NSString *title = [optionTitles objectAtIndex:i];
         NSNumber *value = [optionValues objectAtIndex:i];
-        RZMultiValueSelectionItem *selectionItemMetaData = [[RZMultiValueSelectionItem alloc] initWithTitle:title defaultValue:value];
+        RZDebugMenuMultiValueSelectionItem *selectionItemMetaData = [[RZDebugMenuMultiValueSelectionItem alloc] initWithTitle:title value:value];
         [selectionItems addObject:selectionItemMetaData];
     }
 

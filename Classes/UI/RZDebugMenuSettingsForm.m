@@ -10,7 +10,6 @@
 
 #import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueItem.h"
-#import "RZMultiValueSelectionItem.h"
 #import "RZDebugMenuToggleItem.h"
 #import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
@@ -113,8 +112,8 @@
         }
         else if ( [item isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
             NSArray *selectionItems = ((RZDebugMenuMultiValueItem *)item).selectionItems;
-            NSArray *titles = [selectionItems valueForKey:NSStringFromSelector(@selector(selectionTitle))];
-            NSArray *values = [selectionItems valueForKey:NSStringFromSelector(@selector(selectionValue))];
+            NSArray *titles = [selectionItems valueForKey:NSStringFromSelector(@selector(title))];
+            NSArray *values = [selectionItems valueForKey:NSStringFromSelector(@selector(value))];
 
             mutableFieldDictionary[FXFormFieldOptions] = values;
 

@@ -8,7 +8,7 @@
 
 @interface RZDebugMenuItem : NSObject
 
-@property (strong, nonatomic, readonly) NSString *title;
+@property (copy, nonatomic, readonly) NSString *title;
 
 - (id)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
 
