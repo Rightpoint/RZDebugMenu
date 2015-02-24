@@ -124,7 +124,7 @@ static RZDebugMenuSettings *s_sharedSettings;
 
 - (void)setDebugSettingsStoreClass:(Class)DebugSettingsStoreClass
 {
-    NSAssert(self.settingsStore == nil, @"The settings store class can not be set after initialization of the settings store.");
+    NSAssert(_settingsStore == nil, @"The settings store class can not be set after initialization of the settings store.");
     _debugSettingsStoreClass = DebugSettingsStoreClass;
 }
 
