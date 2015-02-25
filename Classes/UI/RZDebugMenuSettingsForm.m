@@ -185,6 +185,10 @@
             NSArray *textKeyComponents = @[ NSStringFromSelector(@selector(textField)), NSStringFromSelector(@selector(text)) ];
             NSString *textKey = [textKeyComponents componentsJoinedByString:@"."];
             [mutableFieldDictionary setObject:defaultValue forKey:textKey];
+
+            NSArray *textFieldEnabledKeyComponents = @[ NSStringFromSelector(@selector(textField)), @"enabled" ];
+            NSString *textFieldEnabledKey = [textFieldEnabledKeyComponents componentsJoinedByString:@"."];
+            [mutableFieldDictionary setObject:@(NO) forKey:textFieldEnabledKey];
         }
 
         if ( [item isKindOfClass:[RZDebugMenuSettingItem class]] ) {
