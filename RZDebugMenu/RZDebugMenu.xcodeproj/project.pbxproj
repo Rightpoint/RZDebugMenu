@@ -32,6 +32,7 @@
 		D43D48BB1A9CE056002B3A55 /* RZDebugMenuToggleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48AD1A9CE056002B3A55 /* RZDebugMenuToggleItem.m */; };
 		D43D48BC1A9CE056002B3A55 /* RZDebugMenuVersionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48AF1A9CE056002B3A55 /* RZDebugMenuVersionItem.m */; };
 		D43D48C01A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D43D48BF1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.m */; };
+		D4E340641A9E1DAA006902A2 /* RZDebugMenuTitleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D4E340631A9E1DAA006902A2 /* RZDebugMenuTitleItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,8 @@
 		D43D48BE1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuMultiValueSelectionItem.h; sourceTree = "<group>"; };
 		D43D48BF1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuMultiValueSelectionItem.m; sourceTree = "<group>"; };
 		D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettings_Private.h; path = ../Classes/Models/RZDebugMenuSettings_Private.h; sourceTree = "<group>"; };
+		D4E340621A9E1DAA006902A2 /* RZDebugMenuTitleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuTitleItem.h; sourceTree = "<group>"; };
+		D4E340631A9E1DAA006902A2 /* RZDebugMenuTitleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuTitleItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +191,8 @@
 				D43D48AF1A9CE056002B3A55 /* RZDebugMenuVersionItem.m */,
 				D43D48BE1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.h */,
 				D43D48BF1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.m */,
+				D4E340621A9E1DAA006902A2 /* RZDebugMenuTitleItem.h */,
+				D4E340631A9E1DAA006902A2 /* RZDebugMenuTitleItem.m */,
 			);
 			name = Models;
 			path = Classes/Models;
@@ -443,6 +448,7 @@
 				D43C8A0B1A9679CE0057AF66 /* RZDebugMenuFormViewController.m in Sources */,
 				D43D48B31A9CE056002B3A55 /* RZDebugMenuGroupItem.m in Sources */,
 				D43D48901A9BE239002B3A55 /* RZDebugMenuSettingsStore.m in Sources */,
+				D4E340641A9E1DAA006902A2 /* RZDebugMenuTitleItem.m in Sources */,
 				D43C89A71A94FDBA0057AF66 /* RZDebugMenu.m in Sources */,
 				D43D48B71A9CE056002B3A55 /* RZDebugMenuSettingItem.m in Sources */,
 				D43D48C01A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.m in Sources */,

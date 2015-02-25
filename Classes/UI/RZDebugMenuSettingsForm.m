@@ -18,6 +18,7 @@
 #import "RZDebugMenuLoadedChildPaneItem.h"
 #import "RZDebugMenuSettings.h"
 #import "RZDebugMenuFormViewController.h"
+#import "RZDebugMenuTitleItem.h"
 
 @interface RZDebugMenuSettingsForm ()
 
@@ -149,6 +150,9 @@
 
             mutableFieldDictionary[FXFormFieldClass] = [RZDebugMenuSettingsForm class];
             mutableFieldDictionary[FXFormFieldViewController] = [[RZDebugMenuFormViewController alloc] init];
+        }
+        else if ( [item isKindOfClass:[RZDebugMenuTitleItem class]] ) {
+            formFieldType = FXFormFieldTypeDefault;
         }
 
         if ( [item isKindOfClass:[RZDebugMenuSettingItem class]] ) {

@@ -5,6 +5,16 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>Title</key>
+			<string>Read Only Title</string>
+			<key>DefaultValue</key>
+			<string>Simple Read Only Value</string>
+			<key>Key</key>
+			<string>simple_read_only_value</string>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+		</dict>
+		<dict>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>File</key>
