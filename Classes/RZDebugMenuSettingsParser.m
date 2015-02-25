@@ -41,6 +41,7 @@ static NSString* const kRZKeyFile = @"File";
 static NSString* const kRZKeyDefaultValue = @"DefaultValue";
 
 static NSString* const kRZKeyEnvironmentsTitles = @"Titles";
+static NSString* const kRZKeyEnvironmentsShortTitles = @"ShortTitles";
 static NSString* const kRZKeyEnvironmentsValues = @"Values";
 
 static NSString* const kRZKeyMaximumValue = @"MaximumValue";
@@ -53,15 +54,19 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
 
 # pragma mark - Plist Dictionary Parsing
 
-+ (NSArray *)multiValueOptionsArray:(NSArray *)optionTitles withValues:(NSArray *)optionValues
++ (NSArray *)multiValueOptionsArrayWithLongTitles:(NSArray *)longTitles shortTitles:(NSArray *)shortTitles values:(NSArray *)optionValues
 {
     NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
 
-    for (NSInteger i = 0; i < optionTitles.count; i++) {
+    for (NSInteger i = 0; i < longTitles.count; i++) {
 
-        NSString *title = [optionTitles objectAtIndex:i];
+        NSString *longTitle = [longTitles objectAtIndex:i];
+        NSString *shortTitle = shortTitles ? [shortTitles objectAtIndex:i] : nil;
+
         NSNumber *value = [optionValues objectAtIndex:i];
-        RZDebugMenuMultiValueSelectionItem *selectionItemMetaData = [[RZDebugMenuMultiValueSelectionItem alloc] initWithTitle:title value:value];
+        RZDebugMenuMultiValueSelectionItem *selectionItemMetaData = [[RZDebugMenuMultiValueSelectionItem alloc] initWithLongTitle:longTitle
+                                                                                                                       shortTitle:shortTitle
+                                                                                                                            value:value];
         [selectionItems addObject:selectionItemMetaData];
     }
 
@@ -116,10 +121,11 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
                                                                  falseValue:falseValue];
                 }
                 else if ( [itemType isEqualToString:kRZMultiValueSpecifier] ) {
-                    NSArray *optionTitles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsTitles];
+                    NSArray *optionLongTitles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsTitles];
+                    NSArray *optionShortTitles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsShortTitles];
                     NSArray *optionValues = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsValues];
 
-                    NSArray *selectionItems = [self multiValueOptionsArray:optionTitles withValues:optionValues];
+                    NSArray *selectionItems = [self multiValueOptionsArrayWithLongTitles:optionLongTitles shortTitles:optionShortTitles values:optionValues];
 
                     menuItem = [[RZDebugMenuMultiValueItem alloc] initWithValue:defaultValue
                                                                             key:itemIdentifier

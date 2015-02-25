@@ -19,6 +19,9 @@
 #import "RZDebugMenuSettings.h"
 #import "RZDebugMenuFormViewController.h"
 #import "RZDebugMenuTitleItem.h"
+#import "RZDebugMenuMultiValueSelectionItem.h"
+
+#import "RZDebugMenuShortTitles.h"
 
 @interface RZDebugMenuSettingsForm ()
 
@@ -113,10 +116,20 @@
         }
         else if ( [item isKindOfClass:[RZDebugMenuMultiValueItem class]] ) {
             NSArray *selectionItems = ((RZDebugMenuMultiValueItem *)item).selectionItems;
-            NSArray *titles = [selectionItems valueForKey:NSStringFromSelector(@selector(title))];
+            NSArray *longTitles = [selectionItems valueForKey:NSStringFromSelector(@selector(title))];
             NSArray *values = [selectionItems valueForKey:NSStringFromSelector(@selector(value))];
+            NSArray *shortTitles = [selectionItems valueForKey:NSStringFromSelector(@selector(shortTitle))];
+
+            BOOL hasShortTitles = [[shortTitles firstObject] isKindOfClass:[NSString class]];
 
             mutableFieldDictionary[FXFormFieldOptions] = values;
+
+            NSArray *titlesForTransform = longTitles;
+
+            if ( hasShortTitles ) {
+                mutableFieldDictionary[FXFormFieldViewController] = [[RZFormLongNameViewController alloc] initWithLongTitles:longTitles];
+                titlesForTransform = shortTitles;
+            }
 
             mutableFieldDictionary[FXFormFieldValueTransformer] = ^(id input) {
                 NSString *valueToReturn = @"";
@@ -124,7 +137,7 @@
                 if ( input != nil ) {
                     NSUInteger index = [values indexOfObject:input];
                     NSAssert(index < NSNotFound && index >= 0, @"");
-                    valueToReturn = titles[index];
+                    valueToReturn = titlesForTransform[index];
                 }
 
                 return valueToReturn;
