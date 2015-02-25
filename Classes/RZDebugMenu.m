@@ -9,33 +9,38 @@
 #import "RZDebugMenu.h"
 
 #import "RZDebugMenuWindow.h"
-#import "RZDebugMenuModalViewController.h"
 
-#import "RZDebugMenuSettingsInterface.h"
-#import "RZDebugMenuSettingsDataSource.h"
-#import "RZDebugMenuSettingsObserverManager.h"
+#import "RZDebugMenuSettings.h"
+#import "RZDebugMenuSettingsForm.h"
+#import "RZDebugMenuSettingsParser.h"
+#import "RZDebugMenuChildPaneItem.h"
+#import "RZDebugMenuLoadedChildPaneItem.h"
+#import "RZDebugMenuGroupItem.h"
+#import "RZDebugMenuFormViewController.h"
+#import "RZDebugMenuSettings_Private.h"
 
 #import "RZDebugLogMenuDefines.h"
 
-NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
-static NSString * const kRZSettingsFileExtension       = @"plist";
+#import <FXForms/FXForms.h>
 
-@interface RZDebugMenu () <UIGestureRecognizerDelegate, RZDebugMenuClearViewControllerDelegate>
+NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
+
+static NSUInteger kRZNumberOfTapsToHide = 4;
+
+@interface RZDebugMenu () <RZDebugMenuClearViewControllerDelegate>
 
 @property (strong, nonatomic) RZDebugMenuWindow *topWindow;
-@property (strong, nonatomic) UISwipeGestureRecognizer *swipeUpGesture;
 @property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
-@property (strong, nonatomic) RZDebugMenuSettingsDataSource *settingsTableViewDataSource;
-@property (copy, nonatomic) NSString *settingsFileName;
-@property (assign, nonatomic) BOOL enabled;
+
+@property (strong, nonatomic, readwrite) NSArray *settingsMenuItems;
 
 @end
 
 @implementation RZDebugMenu
 
-#pragma mark - class methods
+#pragma mark - Public API
 
-+ (instancetype)privateSharedInstance
++ (instancetype)sharedDebugMenu
 {
     static RZDebugMenu *s_sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -46,39 +51,13 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     return s_sharedInstance;
 }
 
-+ (void)enableWithSettingsPlist:(NSString *)fileName
++ (void)enableMenuWithSettingsPlistName:(NSString *)plistName
 {
-    [[self privateSharedInstance] setSettingsFileName:fileName];
-    [[self privateSharedInstance] setEnabled:YES];
+    [[self sharedDebugMenu] loadSettingsMenuFromPlistName:plistName];
+    [[self sharedDebugMenu] setEnabled:YES];
 }
 
-+ (id)debugSettingForKey:(NSString *)key
-{
-    return [RZDebugMenuSettingsInterface valueForDebugSettingsKey:key];
-}
-
-+ (void)addObserver:(id)observer selector:(SEL)aSelector forKey:(NSString *)key updateImmediately:(BOOL)update
-{
-    RZDebugMenu *sharedInstance = [self privateSharedInstance];
-
-    if ( ![sharedInstance.settingsTableViewDataSource.settingsKeys containsObject:key] ) {
-        RZDebugMenuLogDebug("Warning! Key not in plist");
-    }
-    else {
-        
-        [[RZDebugMenuSettingsObserverManager sharedInstance] addObserver:observer
-                                                                selector:aSelector
-                                                                  forKey:key
-                                                       updateImmediately:update];
-    }
-}
-
-+ (void)removeObserver:(id)observer forKey:(NSString *)key
-{
-    [[RZDebugMenuSettingsObserverManager sharedInstance] removeObserver:observer forKey:key];
-}
-
-#pragma mark - initialize methods
+# pragma mark - Lifecycle
 
 - (id)init
 {
@@ -92,81 +71,44 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     self = [super init];
     if ( self ) {
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(createWindowAndGesture:)
+                                                 selector:@selector(applicationDidFinishLaunching:)
                                                      name:UIApplicationDidFinishLaunchingNotification
                                                    object:nil];
+
+        self.showDebugMenuButton = NO;
     }
 
     return self;
 }
 
-- (void)createWindowAndGesture:(NSNotification *)message
+# pragma mark - Configuration
+
+- (void)configureTopWindowIfNeeded
 {
-    if ( self.enabled ) {
-        
-        [self createTopWindow];
-        [self createSwipeGesture];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeOrientation)
-                                                     name:UIApplicationDidChangeStatusBarOrientationNotification
-                                                   object:nil];
+    if ( self.clearRootViewController == nil ) {
+        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+
+        UIScreen *mainScreen = [UIScreen mainScreen];
+        self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
+        self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.f;
+        self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.topWindow.rootViewController = self.clearRootViewController;
+        self.topWindow.hidden = NO;
     }
 }
 
-- (void)createTopWindow
-{
-    self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
-    
-    UIScreen *mainScreen = [UIScreen mainScreen];
-    self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
-    self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.f;
-    self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.topWindow.rootViewController = self.clearRootViewController;
-    self.topWindow.hidden = NO;
-}
-
-- (void)createSwipeGesture
-{
-    UIApplication *application = [UIApplication sharedApplication];
-    self.swipeUpGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(displayDebugMenu)];
-    self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    self.swipeUpGesture.numberOfTouchesRequired = 3;
-    self.swipeUpGesture.delegate = self;
-    UIWindow *applicationWindow = application.keyWindow;
-    [applicationWindow addGestureRecognizer:self.swipeUpGesture];
-}
-
-#pragma mark - state change methods
+#pragma mark - UX
 
 - (void)displayDebugMenu
 {
-    RZDebugMenuModalViewController *settingsMenu = [[RZDebugMenuModalViewController alloc] initWithDataSource:self.settingsTableViewDataSource];
-    UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenu];
-    [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
-}
+    if ( self.settingsMenuItems.count > 0 ) {
+        RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsMenuItems:self.settingsMenuItems];
 
-- (void)changeOrientation
-{
-    CGFloat const iOSOrientationDepricationVersion = 8.0;
-    NSString *systemVersionString = [[[UIDevice currentDevice] systemVersion] substringToIndex:3];
-    CGFloat systemVersion = [systemVersionString floatValue];
+        FXFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
+        settingsMenuViewController.formController.form = settingsForm;
 
-    if ( systemVersion < iOSOrientationDepricationVersion ) {
-        
-        UIInterfaceOrientation statusBarOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-        if ( statusBarOrientation == UIDeviceOrientationLandscapeLeft ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionRight;
-        }
-        else if ( statusBarOrientation == UIDeviceOrientationLandscapeRight ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-        }
-        else if ( statusBarOrientation == UIDeviceOrientationPortraitUpsideDown ) {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionDown;
-        }
-        else {
-            self.swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
-        }
+        UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenuViewController];
+        [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
     }
 }
 
@@ -177,33 +119,72 @@ static NSString * const kRZSettingsFileExtension       = @"plist";
     [self displayDebugMenu];
 }
 
+#pragma mark - Notifications
 
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+- (void)applicationDidFinishLaunching:(NSNotification *)note
 {
-    return YES;
+    [self configureTopWindowIfNeeded];
 }
 
-#pragma mark - Accessors
+#pragma mark - Settings Menu
 
-- (void)setSettingsFileName:(NSString *)settingsFileName
+- (void)loadSettingsMenuFromPlistName:(NSString *)plistName
 {
-    _settingsFileName = settingsFileName;
-    _settingsFileName = [_settingsFileName stringByDeletingPathExtension];
+    NSError *settingsParsingError = nil;
+    NSArray *keys = nil;
+    NSDictionary *defaultValues = nil;
 
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:_settingsFileName ofType:kRZSettingsFileExtension];
-    
-    if ( !plistPath ) {
-        
-        NSString *exceptionName = [_settingsFileName stringByAppendingString:@".plist doesn't exist"];
-        @throw [NSException exceptionWithName:exceptionName
-                                       reason:@"Make sure you have a settings plist file in the Resources directory of your application"
-                                     userInfo:nil];
+    NSArray *settingsMenuItems = [RZDebugMenuSettingsParser settingsMenuItemsFromPlistName:plistName
+                                                                             returningKeys:&keys
+                                                                             defaultValues:&defaultValues
+                                                                                     error:&settingsParsingError];
+    if ( settingsMenuItems ) {
+        // We've loaded all our settings. Initialize the store.
+        [RZDebugMenuSettings initializeWithKeys:keys defaultValues:defaultValues];
     }
-    
-    NSDictionary *plistData = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    _settingsTableViewDataSource = [[RZDebugMenuSettingsDataSource alloc] initWithDictionary:plistData];
+    else {
+        NSLog(@"Failed to parse settings from plist %@: %@.", plistName, settingsParsingError);
+    }
+
+    self.settingsMenuItems = settingsMenuItems;
+}
+
+# pragma mark - Show / Hide
+
+- (void)configureAutomaticShowHideOnWindow:(UIWindow *)window
+{
+    NSAssert(window != nil, @"");
+
+    UIViewController *rootViewController = window.rootViewController;
+    NSAssert(rootViewController != nil, @"");
+
+    UIView *view = rootViewController.view;
+    NSAssert(view != nil, @"");
+
+    UITapGestureRecognizer *manyTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manyTapGestureRecognizerFired:)];
+    manyTapGestureRecognizer.numberOfTapsRequired = kRZNumberOfTapsToHide;
+
+    [view addGestureRecognizer:manyTapGestureRecognizer];
+}
+
+- (void)manyTapGestureRecognizerFired:(id)sender
+{
+    [self showHideDebugMenuButton];
+}
+
+- (void)showHideDebugMenuButton
+{
+    self.clearRootViewController.showDebugMenuButton = (!self.clearRootViewController.showDebugMenuButton);
+}
+
+- (void)setShowDebugMenuButton:(BOOL)showDebugMenuButton
+{
+    if ( _showDebugMenuButton != showDebugMenuButton ) {
+        _showDebugMenuButton = showDebugMenuButton;
+
+        [self configureTopWindowIfNeeded];
+        self.clearRootViewController.showDebugMenuButton = showDebugMenuButton;
+    }
 }
 
 @end

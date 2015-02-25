@@ -26,35 +26,23 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  *
  *  @param fileName Name of the plist which defines the debug settings to be used. The plist should conform to the standard Settings Bundle plist format.
  */
-+ (void)enableWithSettingsPlist:(NSString *)fileName;
++ (void)enableMenuWithSettingsPlistName:(NSString *)plistName;
 
 /**
- *  Returns the setting value for a specified setting key defined in the plist
+ *  Access the shared debug menu.
  *
- *  @param key Key as defined in the plist under the 'Key' field
- *
- *  @return An object that is the value of the indexed setting, or nil if the key is not valid
+ *  @return If yopu have called enableMenuWithSettingsPlistName:, this will return the shared debug debug.
  */
-+ (id)debugSettingForKey:(NSString *)key;
++ (instancetype)sharedDebugMenu;
 
 /**
- *  Sets an object to observe changes for a particular setting
- *
- *  @param observer  Object to observe changes
- *  @param aSelector A selector to perform when a setting that an object is observing changes
- *  @param key       The key whose value a change will be observed for
- *  @param update    Boolean value that determines if settings should be applied on load or not
- *
- *  @note If the selector accepts a parameter, it will be passed the new value for the key that changed
- */
-+ (void)addObserver:(id)observer selector:(SEL)selector forKey:(NSString *)key updateImmediately:(BOOL)update;
+ *  Configure automatic show / hide of the debug menu button with a 5-tap gesture on the selected window.
 
-/**
- *  Removes an object currently observing for a settings change
- *
- *  @param observer Object to remove as an observer
- *  @param key      The key the observer was observing a change on
+ *  @param window   The window to set up for automatic show / hide of the debug menu button.
  */
-+ (void)removeObserver:(id)observer forKey:(NSString *)key;
+- (void)configureAutomaticShowHideOnWindow:(UIWindow *)window;
+
+@property (assign, nonatomic) BOOL enabled;
+@property (assign, nonatomic, readwrite) BOOL showDebugMenuButton;
 
 @end

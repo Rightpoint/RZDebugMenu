@@ -17,63 +17,93 @@ static const CGRect kRZButtonFrame = { .origin = { .x = 70.0f, .y = 225.0f }, .s
 static const CGFloat kRZButtonGlyphFontSize = 30.0f;
 static const CGFloat kRZBorderWidth = 1.5f;
 
+static const CGFloat kRZButtonAlpha = 0.8f;
+
 // Button Animations
 static const CGFloat kRZBoundaryInset = 20.0f;
 static const CGFloat kRZMargin = 50.0f;
+static const CGFloat kRZAnimationDuration = 0.35f;
 
 @interface RZDebugMenuClearViewController ()
 
 @property (weak, nonatomic) id <RZDebugMenuClearViewControllerDelegate> delegate;
 @property (strong, nonatomic) UIButton *displayDebugMenuButton;
-@property (strong, nonatomic) UIPanGestureRecognizer *dragGesture;
+
+@property (strong, nonatomic) UIPanGestureRecognizer *dragGestureRecognizer;
 
 @end
 
 @implementation RZDebugMenuClearViewController
 
+# pragma mark - Lifecycle
+
 - (id)initWithDelegate:(id)delegate
 {
     self = [super init];
     if ( self ) {
-        _delegate = delegate;
-        _dragGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
-
-        [self createDebugButton];
+        self.delegate = delegate;
     }
 
     return self;
 }
 
-- (void)createDebugButton
-{
-    _displayDebugMenuButton = [[UIButton alloc] initWithFrame:kRZButtonFrame];
-    _displayDebugMenuButton.alpha = 0.80;
-    _displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
-
-    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
-    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateHighlighted];
-    [_displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateSelected];
-
-    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [_displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-
-    [_displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:kRZButtonGlyphFontSize]];
-
-    _displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
-    [_displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
-    _displayDebugMenuButton.clipsToBounds = YES;
-    _displayDebugMenuButton.layer.cornerRadius = 8;
-    _displayDebugMenuButton.layer.borderWidth = kRZBorderWidth;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.view.backgroundColor = [UIColor clearColor];
-    
-    [self.displayDebugMenuButton addGestureRecognizer:self.dragGesture];
+    self.showDebugMenuButton = NO;
+
+    [self configureGesgtureRecognizers];
+    [self configureDebugMenuButton];
+}
+
+# pragma mark - Configuration
+
+- (void)configureGesgtureRecognizers
+{
+    NSAssert(self.dragGestureRecognizer == nil, @"");
+    self.dragGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragButton:)];
+}
+
+- (void)configureDebugMenuButton
+{
+    UIButton *displayDebugMenuButton = [[UIButton alloc] initWithFrame:kRZButtonFrame];;
+    displayDebugMenuButton.alpha = self.showDebugMenuButton ? kRZButtonAlpha : 0.0f;
+    displayDebugMenuButton.backgroundColor = [UIColor whiteColor];
+
+    [displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateNormal];
+    [displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateHighlighted];
+    [displayDebugMenuButton setTitle:kRZDebugMenuButtonTitle forState:UIControlStateSelected];
+
+    [displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    [displayDebugMenuButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+
+    [displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:kRZButtonGlyphFontSize]];
+
+    displayDebugMenuButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+    [displayDebugMenuButton addTarget:self action:@selector(displayDebugMenu) forControlEvents:UIControlEventTouchUpInside];
+
+    displayDebugMenuButton.clipsToBounds = YES;
+    displayDebugMenuButton.layer.cornerRadius = 8;
+    displayDebugMenuButton.layer.borderWidth = kRZBorderWidth;
+
+    NSAssert(self.dragGestureRecognizer != nil, @"");
+    [displayDebugMenuButton addGestureRecognizer:self.dragGestureRecognizer];
+
+    self.displayDebugMenuButton = displayDebugMenuButton;
+
+    NSAssert(self.view != nil, @"");
     [self.view addSubview:self.displayDebugMenuButton];
+}
+
+# pragma mark - Display and Scaling
+
+- (void)displayDebugMenu
+{
+    [self scaleButtonUp];
+    [self.delegate clearViewControllerDebugMenuButtonPressed:self];
 }
 
 - (void)scaleButtonDown
@@ -81,12 +111,6 @@ static const CGFloat kRZMargin = 50.0f;
     CGRect const buttonShrinkFrame = CGRectInset(self.displayDebugMenuButton.frame, 1, 1);
     [self.displayDebugMenuButton.titleLabel setFont:[UIFont systemFontOfSize:29.5]];
     self.displayDebugMenuButton.frame = buttonShrinkFrame;
-}
-
-- (void)displayDebugMenu
-{
-    [self scaleButtonUp];
-    [self.delegate clearViewControllerDebugMenuButtonPressed:self];
 }
 
 - (void)scaleButtonUp
@@ -97,6 +121,8 @@ static const CGFloat kRZMargin = 50.0f;
     self.displayDebugMenuButton.frame = enlargeFrame;
     self.displayDebugMenuButton.center = oldCenter;
 }
+
+# pragma mark - Drag
 
 - (void)dragButton:(UIPanGestureRecognizer *)panGesture
 {
@@ -153,6 +179,17 @@ static const CGFloat kRZMargin = 50.0f;
         [UIView animateWithDuration:0.25 animations:^{
             draggedButton.frame = newButtonFrame;
             [panGesture setTranslation:CGPointZero inView:self.view];
+        }];
+    }
+}
+
+- (void)setShowDebugMenuButton:(BOOL)showDebugMenuButton
+{
+    if ( _showDebugMenuButton != showDebugMenuButton ) {
+        _showDebugMenuButton = showDebugMenuButton;
+
+        [UIView animateWithDuration:kRZAnimationDuration animations:^{
+            self.displayDebugMenuButton.alpha = showDebugMenuButton ? kRZButtonAlpha : 0.0f;
         }];
     }
 }

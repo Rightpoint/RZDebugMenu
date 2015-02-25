@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuSettingItem.h"
 
-@interface RZDebugMenuTextFieldItem : RZDebugMenuSettingsItem
+@interface RZDebugMenuTextFieldItem : RZDebugMenuSettingItem
 
 @end

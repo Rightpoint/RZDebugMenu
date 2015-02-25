@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>File</key>
+			<string>EvenMoreSettings</string>
+			<key>Title</key>
+			<string>Even More Settings</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>More Settings</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Slider of Cool</string>
+			<key>DefaultValue</key>
+			<integer>25</integer>
+			<key>MaximumValue</key>
+			<integer>100</integer>
+			<key>MinimumValue</key>
+			<integer>0</integer>
+			<key>Key</key>
+			<string>slider_cool_preference</string>
+			<key>Type</key>
+			<string>PSSliderSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Enable Awesome</string>
+			<key>Key</key>
+			<string>enable_awesome</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
+</plist>

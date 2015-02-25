@@ -7,12 +7,12 @@
 //
 // NOTE: This class is READONLY and can not be altered via any interfaces
 
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuItem.h"
 
-@interface RZDebugMenuVersionItem : RZDebugMenuSettingsItem
+@interface RZDebugMenuVersionItem : RZDebugMenuItem
 
 @property (strong, nonatomic, readonly) NSString *versionNumber;
 
-- (id)initWithTitle:(NSString *)title vrsionr:(NSString *)version;
+- (id)initWithTitle:(NSString *)title version:(NSString *)version NS_DESIGNATED_INITIALIZER;
 
 @end

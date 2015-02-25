@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettingsItem.h"
+#import "RZDebugMenuSettingItem.h"
 
-@interface RZDebugMenuSliderItem : RZDebugMenuSettingsItem
+@interface RZDebugMenuSliderItem : RZDebugMenuSettingItem
 
 @property (strong, nonatomic, readonly) NSNumber *max;
 @property (strong, nonatomic, readonly) NSNumber *min;
 
-- (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title maxValue:(NSNumber *)max minValue:(NSNumber *)min;
+- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title maxValue:(NSNumber *)max minValue:(NSNumber *)min NS_DESIGNATED_INITIALIZER;
 
 @end

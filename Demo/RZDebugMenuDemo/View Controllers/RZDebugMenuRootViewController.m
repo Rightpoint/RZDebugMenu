@@ -8,9 +8,8 @@
 
 #import "RZDebugMenuRootViewController.h"
 
-#import "RZDebugMenu.h"
-
-static NSString * const kRZDefaultNavTitle = @"Deafult Title";
+#import <RZDebugMenu/RZDebugMenu.h>
+#import <RZDebugMenu/RZDebugMenuSettings.h>
 
 @interface RZDebugMenuRootViewController ()
 
@@ -18,13 +17,19 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
 
 @implementation RZDebugMenuRootViewController
 
+- (void)dealloc
+{
+    [[RZDebugMenuSettings sharedSettings] removeObserver:self forKeyPath:@"reset_toggle"];
+    [[RZDebugMenuSettings sharedSettings] removeObserver:self forKeyPath:@"slider_preference"];
+    [[RZDebugMenuSettings sharedSettings] removeObserver:self forKeyPath:@"name_preference"];
+    [[RZDebugMenuSettings sharedSettings] removeObserver:self forKeyPath:@"circle_choice"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blueColor];
-    
-    self.title = kRZDefaultNavTitle;
-    
+
     self.circle = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 100, 100)];
     
     self.testTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 100, 100, 50)];
@@ -32,11 +37,25 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
     self.testTextField.textColor = [UIColor whiteColor];
     self.testTextField.enabled = NO;
     [self.view addSubview:self.testTextField];
-    
-    [RZDebugMenu addObserver:self selector:@selector(changeBackground:) forKey:@"reset_toggle" updateImmediately:YES];
-    [RZDebugMenu addObserver:self selector:@selector(changeValue:) forKey:@"slider_preference" updateImmediately:YES];
-    [RZDebugMenu addObserver:self selector:@selector(changeNavTitle:) forKey:@"name_preference" updateImmediately:YES];
-    [RZDebugMenu addObserver:self selector:@selector(changeMultiValue:) forKey:@"circle_choice" updateImmediately:YES];
+
+    // For specific observation of particular debug settings, you can use standard KVO (or any other syntactic sugar on top of it).
+    [[RZDebugMenuSettings sharedSettings] addObserver:self forKeyPath:@"reset_toggle" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
+    [[RZDebugMenuSettings sharedSettings] addObserver:self forKeyPath:@"slider_preference" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
+    [[RZDebugMenuSettings sharedSettings] addObserver:self forKeyPath:@"name_preference" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
+    [[RZDebugMenuSettings sharedSettings] addObserver:self forKeyPath:@"circle_choice" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
+
+    UIGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerFired:)];
+    [self.view addGestureRecognizer:panGestureRecognizer];
+}
+
+- (void)panGestureRecognizerFired:(id)sender
+{
+    if ( self.presentedViewController == nil ) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Whoah there ...." message:@"You swiped the backgroud view, didn't you?" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Yep" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 - (void)changeBackground:(NSNumber *)toggleValue
@@ -56,12 +75,7 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
 
 - (void)changeNavTitle:(NSString *)newTitle
 {
-    if ( newTitle ) {
-        self.title = newTitle;
-    }
-    else {
-        self.title = kRZDefaultNavTitle;
-    }
+    self.title = newTitle;
 }
 
 - (void)changeMultiValue:(NSNumber *)newValue
@@ -90,6 +104,27 @@ static NSString * const kRZDefaultNavTitle = @"Deafult Title";
         default:
             [self.circle removeFromSuperview];
             break;
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    id newValue = [change objectForKey:NSKeyValueChangeNewKey];
+
+    if ( [keyPath isEqualToString:@"reset_toggle"] ) {
+        [self changeBackground:newValue];
+    }
+    else if ( [keyPath isEqualToString:@"slider_preference"] ) {
+        [self changeValue:newValue];
+    }
+    else if ( [keyPath isEqualToString:@"name_preference"] ) {
+        [self changeNavTitle:newValue];
+    }
+    else if ( [keyPath isEqualToString:@"circle_choice"] ) {
+        [self changeMultiValue:newValue];
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
 

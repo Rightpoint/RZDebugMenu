@@ -18,7 +18,7 @@
 
 @implementation RZDebugMenuSliderItem
 
-- (id)initWithValue:(id)value forKey:(NSString *)key withTitle:(NSString *)title maxValue:(NSNumber *)max minValue:(NSNumber *)min
+- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title maxValue:(NSNumber *)max minValue:(NSNumber *)min
 {
     self = [super initWithValue:value key:key title:title];
     if ( self ) {
@@ -28,6 +28,11 @@
     }
     
     return self;
+}
+
+- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+{
+    return [self initWithValue:value key:key title:title maxValue:nil minValue:nil];
 }
 
 @end

@@ -16,6 +16,11 @@
 
 @implementation RZDebugMenuMultiValueItem
 
+- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+{
+    return [self initWithValue:value key:key title:title selectionItems:nil];
+}
+
 - (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title selectionItems:(NSArray *)selectionItems
 {
     self = [super initWithValue:value key:key title:title];
