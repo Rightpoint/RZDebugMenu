@@ -38,6 +38,7 @@
     self.testTextField.enabled = NO;
     [self.view addSubview:self.testTextField];
 
+    // For specific observation of particular debug settings, you can use standard KVO (or any other syntactic sugar on top of it).
     [[RZDebugMenuSettings sharedSettings] addObserver:self forKeyPath:@"reset_toggle" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
     [[RZDebugMenuSettings sharedSettings] addObserver:self forKeyPath:@"slider_preference" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
     [[RZDebugMenuSettings sharedSettings] addObserver:self forKeyPath:@"name_preference" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];

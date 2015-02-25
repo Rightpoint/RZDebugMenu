@@ -83,16 +83,18 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
 
 # pragma mark - Configuration
 
-- (void)configureTopWindow
+- (void)configureTopWindowIfNeeded
 {
-    self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
-    
-    UIScreen *mainScreen = [UIScreen mainScreen];
-    self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
-    self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.f;
-    self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.topWindow.rootViewController = self.clearRootViewController;
-    self.topWindow.hidden = NO;
+    if ( self.clearRootViewController == nil ) {
+        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
+
+        UIScreen *mainScreen = [UIScreen mainScreen];
+        self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
+        self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.f;
+        self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.topWindow.rootViewController = self.clearRootViewController;
+        self.topWindow.hidden = NO;
+    }
 }
 
 #pragma mark - UX
@@ -121,7 +123,7 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)note
 {
-    [self configureTopWindow];
+    [self configureTopWindowIfNeeded];
 }
 
 #pragma mark - Settings Menu
@@ -180,6 +182,7 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
     if ( _showDebugMenuButton != showDebugMenuButton ) {
         _showDebugMenuButton = showDebugMenuButton;
 
+        [self configureTopWindowIfNeeded];
         self.clearRootViewController.showDebugMenuButton = showDebugMenuButton;
     }
 }
