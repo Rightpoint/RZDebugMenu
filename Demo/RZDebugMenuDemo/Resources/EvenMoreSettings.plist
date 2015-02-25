@@ -5,6 +5,22 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>DefaultValue</key>
+			<string>activated</string>
+			<key>Key</key>
+			<string>mapped_switch</string>
+			<key>TrueValue</key>
+			<string>activated</string>
+			<key>FalseValue</key>
+			<string>deactivated</string>
+			<key>Title</key>
+			<string>Mapped Switch</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>New item</key>
+			<string></string>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Titles</key>

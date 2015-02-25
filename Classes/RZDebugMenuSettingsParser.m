@@ -39,10 +39,15 @@ static NSString* const kRZKeyTitle = @"Title";
 static NSString* const kRZKeyType = @"Type";
 static NSString* const kRZKeyFile = @"File";
 static NSString* const kRZKeyDefaultValue = @"DefaultValue";
+
 static NSString* const kRZKeyEnvironmentsTitles = @"Titles";
 static NSString* const kRZKeyEnvironmentsValues = @"Values";
+
 static NSString* const kRZKeyMaximumValue = @"MaximumValue";
 static NSString* const kRZKeyMinimumValue = @"MinimumValue";
+
+static NSString* const kRZKeyTrueValue = @"TrueValue";
+static NSString* const kRZKeyFalseValue = @"FalseValue";
 
 @implementation RZDebugMenuSettingsParser
 
@@ -101,7 +106,14 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                                                                    minValue:minimum];
                 }
                 else if ( [itemType isEqualToString:kRZToggleSwitchSpecifier] ) {
-                    menuItem = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue key:itemIdentifier title:title];
+                    id trueValue = [preferenceSpecifierDictionary objectForKey:kRZKeyTrueValue];
+                    id falseValue = [preferenceSpecifierDictionary objectForKey:kRZKeyFalseValue];
+
+                    menuItem = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue
+                                                                        key:itemIdentifier
+                                                                      title:title
+                                                                  trueValue:trueValue
+                                                                 falseValue:falseValue];
                 }
                 else if ( [itemType isEqualToString:kRZMultiValueSpecifier] ) {
                     NSArray *optionTitles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsTitles];

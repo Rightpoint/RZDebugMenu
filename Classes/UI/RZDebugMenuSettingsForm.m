@@ -240,6 +240,27 @@
     RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
     if ( settingsItem ) {
         valueToReturn = [RZDebugMenuSettings sharedSettings][key];
+
+        if ( [settingsItem isKindOfClass:[RZDebugMenuToggleItem class]] ) {
+            id trueValue = ((RZDebugMenuToggleItem *)settingsItem).trueValue;
+            id falseValue = ((RZDebugMenuToggleItem *)settingsItem).falseValue;
+            if ( trueValue ) {
+                NSAssert(falseValue != nil, @"");
+                NSAssert([trueValue class] == [falseValue class], @"");
+
+                NSNumber *(^valueTransformer)(id value) = ^(id value) {
+                    NSNumber *valueToReturn = @(NO);
+
+                    if ( [value isEqual:trueValue] ) {
+                        valueToReturn = @(YES);
+                    }
+
+                    return valueToReturn;
+                };
+
+                valueToReturn = valueTransformer(valueToReturn);
+            }
+        }
     }
     else {
         valueToReturn = [super valueForKey:key];
@@ -252,6 +273,29 @@
 {
     RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
     if ( settingsItem ) {
+        if ( [settingsItem isKindOfClass:[RZDebugMenuToggleItem class]] ) {
+            id trueValue = ((RZDebugMenuToggleItem *)settingsItem).trueValue;
+            id falseValue = ((RZDebugMenuToggleItem *)settingsItem).falseValue;
+            if ( trueValue ) {
+                NSAssert(falseValue != nil, @"");
+                NSAssert([trueValue class] == [falseValue class], @"");
+
+                id (^reverseValueTransformer)(NSNumber *value) = ^(NSNumber *value) {
+                    id valueToReturn = falseValue;
+
+                    NSAssert([value isKindOfClass:[NSNumber class]], @"");
+
+                    if ( [value boolValue] ) {
+                        valueToReturn = trueValue;
+                    }
+
+                    return valueToReturn;
+                };
+
+                value = reverseValueTransformer(value);
+            }
+        }
+
         [RZDebugMenuSettings sharedSettings][key] = value;
     }
     else {
