@@ -18,10 +18,14 @@
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuFormViewController.h"
 #import "RZDebugMenuSettings_Private.h"
+#import "RZDebugMenuVersionItem.h"
+#import "RZDebugMenuGroupItem.h"
 
 #import "RZDebugLogMenuDefines.h"
 
 #import <FXForms/FXForms.h>
+
+static NSString *const kRZVersionTitle = @"Version";
 
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 
@@ -54,7 +58,6 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
 + (void)enableMenuWithSettingsPlistName:(NSString *)plistName
 {
     [[self sharedDebugMenu] loadSettingsMenuFromPlistName:plistName];
-    [[self sharedDebugMenu] setEnabled:YES];
 }
 
 # pragma mark - Lifecycle
@@ -144,6 +147,12 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
     }
     else {
         NSLog(@"Failed to parse settings from plist %@: %@.", plistName, settingsParsingError);
+    }
+
+    if ( settingsMenuItems ) {
+        RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] init];
+        RZDebugMenuGroupItem *versionGroupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:kRZVersionTitle children:@[versionItem]];
+        settingsMenuItems = [settingsMenuItems arrayByAddingObject:versionGroupItem];
     }
 
     self.settingsMenuItems = settingsMenuItems;

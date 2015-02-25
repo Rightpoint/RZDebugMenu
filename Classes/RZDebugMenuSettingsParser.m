@@ -12,7 +12,6 @@
 #import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
-#import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
 #import "RZDebugMenuSliderItem.h"
 #import "RZDebugMenuGroupItem.h"

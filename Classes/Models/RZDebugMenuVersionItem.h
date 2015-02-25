@@ -11,8 +11,22 @@
 
 @interface RZDebugMenuVersionItem : RZDebugMenuItem
 
-@property (strong, nonatomic, readonly) NSString *versionNumber;
+@property (copy, nonatomic, readonly) NSString *versionString;
 
-- (id)initWithTitle:(NSString *)title version:(NSString *)version NS_DESIGNATED_INITIALIZER;
+/**
+ *  Use this method to automatically guess the version string from Info.plist.
+ *
+ *  @return Newly initialized instance.
+ */
+- (instancetype)init;
+
+/**
+ *  Use this method to manually specify a version string.
+ *
+ *  @param version Version string.
+ *
+ *  @return Newly initialized instance.
+ */
+- (instancetype)initWithVersionString:(NSString *)version NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -11,7 +11,6 @@
 #import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
-#import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
 #import "RZDebugMenuSliderItem.h"
 #import "RZDebugMenuGroupItem.h"
@@ -20,6 +19,7 @@
 #import "RZDebugMenuFormViewController.h"
 #import "RZDebugMenuTitleItem.h"
 #import "RZDebugMenuMultiValueSelectionItem.h"
+#import "RZDebugMenuVersionItem.h"
 
 #import "RZDebugMenuShortTitles.h"
 
@@ -175,6 +175,16 @@
 
                 return valueToReturn;
             };
+        }
+        else if ( [item isKindOfClass:[RZDebugMenuVersionItem class]] ) {
+            defaultValue = ((RZDebugMenuVersionItem *)item).versionString;
+            formFieldType = FXFormFieldTypeDefault;
+
+            mutableFieldDictionary[FXFormFieldCell] = [FXFormTextFieldCell class];
+
+            NSArray *textKeyComponents = @[ NSStringFromSelector(@selector(textField)), NSStringFromSelector(@selector(text)) ];
+            NSString *textKey = [textKeyComponents componentsJoinedByString:@"."];
+            [mutableFieldDictionary setObject:defaultValue forKey:textKey];
         }
 
         if ( [item isKindOfClass:[RZDebugMenuSettingItem class]] ) {
