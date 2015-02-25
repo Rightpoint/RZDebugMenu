@@ -123,12 +123,6 @@
 
                 if ( input != nil ) {
                     NSUInteger index = [values indexOfObject:input];
-
-                    // The input from above that was a string can get converted to a number here, so we compare the description as well.
-                    if ( index == NSNotFound ) {
-                        index = [values indexOfObject:[input description]];
-                    }
-
                     NSAssert(index < NSNotFound && index >= 0, @"");
                     valueToReturn = titles[index];
                 }
@@ -153,6 +147,21 @@
         }
         else if ( [item isKindOfClass:[RZDebugMenuTitleItem class]] ) {
             formFieldType = FXFormFieldTypeDefault;
+
+            NSArray *values = ((RZDebugMenuTitleItem *)item).values;
+            NSArray *titles = ((RZDebugMenuTitleItem *)item).titles;
+
+            mutableFieldDictionary[FXFormFieldValueTransformer] = ^(id input) {
+                NSString *valueToReturn = @"";
+
+                if ( input != nil ) {
+                    NSUInteger index = [values indexOfObject:input];
+                    NSAssert(index < NSNotFound && index >= 0, @"");
+                    valueToReturn = titles[index];
+                }
+
+                return valueToReturn;
+            };
         }
 
         if ( [item isKindOfClass:[RZDebugMenuSettingItem class]] ) {
