@@ -37,7 +37,7 @@ static const CGFloat kRZAnimationDuration = 0.35f;
 
 # pragma mark - Lifecycle
 
-- (id)initWithDelegate:(id)delegate
+- (instancetype)initWithDelegate:(id)delegate
 {
     self = [super init];
     if ( self ) {

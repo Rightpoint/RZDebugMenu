@@ -5,6 +5,16 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>Title</key>
+			<string>Read Only Title</string>
+			<key>DefaultValue</key>
+			<string>Simple Read Only Value</string>
+			<key>Key</key>
+			<string>simple_read_only_value</string>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+		</dict>
+		<dict>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>File</key>
@@ -41,6 +51,37 @@
 			<string>enable_awesome</string>
 			<key>DefaultValue</key>
 			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>ShortTitles</key>
+			<array>
+				<string>Zero</string>
+				<string>One</string>
+				<string>Two</string>
+				<string>Three</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+			</array>
+			<key>Titles</key>
+			<array>
+				<string>Zero is a great number.</string>
+				<string>But not as good as One.</string>
+				<string>Two is even better.</string>
+				<string>And Three is the best.</string>
+			</array>
+			<key>DefaultValue</key>
+			<integer>2</integer>
+			<key>Title</key>
+			<string>Short Title Multi Value</string>
+			<key>Key</key>
+			<string>short_title_multi_value</string>
 		</dict>
 	</array>
 </dict>

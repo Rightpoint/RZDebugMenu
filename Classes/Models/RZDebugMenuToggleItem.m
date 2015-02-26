@@ -10,20 +10,31 @@
 
 @interface RZDebugMenuToggleItem ()
 
-@property (strong, nonatomic, readwrite) NSNumber *toggleCellDefaultValue;
+@property (strong, nonatomic, readwrite) id trueValue;
+@property (strong, nonatomic, readwrite) id falseValue;
 
 @end
 
 @implementation RZDebugMenuToggleItem
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithValue:(id)value
+                key:(NSString *)key
+              title:(NSString *)title
+          trueValue:(id)trueValue
+         falseValue:(id)falseValue
 {
     self = [super initWithValue:value key:key title:title];
     if ( self ) {
-        _toggleCellDefaultValue = self.value;
+        self.trueValue = trueValue;
+        self.falseValue = falseValue;
     }
     
     return self;
+}
+
+- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+{
+    return [self initWithValue:value key:key title:title trueValue:nil falseValue:nil];
 }
 
 @end

@@ -12,13 +12,13 @@
 #import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueItem.h"
 #import "RZDebugMenuToggleItem.h"
-#import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuTextFieldItem.h"
 #import "RZDebugMenuSliderItem.h"
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuChildPaneItem.h"
 #import "RZDebugMenuLoadedChildPaneItem.h"
 #import "RZDebugMenuMultiValueSelectionItem.h"
+#import "RZDebugMenuTitleItem.h"
 
 static NSString* const kRZSettingsFileExtension = @"plist";
 
@@ -29,6 +29,7 @@ static NSString* const kRZTextFieldSpecifier = @"PSTextFieldSpecifier";
 static NSString* const kRZSliderSpecifier = @"PSSliderSpecifier";
 static NSString* const kRZGroupSpecifer = @"PSGroupSpecifier";
 static NSString* const kRZChildPaneSpecifer = @"PSChildPaneSpecifier";
+static NSString* const kRZTitleSpecifier = @"PSTitleValueSpecifier";
 
 static NSString* const kRZKeyBundleVersionString = @"CFBundleShortVersionString";
 
@@ -37,24 +38,34 @@ static NSString* const kRZKeyTitle = @"Title";
 static NSString* const kRZKeyType = @"Type";
 static NSString* const kRZKeyFile = @"File";
 static NSString* const kRZKeyDefaultValue = @"DefaultValue";
+
 static NSString* const kRZKeyEnvironmentsTitles = @"Titles";
+static NSString* const kRZKeyEnvironmentsShortTitles = @"ShortTitles";
 static NSString* const kRZKeyEnvironmentsValues = @"Values";
+
 static NSString* const kRZKeyMaximumValue = @"MaximumValue";
 static NSString* const kRZKeyMinimumValue = @"MinimumValue";
+
+static NSString* const kRZKeyTrueValue = @"TrueValue";
+static NSString* const kRZKeyFalseValue = @"FalseValue";
 
 @implementation RZDebugMenuSettingsParser
 
 # pragma mark - Plist Dictionary Parsing
 
-+ (NSArray *)multiValueOptionsArray:(NSArray *)optionTitles withValues:(NSArray *)optionValues
++ (NSArray *)multiValueOptionsArrayWithLongTitles:(NSArray *)longTitles shortTitles:(NSArray *)shortTitles values:(NSArray *)optionValues
 {
     NSMutableArray *selectionItems = [[NSMutableArray alloc] init];
 
-    for (NSInteger i = 0; i < optionTitles.count; i++) {
+    for (NSInteger i = 0; i < longTitles.count; i++) {
 
-        NSString *title = [optionTitles objectAtIndex:i];
+        NSString *longTitle = [longTitles objectAtIndex:i];
+        NSString *shortTitle = shortTitles ? [shortTitles objectAtIndex:i] : nil;
+
         NSNumber *value = [optionValues objectAtIndex:i];
-        RZDebugMenuMultiValueSelectionItem *selectionItemMetaData = [[RZDebugMenuMultiValueSelectionItem alloc] initWithTitle:title value:value];
+        RZDebugMenuMultiValueSelectionItem *selectionItemMetaData = [[RZDebugMenuMultiValueSelectionItem alloc] initWithLongTitle:longTitle
+                                                                                                                       shortTitle:shortTitle
+                                                                                                                            value:value];
         [selectionItems addObject:selectionItemMetaData];
     }
 
@@ -99,13 +110,21 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                                                                    minValue:minimum];
                 }
                 else if ( [itemType isEqualToString:kRZToggleSwitchSpecifier] ) {
-                    menuItem = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue key:itemIdentifier title:title];
+                    id trueValue = [preferenceSpecifierDictionary objectForKey:kRZKeyTrueValue];
+                    id falseValue = [preferenceSpecifierDictionary objectForKey:kRZKeyFalseValue];
+
+                    menuItem = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue
+                                                                        key:itemIdentifier
+                                                                      title:title
+                                                                  trueValue:trueValue
+                                                                 falseValue:falseValue];
                 }
                 else if ( [itemType isEqualToString:kRZMultiValueSpecifier] ) {
-                    NSArray *optionTitles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsTitles];
+                    NSArray *optionLongTitles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsTitles];
+                    NSArray *optionShortTitles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsShortTitles];
                     NSArray *optionValues = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsValues];
 
-                    NSArray *selectionItems = [self multiValueOptionsArray:optionTitles withValues:optionValues];
+                    NSArray *selectionItems = [self multiValueOptionsArrayWithLongTitles:optionLongTitles shortTitles:optionShortTitles values:optionValues];
 
                     menuItem = [[RZDebugMenuMultiValueItem alloc] initWithValue:defaultValue
                                                                             key:itemIdentifier
@@ -129,8 +148,13 @@ static NSString* const kRZKeyMinimumValue = @"MinimumValue";
                     NSString *plistName = [preferenceSpecifierDictionary objectForKey:kRZKeyFile];
                     menuItem = [[RZDebugMenuChildPaneItem alloc] initWithTitle:title plistName:plistName];
                 }
+                else if ( [itemType isEqualToString:kRZTitleSpecifier] ) {
+                    NSArray *titles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsTitles];
+                    NSArray *values = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsValues];
+                    menuItem = [[RZDebugMenuTitleItem alloc] initWithValue:defaultValue key:itemIdentifier title:title values:values titles:titles];
+                }
                 else {
-                    // NSAssert(NO, @"");
+                    NSLog(@"Couldn't recognize preference specifier dictionary: %@.", preferenceSpecifierDictionary);
                 }
 
                 if ( defaultValue != nil && itemIdentifier.length > 0 ) {

@@ -16,7 +16,7 @@
 
 @implementation RZDebugMenuGroupItem
 
-- (id)initWithTitle:(NSString *)title children:(NSArray *)children
+- (instancetype)initWithTitle:(NSString *)title children:(NSArray *)children
 {
     self = [super initWithTitle:title];
     if ( self ) {
@@ -26,7 +26,7 @@
     return self;
 }
 
-- (id)initWithTitle:(NSString *)title
+- (instancetype)initWithTitle:(NSString *)title
 {
     return [self initWithTitle:title children:nil];
 }

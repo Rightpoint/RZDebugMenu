@@ -28,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C22DAD9193CCDA30042938F"
-               BuildableName = "RZDebugMenuDemoTests.xctest"
-               BlueprintName = "RZDebugMenuDemoTests"
-               ReferencedContainer = "container:RZDebugMenuDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

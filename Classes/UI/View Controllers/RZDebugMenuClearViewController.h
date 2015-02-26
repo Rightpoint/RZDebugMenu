@@ -16,7 +16,7 @@
 
 @interface RZDebugMenuClearViewController : UIViewController
 
-- (id)initWithDelegate:(id)delegate;
+- (instancetype)initWithDelegate:(id)delegate;
 
 @property (assign, nonatomic, readwrite) BOOL showDebugMenuButton;
 

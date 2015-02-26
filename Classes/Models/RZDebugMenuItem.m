@@ -10,7 +10,7 @@
 
 @implementation RZDebugMenuItem
 
-- (id)initWithTitle:(NSString *)title
+- (instancetype)initWithTitle:(NSString *)title
 {
     self = [super init];
     if ( self ) {

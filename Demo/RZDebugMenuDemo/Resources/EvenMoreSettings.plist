@@ -5,6 +5,46 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>DefaultValue</key>
+			<string>activated</string>
+			<key>Key</key>
+			<string>mapped_switch</string>
+			<key>TrueValue</key>
+			<string>activated</string>
+			<key>FalseValue</key>
+			<string>deactivated</string>
+			<key>Title</key>
+			<string>Mapped Switch</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>New item</key>
+			<string></string>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Titles</key>
+			<array>
+				<string>Zero</string>
+				<string>One</string>
+				<string>Two</string>
+				<string>Three</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+			</array>
+			<key>DefaultValue</key>
+			<integer>1</integer>
+			<key>Key</key>
+			<string>mapped_read_only_value</string>
+			<key>Title</key>
+			<string>Mapped Read Only Title</string>
+		</dict>
+		<dict>
 			<key>Title</key>
 			<string>Eveen More Settings</string>
 			<key>Type</key>

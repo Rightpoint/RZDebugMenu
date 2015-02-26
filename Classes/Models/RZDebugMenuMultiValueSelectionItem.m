@@ -11,24 +11,26 @@
 @interface RZDebugMenuMultiValueSelectionItem ()
 
 @property (strong, nonatomic, readwrite) id value;
+@property (copy, nonatomic, readwrite) NSString *shortTitle;
 
 @end
 
 @implementation RZDebugMenuMultiValueSelectionItem
 
-- (id)initWithTitle:(NSString *)title value:(id)value
+- (instancetype)initWithLongTitle:(NSString *)longTitle shortTitle:(NSString *)shortTitle value:(id)value
 {
-    self = [super initWithTitle:title];
+    self = [super initWithTitle:longTitle];
     if ( self ) {
+        self.shortTitle = shortTitle;
         self.value = value;
     }
     
     return self;
 }
 
-- (id)initWithTitle:(NSString *)title
+- (instancetype)initWithTitle:(NSString *)title
 {
-    return [self initWithTitle:title value:nil];
+    return [self initWithLongTitle:title shortTitle:nil value:nil];
 }
 
 @end

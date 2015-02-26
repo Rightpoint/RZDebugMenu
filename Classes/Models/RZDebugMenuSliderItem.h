@@ -13,6 +13,6 @@
 @property (strong, nonatomic, readonly) NSNumber *max;
 @property (strong, nonatomic, readonly) NSNumber *min;
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title maxValue:(NSNumber *)max minValue:(NSNumber *)min NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title maxValue:(NSNumber *)max minValue:(NSNumber *)min NS_DESIGNATED_INITIALIZER;
 
 @end

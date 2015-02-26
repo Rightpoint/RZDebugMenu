@@ -42,7 +42,6 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  */
 - (void)configureAutomaticShowHideOnWindow:(UIWindow *)window;
 
-@property (assign, nonatomic) BOOL enabled;
 @property (assign, nonatomic, readwrite) BOOL showDebugMenuButton;
 
 @end
