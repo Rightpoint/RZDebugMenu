@@ -270,7 +270,7 @@
 
         if ( [settingsItem isKindOfClass:[RZDebugMenuToggleItem class]] ) {
             id trueValue = ((RZDebugMenuToggleItem *)settingsItem).trueValue;
-            id falseValue = ((RZDebugMenuToggleItem *)settingsItem).falseValue;
+            id __attribute__((unused)) falseValue = ((RZDebugMenuToggleItem *)settingsItem).falseValue;
             if ( trueValue ) {
                 NSAssert(falseValue != nil, @"");
                 NSAssert([trueValue class] == [falseValue class], @"");
