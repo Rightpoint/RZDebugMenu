@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RZDebugMenu"
-  s.version      = "0.1.0"
+  s.version      = "0.2.0"
   s.summary      = "In-app settings bundle using the plist API in XCode"
 
   s.description  = <<-DESC
