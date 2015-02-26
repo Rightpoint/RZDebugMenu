@@ -15,6 +15,6 @@
 @property (copy, nonatomic, readonly) NSString *longTitle;
 @property (copy, nonatomic, readonly) NSString *shortTitle;
 
-- (id)initWithLongTitle:(NSString *)longTitle shortTitle:(NSString *)shortTitle value:(id)value NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLongTitle:(NSString *)longTitle shortTitle:(NSString *)shortTitle value:(id)value NS_DESIGNATED_INITIALIZER;
 
 @end

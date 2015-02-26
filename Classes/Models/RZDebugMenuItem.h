@@ -10,6 +10,6 @@
 
 @property (copy, nonatomic, readonly) NSString *title;
 
-- (id)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTitle:(NSString *)title NS_DESIGNATED_INITIALIZER;
 
 @end

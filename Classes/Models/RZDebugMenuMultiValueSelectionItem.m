@@ -17,7 +17,7 @@
 
 @implementation RZDebugMenuMultiValueSelectionItem
 
-- (id)initWithLongTitle:(NSString *)longTitle shortTitle:(NSString *)shortTitle value:(id)value
+- (instancetype)initWithLongTitle:(NSString *)longTitle shortTitle:(NSString *)shortTitle value:(id)value
 {
     self = [super initWithTitle:longTitle];
     if ( self ) {
@@ -28,7 +28,7 @@
     return self;
 }
 
-- (id)initWithTitle:(NSString *)title
+- (instancetype)initWithTitle:(NSString *)title
 {
     return [self initWithLongTitle:title shortTitle:nil value:nil];
 }

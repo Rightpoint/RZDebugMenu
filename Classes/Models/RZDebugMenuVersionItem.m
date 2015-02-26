@@ -65,12 +65,12 @@ static NSString *const kRZCFBundleNameKey = @"CFBundleName";
     return versionString;
 }
 
-- (id)initWithTitle:(NSString *)title
+- (instancetype)initWithTitle:(NSString *)title
 {
     return [self init];
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithVersionString:[[self class] versionString]];
 }

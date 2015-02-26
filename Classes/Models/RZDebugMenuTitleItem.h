@@ -10,7 +10,7 @@
 
 @interface RZDebugMenuTitleItem : RZDebugMenuSettingItem
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title values:(NSArray *)values titles:(NSArray *)titles NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title values:(NSArray *)values titles:(NSArray *)titles NS_DESIGNATED_INITIALIZER;
 
 @property (copy, nonatomic, readonly) NSArray *values;
 @property (copy, nonatomic, readonly) NSArray *titles;

@@ -17,7 +17,7 @@
 
 @implementation RZDebugMenuToggleItem
 
-- (id)initWithValue:(id)value
+- (instancetype)initWithValue:(id)value
                 key:(NSString *)key
               title:(NSString *)title
           trueValue:(id)trueValue
@@ -32,7 +32,7 @@
     return self;
 }
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
 {
     return [self initWithValue:value key:key title:title trueValue:nil falseValue:nil];
 }

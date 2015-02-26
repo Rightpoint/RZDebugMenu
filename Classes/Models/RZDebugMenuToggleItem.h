@@ -10,7 +10,7 @@
 
 @interface RZDebugMenuToggleItem : RZDebugMenuSettingItem
 
-- (id)initWithValue:(id)value
+- (instancetype)initWithValue:(id)value
                 key:(NSString *)key
               title:(NSString *)title
           trueValue:(id)trueValue

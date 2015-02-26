@@ -17,7 +17,7 @@
 
 @implementation RZDebugMenuTitleItem
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title values:(NSArray *)values titles:(NSArray *)titles
+- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title values:(NSArray *)values titles:(NSArray *)titles
 {
     self = [super initWithValue:value key:key title:title];
     if ( self ) {
@@ -28,7 +28,7 @@
     return self;
 }
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
 {
     return [self initWithValue:value key:key title:title values:nil titles:nil];
 }

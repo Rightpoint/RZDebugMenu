@@ -16,7 +16,7 @@
 
 @implementation RZDebugMenuTextFieldItem
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
 {
     self = [super initWithValue:value key:key title:title];
     if ( self ) {

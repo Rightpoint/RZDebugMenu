@@ -26,7 +26,7 @@
     return self;
 }
 
-- (id)initWithTitle:(NSString *)title
+- (instancetype)initWithTitle:(NSString *)title
 {
     return [self initWithTitle:title plistName:nil];
 }

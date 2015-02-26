@@ -62,7 +62,7 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
 
 # pragma mark - Lifecycle
 
-- (id)init
+- (instancetype)init
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:@"RZDebugMenu cannot be instantiated. Please use the class method interface."

@@ -12,6 +12,6 @@
 
 @property (strong, nonatomic, readonly) NSArray *selectionItems;
 
-- (id)initWithValue:(id)value key:(NSString *)key title:(NSString *)title selectionItems:(NSArray *)selectionItems NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title selectionItems:(NSArray *)selectionItems NS_DESIGNATED_INITIALIZER;
 
 @end
