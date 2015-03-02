@@ -29,7 +29,7 @@ static NSString *const kRZVersionTitle = @"Version";
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 
 static NSUInteger kRZNumberOfTapsToShow = 3;
-static NSUInteger kRZNumberOfTouchesToShow = 3;
+static NSUInteger kRZNumberOfTouchesToShow = 2;
 
 @interface RZDebugMenu () <RZDebugMenuFormViewControllerDelegate>
 

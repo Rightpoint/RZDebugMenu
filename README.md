@@ -7,7 +7,7 @@ RZDebugMenu
 
 `RZDebugMenu` is configured via Settings Bundle plist file, just like the ones you create for adding your (release build) settings to Settings.app. It supports almost all the Settings Bundle schema defined [here] (https://developer.apple.com/library/prerelease/ios/documentation/PreferenceSettings/Conceptual/SettingsApplicationSchemaReference).
 
-Once you configure it at the start of your application, `RZDebugMenu` shows your menu automatically on a three-finger, three-tap gesture.
+Once you configure it at the start of your application, `RZDebugMenu` shows your menu automatically on a two-finger, three-tap gesture.
 
 ## Usage
 
@@ -24,7 +24,7 @@ To set up RZDebugMenu, add the following code to your Applcation Delegate's `app
 	#endif
 ```
 	
-Once you have your window, to set up the three-finger, three-tap gesture to show the menu, add the following code:
+Once you have your window, to set up the two-finger, three-tap gesture to show the menu, add the following code:
 
 ```objc
 	#if (DEBUG)
