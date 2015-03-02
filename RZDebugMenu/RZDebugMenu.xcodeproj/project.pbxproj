@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		346B7BB88365D4A7B8D60DD7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B80888602266897DB3CC72 /* libPods.a */; };
+		D42787971AA4CEBB00088281 /* UIViewController+RZDebugMenuPresentationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D42787961AA4CEBB00088281 /* UIViewController+RZDebugMenuPresentationAdditions.m */; };
 		D43C89601A93E11E0057AF66 /* libRZDebugMenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89551A93E11E0057AF66 /* libRZDebugMenu.a */; };
 		D43C89931A93E24B0057AF66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89921A93E24B0057AF66 /* Foundation.framework */; };
 		D43C89951A93E24E0057AF66 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89941A93E24E0057AF66 /* UIKit.framework */; };
@@ -60,6 +61,8 @@
 		05DE3EB7F949B26627EF9421 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		45B80888602266897DB3CC72 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8145EFE142630B3CDF5152 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D42787951AA4CEBB00088281 /* UIViewController+RZDebugMenuPresentationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RZDebugMenuPresentationAdditions.h"; path = "Classes/UIViewController+RZDebugMenuPresentationAdditions.h"; sourceTree = "<group>"; };
+		D42787961AA4CEBB00088281 /* UIViewController+RZDebugMenuPresentationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RZDebugMenuPresentationAdditions.m"; path = "Classes/UIViewController+RZDebugMenuPresentationAdditions.m"; sourceTree = "<group>"; };
 		D43C89551A93E11E0057AF66 /* libRZDebugMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRZDebugMenu.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43C895F1A93E11E0057AF66 /* RZDebugMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RZDebugMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43C89651A93E11E0057AF66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,6 +146,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D42787931AA4CE7700088281 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D42787951AA4CEBB00088281 /* UIViewController+RZDebugMenuPresentationAdditions.h */,
+				D42787961AA4CEBB00088281 /* UIViewController+RZDebugMenuPresentationAdditions.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		D43C89091A93DF9E0057AF66 = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +210,7 @@
 		D43C89561A93E11E0057AF66 /* RZDebugMenu */ = {
 			isa = PBXGroup;
 			children = (
+				D43C89971A93E2EE0057AF66 /* RZDebugMenu-Prefix.pch */,
 				D43C89A81A94FDC40057AF66 /* RZDebugLogMenuDefines.h */,
 				D43C89A51A94FDBA0057AF66 /* RZDebugMenu.h */,
 				D43C89A61A94FDBA0057AF66 /* RZDebugMenu.m */,
@@ -205,7 +218,7 @@
 				D43C89731A93E1490057AF66 /* UX */,
 				D43C896C1A93E1290057AF66 /* Settings */,
 				D43C893E1A93E0CB0057AF66 /* Models */,
-				D43C89971A93E2EE0057AF66 /* RZDebugMenu-Prefix.pch */,
+				D42787931AA4CE7700088281 /* Utilities */,
 			);
 			name = RZDebugMenu;
 			path = ..;
@@ -426,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D43D48B21A9CE056002B3A55 /* RZDebugMenuChildPaneItem.m in Sources */,
+				D42787971AA4CEBB00088281 /* UIViewController+RZDebugMenuPresentationAdditions.m in Sources */,
 				D43C89C41A94FDF10057AF66 /* RZDebugMenuSettings.m in Sources */,
 				D43D48BB1A9CE056002B3A55 /* RZDebugMenuToggleItem.m in Sources */,
 				D43D48BA1A9CE056002B3A55 /* RZDebugMenuTextFieldItem.m in Sources */,

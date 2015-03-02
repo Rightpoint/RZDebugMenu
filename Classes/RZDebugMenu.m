@@ -18,6 +18,7 @@
 #import "RZDebugMenuSettings_Private.h"
 #import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuGroupItem.h"
+#import "UIViewController+RZDebugMenuPresentationAdditions.h"
 
 #import "RZDebugLogMenuDefines.h"
 
@@ -154,6 +155,8 @@ static NSUInteger kRZNumberOfTouchesToShow = 3;
     }
 
     UIViewController *viewControllerToPresentOn = [UIApplication sharedApplication].keyWindow.rootViewController;
+    viewControllerToPresentOn = viewControllerToPresentOn.rzDebugMenu_deepestViewControllerForPresentation;
+
     [viewControllerToPresentOn presentViewController:self.debugMenuViewControllerToPresent animated:YES completion:nil];
 }
 
