@@ -3,11 +3,11 @@ RZDebugMenu
 
 [![Build Status](https://travis-ci.org/Raizlabs/RZDebugMenu.svg)](https://travis-ci.org/Raizlabs/RZDebugMenu)
 
-`RZDebugMenu` gives you an easy way to add tweakable, debug-only preferences or settings to your application. This is useful for many settings you often want to change during development, but never in producgtion, such as whether you are using a staging or production API endpoint.
+`RZDebugMenu` gives you an easy way to add tweakable, debug-only preferences or settings to your application. This is useful for many settings you often want to change during development, but never in production, such as whether you are using a `staging` or `production` API endpoint.
 
-`RZDebugMenu` is configured via Settings Bundle plist file, just like the ones you create for adding production settings to Settings.app. It supports almost all the Settings Bundle schema defined [here] (https://developer.apple.com/library/prerelease/ios/documentation/PreferenceSettings/Conceptual/SettingsApplicationSchemaReference).
+`RZDebugMenu` is configured via Settings Bundle plist file, just like the ones you create for adding your (release build) settings to Settings.app. It supports almost all the Settings Bundle schema defined [here] (https://developer.apple.com/library/prerelease/ios/documentation/PreferenceSettings/Conceptual/SettingsApplicationSchemaReference).
 
-`RZDebugMenu` creates a "magic button" that gives you access to your debug settings. The button is hidden by default. To unhide it, use a four-finger tap gesture. You can also unhide it programatically if you want it visible by default.
+Once you configure it at the start of your application, `RZDebugMenu` shows your menu automatically on a three-finger, three-tap gesture.
 
 ## Usage
 
@@ -24,12 +24,12 @@ To set up RZDebugMenu, add the following code to your Applcation Delegate's `app
 	#endif
 ```
 	
-Once you have your window, to set up the four-tap gesture to show the menu, add the following code:
+Once you have your window, to set up the three-finger, three-tap gesture to show the menu, add the following code:
 
 ```objc
 	#if (DEBUG)
-	    // To configure automatic show and hide of the debug menu via a 4-tap gesture, call this method with your app's primary window.
-	    [[RZDebugMenu sharedDebugMenu] configureAutomaticShowHideOnWindow:self.window];
+    // To configure automatic show and hide of the debug menu via a 4-tap gesture, call this method with your app's primary window.
+    [[RZDebugMenu sharedDebugMenu] registerDebugMenuPresentationGestureOnView:self.window];
 	#endif
 ```
 	
@@ -48,7 +48,7 @@ You can also use standard KVO on `RZDebugMenuSettings` to access settings, and t
 	[[RZDebugMenuSettings sharedSettings] addObserver:self forKeyPath:@"name_preference" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
 ```
 	
-Finally, you can detect changes in settings via a Notification too, if you prefer that over KVO.
+Finally, you can detect changes in settings via an `NSNotification`, if you prefer that over KVO.
 
 ```objc
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kRZDebugMenuSettingChangedNotification object:nil];
@@ -61,20 +61,22 @@ This notification will contain keys that describe the setting that has been chan
 Check the sample application for some patterns of advanced usage. Including:
 
 - Changing the way settings are stored (whether they are isolated from or connected to your normal `NSUserDefaults.`)
-- Manually hiding and showing the magic button.
+- Manually showing and dismissing the menu.
 
 ## Try It
 
 To try `RZDebugMenu`, install [CocoaPods](http://cocoapods.org) and run
-
-	pod try RZDebugMenu
+```sh
+pod try RZDebugMenu
+```
 
 ## Installation
 
-`RZDebugMenu` is available through [CocoaPods](http://cocoapods.org). To install, simple add the following line to your Podfile:
+`RZDebugMenu` is available through [CocoaPods](http://cocoapods.org). To install, simply add the following line to your `Podfile`:
+```ruby
+pod RZDebugMenu
+```
 
-	pod RZDebugMenu
-  
 ## Authors
 
 Current Maintainer:
