@@ -108,7 +108,7 @@
 		D43D48AF1A9CE056002B3A55 /* RZDebugMenuVersionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuVersionItem.m; sourceTree = "<group>"; };
 		D43D48BE1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuMultiValueSelectionItem.h; sourceTree = "<group>"; };
 		D43D48BF1A9CE0D6002B3A55 /* RZDebugMenuMultiValueSelectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuMultiValueSelectionItem.m; sourceTree = "<group>"; };
-		D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettings_Private.h; path = ../Classes/Models/RZDebugMenuSettings_Private.h; sourceTree = "<group>"; };
+		D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettings_Private.h; path = Classes/RZDebugMenuSettings_Private.h; sourceTree = "<group>"; };
 		D4E340621A9E1DAA006902A2 /* RZDebugMenuTitleItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuTitleItem.h; sourceTree = "<group>"; };
 		D4E340631A9E1DAA006902A2 /* RZDebugMenuTitleItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuTitleItem.m; sourceTree = "<group>"; };
 		D4E340651A9E3CAC006902A2 /* RZDebugMenuShortTitles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuShortTitles.h; sourceTree = "<group>"; };
@@ -216,6 +216,7 @@
 				D43C89A61A94FDBA0057AF66 /* RZDebugMenu.m */,
 				D43C89C01A94FDF10057AF66 /* RZDebugMenuSettings.h */,
 				D43C89C11A94FDF10057AF66 /* RZDebugMenuSettings.m */,
+				D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */,
 				D43C89F01A94FF230057AF66 /* Settings Parsing */,
 				D43C89731A93E1490057AF66 /* UX */,
 				D43C896C1A93E1290057AF66 /* Settings */,
@@ -245,7 +246,6 @@
 		D43C896C1A93E1290057AF66 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */,
 				D43D48C11A9D018C002B3A55 /* Stores */,
 			);
 			name = Settings;
