@@ -8,6 +8,8 @@
 
 #import "RZDebugMenuItem.h"
 
+#import <FXForms/FXForms.h>
+
 @implementation RZDebugMenuItem
 
 - (instancetype)initWithTitle:(NSString *)title
@@ -18,6 +20,22 @@
     }
 
     return self;
+}
+
+- (NSDictionary *)fxFormsFieldDictionary
+{
+    NSString *title = self.title;
+    if ( title.length == 0 ) {
+        title = @"";
+    }
+
+    NSDictionary *fieldDictionary = @{ FXFormFieldTitle: title };
+    return fieldDictionary;
+}
+
+- (NSArray *)fxFormsChildMenuItems
+{
+    return nil;
 }
 
 @end

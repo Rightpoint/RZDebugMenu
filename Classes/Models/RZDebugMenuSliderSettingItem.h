@@ -1,5 +1,5 @@
 //
-//  RZDebugMenuSliderItem.h
+//  RZDebugMenuSliderSettingItem.h
 //  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/30/14.
@@ -8,7 +8,7 @@
 
 #import "RZDebugMenuSettingItem.h"
 
-@interface RZDebugMenuSliderItem : RZDebugMenuSettingItem
+@interface RZDebugMenuSliderSettingItem : RZDebugMenuSettingItem
 
 @property (strong, nonatomic, readonly) NSNumber *max;
 @property (strong, nonatomic, readonly) NSNumber *min;

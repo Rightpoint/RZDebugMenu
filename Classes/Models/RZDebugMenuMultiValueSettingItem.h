@@ -1,5 +1,5 @@
 //
-//  RZDebugMenuMultiValueItem.h
+//  RZDebugMenuMultiValueSettingItem.h
 //  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/6/14.
@@ -8,7 +8,7 @@
 
 #import "RZDebugMenuSettingItem.h"
 
-@interface RZDebugMenuMultiValueItem : RZDebugMenuSettingItem
+@interface RZDebugMenuMultiValueSettingItem : RZDebugMenuSettingItem
 
 @property (strong, nonatomic, readonly) NSArray *selectionItems;
 

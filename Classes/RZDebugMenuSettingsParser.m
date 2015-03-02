@@ -10,15 +10,15 @@
 
 #import "RZDebugMenu.h"
 #import "RZDebugMenuItem.h"
-#import "RZDebugMenuMultiValueItem.h"
-#import "RZDebugMenuToggleItem.h"
-#import "RZDebugMenuTextFieldItem.h"
-#import "RZDebugMenuSliderItem.h"
+#import "RZDebugMenuMultiValueSettingItem.h"
+#import "RZDebugMenuToggleSettingItem.h"
+#import "RZDebugMenuTextSettingItem.h"
+#import "RZDebugMenuSliderSettingItem.h"
 #import "RZDebugMenuGroupItem.h"
-#import "RZDebugMenuChildPaneItem.h"
-#import "RZDebugMenuLoadedChildPaneItem.h"
+#import "RZDebugMenuSettingsBundleChildItem.h"
+#import "RZDebugMenuLoadedSettingsBundleChildItem.h"
 #import "RZDebugMenuMultiValueSelectionItem.h"
-#import "RZDebugMenuTitleItem.h"
+#import "RZDebugMenuReadOnlyTextSettingItem.h"
 
 static NSString* const kRZSettingsFileExtension = @"plist";
 
@@ -98,12 +98,12 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
                 RZDebugMenuItem *menuItem = nil;
 
                 if ( [itemType isEqualToString:kRZTextFieldSpecifier] ) {
-                    menuItem = [[RZDebugMenuTextFieldItem alloc] initWithValue:defaultValue key:itemIdentifier title:title];
+                    menuItem = [[RZDebugMenuTextSettingItem alloc] initWithValue:defaultValue key:itemIdentifier title:title];
                 }
                 else if ( [itemType isEqualToString:kRZSliderSpecifier] ) {
                     NSNumber *maximum = [preferenceSpecifierDictionary objectForKey:kRZKeyMaximumValue];
                     NSNumber *minimum = [preferenceSpecifierDictionary objectForKey:kRZKeyMinimumValue];
-                    menuItem = [[RZDebugMenuSliderItem alloc] initWithValue:defaultValue
+                    menuItem = [[RZDebugMenuSliderSettingItem alloc] initWithValue:defaultValue
                                                                         key:itemIdentifier
                                                                       title:title
                                                                    maxValue:maximum
@@ -113,7 +113,7 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
                     id trueValue = [preferenceSpecifierDictionary objectForKey:kRZKeyTrueValue];
                     id falseValue = [preferenceSpecifierDictionary objectForKey:kRZKeyFalseValue];
 
-                    menuItem = [[RZDebugMenuToggleItem alloc] initWithValue:defaultValue
+                    menuItem = [[RZDebugMenuToggleSettingItem alloc] initWithValue:defaultValue
                                                                         key:itemIdentifier
                                                                       title:title
                                                                   trueValue:trueValue
@@ -126,7 +126,7 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
 
                     NSArray *selectionItems = [self multiValueOptionsArrayWithLongTitles:optionLongTitles shortTitles:optionShortTitles values:optionValues];
 
-                    menuItem = [[RZDebugMenuMultiValueItem alloc] initWithValue:defaultValue
+                    menuItem = [[RZDebugMenuMultiValueSettingItem alloc] initWithValue:defaultValue
                                                                             key:itemIdentifier
                                                                           title:title
                                                                  selectionItems:selectionItems];
@@ -146,12 +146,12 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
                 }
                 else if ( [itemType isEqualToString:kRZChildPaneSpecifer] ) {
                     NSString *plistName = [preferenceSpecifierDictionary objectForKey:kRZKeyFile];
-                    menuItem = [[RZDebugMenuChildPaneItem alloc] initWithTitle:title plistName:plistName];
+                    menuItem = [[RZDebugMenuSettingsBundleChildItem alloc] initWithTitle:title plistName:plistName];
                 }
                 else if ( [itemType isEqualToString:kRZTitleSpecifier] ) {
                     NSArray *titles = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsTitles];
                     NSArray *values = [preferenceSpecifierDictionary objectForKey:kRZKeyEnvironmentsValues];
-                    menuItem = [[RZDebugMenuTitleItem alloc] initWithValue:defaultValue key:itemIdentifier title:title values:values titles:titles];
+                    menuItem = [[RZDebugMenuReadOnlyTextSettingItem alloc] initWithValue:defaultValue key:itemIdentifier title:title values:values titles:titles];
                 }
                 else {
                     NSLog(@"Couldn't recognize preference specifier dictionary: %@.", preferenceSpecifierDictionary);
@@ -233,8 +233,8 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
         NSArray *keysToAdd = nil;
         NSDictionary *defaultValuesToAdd = nil;
 
-        if ( [menuItem isKindOfClass:[RZDebugMenuChildPaneItem class]] ) {
-            NSString *plistName = ((RZDebugMenuChildPaneItem *)menuItem).plistName;
+        if ( [menuItem isKindOfClass:[RZDebugMenuSettingsBundleChildItem class]] ) {
+            NSString *plistName = ((RZDebugMenuSettingsBundleChildItem *)menuItem).plistName;
 
             NSError *childPaneParsingError = nil;
             NSArray *childPaneSettingsMenuItems = [[self class] settingsMenuItemsFromPlistName:plistName
@@ -242,7 +242,7 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
                                                                                  defaultValues:&defaultValuesToAdd
                                                                                          error:&childPaneParsingError];
             if ( childPaneSettingsMenuItems ) {
-                RZDebugMenuLoadedChildPaneItem *loadedChildPaneItem = [[RZDebugMenuLoadedChildPaneItem alloc] initWithTitle:menuItem.title
+                RZDebugMenuLoadedSettingsBundleChildItem *loadedChildPaneItem = [[RZDebugMenuLoadedSettingsBundleChildItem alloc] initWithTitle:menuItem.title
                                                                                                                   plistName:plistName
                                                                                                           settingsMenuItems:childPaneSettingsMenuItems];
                 NSUInteger index = [mutableSettingsMenuItemsToReturn indexOfObject:menuItem];

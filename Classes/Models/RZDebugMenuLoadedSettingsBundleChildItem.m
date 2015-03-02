@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuLoadedChildPaneItem.h"
+#import "RZDebugMenuLoadedSettingsBundleChildItem.h"
 
-@interface RZDebugMenuLoadedChildPaneItem ()
+@interface RZDebugMenuLoadedSettingsBundleChildItem ()
 
 @property (copy, nonatomic, readwrite) NSArray *settingsMenuItems;
 
 @end
 
-@implementation RZDebugMenuLoadedChildPaneItem
+@implementation RZDebugMenuLoadedSettingsBundleChildItem
 
 - (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName settingsMenuItems:(NSArray *)settingsMenuItems
 {
@@ -29,6 +29,20 @@
 - (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName
 {
     return [self initWithTitle:title plistName:plistName settingsMenuItems:nil];
+}
+
+- (NSDictionary *)fxFormsFieldDictionary
+{
+    NSMutableDictionary *mutableFieldDictionary = [NSMutableDictionary dictionary];
+
+    mutableFieldDictionary[FXFormFieldType] = FXFormFieldTypeDefault;
+
+    return [mutableFieldDictionary copy];
+}
+
+- (NSArray *)fxFormsChildMenuItems
+{
+    return self.settingsMenuItems;
 }
 
 @end

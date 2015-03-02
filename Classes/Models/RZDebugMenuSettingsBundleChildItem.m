@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuChildPaneItem.h"
+#import "RZDebugMenuSettingsBundleChildItem.h"
 
-@interface RZDebugMenuChildPaneItem ()
+@interface RZDebugMenuSettingsBundleChildItem ()
 
 @property (copy, nonatomic, readwrite) NSString *plistName;
 
 @end
 
-@implementation RZDebugMenuChildPaneItem
+@implementation RZDebugMenuSettingsBundleChildItem
 
 - (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName
 {
@@ -29,6 +29,12 @@
 - (instancetype)initWithTitle:(NSString *)title
 {
     return [self initWithTitle:title plistName:nil];
+}
+
+- (NSDictionary *)fxFormsFieldDictionary
+{
+    NSAssert(NO, @"");
+    return nil;
 }
 
 @end

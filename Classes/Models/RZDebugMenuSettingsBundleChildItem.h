@@ -8,7 +8,7 @@
 
 #import "RZDebugMenuItem.h"
 
-@interface RZDebugMenuChildPaneItem : RZDebugMenuItem
+@interface RZDebugMenuSettingsBundleChildItem : RZDebugMenuItem
 
 - (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName NS_DESIGNATED_INITIALIZER;
 

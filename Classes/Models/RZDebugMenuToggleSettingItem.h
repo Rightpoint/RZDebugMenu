@@ -1,5 +1,5 @@
 //
-//  RZDebugMenuToggleItem.h
+//  RZDebugMenuToggleSettingItem.h
 //  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/6/14.
@@ -8,7 +8,7 @@
 
 #import "RZDebugMenuSettingItem.h"
 
-@interface RZDebugMenuToggleItem : RZDebugMenuSettingItem
+@interface RZDebugMenuToggleSettingItem : RZDebugMenuSettingItem
 
 - (instancetype)initWithValue:(id)value
                 key:(NSString *)key

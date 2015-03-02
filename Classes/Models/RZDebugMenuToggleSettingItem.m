@@ -1,21 +1,23 @@
 //
-//  RZDebugMenuToggleItem.m
+//  RZDebugMenuToggleSettingItem.m
 //  RZDebugMenu
 //
 //  Created by Clayton Rieck on 6/6/14.
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuToggleItem.h"
+#import "RZDebugMenuToggleSettingItem.h"
 
-@interface RZDebugMenuToggleItem ()
+#import <FXForms/FXForms.h>
+
+@interface RZDebugMenuToggleSettingItem ()
 
 @property (strong, nonatomic, readwrite) id trueValue;
 @property (strong, nonatomic, readwrite) id falseValue;
 
 @end
 
-@implementation RZDebugMenuToggleItem
+@implementation RZDebugMenuToggleSettingItem
 
 - (instancetype)initWithValue:(id)value
                 key:(NSString *)key
@@ -35,6 +37,15 @@
 - (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
 {
     return [self initWithValue:value key:key title:title trueValue:nil falseValue:nil];
+}
+
+- (NSDictionary *)fxFormsFieldDictionary
+{
+    NSMutableDictionary *mutableFieldDictionary = [[super fxFormsFieldDictionary] mutableCopy];
+
+    mutableFieldDictionary[FXFormFieldType] = FXFormFieldTypeBoolean;
+
+    return [mutableFieldDictionary copy];
 }
 
 @end

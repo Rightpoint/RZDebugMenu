@@ -8,7 +8,7 @@
 
 #import "RZDebugMenuSettingItem.h"
 
-@interface RZDebugMenuTitleItem : RZDebugMenuSettingItem
+@interface RZDebugMenuReadOnlyTextSettingItem : RZDebugMenuSettingItem
 
 - (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title values:(NSArray *)values titles:(NSArray *)titles NS_DESIGNATED_INITIALIZER;
 

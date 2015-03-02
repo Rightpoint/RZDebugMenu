@@ -45,7 +45,7 @@ static NSString *const kRZNavigationBarDoneButtonTitle = @"Done";
 
 # pragma mark - RZDebugMenuSettingsFormDelegate
 
-- (UIViewController *)viewControllerForChildPaneItem:(RZDebugMenuLoadedChildPaneItem *)childPaneItem
+- (UIViewController *)viewControllerForChildPaneItem:(RZDebugMenuItem *)childPaneItem
 {
     NSAssert(childPaneItem != nil, @"");
 

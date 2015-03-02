@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuChildPaneItem.h"
+#import "RZDebugMenuSettingsBundleChildItem.h"
 
-@interface RZDebugMenuLoadedChildPaneItem : RZDebugMenuChildPaneItem
+@interface RZDebugMenuLoadedSettingsBundleChildItem : RZDebugMenuSettingsBundleChildItem
 
 - (instancetype)initWithTitle:(NSString *)title plistName:(NSString *)plistName settingsMenuItems:(NSArray *)settingsMenuItems NS_DESIGNATED_INITIALIZER;
 
