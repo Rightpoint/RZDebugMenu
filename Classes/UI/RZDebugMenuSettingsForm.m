@@ -151,12 +151,19 @@
         else if ( [item isKindOfClass:[RZDebugMenuLoadedChildPaneItem class]] ) {
             formFieldType = FXFormFieldTypeDefault;
 
-            NSArray *settingsMenuItems = ((RZDebugMenuLoadedChildPaneItem *)item).settingsMenuItems;
+            RZDebugMenuLoadedChildPaneItem *childPaneItem = (RZDebugMenuLoadedChildPaneItem *)item;
+            NSArray *settingsMenuItems = childPaneItem.settingsMenuItems;
             RZDebugMenuSettingsForm *childSettingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsMenuItems:settingsMenuItems];
+            childSettingsForm.delegate = self.delegate;
+
             defaultValue = childSettingsForm;
 
             mutableFieldDictionary[FXFormFieldClass] = [RZDebugMenuSettingsForm class];
-            mutableFieldDictionary[FXFormFieldViewController] = [[RZDebugMenuFormViewController alloc] init];
+
+            UIViewController *formViewController = [self.delegate viewControllerForChildPaneItem:childPaneItem];
+            NSAssert(formViewController != nil, @"");
+
+            mutableFieldDictionary[FXFormFieldViewController] = formViewController;
         }
         else if ( [item isKindOfClass:[RZDebugMenuTitleItem class]] ) {
             formFieldType = FXFormFieldTypeDefault;

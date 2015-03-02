@@ -8,6 +8,8 @@
 
 #import "RZDebugMenuFormViewController.h"
 
+#import "RZDebugMenuSettingsForm.h"
+
 static NSString *const kRZNavigationBarTitle = @"Debug Menu";
 
 static NSString *const kRZNavigationBarDoneButtonTitle = @"Done";
@@ -38,8 +40,19 @@ static NSString *const kRZNavigationBarDoneButtonTitle = @"Done";
 
 - (void)doneButtonTapped:(id)sender
 {
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate debugMenuFormViewControllerShouldDimiss:self];
+}
+
+# pragma mark - RZDebugMenuSettingsFormDelegate
+
+- (UIViewController *)viewControllerForChildPaneItem:(RZDebugMenuLoadedChildPaneItem *)childPaneItem
+{
+    NSAssert(childPaneItem != nil, @"");
+
+    RZDebugMenuFormViewController *formViewController = [[RZDebugMenuFormViewController alloc] initWithNibName:nil bundle:nil];
+    formViewController.delegate = self.delegate;
+
+    return formViewController;
 }
 
 @end

@@ -36,10 +36,7 @@ static NSString *const kSettingsPlistName = @"Settings.plist";
 
 #if (DEBUG)
     // To configure automatic show and hide of the debug menu via a 4-tap gesture, call this method with your app's primary window.
-    [[RZDebugMenu sharedDebugMenu] configureAutomaticShowHideOnWindow:self.window];
-
-    // The debug menu button will be hidden by default. To show it, call the above method and then do theh 4-tap gesture, or you can enable it progarmmatically as follows.
-    [RZDebugMenu sharedDebugMenu].showDebugMenuButton = YES;
+    [[RZDebugMenu sharedDebugMenu] registerDebugMenuPresentationGestureOnView:self.window];
 
     // If you want your settings to be stored directly in user defaults, overwriting values used by your app via regular defaults APIs, you can uncomment the line below.
     // [[RZDebugMenuSettings sharedSettings] setDebugSettingsStoreClass:[RZDebugMenuUserDefaultsStore class]];

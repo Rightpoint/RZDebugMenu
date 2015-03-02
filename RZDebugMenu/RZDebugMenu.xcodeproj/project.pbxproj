@@ -12,9 +12,7 @@
 		D43C89931A93E24B0057AF66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89921A93E24B0057AF66 /* Foundation.framework */; };
 		D43C89951A93E24E0057AF66 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89941A93E24E0057AF66 /* UIKit.framework */; };
 		D43C89A71A94FDBA0057AF66 /* RZDebugMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89A61A94FDBA0057AF66 /* RZDebugMenu.m */; };
-		D43C89AB1A94FDCB0057AF66 /* RZDebugMenuClearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89AA1A94FDCB0057AF66 /* RZDebugMenuClearViewController.m */; };
 		D43C89C41A94FDF10057AF66 /* RZDebugMenuSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89C11A94FDF10057AF66 /* RZDebugMenuSettings.m */; };
-		D43C89D41A94FE020057AF66 /* RZDebugMenuWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89D31A94FE020057AF66 /* RZDebugMenuWindow.m */; };
 		D43C89FA1A951B500057AF66 /* RZDebugMenuSettingsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89F91A951B500057AF66 /* RZDebugMenuSettingsParser.m */; };
 		D43C89FD1A951B560057AF66 /* RZDebugMenuSettingsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C89FC1A951B560057AF66 /* RZDebugMenuSettingsForm.m */; };
 		D43C8A0B1A9679CE0057AF66 /* RZDebugMenuFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D43C8A091A9679CE0057AF66 /* RZDebugMenuFormViewController.m */; };
@@ -71,12 +69,8 @@
 		D43C89A51A94FDBA0057AF66 /* RZDebugMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenu.h; path = Classes/RZDebugMenu.h; sourceTree = "<group>"; };
 		D43C89A61A94FDBA0057AF66 /* RZDebugMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenu.m; path = Classes/RZDebugMenu.m; sourceTree = "<group>"; };
 		D43C89A81A94FDC40057AF66 /* RZDebugLogMenuDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugLogMenuDefines.h; path = Classes/RZDebugLogMenuDefines.h; sourceTree = "<group>"; };
-		D43C89A91A94FDCB0057AF66 /* RZDebugMenuClearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuClearViewController.h; path = "View Controllers/RZDebugMenuClearViewController.h"; sourceTree = "<group>"; };
-		D43C89AA1A94FDCB0057AF66 /* RZDebugMenuClearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuClearViewController.m; path = "View Controllers/RZDebugMenuClearViewController.m"; sourceTree = "<group>"; };
 		D43C89C01A94FDF10057AF66 /* RZDebugMenuSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettings.h; path = ../Classes/Models/RZDebugMenuSettings.h; sourceTree = "<group>"; };
 		D43C89C11A94FDF10057AF66 /* RZDebugMenuSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettings.m; path = ../Classes/Models/RZDebugMenuSettings.m; sourceTree = "<group>"; };
-		D43C89D21A94FE020057AF66 /* RZDebugMenuWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuWindow.h; path = Views/RZDebugMenuWindow.h; sourceTree = "<group>"; };
-		D43C89D31A94FE020057AF66 /* RZDebugMenuWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuWindow.m; path = Views/RZDebugMenuWindow.m; sourceTree = "<group>"; };
 		D43C89F81A951B500057AF66 /* RZDebugMenuSettingsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettingsParser.h; path = Classes/RZDebugMenuSettingsParser.h; sourceTree = "<group>"; };
 		D43C89F91A951B500057AF66 /* RZDebugMenuSettingsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettingsParser.m; path = Classes/RZDebugMenuSettingsParser.m; sourceTree = "<group>"; };
 		D43C89FB1A951B560057AF66 /* RZDebugMenuSettingsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingsForm.h; sourceTree = "<group>"; };
@@ -249,7 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				D43C89F41A95182F0057AF66 /* FXForms Subclasses */,
-				D43C899B1A93E3AC0057AF66 /* Windows */,
 				D43C89871A93E16C0057AF66 /* View Controllers */,
 			);
 			name = UX;
@@ -259,8 +252,6 @@
 		D43C89871A93E16C0057AF66 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D43C89A91A94FDCB0057AF66 /* RZDebugMenuClearViewController.h */,
-				D43C89AA1A94FDCB0057AF66 /* RZDebugMenuClearViewController.m */,
 				D43C8A081A9679CE0057AF66 /* RZDebugMenuFormViewController.h */,
 				D43C8A091A9679CE0057AF66 /* RZDebugMenuFormViewController.m */,
 			);
@@ -276,15 +267,6 @@
 			);
 			name = Frameworks;
 			path = RZDebugMenu;
-			sourceTree = "<group>";
-		};
-		D43C899B1A93E3AC0057AF66 /* Windows */ = {
-			isa = PBXGroup;
-			children = (
-				D43C89D21A94FE020057AF66 /* RZDebugMenuWindow.h */,
-				D43C89D31A94FE020057AF66 /* RZDebugMenuWindow.m */,
-			);
-			name = Windows;
 			sourceTree = "<group>";
 		};
 		D43C89F01A94FF230057AF66 /* Settings Parsing */ = {
@@ -443,7 +425,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D43C89AB1A94FDCB0057AF66 /* RZDebugMenuClearViewController.m in Sources */,
 				D43D48B21A9CE056002B3A55 /* RZDebugMenuChildPaneItem.m in Sources */,
 				D43C89C41A94FDF10057AF66 /* RZDebugMenuSettings.m in Sources */,
 				D43D48BB1A9CE056002B3A55 /* RZDebugMenuToggleItem.m in Sources */,
@@ -464,7 +445,6 @@
 				D43C89FD1A951B560057AF66 /* RZDebugMenuSettingsForm.m in Sources */,
 				D43C89FA1A951B500057AF66 /* RZDebugMenuSettingsParser.m in Sources */,
 				D43D48961A9BE3F4002B3A55 /* RZDebugMenuUserDefaultsStore.m in Sources */,
-				D43C89D41A94FE020057AF66 /* RZDebugMenuWindow.m in Sources */,
 				D43D48BC1A9CE056002B3A55 /* RZDebugMenuVersionItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

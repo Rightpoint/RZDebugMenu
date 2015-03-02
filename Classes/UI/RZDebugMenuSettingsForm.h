@@ -8,8 +8,18 @@
 
 #import <FXForms/FXForms.h>
 
+@class RZDebugMenuLoadedChildPaneItem;
+
+@protocol RZDebugMenuSettingsFormDelegate <NSObject>
+
+- (UIViewController *)viewControllerForChildPaneItem:(RZDebugMenuLoadedChildPaneItem *)childPaneItem;
+
+@end
+
 @interface RZDebugMenuSettingsForm : NSObject <FXForm>
 
 - (instancetype)initWithSettingsMenuItems:(NSArray *)settingsMenuItems NS_DESIGNATED_INITIALIZER;
+
+@property (weak, nonatomic, readwrite) id <RZDebugMenuSettingsFormDelegate> delegate;
 
 @end

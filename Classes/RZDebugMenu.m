@@ -8,8 +8,6 @@
 
 #import "RZDebugMenu.h"
 
-#import "RZDebugMenuWindow.h"
-
 #import "RZDebugMenuSettings.h"
 #import "RZDebugMenuSettingsForm.h"
 #import "RZDebugMenuSettingsParser.h"
@@ -29,12 +27,12 @@ static NSString *const kRZVersionTitle = @"Version";
 
 NSString* const kRZDebugMenuSettingChangedNotification = @"RZDebugMenuSettingChanged";
 
-static NSUInteger kRZNumberOfTapsToHide = 4;
+static NSUInteger kRZNumberOfTapsToShow = 3;
+static NSUInteger kRZNumberOfTouchesToShow = 3;
 
-@interface RZDebugMenu () <RZDebugMenuClearViewControllerDelegate>
+@interface RZDebugMenu () <RZDebugMenuFormViewControllerDelegate>
 
-@property (strong, nonatomic) RZDebugMenuWindow *topWindow;
-@property (strong, nonatomic) RZDebugMenuClearViewController *clearRootViewController;
+@property (strong, nonatomic, readwrite) UIViewController *debugMenuViewControllerToPresent;
 
 @property (strong, nonatomic, readwrite) NSArray *settingsMenuItems;
 
@@ -73,60 +71,30 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
 {
     self = [super init];
     if ( self ) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationDidFinishLaunching:)
-                                                     name:UIApplicationDidFinishLaunchingNotification
-                                                   object:nil];
-
-        self.showDebugMenuButton = NO;
+        [self configureDebugMenu];
     }
 
     return self;
 }
 
-# pragma mark - Configuration
+#pragma mark - Configuration
 
-- (void)configureTopWindowIfNeeded
-{
-    if ( self.clearRootViewController == nil ) {
-        self.clearRootViewController = [[RZDebugMenuClearViewController alloc] initWithDelegate:self];
-
-        UIScreen *mainScreen = [UIScreen mainScreen];
-        self.topWindow = [[RZDebugMenuWindow alloc] initWithFrame:mainScreen.bounds];
-        self.topWindow.windowLevel = UIWindowLevelStatusBar - 1.f;
-        self.topWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        self.topWindow.rootViewController = self.clearRootViewController;
-        self.topWindow.hidden = NO;
-    }
-}
-
-#pragma mark - UX
-
-- (void)displayDebugMenu
+- (void)configureDebugMenu
 {
     if ( self.settingsMenuItems.count > 0 ) {
         RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithSettingsMenuItems:self.settingsMenuItems];
 
-        FXFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
+        RZDebugMenuFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
+        settingsMenuViewController.delegate = self;
+        
+        settingsForm.delegate = settingsMenuViewController;
+
         settingsMenuViewController.formController.form = settingsForm;
 
         UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenuViewController];
-        [self.clearRootViewController presentViewController:modalNavigationController animated:YES completion:nil];
+
+        self.debugMenuViewControllerToPresent = modalNavigationController;
     }
-}
-
-#pragma mark - RZDebugMenuClearViewControllerDelegate
-
-- (void)clearViewControllerDebugMenuButtonPressed:(RZDebugMenuClearViewController *)clearViewController
-{
-    [self displayDebugMenu];
-}
-
-#pragma mark - Notifications
-
-- (void)applicationDidFinishLaunching:(NSNotification *)note
-{
-    [self configureTopWindowIfNeeded];
 }
 
 #pragma mark - Settings Menu
@@ -156,44 +124,56 @@ static NSUInteger kRZNumberOfTapsToHide = 4;
     }
 
     self.settingsMenuItems = settingsMenuItems;
+
+    [self configureDebugMenu];
 }
 
-# pragma mark - Show / Hide
+# pragma mark - Presentation
 
-- (void)configureAutomaticShowHideOnWindow:(UIWindow *)window
+- (void)registerDebugMenuPresentationGestureOnView:(UIView *)view
 {
-    NSAssert(window != nil, @"");
-
-    UIViewController *rootViewController = window.rootViewController;
-    NSAssert(rootViewController != nil, @"");
-
-    UIView *view = rootViewController.view;
     NSAssert(view != nil, @"");
 
-    UITapGestureRecognizer *manyTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manyTapGestureRecognizerFired:)];
-    manyTapGestureRecognizer.numberOfTapsRequired = kRZNumberOfTapsToHide;
+    UITapGestureRecognizer *manyTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(debugMenuActivationGestureRecognizerFired:)];
+    manyTapGestureRecognizer.numberOfTapsRequired = kRZNumberOfTapsToShow;
+    manyTapGestureRecognizer.numberOfTouchesRequired = kRZNumberOfTouchesToShow;
 
     [view addGestureRecognizer:manyTapGestureRecognizer];
 }
 
-- (void)manyTapGestureRecognizerFired:(id)sender
+- (void)presentDebugMenu
 {
-    [self showHideDebugMenuButton];
-}
-
-- (void)showHideDebugMenuButton
-{
-    self.clearRootViewController.showDebugMenuButton = (!self.clearRootViewController.showDebugMenuButton);
-}
-
-- (void)setShowDebugMenuButton:(BOOL)showDebugMenuButton
-{
-    if ( _showDebugMenuButton != showDebugMenuButton ) {
-        _showDebugMenuButton = showDebugMenuButton;
-
-        [self configureTopWindowIfNeeded];
-        self.clearRootViewController.showDebugMenuButton = showDebugMenuButton;
+    if ( self.debugMenuViewControllerToPresent.presentingViewController != nil ) {
+        NSLog(@"Not presenting debug menu. It is already active.");
+        return;
     }
+
+    if ( self.debugMenuViewControllerToPresent == nil ) {
+        NSLog(@"No debug menu enabled. Not presenting.");
+        return;
+    }
+
+    UIViewController *viewControllerToPresentOn = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [viewControllerToPresentOn presentViewController:self.debugMenuViewControllerToPresent animated:YES completion:nil];
+}
+
+- (void)debugMenuActivationGestureRecognizerFired:(id)sender
+{
+    [self presentDebugMenu];
+}
+
+- (void)dismissDebugMenu
+{
+    if ( self.debugMenuViewControllerToPresent.presentingViewController ) {
+        [self.debugMenuViewControllerToPresent dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+# pragma mark - RZDebugMenuFormViewControllerDelegate
+
+- (void)debugMenuFormViewControllerShouldDimiss:(RZDebugMenuFormViewController *)debugMenuFormViewController
+{
+    [self dismissDebugMenu];
 }
 
 @end
