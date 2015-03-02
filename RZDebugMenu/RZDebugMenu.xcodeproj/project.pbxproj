@@ -69,22 +69,22 @@
 		D43C89921A93E24B0057AF66 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D43C89941A93E24E0057AF66 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D43C89971A93E2EE0057AF66 /* RZDebugMenu-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RZDebugMenu-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		D43C89A51A94FDBA0057AF66 /* RZDebugMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenu.h; path = Classes/RZDebugMenu.h; sourceTree = "<group>"; };
+		D43C89A51A94FDBA0057AF66 /* RZDebugMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenu.h; path = "Public Headers/RZDebugMenu.h"; sourceTree = "<group>"; };
 		D43C89A61A94FDBA0057AF66 /* RZDebugMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenu.m; path = Classes/RZDebugMenu.m; sourceTree = "<group>"; };
 		D43C89A81A94FDC40057AF66 /* RZDebugLogMenuDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugLogMenuDefines.h; path = Classes/RZDebugLogMenuDefines.h; sourceTree = "<group>"; };
-		D43C89C01A94FDF10057AF66 /* RZDebugMenuSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettings.h; path = ../Classes/Models/RZDebugMenuSettings.h; sourceTree = "<group>"; };
-		D43C89C11A94FDF10057AF66 /* RZDebugMenuSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettings.m; path = ../Classes/Models/RZDebugMenuSettings.m; sourceTree = "<group>"; };
+		D43C89C01A94FDF10057AF66 /* RZDebugMenuSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettings.h; path = "Public Headers/RZDebugMenuSettings.h"; sourceTree = "<group>"; };
+		D43C89C11A94FDF10057AF66 /* RZDebugMenuSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettings.m; path = Classes/RZDebugMenuSettings.m; sourceTree = "<group>"; };
 		D43C89F81A951B500057AF66 /* RZDebugMenuSettingsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettingsParser.h; path = Classes/RZDebugMenuSettingsParser.h; sourceTree = "<group>"; };
 		D43C89F91A951B500057AF66 /* RZDebugMenuSettingsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettingsParser.m; path = Classes/RZDebugMenuSettingsParser.m; sourceTree = "<group>"; };
 		D43C89FB1A951B560057AF66 /* RZDebugMenuSettingsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuSettingsForm.h; sourceTree = "<group>"; };
 		D43C89FC1A951B560057AF66 /* RZDebugMenuSettingsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuSettingsForm.m; sourceTree = "<group>"; };
-		D43C8A081A9679CE0057AF66 /* RZDebugMenuFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuFormViewController.h; path = ../RZDebugMenuFormViewController.h; sourceTree = "<group>"; };
+		D43C8A081A9679CE0057AF66 /* RZDebugMenuFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuFormViewController.h; path = "../../Public Headers/RZDebugMenuFormViewController.h"; sourceTree = "<group>"; };
 		D43C8A091A9679CE0057AF66 /* RZDebugMenuFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuFormViewController.m; path = ../RZDebugMenuFormViewController.m; sourceTree = "<group>"; };
-		D43D488E1A9BE239002B3A55 /* RZDebugMenuSettingsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettingsStore.h; path = ../Classes/RZDebugMenuSettingsStore.h; sourceTree = "<group>"; };
+		D43D488E1A9BE239002B3A55 /* RZDebugMenuSettingsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuSettingsStore.h; path = "../Public Headers/RZDebugMenuSettingsStore.h"; sourceTree = "<group>"; };
 		D43D488F1A9BE239002B3A55 /* RZDebugMenuSettingsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuSettingsStore.m; path = ../Classes/RZDebugMenuSettingsStore.m; sourceTree = "<group>"; };
-		D43D48941A9BE3F4002B3A55 /* RZDebugMenuUserDefaultsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuUserDefaultsStore.h; path = ../Classes/RZDebugMenuUserDefaultsStore.h; sourceTree = "<group>"; };
+		D43D48941A9BE3F4002B3A55 /* RZDebugMenuUserDefaultsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuUserDefaultsStore.h; path = "../Public Headers/RZDebugMenuUserDefaultsStore.h"; sourceTree = "<group>"; };
 		D43D48951A9BE3F4002B3A55 /* RZDebugMenuUserDefaultsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuUserDefaultsStore.m; path = ../Classes/RZDebugMenuUserDefaultsStore.m; sourceTree = "<group>"; };
-		D43D48971A9CDF02002B3A55 /* RZDebugMenuIsolatedUserDefaultsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuIsolatedUserDefaultsStore.h; path = ../Classes/RZDebugMenuIsolatedUserDefaultsStore.h; sourceTree = "<group>"; };
+		D43D48971A9CDF02002B3A55 /* RZDebugMenuIsolatedUserDefaultsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuIsolatedUserDefaultsStore.h; path = "../Public Headers/RZDebugMenuIsolatedUserDefaultsStore.h"; sourceTree = "<group>"; };
 		D43D48981A9CDF02002B3A55 /* RZDebugMenuIsolatedUserDefaultsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuIsolatedUserDefaultsStore.m; path = ../Classes/RZDebugMenuIsolatedUserDefaultsStore.m; sourceTree = "<group>"; };
 		D43D489A1A9CE056002B3A55 /* RZDebugMenuChildPaneItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugMenuChildPaneItem.h; sourceTree = "<group>"; };
 		D43D489B1A9CE056002B3A55 /* RZDebugMenuChildPaneItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugMenuChildPaneItem.m; sourceTree = "<group>"; };
@@ -214,6 +214,8 @@
 				D43C89A81A94FDC40057AF66 /* RZDebugLogMenuDefines.h */,
 				D43C89A51A94FDBA0057AF66 /* RZDebugMenu.h */,
 				D43C89A61A94FDBA0057AF66 /* RZDebugMenu.m */,
+				D43C89C01A94FDF10057AF66 /* RZDebugMenuSettings.h */,
+				D43C89C11A94FDF10057AF66 /* RZDebugMenuSettings.m */,
 				D43C89F01A94FF230057AF66 /* Settings Parsing */,
 				D43C89731A93E1490057AF66 /* UX */,
 				D43C896C1A93E1290057AF66 /* Settings */,
@@ -243,8 +245,6 @@
 		D43C896C1A93E1290057AF66 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				D43C89C01A94FDF10057AF66 /* RZDebugMenuSettings.h */,
-				D43C89C11A94FDF10057AF66 /* RZDebugMenuSettings.m */,
 				D43D48C21A9D04AB002B3A55 /* RZDebugMenuSettings_Private.h */,
 				D43D48C11A9D018C002B3A55 /* Stores */,
 			);
@@ -564,6 +564,11 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/FXForms\"",
+					"\"Public Headers\"/**",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -575,6 +580,11 @@
 			baseConfigurationReference = CA8145EFE142630B3CDF5152 /* Pods.release.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "RZDebugMenu-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/FXForms\"",
+					"\"Public Headers\"/**",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

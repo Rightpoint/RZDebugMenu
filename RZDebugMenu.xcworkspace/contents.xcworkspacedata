@@ -5,6 +5,9 @@
       location = "group:RZDebugMenu/RZDebugMenu.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:RZDebugMenu/Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Demo/Pods/Pods.xcodeproj">
    </FileRef>
    <FileRef

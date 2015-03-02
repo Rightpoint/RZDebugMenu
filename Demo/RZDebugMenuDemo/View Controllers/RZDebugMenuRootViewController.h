@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettings.h"
+#import <RZDebugMenu/RZDebugMenuSettings.h>
 
 @interface RZDebugMenuRootViewController : UIViewController
 
