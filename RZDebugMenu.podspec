@@ -12,16 +12,24 @@ Pod::Spec.new do |s|
   s.author = { "Clayton Rieck" => "cjrieck123@gmail.com", "Nick Donalodson" => "ndonald2@gmail.com", "Michael Gorbach" => "michael.gorbach@raizlabs.com" }
   
   s.platform = :ios, "8.0"
+  s.ios.deployment_target = '8.0'
   
   s.source = { :git => "https://github.com/Raizlabs/RZDebugMenu.git", :tag => s.version.to_s }
   
-  s.source_files =  "Classes/**/*.{h,m}", "Public Headers/**/*.h"
-  
-  s.private_header_files =  "Classes/**/*.h"
-  s.public_header_files = "Public Headers/**/*.h"
-  
-  s.exclude_files = "Classes/Exclude"
-  
   s.requires_arc = true
+  
   s.dependency 'FXForms', '~>1.2'
+  
+  s.source_files = "Library/Core/Source/**/*.{h,m}"
+  s.public_header_files = "Library/Core/Public Headers/*.{h,m}"    
+  s.private_header_files = "Library/Core/Source/**/*.h"
+  
+  submodule_names = ["Settings", "Version"]
+  submodule_names.each { |sm|
+    s.subspec sm do |ss|
+      ss.source_files = "Library/Modules/#{sm}/Source/**/*.{h,m}"
+      ss.public_header_files = "Library/Modules/#{sm}/Public Headers/**/*.{h,m}"
+      ss.private_header_files = "Library/Modules/#{sm}/Source/**/*.h"
+    end
+  }
 end
