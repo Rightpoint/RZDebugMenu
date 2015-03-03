@@ -60,7 +60,7 @@
 			<key>Key</key>
 			<string>circle_choice</string>
 			<key>DefaultValue</key>
-			<integer>2</integer>
+			<integer>3</integer>
 			<key>Titles</key>
 			<array>
 				<string>None</string>
