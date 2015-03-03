@@ -8,7 +8,7 @@
 
 #import "RZDebugMenuFormViewController.h"
 
-#import "RZDebugMenuSettingsForm.h"
+#import "RZDebugMenuForm.h"
 
 static NSString *const kRZNavigationBarTitle = @"Debug Menu";
 

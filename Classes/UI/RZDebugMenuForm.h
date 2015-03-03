@@ -1,5 +1,5 @@
 //
-//  RZDebugMenuSettingsForm.h
+//  RZDebugMenuForm.h
 //  RZDebugMenu
 //
 //  Created by Michael Gorbach on 2/18/15.
@@ -16,7 +16,7 @@
 
 @end
 
-@interface RZDebugMenuSettingsForm : NSObject <FXForm>
+@interface RZDebugMenuForm : NSObject <FXForm>
 
 - (instancetype)initWithMenuItems:(NSArray *)meuItems NS_DESIGNATED_INITIALIZER;
 

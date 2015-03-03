@@ -9,7 +9,7 @@
 #import "RZDebugMenu.h"
 
 #import "RZDebugMenuSettings.h"
-#import "RZDebugMenuSettingsForm.h"
+#import "RZDebugMenuForm.h"
 #import "RZDebugMenuSettingsParser.h"
 #import "RZDebugMenuSettingsBundleChildItem.h"
 #import "RZDebugMenuLoadedSettingsBundleChildItem.h"
@@ -83,7 +83,7 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
 - (void)configureDebugMenu
 {
     if ( self.settingsMenuItems.count > 0 ) {
-        RZDebugMenuSettingsForm *settingsForm = [[RZDebugMenuSettingsForm alloc] initWithMenuItems:self.settingsMenuItems];
+        RZDebugMenuForm *settingsForm = [[RZDebugMenuForm alloc] initWithMenuItems:self.settingsMenuItems];
 
         RZDebugMenuFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
         settingsMenuViewController.delegate = self;

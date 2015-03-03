@@ -8,7 +8,7 @@
 
 #import <FXForms/FXForms.h>
 
-#import "RZDebugMenuSettingsForm.h"
+#import "RZDebugMenuForm.h"
 
 @class RZDebugMenuFormViewController;
 

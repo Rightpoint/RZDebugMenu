@@ -1,12 +1,12 @@
 //
-//  RZDebugMenuSettingsForm.m
+//  RZDebugMenuForm.m
 //  RZDebugMenu
 //
 //  Created by Michael Gorbach on 2/18/15.
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-#import "RZDebugMenuSettingsForm.h"
+#import "RZDebugMenuForm.h"
 
 #import "RZDebugMenuItem.h"
 #import "RZDebugMenuMultiValueSettingItem.h"
@@ -23,7 +23,7 @@
 
 #import "RZDebugMenuShortTitles.h"
 
-@interface RZDebugMenuSettingsForm ()
+@interface RZDebugMenuForm ()
 
 @property (strong, nonatomic, readwrite) NSArray *menuItems;
 
@@ -31,7 +31,7 @@
 
 @end
 
-@implementation RZDebugMenuSettingsForm
+@implementation RZDebugMenuForm
 
 - (instancetype)initWithMenuItems:(NSArray *)menuItems
 {
@@ -74,12 +74,12 @@
         if ( childMenuItems.count > 0 ) {
             NSMutableDictionary *mutableFieldDictionary = [fieldDictinoary mutableCopy];
 
-            RZDebugMenuSettingsForm *childSettingsForm = [[RZDebugMenuSettingsForm alloc] initWithMenuItems:childMenuItems];
+            RZDebugMenuForm *childSettingsForm = [[RZDebugMenuForm alloc] initWithMenuItems:childMenuItems];
             childSettingsForm.delegate = self.delegate;
 
             mutableFieldDictionary[FXFormFieldDefaultValue] = childSettingsForm;
 
-            mutableFieldDictionary[FXFormFieldClass] = [RZDebugMenuSettingsForm class];
+            mutableFieldDictionary[FXFormFieldClass] = [RZDebugMenuForm class];
 
             UIViewController *formViewController = [self.delegate viewControllerForChildPaneItem:item];
             NSAssert(formViewController != nil, @"");
