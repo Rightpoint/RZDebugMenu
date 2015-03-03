@@ -63,16 +63,18 @@
 
 - (NSArray *)uncachedFields
 {
-    NSMutableArray *mutableFields = nil;
-
     NSArray *flattenedMenuItems = [[self class] menuItemsByFlatteningGroupsFromMenuItems:self.menuItems];
 
+    NSMutableArray *mutableFields = nil;
+
+    RZDebugMenuGroupItem *groupToStart = nil;
+
     for ( RZDebugMenuItem *item in flattenedMenuItems ) {
-        NSDictionary *fieldDictinoary = item.fxFormsFieldDictionary;
+        NSDictionary *fieldDictionary = item.fxFormsFieldDictionary;
 
         NSArray *childMenuItems = item.fxFormsChildMenuItems;
         if ( childMenuItems.count > 0 ) {
-            NSMutableDictionary *mutableFieldDictionary = [fieldDictinoary mutableCopy];
+            NSMutableDictionary *mutableFieldDictionary = [fieldDictionary mutableCopy];
 
             RZDebugMenuForm *childSettingsForm = [[RZDebugMenuForm alloc] initWithMenuItems:childMenuItems];
             childSettingsForm.delegate = self.delegate;
@@ -86,17 +88,33 @@
 
             mutableFieldDictionary[FXFormFieldViewController] = formViewController;
 
-            fieldDictinoary = [mutableFieldDictionary copy];
+            fieldDictionary = [mutableFieldDictionary copy];
         }
 
-        NSString *formFieldType = fieldDictinoary[FXFormFieldType];
+        if ( groupToStart ) {
+            NSAssert([item isKindOfClass:[RZDebugMenuGroupItem class]] == NO, @"Nested groups aren't allowed!");
+
+            NSMutableDictionary *mutableFieldDictionary = [fieldDictionary mutableCopy];
+
+            mutableFieldDictionary[FXFormFieldHeader] = groupToStart.title;
+
+            groupToStart = nil;
+
+            fieldDictionary = [mutableFieldDictionary copy];
+        }
+
+        if ( [item isKindOfClass:[RZDebugMenuGroupItem class]] ) {
+            groupToStart = (RZDebugMenuGroupItem *)item;
+        }
+
+        NSString *formFieldType = fieldDictionary[FXFormFieldType];
 
         if ( formFieldType.length > 0 ) {
             if ( mutableFields == nil ) {
                 mutableFields = [NSMutableArray array];
             }
 
-            [mutableFields addObject:fieldDictinoary];
+            [mutableFields addObject:fieldDictionary];
         }
     }
 
