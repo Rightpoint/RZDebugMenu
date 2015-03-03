@@ -35,6 +35,7 @@
 {
     NSMutableDictionary *mutableFieldDictionary = [NSMutableDictionary dictionary];
 
+    mutableFieldDictionary[FXFormFieldTitle] = self.title;
     mutableFieldDictionary[FXFormFieldType] = FXFormFieldTypeDefault;
 
     return [mutableFieldDictionary copy];

@@ -67,8 +67,6 @@
 
     NSArray *flattenedMenuItems = [[self class] menuItemsByFlatteningGroupsFromMenuItems:self.menuItems];
 
-    id defaultValue = nil;
-
     for ( RZDebugMenuItem *item in flattenedMenuItems ) {
         NSDictionary *fieldDictinoary = item.fxFormsFieldDictionary;
 
@@ -79,7 +77,7 @@
             RZDebugMenuSettingsForm *childSettingsForm = [[RZDebugMenuSettingsForm alloc] initWithMenuItems:childMenuItems];
             childSettingsForm.delegate = self.delegate;
 
-            defaultValue = childSettingsForm;
+            mutableFieldDictionary[FXFormFieldDefaultValue] = childSettingsForm;
 
             mutableFieldDictionary[FXFormFieldClass] = [RZDebugMenuSettingsForm class];
 
