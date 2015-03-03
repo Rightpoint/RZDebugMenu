@@ -44,17 +44,21 @@
     NSArray *values = self.values;
     NSArray *titles = self.titles;
 
-    mutableFieldDictionary[FXFormFieldValueTransformer] = ^(id input) {
-        NSString *valueToReturn = @"";
+    if ( values.count > 0 ) {
+        NSAssert(values.count == titles.count, @"");
 
-        if ( input != nil ) {
-            NSUInteger index = [values indexOfObject:input];
-            NSAssert(index < NSNotFound && index >= 0, @"");
-            valueToReturn = titles[index];
-        }
+        mutableFieldDictionary[FXFormFieldValueTransformer] = ^(id input) {
+            NSString *valueToReturn = @"";
 
-        return valueToReturn;
-    };
+            if ( input != nil ) {
+                NSUInteger index = [values indexOfObject:input];
+                NSAssert(index < NSNotFound && index >= 0, @"");
+                valueToReturn = titles[index];
+            }
+
+            return valueToReturn;
+        };
+    }
 
     return [mutableFieldDictionary copy];
 }
