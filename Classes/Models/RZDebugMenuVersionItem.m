@@ -75,4 +75,24 @@ static NSString *const kRZCFBundleNameKey = @"CFBundleName";
     return [self initWithVersionString:[[self class] versionString]];
 }
 
+- (NSDictionary *)fxFormsFieldDictionary
+{
+    NSMutableDictionary *mutableFieldDictionary = [[super fxFormsFieldDictionary] mutableCopy];
+
+    mutableFieldDictionary[FXFormFieldType] = FXFormFieldTypeDefault;
+    mutableFieldDictionary[FXFormFieldCell] = [FXFormTextFieldCell class];
+
+    // We don't respond to valueForKey, so set the text manually.
+    NSArray *textKeyComponents = @[ NSStringFromSelector(@selector(textField)), NSStringFromSelector(@selector(text)) ];
+    NSString *textKey = [textKeyComponents componentsJoinedByString:@"."];
+    [mutableFieldDictionary setObject:self.versionString forKey:textKey];
+
+    // Make sure it's not editable.
+    NSArray *textFieldEnabledKeyComponents = @[ NSStringFromSelector(@selector(textField)), @"enabled" ];
+    NSString *textFieldEnabledKey = [textFieldEnabledKeyComponents componentsJoinedByString:@"."];
+    [mutableFieldDictionary setObject:@(NO) forKey:textFieldEnabledKey];
+
+    return [mutableFieldDictionary copy];
+}
+
 @end
