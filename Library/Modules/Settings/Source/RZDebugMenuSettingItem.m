@@ -8,16 +8,19 @@
 
 #import "RZDebugMenuSettingItem.h"
 
+#import "RZDebugMenuSettings.h"
+
 #import <FXForms/FXForms.h>
 
 @implementation RZDebugMenuSettingItem
 
-- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithDefaultValue:(id)value key:(NSString *)key title:(NSString *)title
 {
+    NSAssert(key.length > 0, @"");
+
     self = [super initWithTitle:title];
     if ( self ) {
         _key = key;
-        _value = value;
     }
 
     return self;
@@ -25,7 +28,7 @@
 
 - (instancetype)initWithTitle:(NSString *)title
 {
-    return [self initWithValue:nil key:nil title:title];
+    return [self initWithDefaultValue:nil key:nil title:title];
 }
 
 - (NSDictionary *)fxFormsFieldDictionary
@@ -43,6 +46,16 @@
     }
 
     return [mutableFieldDictionary copy];
+}
+
+- (void)updateValue:(id)value
+{
+    [RZDebugMenuSettings sharedSettings][self.key] = value;
+}
+
+- (id)value
+{
+    return [RZDebugMenuSettings sharedSettings][self.key];
 }
 
 @end

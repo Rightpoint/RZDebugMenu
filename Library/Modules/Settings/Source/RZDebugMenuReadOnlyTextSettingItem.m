@@ -21,7 +21,7 @@
 
 - (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title values:(NSArray *)values titles:(NSArray *)titles
 {
-    self = [super initWithValue:value key:key title:title];
+    self = [super initWithDefaultValue:value key:key title:title];
     if ( self ) {
         self.values = values;
         self.titles = titles;
@@ -30,7 +30,7 @@
     return self;
 }
 
-- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithDefaultValue:(id)value key:(NSString *)key title:(NSString *)title
 {
     return [self initWithValue:value key:key title:title values:nil titles:nil];
 }

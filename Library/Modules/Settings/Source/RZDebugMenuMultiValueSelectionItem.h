@@ -10,8 +10,6 @@
 
 @interface RZDebugMenuMultiValueSelectionItem : RZDebugMenuItem
 
-@property (strong, nonatomic, readonly) id value;
-
 @property (copy, nonatomic, readonly) NSString *longTitle;
 @property (copy, nonatomic, readonly) NSString *shortTitle;
 

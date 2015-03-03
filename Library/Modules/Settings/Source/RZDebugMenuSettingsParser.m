@@ -98,7 +98,7 @@ static NSString* const kRZKeyFalseValue = @"FalseValue";
                 RZDebugMenuItem *menuItem = nil;
 
                 if ( [itemType isEqualToString:kRZTextFieldSpecifier] ) {
-                    menuItem = [[RZDebugMenuTextSettingItem alloc] initWithValue:defaultValue key:itemIdentifier title:title];
+                    menuItem = [[RZDebugMenuTextSettingItem alloc] initWithDefaultValue:defaultValue key:itemIdentifier title:title];
                 }
                 else if ( [itemType isEqualToString:kRZSliderSpecifier] ) {
                     NSNumber *maximum = [preferenceSpecifierDictionary objectForKey:kRZKeyMaximumValue];

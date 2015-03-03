@@ -16,9 +16,9 @@
 
 @implementation RZDebugMenuTextSettingItem
 
-- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithDefaultValue:(id)value key:(NSString *)key title:(NSString *)title
 {
-    self = [super initWithValue:value key:key title:title];
+    self = [super initWithDefaultValue:value key:key title:title];
     if ( self ) {
     }
     

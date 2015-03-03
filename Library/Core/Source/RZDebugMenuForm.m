@@ -9,17 +9,8 @@
 #import "RZDebugMenuForm.h"
 
 #import "RZDebugMenuItem.h"
-#import "RZDebugMenuMultiValueSettingItem.h"
-#import "RZDebugMenuToggleSettingItem.h"
-#import "RZDebugMenuTextSettingItem.h"
-#import "RZDebugMenuSliderSettingItem.h"
 #import "RZDebugMenuGroupItem.h"
-#import "RZDebugMenuLoadedSettingsBundleChildItem.h"
-#import "RZDebugMenuSettings.h"
 #import "RZDebugMenuFormViewController.h"
-#import "RZDebugMenuReadOnlyTextSettingItem.h"
-#import "RZDebugMenuMultiValueSelectionItem.h"
-#import "RZDebugMenuVersionItem.h"
 
 #import "RZDebugMenuShortTitles.h"
 
@@ -28,6 +19,8 @@
 @property (strong, nonatomic, readwrite) NSArray *menuItems;
 
 @property (strong, nonatomic, readwrite) NSArray *cachedFields;
+
+@property (strong, nonatomic, readwrite) NSDictionary *menuItemsByKey;
 
 @end
 
@@ -66,6 +59,7 @@
     NSArray *flattenedMenuItems = [[self class] menuItemsByFlatteningGroupsFromMenuItems:self.menuItems];
 
     NSMutableArray *mutableFields = nil;
+    NSMutableDictionary *mutableMenuItemsByKey = nil;
 
     RZDebugMenuGroupItem *groupToStart = nil;
 
@@ -116,7 +110,18 @@
 
             [mutableFields addObject:fieldDictionary];
         }
+
+        NSString *key = fieldDictionary[FXFormFieldKey];
+        if ( key.length > 0 ) {
+            if ( mutableMenuItemsByKey == nil ) {
+                mutableMenuItemsByKey = [NSMutableDictionary dictionary];
+            }
+
+            mutableMenuItemsByKey[key] = item;
+        }
     }
+
+    self.menuItemsByKey = [mutableMenuItemsByKey copy];
 
     return [mutableFields copy];
 }
@@ -133,105 +138,26 @@
     return cachedFields;
 }
 
-+ (RZDebugMenuSettingItem *)settingsMenuItemForKey:(NSString *)key inMenuItems:(NSArray *)menuItems
-{
-    RZDebugMenuSettingItem *settingsMenuItem = nil;
-
-    for ( RZDebugMenuItem *menuItem in menuItems ) {
-        if ( [menuItem isKindOfClass:[RZDebugMenuSettingItem class]] ) {
-            if ( [((RZDebugMenuSettingItem *)menuItem).key isEqualToString:key] ) {
-                settingsMenuItem = (RZDebugMenuSettingItem *)menuItem;
-                break;
-            }
-        }
-        else {
-            if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
-                NSArray *childMenuItems = ((RZDebugMenuGroupItem *)menuItem).children;
-                settingsMenuItem = [[self class] settingsMenuItemForKey:key inMenuItems:childMenuItems];
-            }
-            else if ( [menuItem isKindOfClass:[RZDebugMenuLoadedSettingsBundleChildItem class]] ) {
-                NSArray *childMenuItems = ((RZDebugMenuLoadedSettingsBundleChildItem *)menuItem).settingsMenuItems;
-                settingsMenuItem = [[self class] settingsMenuItemForKey:key inMenuItems:childMenuItems];
-            }
-
-            if ( settingsMenuItem ) {
-                break;
-            }
-        }
-    }
-
-    return settingsMenuItem;
-}
-
-- (RZDebugMenuSettingItem *)settingsMenuItemForKey:(NSString *)key
-{
-    return [[self class] settingsMenuItemForKey:key inMenuItems:self.menuItems];
-}
-
 - (id)valueForKey:(NSString *)key
 {
-    id valueToReturn = nil;
+    id value = nil;
 
-    RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
-    if ( settingsItem ) {
-        valueToReturn = [RZDebugMenuSettings sharedSettings][key];
-
-        if ( [settingsItem isKindOfClass:[RZDebugMenuToggleSettingItem class]] ) {
-            id trueValue = ((RZDebugMenuToggleSettingItem *)settingsItem).trueValue;
-            id __attribute__((unused)) falseValue = ((RZDebugMenuToggleSettingItem *)settingsItem).falseValue;
-            if ( trueValue ) {
-                NSAssert(falseValue != nil, @"");
-                NSAssert([trueValue class] == [falseValue class], @"");
-
-                NSNumber *(^valueTransformer)(id value) = ^(id value) {
-                    NSNumber *valueToReturn = @(NO);
-
-                    if ( [value isEqual:trueValue] ) {
-                        valueToReturn = @(YES);
-                    }
-
-                    return valueToReturn;
-                };
-
-                valueToReturn = valueTransformer(valueToReturn);
-            }
-        }
+    RZDebugMenuItem *menuItem = [self menuItemsByKey][key];
+    if ( menuItem ) {
+        value = menuItem.value;
     }
     else {
-        valueToReturn = [super valueForKey:key];
+        value = [super valueForKey:key];
     }
 
-    return valueToReturn;
+    return value;
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
-    RZDebugMenuSettingItem *settingsItem = [self settingsMenuItemForKey:key];
-    if ( settingsItem ) {
-        if ( [settingsItem isKindOfClass:[RZDebugMenuToggleSettingItem class]] ) {
-            id trueValue = ((RZDebugMenuToggleSettingItem *)settingsItem).trueValue;
-            id falseValue = ((RZDebugMenuToggleSettingItem *)settingsItem).falseValue;
-            if ( trueValue ) {
-                NSAssert(falseValue != nil, @"");
-                NSAssert([trueValue class] == [falseValue class], @"");
-
-                id (^reverseValueTransformer)(NSNumber *value) = ^(NSNumber *value) {
-                    id valueToReturn = falseValue;
-
-                    NSAssert([value isKindOfClass:[NSNumber class]], @"");
-
-                    if ( [value boolValue] ) {
-                        valueToReturn = trueValue;
-                    }
-
-                    return valueToReturn;
-                };
-
-                value = reverseValueTransformer(value);
-            }
-        }
-
-        [RZDebugMenuSettings sharedSettings][key] = value;
+    RZDebugMenuItem *menuItem = [self menuItemsByKey][key];
+    if ( menuItem ) {
+        [menuItem updateValue:value];
     }
     else {
         [super setValue:value forKey:key];

@@ -21,14 +21,14 @@
 
 @implementation RZDebugMenuMultiValueSettingItem
 
-- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithDefaultValue:(id)value key:(NSString *)key title:(NSString *)title
 {
     return [self initWithValue:value key:key title:title selectionItems:nil];
 }
 
 - (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title selectionItems:(NSArray *)selectionItems
 {
-    self = [super initWithValue:value key:key title:title];
+    self = [super initWithDefaultValue:value key:key title:title];
     if ( self ) {
         _selectionItems = selectionItems;
     }

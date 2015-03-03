@@ -38,4 +38,8 @@
     return nil;
 }
 
+- (void)updateValue:(id)value
+{
+}
+
 @end

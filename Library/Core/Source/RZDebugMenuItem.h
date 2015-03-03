@@ -18,4 +18,8 @@
 
 @property (copy, nonatomic, readonly) NSArray *fxFormsChildMenuItems;
 
+@property (strong, nonatomic, readonly) id value;
+
+- (void)updateValue:(id)value;
+
 @end

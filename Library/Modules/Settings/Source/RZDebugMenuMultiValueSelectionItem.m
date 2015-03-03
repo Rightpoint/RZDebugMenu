@@ -11,11 +11,13 @@
 @interface RZDebugMenuMultiValueSelectionItem ()
 
 @property (strong, nonatomic, readwrite) id value;
+
 @property (copy, nonatomic, readwrite) NSString *shortTitle;
 
 @end
 
 @implementation RZDebugMenuMultiValueSelectionItem
+@synthesize value = _value;
 
 - (instancetype)initWithLongTitle:(NSString *)longTitle shortTitle:(NSString *)shortTitle value:(id)value
 {

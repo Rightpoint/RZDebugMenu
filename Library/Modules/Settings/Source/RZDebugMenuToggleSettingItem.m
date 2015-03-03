@@ -25,7 +25,7 @@
           trueValue:(id)trueValue
          falseValue:(id)falseValue
 {
-    self = [super initWithValue:value key:key title:title];
+    self = [super initWithDefaultValue:value key:key title:title];
     if ( self ) {
         self.trueValue = trueValue;
         self.falseValue = falseValue;
@@ -34,7 +34,7 @@
     return self;
 }
 
-- (instancetype)initWithValue:(id)value key:(NSString *)key title:(NSString *)title
+- (instancetype)initWithDefaultValue:(id)value key:(NSString *)key title:(NSString *)title
 {
     return [self initWithValue:value key:key title:title trueValue:nil falseValue:nil];
 }
@@ -46,6 +46,33 @@
     mutableFieldDictionary[FXFormFieldType] = FXFormFieldTypeBoolean;
 
     return [mutableFieldDictionary copy];
+}
+
+- (void)updateValue:(id)value
+{
+    id trueValue = self.trueValue;
+    id falseValue = self.falseValue;
+
+    if ( trueValue ) {
+        NSAssert(falseValue != nil, @"");
+        NSAssert([trueValue class] == [falseValue class], @"");
+
+        id (^reverseValueTransformer)(NSNumber *value) = ^(NSNumber *value) {
+            id valueToReturn = falseValue;
+
+            NSAssert([value isKindOfClass:[NSNumber class]], @"");
+
+            if ( [value boolValue] ) {
+                valueToReturn = trueValue;
+            }
+
+            return valueToReturn;
+        };
+
+        value = reverseValueTransformer(value);
+    }
+
+    [super updateValue:value];
 }
 
 @end
