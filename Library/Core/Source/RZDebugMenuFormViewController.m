@@ -8,6 +8,7 @@
 
 #import "RZDebugMenuFormViewController.h"
 
+#import "RZDebugMenuItem.h"
 #import "RZDebugMenuForm.h"
 
 static NSString *const kRZNavigationBarTitle = @"Debug Menu";
@@ -22,6 +23,16 @@ static NSString *const kRZNavigationBarDoneButtonTitle = @"Done";
 
 @implementation RZDebugMenuFormViewController
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if ( self ) {
+        self.title = kRZNavigationBarTitle;
+    }
+
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -31,11 +42,6 @@ static NSString *const kRZNavigationBarDoneButtonTitle = @"Done";
                                                                   target:self
                                                                   action:@selector(doneButtonTapped:)];
     self.navigationItem.rightBarButtonItem = doneButton;
-}
-
-- (NSString *)title
-{
-    return kRZNavigationBarTitle;
 }
 
 - (void)doneButtonTapped:(id)sender
@@ -50,6 +56,7 @@ static NSString *const kRZNavigationBarDoneButtonTitle = @"Done";
     NSAssert(childPaneItem != nil, @"");
 
     RZDebugMenuFormViewController *formViewController = [[RZDebugMenuFormViewController alloc] initWithNibName:nil bundle:nil];
+    formViewController.title = childPaneItem.title;
     formViewController.delegate = self.delegate;
 
     return formViewController;

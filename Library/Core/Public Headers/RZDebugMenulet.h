@@ -8,6 +8,8 @@
 
 @protocol RZDebugMenulet < NSObject >
 
+@property (strong, nonatomic, readonly) NSString *title;
+
 @property (copy, nonatomic, readonly) NSArray *menuItems;
 
 @end

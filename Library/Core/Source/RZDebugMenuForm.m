@@ -10,7 +10,6 @@
 
 #import "RZDebugMenuItem.h"
 #import "RZDebugMenuGroupItem.h"
-#import "RZDebugMenuFormViewController.h"
 
 #import "RZDebugMenuShortTitles.h"
 
@@ -45,6 +44,8 @@
 
         if ( [menuItem isKindOfClass:[RZDebugMenuGroupItem class]] ) {
             NSArray *children = ((RZDebugMenuGroupItem *)menuItem).children;
+            children = [[self class] menuItemsByFlatteningGroupsFromMenuItems:children];
+
             if ( children.count > 0 ) {
                 [mutableSettingsMenuItems addObjectsFromArray:children];
             }
@@ -86,7 +87,7 @@
         }
 
         if ( groupToStart ) {
-            NSAssert([item isKindOfClass:[RZDebugMenuGroupItem class]] == NO, @"Nested groups aren't allowed!");
+            // NSAssert([item isKindOfClass:[RZDebugMenuGroupItem class]] == NO, @"Nested groups aren't allowed!");
 
             NSMutableDictionary *mutableFieldDictionary = [fieldDictionary mutableCopy];
 
@@ -123,7 +124,7 @@
 
     self.menuItemsByKey = [mutableMenuItemsByKey copy];
 
-    return [mutableFields copy];
+    return mutableFields ? [mutableFields copy] : [NSArray array];
 }
 
 - (NSArray *)fields

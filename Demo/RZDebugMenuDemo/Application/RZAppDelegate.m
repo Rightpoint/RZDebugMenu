@@ -13,6 +13,8 @@
 #import <RZDebugMenu/RZDebugMenu.h>
 #import <RZDebugMenu/RZDebugMenuSettings.h>
 #import <RZDebugMenu/RZDebugMenuUserDefaultsStore.h>
+#import <RZDebugMenu/RZDebugSettingsMenulet.h>
+#import <RZDebugMenu/RZDebugMenuVersionMenulet.h>
 
 static NSString *const kSettingsPlistName = @"Settings.plist";
 
@@ -20,12 +22,7 @@ static NSString *const kSettingsPlistName = @"Settings.plist";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-#if (DEBUG)
-    // To activate the debug menu, call this method with the name of the settings plist you want to use. It should be included in your application bundle.
-    [RZDebugMenu enableMenuWithSettingsPlistName:kSettingsPlistName];
-#endif
-    
+
     RZDebugMenuRootViewController *rootViewController = [[RZDebugMenuRootViewController alloc] init];
     UINavigationController *rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     
@@ -43,6 +40,12 @@ static NSString *const kSettingsPlistName = @"Settings.plist";
 
     // For general observation of changes to any debug settings, you can use this notification, which includes specific information on what setting changes, as well as the previous and new values.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kRZDebugMenuSettingChangedNotification object:nil];
+
+    RZDebugSettingsMenulet *settingsMenulet = [[RZDebugSettingsMenulet alloc] initWithSettingsPlistName:kSettingsPlistName];
+    [[RZDebugMenu sharedDebugMenu] appendMenulet:settingsMenulet];
+
+    RZDebugMenuVersionMenulet *versionMenulet = [[RZDebugMenuVersionMenulet alloc] init];
+    [[RZDebugMenu sharedDebugMenu] appendMenulet:versionMenulet];
 #endif
 
     return YES;

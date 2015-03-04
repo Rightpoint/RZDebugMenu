@@ -13,8 +13,8 @@
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuFormViewController.h"
 #import "RZDebugMenuGroupItem.h"
+#import "RZDebugMenuChildItem.h"
 #import "UIViewController+RZDebugMenuPresentationAdditions.h"
-
 #import "RZDebugLogMenuDefines.h"
 
 #import <FXForms/FXForms.h>
@@ -30,7 +30,7 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
 
 @property (strong, nonatomic, readwrite) UIViewController *debugMenuViewControllerToPresent;
 
-@property (strong, nonatomic, readwrite) NSArray *settingsMenuItems;
+@property (strong, nonatomic, readwrite) NSArray *topLevelMenuItems;
 
 @end
 
@@ -62,31 +62,12 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
 {
     self = [super init];
     if ( self ) {
-        [self configureDebugMenu];
+        self.topLevelMenuItems = [NSArray array];
     }
 
     return self;
 }
 
-#pragma mark - Configuration
-
-- (void)configureDebugMenu
-{
-    if ( self.settingsMenuItems.count > 0 ) {
-        RZDebugMenuForm *settingsForm = [[RZDebugMenuForm alloc] initWithMenuItems:self.settingsMenuItems];
-
-        RZDebugMenuFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
-        settingsMenuViewController.delegate = self;
-        
-        settingsForm.delegate = settingsMenuViewController;
-
-        settingsMenuViewController.formController.form = settingsForm;
-
-        UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenuViewController];
-
-        self.debugMenuViewControllerToPresent = modalNavigationController;
-    }
-}
 # pragma mark - Presentation
 
 - (void)registerDebugMenuPresentationGestureOnView:(UIView *)view
@@ -105,6 +86,21 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
     if ( self.debugMenuViewControllerToPresent.presentingViewController != nil ) {
         NSLog(@"Not presenting debug menu. It is already active.");
         return;
+    }
+
+    if ( self.topLevelMenuItems.count > 0 ) {
+        RZDebugMenuForm *settingsForm = [[RZDebugMenuForm alloc] initWithMenuItems:self.topLevelMenuItems];
+
+        RZDebugMenuFormViewController *settingsMenuViewController = [[RZDebugMenuFormViewController alloc] init];
+        settingsMenuViewController.delegate = self;
+
+        settingsForm.delegate = settingsMenuViewController;
+
+        settingsMenuViewController.formController.form = settingsForm;
+
+        UINavigationController *modalNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsMenuViewController];
+
+        self.debugMenuViewControllerToPresent = modalNavigationController;
     }
 
     if ( self.debugMenuViewControllerToPresent == nil ) {
@@ -139,8 +135,33 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
 
 # pragma mark - Menulets
 
-- (void)addMenuItemsFromMenulet:(id <RZDebugMenulet>)menuLet
+- (void)appendMenuItems:(NSArray *)menuItems
 {
+    NSAssert(menuItems.count > 0, @"");
+
+    NSMutableArray *mutableTopLevelMenuItems = [self.topLevelMenuItems mutableCopy];
+    [mutableTopLevelMenuItems addObjectsFromArray:menuItems];
+    self.topLevelMenuItems = [mutableTopLevelMenuItems copy];
+}
+
+- (void)addMenulet:(id <RZDebugMenulet>)menulet
+{
+    NSArray *menuItems = menulet.menuItems;
+    if ( menuItems.count > 0 ) {
+        NSString *title = menulet.title;
+        RZDebugMenuChildItem *childItem = [[RZDebugMenuChildItem alloc] initWithTitle:title children:menuItems];
+        [self appendMenuItems:@[childItem]];
+    }
+}
+
+- (void)appendMenulet:(id <RZDebugMenulet>)menulet
+{
+    NSArray *menuItems = menulet.menuItems;
+    if ( menuItems.count > 0 ) {
+        NSString *title = menulet.title;
+        RZDebugMenuGroupItem *groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:title children:menuItems];
+        [self appendMenuItems:@[groupItem]];
+    }
 }
 
 @end

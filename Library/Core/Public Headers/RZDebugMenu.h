@@ -50,4 +50,19 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  */
 @property (strong, nonatomic, readonly) UIViewController *debugMenuViewControllerToPresent;
 
+/**
+ *  Add a menulet. This menulet will be added as it's own menu item.
+ *
+ *  @param menulet The menulet to add.
+ */
+- (void)addMenulet:(id <RZDebugMenulet>)menulet;
+
+
+/**
+ *  Append a menulet. All the items from this menulet will be appended to the menu.
+ *
+ *  @param menulet The menulet to append.
+ */
+- (void)appendMenulet:(id <RZDebugMenulet>)menulet;
+
 @end

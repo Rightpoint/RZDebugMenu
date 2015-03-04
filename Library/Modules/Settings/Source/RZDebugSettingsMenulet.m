@@ -11,6 +11,8 @@
 #import "RZDebugMenuSettingsParser.h"
 #import "RZDebugMenuSettings_Private.h"
 
+static NSString *const kRZSettingsTitle = @"Settings";
+
 @interface RZDebugSettingsMenulet ()
 
 @property (copy, nonatomic, readwrite) NSArray *menuItems;
@@ -50,6 +52,11 @@
     }
 
     self.menuItems = settingsMenuItems;
+}
+
+- (NSString *)title
+{
+    return kRZSettingsTitle;
 }
 
 @end
