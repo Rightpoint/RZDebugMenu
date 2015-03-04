@@ -10,6 +10,8 @@
 
 @property (strong, nonatomic, readonly) NSString *title;
 
+@optional
+@property (strong, nonatomic, readonly) UIViewController *viewController;
 @property (copy, nonatomic, readonly) NSArray *menuItems;
 
 @end

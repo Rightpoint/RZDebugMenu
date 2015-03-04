@@ -24,7 +24,8 @@ Pod::Spec.new do |s|
   s.public_header_files = "Library/Core/Public Headers/*.{h,m}"    
   s.private_header_files = "Library/Core/Source/**/*.h"
   
-  submodule_names = ["Settings", "Version"]
+  submodule_names = [ "Settings", "Version" ]
+  
   submodule_names.each { |sm|
     s.subspec sm do |ss|
       ss.source_files = "Library/Modules/#{sm}/Source/**/*.{h,m}", "Library/Modules/#{sm}/Public Headers/**/*.{h,m}"
@@ -32,4 +33,13 @@ Pod::Spec.new do |s|
       ss.private_header_files = "Library/Modules/#{sm}/Source/**/*.h"
     end
   }
+  
+  s.subspec "Logging" do |ss|
+    ss.source_files = "Library/Modules/Logging/Source/**/*.{h,m}", "Library/Modules/Logging/Public Headers/**/*.{h,m}"
+    ss.public_header_files = "Library/Modules/Logging/Public Headers/**/*.{h,m}"
+    ss.private_header_files = "Library/Modules/Logging/Source/**/*.h"
+    ss.dependency 'CocoaLumberjack', '~>1.9'
+  end
+  
+  s.default_subspecs = 'Settings', 'Version'
 end

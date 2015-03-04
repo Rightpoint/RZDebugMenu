@@ -2,3 +2,4 @@
 platform :ios, '8.0'
 
 pod 'FXForms', '~>1.2'
+pod 'CocoaLumberJack', '~>1.9'

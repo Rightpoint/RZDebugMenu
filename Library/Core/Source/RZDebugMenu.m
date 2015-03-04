@@ -16,6 +16,7 @@
 #import "RZDebugMenuChildItem.h"
 #import "UIViewController+RZDebugMenuPresentationAdditions.h"
 #import "RZDebugLogMenuDefines.h"
+#import "RZDebugMenuViewControllerItem.h"
 
 #import <FXForms/FXForms.h>
 
@@ -146,21 +147,51 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
 
 - (void)addMenulet:(id <RZDebugMenulet>)menulet
 {
-    NSArray *menuItems = menulet.menuItems;
+    NSString *title = menulet.title;
+
+    NSArray *menuItems = nil;
+    if ( [menulet respondsToSelector:@selector(menuItems)] ) {
+        menuItems = menulet.menuItems;
+    }
+
     if ( menuItems.count > 0 ) {
-        NSString *title = menulet.title;
         RZDebugMenuChildItem *childItem = [[RZDebugMenuChildItem alloc] initWithTitle:title children:menuItems];
         [self appendMenuItems:@[childItem]];
+    }
+
+    UIViewController *viewController = nil;
+    if ( [menulet respondsToSelector:@selector(viewController)] ) {
+        viewController = menulet.viewController;
+    }
+
+    if ( viewController ) {
+        RZDebugMenuItem *viewControllerMenuItem = [[RZDebugMenuViewControllerItem alloc] initWithTitle:title viewController:viewController];
+        [self appendMenuItems:@[viewControllerMenuItem]];
     }
 }
 
 - (void)appendMenulet:(id <RZDebugMenulet>)menulet
 {
-    NSArray *menuItems = menulet.menuItems;
+    NSString *title = menulet.title;
+
+    NSArray *menuItems = nil;
+    if ( [menulet respondsToSelector:@selector(menuItems)] ) {
+        menuItems = menulet.menuItems;
+    }
+    
     if ( menuItems.count > 0 ) {
-        NSString *title = menulet.title;
         RZDebugMenuGroupItem *groupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:title children:menuItems];
         [self appendMenuItems:@[groupItem]];
+    }
+
+    UIViewController *viewController = nil;
+    if ( [menulet respondsToSelector:@selector(viewController)] ) {
+        viewController = menulet.viewController;
+    }
+
+    if ( viewController ) {
+        RZDebugMenuItem *viewControllerMenuItem = [[RZDebugMenuViewControllerItem alloc] initWithTitle:title viewController:viewController];
+        [self appendMenuItems:@[viewControllerMenuItem]];
     }
 }
 

@@ -15,6 +15,7 @@
 #import <RZDebugMenu/RZDebugMenuUserDefaultsStore.h>
 #import <RZDebugMenu/RZDebugSettingsMenulet.h>
 #import <RZDebugMenu/RZDebugMenuVersionMenulet.h>
+#import <RZDebugMenu/RZDebugLoggingMenulet.h>
 
 static NSString *const kSettingsPlistName = @"Settings.plist";
 
@@ -42,7 +43,10 @@ static NSString *const kSettingsPlistName = @"Settings.plist";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged:) name:kRZDebugMenuSettingChangedNotification object:nil];
 
     RZDebugSettingsMenulet *settingsMenulet = [[RZDebugSettingsMenulet alloc] initWithSettingsPlistName:kSettingsPlistName];
-    [[RZDebugMenu sharedDebugMenu] appendMenulet:settingsMenulet];
+    [[RZDebugMenu sharedDebugMenu] addMenulet:settingsMenulet];
+
+    RZDebugLoggingMenulet *loggingMenulet = [RZDebugLoggingMenulet sharedDebugLoggingMenulet];
+    [[RZDebugMenu sharedDebugMenu] addMenulet:loggingMenulet];
 
     RZDebugMenuVersionMenulet *versionMenulet = [[RZDebugMenuVersionMenulet alloc] init];
     [[RZDebugMenu sharedDebugMenu] appendMenulet:versionMenulet];

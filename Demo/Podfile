@@ -2,3 +2,4 @@
 platform :ios, '8.0'
 
 pod 'RZDebugMenu', :path => '../'
+pod 'RZDebugMenu/Logging', :path => '../'

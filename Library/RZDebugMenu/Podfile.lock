@@ -1,10 +1,17 @@
 PODS:
+  - CocoaLumberjack (1.9.2):
+    - CocoaLumberjack/Extensions (= 1.9.2)
+  - CocoaLumberjack/Core (1.9.2)
+  - CocoaLumberjack/Extensions (1.9.2):
+    - CocoaLumberjack/Core
   - FXForms (1.2.12)
 
 DEPENDENCIES:
+  - CocoaLumberJack (~> 1.9)
   - FXForms (~> 1.2)
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   FXForms: ae90610432a0a9cbb71e0180f202d0fff375881f
 
 COCOAPODS: 0.35.0
