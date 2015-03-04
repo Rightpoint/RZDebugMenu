@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		346B7BB88365D4A7B8D60DD7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B80888602266897DB3CC72 /* libPods.a */; };
+		D435314D1AA66F7F001D7885 /* RZDebugMenulet.m in Sources */ = {isa = PBXBuildFile; fileRef = D435314C1AA66F7F001D7885 /* RZDebugMenulet.m */; };
 		D43C89601A93E11E0057AF66 /* libRZDebugMenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89551A93E11E0057AF66 /* libRZDebugMenu.a */; };
 		D43C89931A93E24B0057AF66 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89921A93E24B0057AF66 /* Foundation.framework */; };
 		D43C89951A93E24E0057AF66 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C89941A93E24E0057AF66 /* UIKit.framework */; };
@@ -33,6 +34,7 @@
 		D4C570E21AA6242800383A31 /* RZDebugMenuSettingsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C570B21AA623B900383A31 /* RZDebugMenuSettingsStore.m */; };
 		D4C570E31AA6242800383A31 /* RZDebugMenuSettingsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C570B11AA623B900383A31 /* RZDebugMenuSettingsParser.m */; };
 		D4C570E61AA6243800383A31 /* RZDebugMenuVersionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C570E51AA6243800383A31 /* RZDebugMenuVersionItem.m */; };
+		D4D9727D1AA66CBE0076C5BE /* RZDebugSettingsMenulet.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D9727C1AA66CBE0076C5BE /* RZDebugSettingsMenulet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		05DE3EB7F949B26627EF9421 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		45B80888602266897DB3CC72 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA8145EFE142630B3CDF5152 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D435314B1AA66F79001D7885 /* RZDebugMenulet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RZDebugMenulet.h; path = "Public Headers/RZDebugMenulet.h"; sourceTree = "<group>"; };
+		D435314C1AA66F7F001D7885 /* RZDebugMenulet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenulet.m; path = Source/RZDebugMenulet.m; sourceTree = "<group>"; };
 		D43C89551A93E11E0057AF66 /* libRZDebugMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRZDebugMenu.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43C895F1A93E11E0057AF66 /* RZDebugMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RZDebugMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D43C89651A93E11E0057AF66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		D4C570BB1AA623B900383A31 /* RZDebugMenuUserDefaultsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuUserDefaultsStore.m; path = Source/RZDebugMenuUserDefaultsStore.m; sourceTree = "<group>"; };
 		D4C570E41AA6243800383A31 /* RZDebugMenuVersionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RZDebugMenuVersionItem.h; path = Source/RZDebugMenuVersionItem.h; sourceTree = "<group>"; };
 		D4C570E51AA6243800383A31 /* RZDebugMenuVersionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RZDebugMenuVersionItem.m; path = Source/RZDebugMenuVersionItem.m; sourceTree = "<group>"; };
+		D4D9727B1AA66CBE0076C5BE /* RZDebugSettingsMenulet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZDebugSettingsMenulet.h; sourceTree = "<group>"; };
+		D4D9727C1AA66CBE0076C5BE /* RZDebugSettingsMenulet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZDebugSettingsMenulet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +214,8 @@
 				D4C570961AA6233600383A31 /* RZDebugMenu.h */,
 				D4C570861AA6232F00383A31 /* RZDebugMenu.m */,
 				D4C570851AA6232F00383A31 /* RZDebugLogMenuDefines.h */,
+				D435314B1AA66F79001D7885 /* RZDebugMenulet.h */,
+				D435314C1AA66F7F001D7885 /* RZDebugMenulet.m */,
 				D4C570991AA6235400383A31 /* Menu Items */,
 				D4C570981AA6234C00383A31 /* UX */,
 			);
@@ -259,6 +267,7 @@
 		D4C5709C1AA6239A00383A31 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				D4D972771AA66C370076C5BE /* Menulet */,
 				D4C570CE1AA6240C00383A31 /* UX */,
 				D4C570CD1AA623DA00383A31 /* Menu Items */,
 				D4C570CC1AA623C800383A31 /* Storage */,
@@ -324,6 +333,15 @@
 				D4C570B41AA623B900383A31 /* RZDebugMenuShortTitles.m */,
 			);
 			name = UX;
+			sourceTree = "<group>";
+		};
+		D4D972771AA66C370076C5BE /* Menulet */ = {
+			isa = PBXGroup;
+			children = (
+				D4D9727B1AA66CBE0076C5BE /* RZDebugSettingsMenulet.h */,
+				D4D9727C1AA66CBE0076C5BE /* RZDebugSettingsMenulet.m */,
+			);
+			name = Menulet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D435314D1AA66F7F001D7885 /* RZDebugMenulet.m in Sources */,
 				D4C570DE1AA6242800383A31 /* RZDebugMenuToggleSettingItem.m in Sources */,
 				D4C570DB1AA6242800383A31 /* RZDebugMenuSettingsBundleChildItem.m in Sources */,
 				D4C570DA1AA6242800383A31 /* RZDebugMenuSettingItem.m in Sources */,
@@ -465,6 +484,7 @@
 				D4C570D01AA6242800383A31 /* RZDebugMenuGroupItem.m in Sources */,
 				D4C570D31AA6242800383A31 /* RZDebugMenuFormViewController.m in Sources */,
 				D4C570D81AA6242800383A31 /* RZDebugMenuMultiValueSettingItem.m in Sources */,
+				D4D9727D1AA66CBE0076C5BE /* RZDebugSettingsMenulet.m in Sources */,
 				D4C570D91AA6242800383A31 /* RZDebugMenuReadOnlyTextSettingItem.m in Sources */,
 				D4C570D41AA6242800383A31 /* UIViewController+RZDebugMenuPresentationAdditions.m in Sources */,
 				D4C570DF1AA6242800383A31 /* RZDebugMenuUserDefaultsStore.m in Sources */,

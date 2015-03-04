@@ -10,13 +10,8 @@
 
 #import "RZDebugMenuSettings.h"
 #import "RZDebugMenuForm.h"
-#import "RZDebugMenuSettingsParser.h"
-#import "RZDebugMenuSettingsBundleChildItem.h"
-#import "RZDebugMenuLoadedSettingsBundleChildItem.h"
 #import "RZDebugMenuGroupItem.h"
 #import "RZDebugMenuFormViewController.h"
-#import "RZDebugMenuSettings_Private.h"
-#import "RZDebugMenuVersionItem.h"
 #import "RZDebugMenuGroupItem.h"
 #import "UIViewController+RZDebugMenuPresentationAdditions.h"
 
@@ -52,11 +47,6 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
     });
 
     return s_sharedInstance;
-}
-
-+ (void)enableMenuWithSettingsPlistName:(NSString *)plistName
-{
-    [[self sharedDebugMenu] loadSettingsMenuFromPlistName:plistName];
 }
 
 # pragma mark - Lifecycle
@@ -97,38 +87,6 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
         self.debugMenuViewControllerToPresent = modalNavigationController;
     }
 }
-
-#pragma mark - Settings Menu
-
-- (void)loadSettingsMenuFromPlistName:(NSString *)plistName
-{
-    NSError *settingsParsingError = nil;
-    NSArray *keys = nil;
-    NSDictionary *defaultValues = nil;
-
-    NSArray *settingsMenuItems = [RZDebugMenuSettingsParser settingsMenuItemsFromPlistName:plistName
-                                                                             returningKeys:&keys
-                                                                             defaultValues:&defaultValues
-                                                                                     error:&settingsParsingError];
-    if ( settingsMenuItems ) {
-        // We've loaded all our settings. Initialize the store.
-        [RZDebugMenuSettings initializeWithKeys:keys defaultValues:defaultValues];
-    }
-    else {
-        NSLog(@"Failed to parse settings from plist %@: %@.", plistName, settingsParsingError);
-    }
-
-    if ( settingsMenuItems ) {
-        RZDebugMenuVersionItem *versionItem = [[RZDebugMenuVersionItem alloc] init];
-        RZDebugMenuGroupItem *versionGroupItem = [[RZDebugMenuGroupItem alloc] initWithTitle:kRZVersionTitle children:@[versionItem]];
-        settingsMenuItems = [settingsMenuItems arrayByAddingObject:versionGroupItem];
-    }
-
-    self.settingsMenuItems = settingsMenuItems;
-
-    [self configureDebugMenu];
-}
-
 # pragma mark - Presentation
 
 - (void)registerDebugMenuPresentationGestureOnView:(UIView *)view
@@ -177,6 +135,12 @@ static NSUInteger kRZNumberOfTouchesToShow = 2;
 - (void)debugMenuFormViewControllerShouldDimiss:(RZDebugMenuFormViewController *)debugMenuFormViewController
 {
     [self dismissDebugMenu];
+}
+
+# pragma mark - Menulets
+
+- (void)addMenuItemsFromMenulet:(id <RZDebugMenulet>)menuLet
+{
 }
 
 @end

@@ -11,6 +11,8 @@
  */
 OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
 
+#import "RZDebugMenulet.h"
+
 /**
  *  RZDebug Menu Class
  *
@@ -18,13 +20,6 @@ OBJC_EXTERN NSString* const kRZDebugMenuSettingChangedNotification;
  */
 @interface RZDebugMenu : NSObject
 /** @name RZDebugMenu Interface */
-
-/**
- *  Enables the debug menu with a specified settings plist
- *
- *  @param fileName Name of the plist which defines the debug settings to be used. The plist should conform to the standard Settings Bundle plist format.
- */
-+ (void)enableMenuWithSettingsPlistName:(NSString *)plistName;
 
 /**
  *  Access the shared debug menu.

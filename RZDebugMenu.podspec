@@ -20,14 +20,14 @@ Pod::Spec.new do |s|
   
   s.dependency 'FXForms', '~>1.2'
   
-  s.source_files = "Library/Core/Source/**/*.{h,m}"
+  s.source_files = "Library/Core/Source/**/*.{h,m}", "Library/Core/Public Headers/**/*.{h,m}"
   s.public_header_files = "Library/Core/Public Headers/*.{h,m}"    
   s.private_header_files = "Library/Core/Source/**/*.h"
   
   submodule_names = ["Settings", "Version"]
   submodule_names.each { |sm|
     s.subspec sm do |ss|
-      ss.source_files = "Library/Modules/#{sm}/Source/**/*.{h,m}"
+      ss.source_files = "Library/Modules/#{sm}/Source/**/*.{h,m}", "Library/Modules/#{sm}/Public Headers/**/*.{h,m}"
       ss.public_header_files = "Library/Modules/#{sm}/Public Headers/**/*.{h,m}"
       ss.private_header_files = "Library/Modules/#{sm}/Source/**/*.h"
     end
