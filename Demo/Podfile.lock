@@ -1,6 +1,6 @@
 PODS:
   - FXForms (1.2.12)
-  - RZDebugMenu (0.1.0):
+  - RZDebugMenu (0.2.0):
     - FXForms (~> 1.2)
 
 DEPENDENCIES:
@@ -12,6 +12,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FXForms: ae90610432a0a9cbb71e0180f202d0fff375881f
-  RZDebugMenu: 117dda5d9327eafeef00d2cb48d33393a2f573cc
+  RZDebugMenu: e9ac336564dba9d0fbb51127a698df8e1e449b8d
 
 COCOAPODS: 0.35.0

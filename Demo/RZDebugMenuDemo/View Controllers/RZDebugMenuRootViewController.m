@@ -51,7 +51,7 @@
 - (void)panGestureRecognizerFired:(id)sender
 {
     if ( self.presentedViewController == nil ) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Whoah there ...." message:@"You swiped the backgroud view, didn't you?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Woah there ...." message:@"You swiped the background view, didn't you?" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"Yep" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
