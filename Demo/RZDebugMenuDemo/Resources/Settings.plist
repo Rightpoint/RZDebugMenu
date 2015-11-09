@@ -36,7 +36,7 @@
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>DefaultValue</key>
-			<string>Tap the gear to the get to the Debug menu.</string>
+			<string>Use a triple, two-finger tap to get to the Debug Menu.</string>
 			<key>Key</key>
 			<string>name_preference</string>
 			<key>Title</key>

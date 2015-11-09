@@ -8,6 +8,18 @@
 
 #import <FXForms/FXForms.h>
 
-@interface RZDebugMenuFormViewController : FXFormViewController
+#import "RZDebugMenuSettingsForm.h"
+
+@class RZDebugMenuFormViewController;
+
+@protocol RZDebugMenuFormViewControllerDelegate <NSObject>
+
+- (void)debugMenuFormViewControllerShouldDimiss:(RZDebugMenuFormViewController *)debugMenuFormViewController;
+
+@end
+
+@interface RZDebugMenuFormViewController : FXFormViewController <RZDebugMenuSettingsFormDelegate>
+
+@property (weak, nonatomic, readwrite) id <RZDebugMenuFormViewControllerDelegate> delegate;
 
 @end
